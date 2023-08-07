@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Contract_Need_Accounting_Approval__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>This Checkbox store whether All Contract need Accounting Approval or not.</description>
+    <externalId>false</externalId>
+    <label>All Contract Need Accounting Approval</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

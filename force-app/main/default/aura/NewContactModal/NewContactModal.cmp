@@ -1,0 +1,133 @@
+<aura:component controller="OppActionButtonController" implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
+	
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+    
+	<!-- Google Address -->
+	<aura:attribute name="filteredOptions" type="String[]"/>
+    <aura:attribute name="searchKey" type="String" default=""/>
+    <aura:attribute name="profile" type="String" default=""/>
+    <aura:attribute name="isRedirect" type="Boolean" default="true"/>
+    <aura:attribute name="recordTypeId" type="String" access="private"/>
+	<ltng:require scripts="{!$Resource.LtngUtility}"/>
+
+	<aura:attribute name="isOpenModal" default="false" type="Boolean"/>
+	<aura:attribute name="accountId" type="String"/>
+	<aura:attribute name="spinner" default="false" type="Boolean" access="private"/>
+	<aura:attribute name="accountObj" type="Object" access="private"/>
+	<aura:attribute name="contactObj" type="Object" access="public" default="{}"/>
+	<aura:attribute name="meta" type="Object" access="private"/>
+	<aura:attribute name="depnedentFieldMap" type="map" description="map to store dependent values with controlling value" />
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+
+
+	<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+    	<aura:if isTrue="{!v.spinner}">
+			<lightning:spinner size="small" variant="brand"/>
+		</aura:if>
+    	<div class="slds-modal__container">
+	      	<header class="slds-modal__header">
+		        <button onclick="{!c.closeModal}" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+		          	<lightning:icon iconName="utility:close" size="small" variant="bare"/>
+		          	<span class="slds-assistive-text">Close</span>
+		        </button>
+	        	<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{!v.contactObj.Id==null?'New':'Edit'} Contact for : {!v.accountObj.Name}</h2>
+	      	</header>
+	      	<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+	        	<lightning:layout multipleRows="true">	        		
+	        		<lightning:layoutItem size="6" class="slds-p-around_small">
+	        			<lightning:combobox options="{!v.meta.Salutation.FieldPicklist}" value="{!v.contactObj.Salutation}" label="{!v.meta.Salutation.FieldLabel}" aura:id="inputFields"/>
+	        			
+	        			<lightning:input type="text" value="{!v.contactObj.FirstName}" required="true" label="First Name" aura:id="inputFields" maxlength="40" messageWhenValueMissing="{!$Label.c.FirstNameMessage}" messageWhenTooLong="{!$Label.c.FirstNameCharacterMessage}"/>
+	        			
+	        			<lightning:input type="text" value="{!v.contactObj.LastName}" required="true" label="Last Name" aura:id="inputFields" messageWhenValueMissing="{!$Label.c.LastNameMessage}" messageWhenTooLong="LastNameCharacterMessage"/>
+                        <lightning:input value="{!v.contactObj.Email}" type="email" label="Email" required="true" aura:id="inputFields"/>
+	        			<!-- Added by Akshi -->
+                        <lightning:input type="text" value="{!v.contactObj.Title}" label="Job Title" aura:id="inputFields"/>
+                        <lightning:dualListbox label= "Contact Type" sourceLabel="Available" 
+                           selectedLabel="Selected" value="{!v.contactObj.Contact_Type__c}" options="{!v.meta.Contact_Type.FieldPicklist}" />   
+	        		</lightning:layoutItem>
+	        		<lightning:layoutItem size="6" class="slds-p-around_small">		        			
+	        			<div class="slds-form-element">
+						    <label class="slds-form-element__label" for="combobox-id-5">Account Name</label>
+						    <div class="slds-form-element__control">
+							    <div class="slds-combobox_container slds-has-selection">
+							        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+							          	<div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left-right" role="none">
+								            <span class="slds-icon_container slds-icon-standard-account slds-combobox__input-entity-icon" title="Account">
+								              <lightning:icon iconName="standard:account" size="small"/>
+								              <span class="slds-assistive-text">Account</span>
+								            </span>
+								             <input class="slds-input slds-combobox__input slds-combobox__input-value" id="combobox-id-5" aria-controls="listbox-id-5" autocomplete="off" role="textbox" type="text" placeholder="Select an Option" readonly="true" value="{!v.accountObj.Name}"/>
+							          	</div>
+					          		</div>
+				          		</div>
+		          			</div>
+			          	</div>
+
+	        			<!-- <lightning:input value="{!v.accountObj.Name}" type="text" readonly="true" label="Account Name"/> -->
+
+	        			<lightning:input value="{!v.contactObj.MobilePhone}" type="text" label="Mobile Phone" aura:id="mobilePhoneFields"/>
+	        			<lightning:input value="{!v.contactObj.Phone}" type="text" label="Business Phone" aura:id="phoneFields"/>
+	        			<!--<lightning:input value="{!v.contactObj.MailingStreet}" type="text" label="Mailing Street" aura:id="inputFields" required="true" messageWhenValueMissing="{!$Label.c.MailingStreetMessage}"/>-->
+        				
+        				<!-- google address auto complete-->
+        				<div class="slds-size_12-of-12 slds-dropdown-trigger slds-dropdown-trigger_click slds-combobox-lookup" 
+					         aria-expanded="false" aria-haspopup="listbox" role="combobox" aura:id="searchLookup">
+					        <lightning:input type="search" label="Mailing Street" onchange="{!c.keyPressController}" value="{!v.searchKey}" aura:id="inputFields" required="true" onfocus="{!c.keyPressController}" onblur="{!c.handleBlur}" messageWhenValueMissing="{!$Label.c.MailingStreetMessage}"/>
+					        <div id="listbox-unique-id" role="listbox">
+					            <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid"
+					                role="presentation" style="max-width:99.9%">
+					                <aura:if isTrue="{!v.filteredOptions.length==0}">
+					                	<li role="presentation" class="slds-listbox__item">
+					                    	<span id="listbox-option-unique-id-01"
+					                              class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+					                              role="option">
+					                            <span class="slds-media__body">
+					                                <span class="slds-listbox__option-text slds-listbox__option-text_entity">
+					                                    Loading...</span>
+					                            </span>
+					                        </span>
+					                    </li>
+					                </aura:if>
+					                <aura:iteration items="{!v.filteredOptions}" var="option">
+					                    <li role="presentation"
+					                        class="slds-listbox__item"
+					                        onclick="{!c.handleSelect}"
+					                        data-value="{!option.value}"
+					                        data-record="{!option.label}"
+					                        data-locaval="{!option.locaval}"
+					                        data-placeid="{!option.PlaceId}"
+					                        >
+					                        <span id="listbox-option-unique-id-01"
+					                              class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+					                              role="option">
+					                            <span class="slds-media__body">
+					                                <span class="slds-listbox__option-text slds-listbox__option-text_entity">{!option.label}</span>
+					                            </span>
+					                        </span>
+					                    </li>
+					                </aura:iteration>
+					            </ul>
+					        </div>
+					    </div>
+					    <!-- Google Auto complete end-->
+
+	        			<lightning:input value="{!v.contactObj.MailingCity}" type="text" label="Mailing City" aura:id="inputFields" required="true" messageWhenValueMissing="{!$Label.c.MailingCityMessage}"/>
+
+	        			<lightning:combobox options="{!v.meta.MailingCountryCode.FieldPicklist}" value="{!v.contactObj.MailingCountryCode}" label="{!v.meta.MailingCountryCode.FieldLabel}" aura:id="billingCountry" required="true" onchange="{!c.onBillingCountryChange}"/>
+	        			
+	        			<lightning:combobox spinnerActive="{!v.isLoading}" value="{!v.contactObj.MailingStateCode}" label="Mailing State Code" aura:id="billingState"/>
+
+        				<lightning:input type="text" value="{!v.contactObj.MailingPostalCode}" label="MailingZip/Postal Code" aura:id="inputFields"/>
+	        		</lightning:layoutItem>
+	        	</lightning:layout>	        	
+	      	</div>
+	      	<footer class="slds-modal__footer">
+		        <lightning:button label="Cancel" onclick="{!c.closeModal}" iconName="utility:close" iconPosition="left" variant="destructive"/>
+		        <lightning:button label="Save" onclick="{!c.saveModalData}" iconName="utility:check" iconPosition="left" variant="brand"/>
+	      	</footer>
+    	</div>
+  	</section>
+  	<div class="slds-backdrop slds-backdrop_open"></div>
+</aura:component>

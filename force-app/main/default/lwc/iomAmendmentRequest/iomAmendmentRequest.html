@@ -1,0 +1,126 @@
+<!--
+* File         :   iomAmendmentRequest 
+* Project      :   Order & Billing Plateform
+* Created Date :   18th Dec 2021 [IOM-574]
+* Created By   :   Girikon(Ashish)
+* *****************************************************************
+@description : Amendment Request Quick Action Form
+*******************************************************************
+* Modification log : 
+* 1.
+-->
+<!-- sldsValidatorIgnore -->
+<!-- sldsValidatorIgnoreNextLine -->
+<template>
+    <lightning-quick-action-panel header="Submit for change">
+        <template if:true={isShowSubmit4ChangeForm}>
+            <!--
+                *** Show Alert Notification
+            -->
+            <template if:true={showAmedmentCategoryDescriptionAlert}>
+                <div class="slds-notify slds-notify_alert slds-notify_alert slds-m-left_small slds-m-right_small slds-m-bottom_medium" role="alert">
+                    <span class="slds-assistive-text">warning</span>
+                    <span class="slds-icon_container slds-m-right_x-small" title="Description">
+                        <lightning-icon size="x-small" icon-name="utility:info_alt" alternative-text="Info" variant="inverse" title="Info">
+                        </lightning-icon>
+                    </span>
+                    <h2>{amedmentCategoryDescriptionMsg}</h2>
+                    <div class="slds-notify__close">
+                       <button class="slds-button slds-button_icon slds-button_icon-small" onclick={closeAlert} title="Close">
+                            <lightning-icon icon-name="utility:close" alternative-text="Connected" variant="inverse" size="x-small"
+                            title="x-small size"></lightning-icon>
+                          <span class="slds-assistive-text">Close</span>
+                       </button>
+                       <!-- <lightning-button-icon icon-name="utility:close"  variant="brand" alternative-text="Close"   class="slds-m-left_xx-small" title="Close"></lightning-button-icon> -->
+                    </div>
+                 </div>
+            </template> 
+            <template if:true={showmultiAmedmentCategoryDescriptionAlert}>
+                <template for:each={multiamedmentCategoryDescriptionMsg} for:item="item">
+                <div class="slds-notify slds-notify_alert slds-notify_alert slds-m-left_small slds-m-right_small slds-m-bottom_medium" role="alert" key={item.Id}>
+                    <span class="slds-assistive-text">warning</span>
+                    <span class="slds-icon_container slds-m-right_x-small" title="Description">
+                        <lightning-icon size="x-small" icon-name="utility:info_alt" alternative-text="Info" variant="inverse" title="Info">
+                        </lightning-icon>
+                    </span>
+                    <h2>{item.value}</h2>
+                    <div class="slds-notify__close">
+                       <button class="slds-button slds-button_icon slds-button_icon-small" onclick={closeAlert} title="Close">
+                            <lightning-icon icon-name="utility:close" alternative-text="Connected" variant="inverse" size="x-small"
+                            title="x-small size"></lightning-icon>
+                          <span class="slds-assistive-text">Close</span>
+                       </button>
+                    </div>
+                 </div>
+            </template> 
+            </template>
+                      
+            <!--
+                **********END******
+            -->
+            <lightning-record-edit-form object-api-name={objectApiName} onsuccess={handleSuccess} onsubmit={handleSubmit}>
+                <lightning-messages> </lightning-messages>
+                <!-- <lightning-output-field field-name="IOM_Opportunity__c"></lightning-output-field> -->
+                <lightning-layout multiple-rows="true">
+                    <lightning-layout-item class="slds-p-right_small slds-p-" size="6">
+                        <lightning-input-field field-name="IOM_Opportunity__c" value={recordId} disabled="true">
+                        </lightning-input-field>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item class="slds-p-right_small slds-p-" size="6">
+                        <lightning-input-field field-name="IOM_Account__c" value={opportunutyAccountId} disabled="true">
+                        </lightning-input-field>
+                    </lightning-layout-item>
+                    
+                    <lightning-layout-item class="slds-p-right_small" size="6">
+                        <lightning-input-field field-name="IOM_Status__c" disabled="true"> </lightning-input-field>
+                    </lightning-layout-item>
+                    
+                    <lightning-layout-item class="slds-p-right_small slds-m-top_x-small" size="6">
+                        <lightning-input-field field-name="IOM_Request_Instruction__c" data-id='instruction' class="validate"> </lightning-input-field>
+                    </lightning-layout-item>
+
+                    <template if:true={showlostreason}>
+                        <lightning-layout-item class="slds-p-right_small slds-m-top_x-small" size="6">
+                            <lightning-input-field field-name="IOM_Lost_Reason__c" data-id='reason' class="validate"> </lightning-input-field>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item class="slds-p-right_small slds-m-top_x-small" size="6">
+                            <lightning-input-field field-name="IOM_Cancel_Reason__c"> </lightning-input-field>
+                        </lightning-layout-item>
+                    </template>
+
+                    <lightning-layout-item class="slds-p-right_small slds-m-top_x-small" size="12">
+                        <lightning-input-field field-name="IOM_Amendment_Type__c" onchange={reqCagChange} data-id='type' class="validate" > </lightning-input-field>
+                    </lightning-layout-item>
+
+                </lightning-layout>
+
+                <footer class="slds-modal__footer">
+                    <div class="slds-align_absolute-center">
+                        <lightning-button variant="Neutral" onclick={closeQuickAction} label="Cancel">
+                        </lightning-button>
+                        <lightning-button variant="brand" onclick={onSubmit} class="slds-m-left_x-small" label="Save" type="submit" disabled={disableSubmit}>
+                        </lightning-button>
+                    </div>
+                </footer>
+            </lightning-record-edit-form>
+        </template>
+
+        <template if:false={isShowSubmit4ChangeForm}>
+            <div class="slds-align_absolute-center" style="height:5rem">
+                <div class="slds-text-heading_small" style="color: red;">
+                    <p>{errorMsg}</p>
+                </div>
+                <br />
+            </div>
+
+            <footer class="slds-modal__footer">
+                <div class="slds-align_absolute-center">
+                    <lightning-button variant="Neutral" onclick={closeQuickAction} label="Cancel"></lightning-button>
+                </div>
+            </footer>
+        </template>
+    </lightning-quick-action-panel>
+
+</template>

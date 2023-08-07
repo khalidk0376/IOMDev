@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Icon__c</fullName>
+    <description>Salesforce icon name list,
+There are three icons type support utility, standard and custom. If you want to add check icon then you can use &quot;utility:add&quot;.
+Icon reference https://www.lightningdesignsystem.com/icons/</description>
+    <externalId>false</externalId>
+    <inlineHelpText>It will show different Icon in Customer Center.</inlineHelpText>
+    <label>Icon</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>utility:company</fullName>
+                <default>false</default>
+                <label>Account</label>
+            </value>
+            <value>
+                <fullName>utility:checkin</fullName>
+                <default>false</default>
+                <label>Address</label>
+            </value>
+            <value>
+                <fullName>utility:news</fullName>
+                <default>false</default>
+                <label>Article</label>
+            </value>
+            <value>
+                <fullName>utility:user</fullName>
+                <default>false</default>
+                <label>Avatar</label>
+            </value>
+            <value>
+                <fullName>utility:email</fullName>
+                <default>false</default>
+                <label>Email</label>
+            </value>
+            <value>
+                <fullName>utility:page</fullName>
+                <default>false</default>
+                <label>Document</label>
+            </value>
+            <value>
+                <fullName>utility:education</fullName>
+                <default>false</default>
+                <label>Education</label>
+            </value>
+            <value>
+                <fullName>utility:event</fullName>
+                <default>false</default>
+                <label>Event</label>
+            </value>
+            <value>
+                <fullName>utility:file</fullName>
+                <default>false</default>
+                <label>File</label>
+            </value>
+            <value>
+                <fullName>utility:form</fullName>
+                <default>false</default>
+                <label>Form</label>
+            </value>
+            <value>
+                <fullName>utility:location</fullName>
+                <default>false</default>
+                <label>Location</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

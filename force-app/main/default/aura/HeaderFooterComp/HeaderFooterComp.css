@@ -1,0 +1,15 @@
+.THIS{z-index:9001}
+.THIS .qa-allow-box {
+    clear: both;
+}
+.THIS .img{width:200px;height:60px;padding:5px;border:1px dashed #d8dde6;margin:2px;}
+.THIS textarea{height: 161px;}
+.THIS input[type=radio]:checked + label img{
+ 	border: 1px dashed green !important;   
+}
+.THIS .mms_selection .slds-modal__container{ width:100%;}
+@media only screen and (max-width: 992px) {
+	.THIS .mms_selection .slds-modal__container{ width:85% !important;}
+}
+
+.THIS .br{border-top-left-radius: .25rem;border-top-right-radius: .25rem;height:395px}

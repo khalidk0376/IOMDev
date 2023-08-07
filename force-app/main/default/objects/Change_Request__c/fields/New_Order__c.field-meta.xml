@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Order__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>This will be having new order lookup data</description>
+    <externalId>false</externalId>
+    <label>Order</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Order.AccountId</field>
+            <operation>equals</operation>
+            <valueField>$Source.Account__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>Order.OpportunityId</field>
+            <operation>equals</operation>
+            <valueField>$Source.Opportunity__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Order</referenceTo>
+    <relationshipName>Amendments1</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

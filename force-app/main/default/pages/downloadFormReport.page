@@ -1,0 +1,5 @@
+<apex:page title="Download Form Reports" cache="true" showHeader="false" sidebar="false" readOnly="true" contentType="application/vnd.ms-excel#OnlineFormReport.xls">
+    <apex:outputPanel rendered="{!$CurrentPage.parameters.type=='community-user'}">
+        <c:ReportByCommUserDownload />
+    </apex:outputPanel>
+</apex:page>

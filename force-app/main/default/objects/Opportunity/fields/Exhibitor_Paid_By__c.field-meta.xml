@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Exhibitor_Paid_By__c</fullName>
+    <description>1. To check if its a Agent Oppty
+2. If Agent, then who is paying for it. 
+
+It will determine the price of the products added on the &quot;Related Oppty&quot;</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Choose only if the Opportunity Created belongs to Agent Account!</inlineHelpText>
+    <label>Exhibitor Paid By</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Exhibitor Paid by Agent</fullName>
+                <default>false</default>
+                <label>Exhibitor Paid by Agent</label>
+            </value>
+            <value>
+                <fullName>Exhibitor Paid by Exhibitor</fullName>
+                <default>false</default>
+                <label>Exhibitor Paid by Exhibitor</label>
+            </value>
+            <value>
+                <fullName>Individual Contract</fullName>
+                <default>false</default>
+                <label>Individual Contract</label>
+            </value>
+            <value>
+                <fullName>SubAgent Paid By Subagent</fullName>
+                <default>false</default>
+                <label>SubAgent Paid By Subagent</label>
+            </value>
+            <value>
+                <fullName>SubAgent Paid By Exhibitor</fullName>
+                <default>false</default>
+                <label>SubAgent Paid By Exhibitor</label>
+            </value>
+            <value>
+                <fullName>Co-Exhibitor Paid by Exhibitor</fullName>
+                <default>false</default>
+                <label>Co-Exhibitor Paid by Exhibitor</label>
+            </value>
+            <value>
+                <fullName>Co-Exhibitor Split Pay</fullName>
+                <default>false</default>
+                <label>Co-Exhibitor Split Pay</label>
+            </value>
+            <value>
+                <fullName>Non-Exhibiting Customer</fullName>
+                <default>false</default>
+                <label>Non-Exhibiting Customer</label>
+            </value>
+            <value>
+                <fullName>UK Exhibitor VAT Invoicing</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>UK Exhibitor VAT Invoicing</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

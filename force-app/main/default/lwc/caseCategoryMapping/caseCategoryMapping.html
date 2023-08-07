@@ -1,0 +1,146 @@
+<template>
+    <lightning-card title="Case Category" icon-name="standard:category">
+        <div class="slds-var-m-around_medium">
+        
+                <template if:true={isEditMode}> 
+                    <div class="c-container">
+                        <!-- <lightning-record-edit-form density="compact" record-id={recordId} object-api-name="Edition__c" onsubmit={handleSubmit}> -->                            
+                            <lightning-layout  multiple-rows="true">
+                                <lightning-layout-item class="slds-p-right_small" size="12">
+                                    <lightning-combobox variant="label-inline"
+                                        name="Category 1"
+                                        label="Category 1"
+                                        value={category1}
+                                        placeholder="Select Category 1"
+                                        options={category1Options}
+                                        onchange={handleCategoryChange1} 
+                                                                        
+                                        >
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+
+                                <lightning-layout-item class="slds-p-right_small" size="12">
+                                    <lightning-combobox variant="label-inline"
+                                        name="Category 2"
+                                        label="Category 2"
+                                        value={category2}
+                                        placeholder="Select Category 2"
+                                        options={category2Options}
+                                        onchange={handleCategoryChange2}      
+                                        disabled={disableCategory2} 
+                                                                 
+                                        >
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+
+                                <lightning-layout-item class="slds-p-right_small" size="12">
+                                    <lightning-combobox variant="label-inline"
+                                        name="Category 3"
+                                        label="Category 3"
+                                        value={category3}
+                                        placeholder="Select Category 3"
+                                        options={category3Options}
+                                        onchange={handleCategoryChange3}                                          
+                                        disabled={disableCategory3}      >
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+
+                                
+                            </lightning-layout>
+                                     
+                </div>
+            </template>
+
+            <template if:false={isEditMode}> 
+                <div class="c-container">
+                        <lightning-layout  multiple-rows="true">
+                        <lightning-layout-item class="slds-p-right_small" size="12">
+                                <template if:true={caseDataShow}>
+                                    <div class="slds-form-element slds-form-element_horizontal slds-border_bottom" ondblclick={editRecord}>
+                                        <label class="slds-form-element__label" for="">Category 1</label>
+                                        <div class="slds-form-element__control">
+                                            <div class="SysInfo">
+                                                {categoryName1}
+                                            </div>
+                                            <lightning-button-icon icon-name="utility:edit" onclick={editRecord}   icon-class="slds-button__icon_hint" variant="bare"  alternative-text="Edit"   class="edit" title="Edit" ></lightning-button-icon>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </template>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-right_small" size="12">
+                                    <template if:true={caseDataShow}>
+                                        <div class="slds-form-element slds-form-element_horizontal slds-border_bottom" ondblclick={editRecord}>
+                                            <label class="slds-form-element__label" for="">Category 2</label>
+                                            <div class="slds-form-element__control">
+                                                <div class="SysInfo">
+                                                    {categoryName2}
+                                                </div>
+                                                <lightning-button-icon icon-name="utility:edit" onclick={editRecord}   icon-class="slds-button__icon_hint" variant="bare"  alternative-text="Edit"   class="edit" title="Edit" ></lightning-button-icon>
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                    </template>
+                                </lightning-layout-item>
+                                <lightning-layout-item class="slds-p-right_small" size="12">
+                                        <template if:true={caseDataShow}>
+                                            <div class="slds-form-element slds-form-element_horizontal slds-border_bottom" ondblclick={editRecord}>
+                                                <label class="slds-form-element__label" for="">Category 3</label>
+                                                <div class="slds-form-element__control">
+                                                    <div class="SysInfo">
+                                                        {categoryName3}
+                                                    </div>
+                                                    <lightning-button-icon icon-name="utility:edit" onclick={editRecord}   icon-class="slds-button__icon_hint" variant="bare"  alternative-text="Edit"   class="edit" title="Edit" ></lightning-button-icon>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                        </template>
+                                    </lightning-layout-item>
+                        </lightning-layout>
+
+
+
+                       
+                       <!-- <lightning-record-view-form record-id={recordId} object-api-name={sObjectname}>
+                            <lightning-layout  multiple-rows="true">
+                                <lightning-layout-item class="slds-p-right_small" size="6">
+                                    <div class ="slds-border_bottom">
+                                            
+                                        <lightning-output-field class="longtext" ondblclick={editRecord} field-name="Category_1__c">
+                                            <lightning-button-icon icon-name="utility:edit" onclick={editRecord}   icon-class="slds-button__icon_hint" variant="bare"  alternative-text="Edit"   class="edit" title="Edit"></lightning-button-icon>
+                                        </lightning-output-field>
+                                    </div>
+                                </lightning-layout-item>
+
+                                <lightning-layout-item class="slds-p-right_small" size="6">
+                                    <div class ="slds-border_bottom">   
+                                        <lightning-output-field class="longtext" ondblclick={editRecord} field-name="Category_2__c">
+                                            <lightning-button-icon icon-name="utility:edit" onclick={editRecord}  icon-class="slds-button__icon_hint" variant="bare"  alternative-text="Edit"   class="edit" title="Edit"></lightning-button-icon>
+                                        </lightning-output-field>
+                                    </div>
+                                </lightning-layout-item>
+
+                                <lightning-layout-item class="slds-p-right_small" size="6">
+                                    <div class ="slds-border_bottom">
+                                    <lightning-output-field class="longtext" ondblclick={editRecord} field-name="Category_3__c">
+                                        <lightning-button-icon icon-name="utility:edit" onclick={editRecord}  icon-class="slds-button__icon_hint"  variant="bare"  alternative-text="Edit"   class="edit" title="Edit"></lightning-button-icon>
+                                    </lightning-output-field>
+                                    </div>
+                                </lightning-layout-item>
+
+                                
+                            </lightning-layout>                    
+                        </lightning-record-view-form>   -->
+                      
+                   
+                </div>
+            </template>
+
+    </div>
+</lightning-card>
+    
+
+</template>

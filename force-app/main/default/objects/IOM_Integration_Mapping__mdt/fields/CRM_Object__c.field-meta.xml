@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CRM_Object__c</fullName>
+    <description>CRM sObject to map with IOM payload</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>CRM Object</label>
+    <referenceTo>EntityDefinition</referenceTo>
+    <relationshipLabel>IOM_Integration_Mappings</relationshipLabel>
+    <relationshipName>IOM_Integration_Mappings</relationshipName>
+    <required>false</required>
+    <type>MetadataRelationship</type>
+    <unique>false</unique>
+</CustomField>

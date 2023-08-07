@@ -1,0 +1,51 @@
+<template>
+    <article class="slds-card slds-card_boundary">
+        <div class="slds-page-header slds-page-header_joined slds-page-header_bleed slds-shrink-none test-headerRegion slds-is-relative">
+            <div class="slds-media slds-media--center slds-has-flexi-truncate">
+                <div class="slds-col slds-has-flexi-truncate firstHeaderRow">
+                    <div class="slds-media slds-no-space slds-grow">
+                        <lightning-icon icon-name="standard:event" alternative-text="Event" title="Event" size="small"></lightning-icon>
+                        &nbsp;&nbsp;
+                        <div class="slds-media__body slds-align-middle">
+                            <h2 class="slds-card__header-title">
+                                <span title={titleWithCount} class="slds-truncate slds-m-right--xx-small">{titleWithCount}</span>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-grid listDisplays">
+            <div class="slds-grid slds-border__left slds-border__right listViewContainer">
+                <div class="slds-col slds-no-space display-wrapper">
+                    <div class="slds-card__body slds-wrap slds-grid">
+                        <template for:each={boothTypes} for:item="item" for:index="ind">
+                            <article key={item.number} class="slds-size_1-of-1 slds-var-p-horizontal_medium slds-var-p-vertical_xx-small slds-tile slds-media slds-hint-parent">
+                                <div class="slds-media__body">
+                                    <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+                                        <h3 class="slds-tile__title slds-truncate">
+                                            {item.boothType}
+                                        </h3>
+                                        <div class="slds-shrink-none">
+                                        </div>
+                                    </div>
+                                    <div class="slds-tile__detail">
+                                        <!--<dl class="slds-list_horizontal slds-wrap">
+                                            <dt class="slds-item_label slds-text-color_weak slds-truncate">User Type:</dt>
+                                            <dd class="slds-item_detail slds-truncate">
+                                                <lst-template-list-field>
+                                                    <lst-formatted-text>Exhibitor</lst-formatted-text>
+                                                </lst-template-list-field>
+                                            </dd>
+                                        </dl>-->
+                                    </div>
+                                </div>
+                            </article>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+   
+ </template>

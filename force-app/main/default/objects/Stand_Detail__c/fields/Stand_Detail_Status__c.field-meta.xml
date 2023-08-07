@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Stand_Detail_Status__c</fullName>
+    <description>Stand Detail Status</description>
+    <externalId>false</externalId>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Not started</fullName>
+                <default>true</default>
+                <label>Not started</label>
+            </value>
+            <value>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+                <label>In Progress</label>
+            </value>
+            <value>
+                <fullName>In Review</fullName>
+                <default>false</default>
+                <label>In Review</label>
+            </value>
+            <value>
+                <fullName>Pending Sales Approval</fullName>
+                <default>false</default>
+                <label>Pending Sales Approval</label>
+            </value>
+            <value>
+                <fullName>Stand Design Rejected/Incomplete</fullName>
+                <default>false</default>
+                <label>Stand Design Rejected/Incomplete</label>
+            </value>
+            <value>
+                <fullName>Stand Design Resubmitted</fullName>
+                <default>false</default>
+                <label>Stand Design Resubmitted</label>
+            </value>
+            <value>
+                <fullName>Pending Venue Approval</fullName>
+                <default>false</default>
+                <label>Pending Venue Approval</label>
+            </value>
+            <value>
+                <fullName>Tentative Approval</fullName>
+                <default>false</default>
+                <label>Tentative Approval</label>
+            </value>
+            <value>
+                <fullName>Permission to Build</fullName>
+                <default>false</default>
+                <label>Permission to Build</label>
+            </value>
+            <value>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+                <label>Cancelled</label>
+            </value>
+            <value>
+                <fullName>Viewed</fullName>
+                <default>false</default>
+                <label>Viewed</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Email_IDs_to_Notify_for_Stand_Submission__c</fullName>
+    <description>Enter comma separated email addresses to received email notification when a custom submit stand design</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Enter comma separated email addresses to received email notification when a custom submit stand design</inlineHelpText>
+    <label>Email IDs to Notify for Stand Submission</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

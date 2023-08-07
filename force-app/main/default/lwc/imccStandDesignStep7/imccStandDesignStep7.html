@@ -1,0 +1,105 @@
+<template>
+    <lightning-spinner if:true={spinner} variant="brand" size="small" title="Loading..."></lightning-spinner>
+    <h2 class="tab-heading slds-p-horizontal_small">Step 7: Exhibitor Appointed Contractor Agreement</h2>    
+    <div class="main-head slds-text-align_center para paragraph-d-standard">
+        <div>{Step7_Top_HeaderLabel}</div>
+        <div>{Step7_Top_Header_andLabel}</div>
+        <div>{Step7_Top_Header2Label}</div>
+    </div>
+
+    <div class="manuals slds-m-around_small" onclick={handleClick2}>
+        <div class="tab-sub-heading">
+            <span class="para paragraph-d-standard"><u>Background</u></span>
+        </div>
+        <div class="s-1of3">
+            <div class="sec1 para paragraph-d-small">{Step_7_1_Label}</div>
+
+            <div class="sec2 para paragraph-d-standard">{IT_IS_AGREED_AS_FOLLOWS_Label}</div>
+            <div class="para paragraph-d-small">
+                <ol type="1">
+                    <li>{Agree_As_Follow_1Label}</li>
+                    <li>
+                        <span>{Agree_As_Follow_2Label}</span>
+                        <ol type="a">
+                            <li>{Agree_As_Follow_2_aLabel}</li>
+                            <li>{Agree_As_Follow_2_bLabel}</li>
+                            <li>{Agree_As_Follow_2_cLabel}</li>
+                            <li>{Agree_As_Follow_2_dLabel}</li>
+                            <li>{Agree_As_Follow_2_eLabel}</li>
+                            <li>{Agree_As_Follow_2_fLabel}</li>
+                            <li>{Agree_As_Follow_2_gLabel}</li>
+                        </ol>
+                    </li>
+                    <li>{Agree_As_Follow_3Label}</li>
+                    <li>{Agree_As_Follow_4Label}</li>
+                    <li>{Agree_As_Follow_5Label}</li>
+                    <li>{Agree_As_Follow_6Label}</li>
+                </ol>
+                <div>
+                    <span>{This_Agreement_is_acceptedLabel}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-p-around_small">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="7">
+                    <lightning-input if:true={isShowQ1} disabled={isInReview} type="text" value={standDetail.Print_Name__c} onclick={handleClick} onchange={handleChange} name="Print_Name" label="Print Name" placeholder="Enter Text" variant="label-inline" max-length="180" required></lightning-input>
+                    <lightning-input if:true={isShowQ2} disabled={isInReview} type="text" value={standDetail.Job_Title__c} onclick={handleClick} onchange={handleChange} name="Job_Title" label="Job Title" placeholder="Enter Text" class="slds-m-top_small" variant="label-inline" max-length="100" required></lightning-input>
+                    <lightning-input if:true={isShowQ3} disabled={isInReview} type="date" value={standDetail.Date__c} onclick={handleClick} onchange={handleChange} name="Date" label="Date" placeholder="Enter Text" class="slds-m-top_small" variant="label-inline" required></lightning-input>
+                    <div class="imcc-sign" if:true={isShowQ4}>
+                        <div style="width: 33.5%;">
+                            <label class="slds-form-element__label slds-no-flex">
+                                <abbr title="required" class="slds-required">*</abbr> Signature:
+                            </label>
+                        </div>
+                        <div class="btn" if:false={isInReview}>
+                            <lightning-button onclick={openModal} icon-name="utility:edit" label="e-Sign"></lightning-button>
+                        </div>
+                        <div if:true={isInReview} class="btn slds-box slds-text-align_center" style="width: 250px;">
+                            <span if:false={docId}>Signature</span>
+                            <img if:true={docId} src={docUrl} style="min-width:100%" alt="signature"/>
+                        </div>
+                    </div>
+                    <template if:true={isShowQ4}>
+                        <div if:false={isInReview} class="slds-box slds-text-align_center sign-container" style="width: 250px;">
+                            <span if:false={docId}>Signature</span>
+                            <img if:true={docId} src={docUrl} style="min-width:100%" alt="signature"/>
+                        </div>
+                    </template>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+
+    <template if:true={isOpenSignModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-modal_medium slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">                    
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Signature Pad</h2>
+                    <button onclick={closeModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-icon icon-name="utility:close" size="x-small"></lightning-icon>
+                        <span class="slds-assistive-text">Cancel and close</span>
+                    </button>
+                </header>
+                <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                    <canvas height="280" width="700" class="canvas"></canvas>
+                    
+                    <lightning-spinner if:true={spinner} variant="brand" size="small" title="Loading..."></lightning-spinner>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="7" small-device-size="12" medium-device-size="12" large-device-size="7" class="slds-text-align_left">
+                            <span class="para paragraph-d-small slds-text-color_error">By signing you are agreeing to term and condition</span>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="5" small-device-size="12" medium-device-size="12" large-device-size="5">
+                            <button class="slds-button slds-button_neutral" onclick={erase}>Clear</button>
+                            <button class="slds-button slds-button_brand" onclick={saveSignatureModal}>Capture Signature</button>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

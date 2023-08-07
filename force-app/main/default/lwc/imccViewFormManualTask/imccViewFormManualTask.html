@@ -1,0 +1,297 @@
+<!-- sldsValidatorIgnore -->
+<!-- sldsValidatorIgnore -->
+<template>
+   <lightning-spinner if:true={isTrue} variant="brand" size="Large" title="Loading..."></lightning-spinner>
+   <template if:true={isModalOpenLink}>
+       <!-- Modal/Popup Box LWC starts here -->
+       <section role="dialog" tabindex="-1" aria-labelledby="linkformagreementHeader" aria-modal="true"
+          aria-describedby="linkformagreementContent" class="slds-modal slds-fade-in-open modalpopup">
+          <div class="slds-modal__container">
+             <!-- Modal/Popup Box LWC header here -->
+             <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                   onclick={closeModalLinkForm}>
+                   <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small">
+                   </lightning-icon>
+                   <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 id="linkformagreementHeader" class="slds-text-heading_medium slds-hyphenate">Form Agreement</h2>
+             </header>
+             <!-- Modal/Popup Box LWC body starts here -->
+             <div class="slds-modal__content slds-p-around_medium" id="linkformagreementContent">
+                <p>
+                   You are viewing a form that is tracked outside of this system. By clicking agree, you agree to
+                   complete this form immediately.
+                </p>
+             </div>
+             <!-- Modal/Popup Box LWC footer starts here -->
+             <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_brand" onclick={openLinkForm} title="Agree">Agree</button>
+                <button class="slds-button slds-button_neutral" onclick={closeModalLinkForm}
+                   title="Cancel">Cancel</button>
+ 
+                <!--<button class="slds-button slds-button_brand" onclick={openLinkForm} title="Agree">Agree</button>-->
+             </footer>
+          </div>
+       </section>
+       <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+   
+    <template if:true={downloadModal}>
+     <template if:true={isManual}>
+        <div class="demo-only modalCss">
+           <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+              aria-describedby="modal-content-id-1" class="slds-modal pdf-modal slds-slide-up-saving slds-modal_large">
+              <div class="slds-modal__container">
+                 <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                       title="Close" onclick={ClosePopup}>
+                       <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                          size="small">
+                       </lightning-icon>
+                       <span class="slds-assistive-text">Close</span>
+                    </button>
+                 </header>
+                 <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-23">
+                    <iframe src={showPdf} style="width:100%; min-height:600px;padding-bottom:0px;"></iframe>
+                 </div>
+                 <footer style="padding: 10px;" class="slds-modal__footer">
+                    <div class="slds-grid slds-wrap">
+                       <div class="slds-size_7-of-12 slds-p-right_x-small">
+                          <div class="slds-grid" style="margin-top: 13px;">
+                             <template if:true={isPdfAgreed}>
+                                <div class="slds-size_7-of-12 slds-mright_xx-small slds-m-left_xx-large">
+                                   <lightning-input onchange={handleAgreeManual} type="checkbox" checked="true"
+                                      label={manualTermCon}></lightning-input>
+                                </div>
+                             </template>
+                             <template if:false={isPdfAgreed}>
+                                <div class="slds-size_7-of-12">
+                                   <lightning-input onchange={handleAgreeManual} type="checkbox"
+                                      label={manualTermCon}></lightning-input>
+                                </div>
+                             </template>
+                          </div>
+                       </div>
+                       <div class="slds-size_5-of-12 slds-p-left_x-small">
+                          <a href={showPdf} class="slds-button slds-button_brand" download="MyFile">
+                             <lightning-icon icon-name="utility:arrow_bottom" size="xx-small"></lightning-icon>
+                             &nbsp;Download &nbsp;
+                          </a>&nbsp;
+                          <template if:true={isVisibleSaveOnLoad}>
+                             <lightning-button disabled={isSaveBtnDisable} onclick={saveFormData} label="Submit"
+                                variant="brand" icon-name="utility:save" class="slds-m-left_large"></lightning-button>
+                          </template>
+                          <template if:false={isVisibleSaveOnLoad}>
+                             <lightning-button disabled=true onclick={saveFormData} label="Submit" variant="brand"
+                                icon-name="utility:save" class="slds-m-left_large"></lightning-button>
+                          </template>
+
+                          <lightning-button variant="neutral" label="Close" title="Close" onclick={ClosePopup}
+                             class="slds-m-left_x-small"></lightning-button>
+                       </div>
+                    </div>
+                 </footer>
+              </div>
+           </section>
+           <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+     </template>
+     <template if:false={isManual}>
+        <div class="demo-only modalCss">
+           <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+              aria-describedby="modal-content-id-1" class="slds-modal pdf-modal slds-slide-up-saving slds-modal_large">
+              <div class="slds-modal__container">
+                 <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                       title="Close" onclick={ClosePopup}>
+                       <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                          size="small">
+                       </lightning-icon>
+                       <span class="slds-assistive-text">Close</span>
+                    </button>
+                 </header>
+                 <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-24">
+                    <div class="row">
+                       <div style="float: left; width: 30%; white-space: pre-line">
+                          <p><lightning-icon icon-name="action:info" alternative-text="info"
+                             size="xx-small" variant="success"></lightning-icon>&nbsp;
+                          <b>How to submit a pdf form:</b></p>&nbsp;&nbsp;
+                       <p>{Instruction}</p>
+                    </div>
+                       <div style="float: left; width: 70%;"><iframe src={showPdf}
+                             style="width:100%; min-height:600px;padding-bottom:0px;"></iframe></div>
+                    </div>
+                 </div>
+                 <footer style="padding: 10px;" class="slds-modal__footer">
+                    <div
+                       class="slds-grid btn-container slds-wrap slds-grid_align-spread slds-m-top_small slds-m-bottom_small slds-p-left_medium slds-p-right_medium"
+                       style="align-items: center;">
+                       <div class="slds-col slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 ">
+                          <div class="slds-grid" style="align-items: center;gap:5px">
+                             <div class="slds-col">
+                                <template if:true={isViewPDFFormEntry}>
+                                   <a href={showPdf} class="slds-button slds-button_brand" download="MyFile">
+                                      <lightning-icon icon-name="utility:arrow_bottom"
+                                         size="xx-small"></lightning-icon>
+                                      &nbsp;Download Empty form &nbsp;
+                                   </a>&nbsp;
+                                </template>
+                                <template if:false={isViewPDFFormEntry}>
+                                   <a href={showPdf} class="slds-button slds-button_brand" download="MyFile">
+                                      <lightning-icon icon-name="utility:arrow_bottom"
+                                         size="xx-small"></lightning-icon>
+                                      &nbsp;Download Empty form &nbsp;
+                                   </a>&nbsp;
+                                </template>
+                             </div>
+                             <div class="slds-col " style="margin-top:-20px">
+                                <template if:true={isUploadEnable}>
+                                   <lightning-file-upload name="fileUploader" accept={acceptedFormats}
+                                      record-id={entryId} onuploadfinished={handleUploadFinished}
+                                      variant="label-hidden" multiple>
+                                   </lightning-file-upload>
+                                </template>
+                             </div>
+                          </div>
+                       </div>
+                       <div
+                          class="slds-col slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-text-align_right">
+                          <lightning-button variant="neutral" label="Close" title="Close" onclick={ClosePopup}
+                             icon-position="right"></lightning-button>
+                       </div>
+                    </div>
+
+                    <template if:true={showAfterUploadBtn}>
+                       <template for:each={fileData} for:item="item" for:index="index">
+                          <div key={item.name} class="item">
+                       <div class="slds-size_7-of-12 slds-p-top_x-small">
+                          &nbsp;
+                       </div>
+                       <div
+                          class="slds-grid btn-container slds-wrap slds-grid_align-spread slds-m-top_small slds-m-bottom_small slds-p-left_medium slds-p-right_medium"
+                          style="align-items: center;">
+                          <div
+                             class="slds-col slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 ">
+                             <div class="slds-grid" style="align-items: center;gap:5px">
+                                <div class="slds-col">
+                                   <lightning-icon icon-name="doctype:pdf" size="medium"></lightning-icon>
+                                </div>
+                                <div class="slds-col " style="text-align: left;gap:5px">
+                                   {item.Title}</br>{item.sizeInKB} KB
+                                </div>
+                             </div>
+                          </div>
+                          <div
+                             class="slds-col slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-text-align_right">
+
+                             <lightning-button label="View" variant="neutral" disabled={disableViewBtn}
+                                onclick={viewModel} name={item.Id}></lightning-button>&nbsp;
+
+                             <lightning-button variant="destructive" label="Delete" title="Close"
+                                onclick={handledeletePdfModal} disabled={disableDeleteBtn}>
+                             </lightning-button>&nbsp;
+
+                             <lightning-button variant="brand" label="Submit" title="Submit"
+                                disabled={disableSubmitBtn} onclick={submitPdf} ></lightning-button>
+                          </div>
+                       </div>
+                    </div>
+                    </template>
+                    </template>
+
+                 </footer>
+              </div>
+           </section>
+           <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+     </template>
+  </template>
+
+    <template if:true={isOpenBoothSelector}>
+     <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small"
+        aria-labelledby="modal-heading-03" aria-modal="true">
+        <div class="slds-modal__container">
+           <button onclick={closeBoothSelector}
+              class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+              <lightning-icon icon-name="utility:close" size="small" variant="bare"></lightning-icon>
+           </button>
+           <div class="slds-modal__header">
+              <h1 id="modal-heading-03" class="slds-modal__title slds-hyphenate">Select booth to open form</h1>
+           </div>
+           <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3" style="min-height: 320px;">
+              <div class="slds-p-bottom_x-large">
+                 <lightning-combobox label="Select Booth" required="true" onchange={handleBoothSelect} options={boothList} value={selectedBooth}></lightning-combobox>
+              </div>
+           </div>
+           <div class="slds-modal__footer">
+              <button onclick={closeBoothSelector} class="slds-button slds-button_neutral"
+                 aria-label="Cancel and close">Cancel</button>
+              <button onclick={openFormForBooth} class="slds-button slds-button_brand">Open Form</button>
+           </div>
+        </div>
+     </section>
+     <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+  </template>
+
+  <template if:true={viewModal}>
+     <div class="demo-only modalCss">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+           aria-describedby="modal-content-id-11" class="slds-modal pdf-modal slds-slide-up-saving slds-modal_large">
+           <div class="slds-modal__container">
+              <header class="slds-modal__header">
+                 <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                    onclick={closeViewPopup}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small">
+                    </lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                 </button>
+              </header>
+              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-22">
+                 <iframe src={viewPdf} style="width:100%; min-height:600px;padding-bottom:0px;"></iframe>
+              </div>
+              <footer class="slds-modal__footer">
+                 <a href={viewPdf} class="slds-button slds-button_brand" download="MyFile">
+                    <lightning-icon icon-name="utility:arrow_bottom" size="xx-small"></lightning-icon>&nbsp;Download
+                    &nbsp;
+                 </a>&nbsp;
+                 <lightning-button variant="neutral" label="Close" title="Close" onclick={closeViewPopup}
+                    class="slds-m-left_x-small"></lightning-button>
+              </footer>
+           </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+     </div>
+  </template>
+  <template if:true={isDeletePdfModal}>
+     <!-- Modal/Popup Box LWC starts here -->
+     <section role="dialog" tabindex="-1" aria-labelledby="deleteFormHeader" aria-modal="true"
+        aria-describedby="deleteFormModalContent" class="slds-modal slds-fade-in-open modalpopup">
+        <div class="slds-modal__container">
+           <!-- Modal/Popup Box LWC header here -->
+           <header class="slds-modal__header">
+              <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                 onclick={closePdfDeleteModal}>
+                 <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small">
+                 </lightning-icon>
+                 <span class="slds-assistive-text">Close</span>
+              </button>
+              <h2 id="deletePdfHeader" class="slds-text-heading_medium slds-hyphenate">Pdf Form Deletion</h2>
+           </header>
+           <!-- Modal/Popup Box LWC body starts here -->
+           <div class="slds-modal__content slds-p-around_medium" id="deletePdfFormModalContent">
+              <p>
+                 Are you sure you want to delete this Pdf submission ?
+              </p>
+           </div>
+           <!-- Modal/Popup Box LWC footer starts here -->
+           <footer class="slds-modal__footer">
+              <button class="slds-button slds-button_brand" onclick={deletePdf} title="Yes">Yes</button>
+              <button class="slds-button slds-button_neutral" onclick={closePdfDeleteModal} title="No">No</button>
+
+           </footer>
+        </div>
+     </section>
+     <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+</template>

@@ -1,0 +1,15 @@
+<template>
+
+    <lightning-quick-action-panel header="Re-Send to IOM">
+
+        <p>Are you sure you want to re-send the opportunity for Ordering. Please ensure all the validation error messages are removed by updating the required fields for a successful sync</p>
+
+        <div slot="footer">
+            <lightning-button  label="Cancel" onclick={closeModal}></lightning-button>
+
+            <lightning-button variant="brand" class="slds-m-left_x-small" label="OK" onclick={updateField}></lightning-button>
+
+        </div>
+    </lightning-quick-action-panel>
+
+</template>

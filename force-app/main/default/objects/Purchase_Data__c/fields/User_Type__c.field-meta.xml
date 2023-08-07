@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>User_Type__c</fullName>
+    <description>Defines user type like Exhibitor, Agent, Co-Exhibitor, Contractor, Online</description>
+    <externalId>false</externalId>
+    <label>User Type</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>User_Type</valueSetName>
+    </valueSet>
+</CustomField>

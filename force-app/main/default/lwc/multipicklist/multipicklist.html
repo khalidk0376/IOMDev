@@ -1,0 +1,45 @@
+<!--
+Created By	 : Girikon(Sachin)(IML2R-742)
+Created On	 : Feb 20, 2020
+@description : Generic component used to draw multipick list.
+
+Modification log --
+Modified By	:  
+-->
+<template>
+    <div class="slds-form-element" style="width: 200px;display: inline-block;">
+        <div class="slds-form-element__control">
+            <div class="slds-combobox_container">
+                <div onmouseenter={openDropdown} onmouseleave={closeDropDown}
+                     class="dropdown slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-close" 
+                     aria-expanded="true" aria-haspopup="listbox" role="combobox">
+                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">                        
+                        <input type="text" class="slds-input slds-combobox__input slds-combobox__input-value" 
+                               placeholder={placeholder} onfocus={openDropdown} value={visibleToUser} readonly/>         
+                        <span class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right" title="Down icon">
+                            <lightning-icon icon-name="utility:down" size="xx-small" class="slds-icon-text-default"></lightning-icon>
+                            <span class="slds-assistive-text">Down icon</span>
+                        </span>
+                    </div>
+                    <div class="" id="listbox-unique-id" role="listbox" style="margin-top: -3px;">
+                        <ul class="slds-listbox slds-dropdown_length-7 slds-listbox_vertical slds-dropdown slds-dropdown_fluid" role="presentation">                            
+                            <template for:each={options} for:item="item" for:index="ind">
+                                <li title={item.label} key={item.label} onclick={selectOption} data-ischecked={item.isChecked} data-value={item.value} role="presentation" class="slds-listbox__item"><!--slds-selected -->
+                                    <div id={ind} 
+                                         class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small slds-media_center" role="option">
+                                        <span class="slds-media__figure">                                            
+                                            <template if:true={item.isChecked}>
+                                                <lightning-icon icon-name="utility:check" size="xx-small"></lightning-icon> 
+                                            </template>
+                                            &nbsp; {item.label}
+                                        </span>                                        
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

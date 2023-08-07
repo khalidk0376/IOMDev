@@ -1,0 +1,44 @@
+<!-- Created By		: Girikon(Garima[IMCC-2])
+Created On		: Sep 10 2021
+@description 	: This LWC is used for IMCC header for account selection page.
+-->
+<template>
+    <div if:true={eventDtls}>
+      <section class="exhg-top-header" style={utilityBarBranding}>
+        <div class="container" style="padding-top: 10px;">
+          <nav id="primary_nav_wrap" class="primary_nav_wrap">
+                <lightning-button variant="brand" label="Log Out" title="Log Out" 
+        
+                onclick={logOut} class="slds-m-right_x-small slds-float_right"></lightning-button>
+          </nav>
+        </div> 
+      </section>
+      <div class="container">
+        <div class="row">
+          <div class="exhg-col-sm-9 exhg-col-xs-12">
+            
+              <img src={eventLogo} class="pull-left imgStyle" />
+           
+            <div class="pull-left exhg-show-name"></div>
+            <p class="color-black exhg-name">{eventDtls.Name}</p>
+            <h2 class="color-black main-heading-style">Customer Center </h2>
+            <h2 class="subHeader">{eventLocation}</h2>
+          </div>
+          
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      
+    </div>
+    <div if:false={eventDtls}>
+    <section >
+            <div class="container" style="padding-top: 10px;">
+              <nav class="primary_nav_wrap">
+                    <lightning-button variant="brand" label="Log Out" title="Log Out" 
+            
+                    onclick={logOut} class="slds-m-right_x-small slds-float_right"></lightning-button>
+              </nav>
+            </div> 
+          </section>
+        </div>
+  </template>

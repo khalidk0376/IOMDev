@@ -1,0 +1,90 @@
+<!-- Created By		: Girikon(Garima[IMCC-2])
+Created On		: Sep 9 2021
+@description 	: This LWC is used for IMCC footer for account selection page.
+-->
+<template>
+   
+  <div class="dashboard-f">
+    <lightning-layout multiple-rows="true" class="footer-event slds-grid slds-wrap">
+      <lightning-layout-item size="8" small-device-size="12" medium-device-size="8" large-device-size="8">
+        <div class="about-arab heading heading-d-tiny heading-m-tiny heading-m-small" if:true={eventDtls}>About {eventDtls.Name}</div>
+        <div class="about-arab-content para paragraph-d-small paragraph-m-small" if:true={eventDtls}>
+          <lightning-formatted-rich-text value={eventDtls.Edition_Description__c}></lightning-formatted-rich-text>  
+        </div>
+        <div class="about-arab-content-links" if:true={isLinksVisible}>
+          <template for:each={edWebsiteDtls} for:item="web">
+            <div key={web.Id} class="item">
+              <a href={web.Website_Link__c} target="_blank" class="item-link para paragraph-m-small paragraph-d-tiny">{web.Website_Label__c}</a>
+            </div>  
+          </template>
+        </div>
+      </lightning-layout-item>
+
+      <lightning-layout-item size="4" small-device-size="12" medium-device-size="4" large-device-size="4" class="show-hours-cont">
+        <div class="about-arab heading heading-d-tiny heading-m-tiny heading-m-small">Show Hours</div>
+        <div if:true={isLive} class="event-status status-1 heading heading-d-eyebrow heading-m-eyebrow">ONLINE</div>          
+        <div  class="date-time para paragraph-d-small paragraph-m-small">          
+        <template if:true={isLive} for:each={showTimingLiveValues} for:item="liveValue" >
+          <div class="f-datetime" key={liveValue.Id}>
+            <div class="date-info">{liveValue.Show_Date__c}</div>
+            <div class="time-info" if:true={liveValue.Show_Hours__c}>{liveValue.Show_Hours__c}</div>
+          </div>	
+        </template>
+      </div>
+         <div if:true={isOnline} class="event-status heading heading-d-eyebrow">LIVE</div>
+          <div class="date-time para paragraph-d-small">            
+            <template if:true={isOnline} for:each={showTimingOnlineValues} for:item="onlineValue" >
+              <div class="f-datetime" key={onlineValue.Id}>
+                <div class="date-info">{onlineValue.Show_Date__c}</div>
+                <div class="time-info" if:true={onlineValue.Show_Hours__c}>{onlineValue.Show_Hours__c}</div>
+              </div>	
+            </template>
+          </div>
+      </lightning-layout-item>
+    </lightning-layout>
+
+    <lightning-layout multiple-rows="true" class="middle-line">
+      <lightning-layout-item size="12">
+        <div class="line"></div>
+      </lightning-layout-item>
+    </lightning-layout>
+
+    <lightning-layout multiple-rows="true" class="footer">
+      <lightning-layout-item if:true={isFollowVisible} size="12">
+        <div class="external-links slds-wrap">
+            <div class="follow-us heading heading-d-eyebrow heading-m-eyebrow">Follow us</div>                
+            <div class="social-media slds-align_absolute-center">
+                <div class="item" if:true={eventDtls.YouTube__c}><a href={eventDtls.YouTube__c} target="_blank" if:true={eventDtls.YouTube__c}><img src="/sfsites/c/resource/IMCC/icons/yt.svg" class="icon-inverse" alt="Youtube"/></a></div>
+                <div class="item" if:true={eventDtls.Twitter__c}><a href={eventDtls.Twitter__c} target="_blank" if:true={eventDtls.Twitter__c}><img src="/sfsites/c/resource/IMCC/icons/tw.svg" class="icon-inverse" alt="Twitter"/></a></div>
+                <div class="item" if:true={eventDtls.LinkedIn__c}><a href={eventDtls.LinkedIn__c} target="_blank" if:true={eventDtls.LinkedIn__c}><img src="/sfsites/c/resource/IMCC/icons/li.svg" class="icon-inverse" alt="Linked In"/></a></div>
+                <div class="item" if:true={eventDtls.FaceBook__c}><a href={eventDtls.FaceBook__c} target="_blank" if:true={eventDtls.FaceBook__c}><img src="/sfsites/c/resource/IMCC/icons/fb.svg" class="icon-inverse" alt="Facebook"/></a></div>
+                <div class="item" if:true={eventDtls.Instagram__c}><a href={eventDtls.Instagram__c} target="_blank" if:true={eventDtls.Instagram__c}><img src="/sfsites/c/resource/IMCC/icons/ig.svg" class="icon-inverse" alt="Instagram"/></a></div>
+            </div>
+        </div>
+    </lightning-layout-item>
+
+    <lightning-layout-item size="12">
+        <div class="line"></div>
+    </lightning-layout-item>
+        
+        <lightning-layout-item size="12">
+          <div class="f-bottom">
+              <div><a href="https://www.informamarkets.com/en/accessibility.html" class="privacy-policy-heading para paragraph-d-small paragraph-m-standard-medium paragraph-m-small" target="_blank">Accessibility</a></div>
+              <div class="dash"></div>
+              <div><a href="https://www.informa.com/privacy-policy/" class="privacy-policy-heading para paragraph-d-small paragraph-m-standard-medium paragraph-m-small" target="_blank">Privacy Policy</a></div>
+              <div class="dash"></div>
+              <div><a href="https://www.informa.com/privacy-policy/" class="privacy-policy-heading para paragraph-d-small paragraph-m-standard-medium paragraph-m-small" target="_blank">Cookie Policy</a></div>
+              <div class="dash"></div>
+              <div><a href="https://www.informamarkets.com/en/terms-of-use.html" class="privacy-policy-heading para paragraph-d-small paragraph-m-standard-medium paragraph-m-small" target="_blank">Terms of Use</a></div>
+              <div class="dash"></div>
+              <div><a href="https://www.informamarkets.com/en/home.html" target="_blank" class="privacy-policy-heading para paragraph-d-small paragraph-m-standard-medium paragraph-m-small">Home</a></div>
+          </div>
+            <!-- <div class="privacy-policy-content para paragraph-d-tiny paragraph-m-tiny ">
+                {privacyPolicyText}
+                <span><a class="read-more" target="_blank" href={privacyPolicyLink}>Read More</a></span>
+            </div> -->
+        </lightning-layout-item>
+    </lightning-layout>
+</div>
+<iframe src="/IMCC/apex/IMCC_Live_Chat" width="0" class="maxHeight chatWindowFrame" ></iframe>
+</template>

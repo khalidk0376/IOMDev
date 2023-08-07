@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Age_Bracket__c</fullName>
+    <description>Define the particular range of age range of customer on customer portal.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Define the particular range of age range of customer on customer portal.</inlineHelpText>
+    <label>Age Bracket</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>18-20</fullName>
+                <default>false</default>
+                <label>18-20</label>
+            </value>
+            <value>
+                <fullName>21-24</fullName>
+                <default>false</default>
+                <label>21-24</label>
+            </value>
+            <value>
+                <fullName>25-34</fullName>
+                <default>false</default>
+                <label>25-34</label>
+            </value>
+            <value>
+                <fullName>35-44</fullName>
+                <default>false</default>
+                <label>35-44</label>
+            </value>
+            <value>
+                <fullName>45-54</fullName>
+                <default>false</default>
+                <label>45-54</label>
+            </value>
+            <value>
+                <fullName>55-64</fullName>
+                <default>false</default>
+                <label>55-64</label>
+            </value>
+            <value>
+                <fullName>65+</fullName>
+                <default>false</default>
+                <label>65+</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

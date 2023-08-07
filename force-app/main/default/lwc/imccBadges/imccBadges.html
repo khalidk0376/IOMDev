@@ -1,0 +1,80 @@
+<template>
+    <div><c-imcc-page-header></c-imcc-page-header></div>
+    <lightning-card title="BADGES DATA" >
+        
+         <div if:true={showDueDate} class="slds-p-left_medium">
+             <template if:true={dueDate}>
+                 Due Date:
+                <lightning-formatted-date-time
+                value={dueDate}
+                year="numeric"
+                month="numeric"
+                day="numeric" class="slds-p-left_small">
+            </lightning-formatted-date-time></template>
+        </div>
+        <div slot="actions">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="7" padding="horizontal-small">
+                    <lightning-combobox value={selectedBooth} variant="label-hidden" onchange={handleBoothChange} options={purchaseDataList} label="Select Purchase Data"></lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item size="5">
+                    <lightning-button disabled={buttonStatus} label="Create Badges" variant="brand"></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <!--<div class="slds-p-around_medium">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th>Booth Number</th>     
+                        <th>Total Badges</th>                   
+                        <th>Allocated</th>
+                        <th>Submitted</th>
+                        <th>Additional Badge</th>
+                        <th>Remaining</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template if:true={badges} for:each={badges} for:item="badge" for:index="index">
+                       <tr key={badge.Id}>
+                            <td>{badge.Booth_Number__c}</td>
+                            <td>{badge.Total_Badges__c}</td>
+                            <td>{badge.Badge_Allocated__c}</td>
+                            <td>{badge.Submitted_Badges__c}</td>
+                            <td>{badge.Addition_Badge_Count__c}</td>
+                            <td>{badge.Remaining_Badges__c}</td>
+                       </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>--> 
+        <div class="slds-p-around_medium">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th>First Name</th>     
+                        <th>Last Name</th>                   
+                        <th>Email</th>
+                        <th>Job Title</th>
+                        <th>Country</th>
+                        <th>Stand No./Online*</th>
+                        <th>Status*</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template if:true={badges} for:each={badges} for:item="badge" for:index="index">
+                       <tr key={badge.Id}>
+                            <td>{badge.firstName}</td>
+                            <td>{badge.lastName}</td>
+                            <td>{badge.email}</td>
+                            <td>{badge.jobTitle}</td>
+                            <td>{badge.country}</td>
+                            <td>{badge.standNo}</td>
+                            <td>{badge.status}</td>
+                       </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>   
+    </lightning-card>
+</template>

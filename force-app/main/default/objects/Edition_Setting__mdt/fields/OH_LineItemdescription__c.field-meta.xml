@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OH_LineItemdescription__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>When checked will render the Lineitemdescription field in the node for document line and its translation node in OH JSON</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Include Line Item description</label>
+    <type>Checkbox</type>
+</CustomField>

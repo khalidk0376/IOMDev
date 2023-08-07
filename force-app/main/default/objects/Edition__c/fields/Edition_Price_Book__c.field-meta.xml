@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Edition_Price_Book__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>This Lookup stores the value of the related Price Book.</description>
+    <externalId>false</externalId>
+    <label>Edition Price Book</label>
+    <referenceTo>Pricebook2</referenceTo>
+    <relationshipLabel>Edition</relationshipLabel>
+    <relationshipName>Event_Edition</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

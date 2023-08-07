@@ -1,0 +1,483 @@
+<template>
+    <template if:true={isOpenActionModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="edit-form-heading" aria-modal="true"
+            aria-describedby="modal-content-edit-form" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button type="button" onclick={closeModal}
+                        class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning-icon icon-name="utility:close" variant="bare" size="small"></lightning-icon>
+                    </button>
+                    <h2 id="edit-form-heading" class="slds-text-heading_medium slds-hyphenate">Viewing Order: {ordName}
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-edit-form">
+                    <!-- Spinner -->
+                    <template if:true={showLoading}>
+                        <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass">
+                        </lightning-spinner>
+                    </template>
+                    <template if:false={isSSCBrazilUser}>
+                        <div class="slds-m-top_medium">
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                <thead>
+                                    <tr>
+                                        <th> Field Name </th>
+                                        <th></th>
+                                        <th> English (ISO-8859-1) </th>
+                                        <th></th>
+                                        <th> Local Language </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Account Name <abbr class="req">*</abbr></td>
+                                        <td></td>
+                                        <td>
+                                            <template if:false={showhide}>
+                                                <template if:true={ordObj}>
+                                                    <template if:true={ordObj.blng__BillingAccount__r}>
+                                                        {ordObj.blng__BillingAccount__r.Name}
+                                                    </template>
+                                                </template>
+                                                <template if:false={isReadOnly}>
+                                                    <lightning-button-icon icon-name="utility:edit"
+                                                        class="slds-float_right" icon-class="slds-button__icon_hint"
+                                                        alternative-text="Update values" variant="bare"
+                                                        onclick={showhideval}></lightning-button-icon>
+                                                </template>
+                                            </template>
+                                            <template if:true={showhide}>
+                                                <lightning-input class="validate" type="Text" name="ida"
+                                                    value={orgaccnameval} variant="label-hidden" onchange={handlechange}
+                                                    required>
+                                                </lightning-input>
+                                            </template>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <lightning-input type="Text" read-only={isReadOnly}
+                                                name="id1" value={accnameval} variant="label-hidden"
+                                                onchange={handlechange}>
+                                            </lightning-input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Billing Address Line <abbr class="req">*</abbr></td>
+                                        <td></td>
+                                        <td>
+                                            <template if:false={showhide}>
+                                                <template if:true={ordObj}>
+                                                    <template if:true={ordObj.blng__BillingAccount__r}>
+                                                        {ordObj.blng__BillingAccount__r.BillingStreet}
+                                                    </template>
+                                                </template>
+                                                <template if:false={isReadOnly}>
+                                                    <lightning-button-icon icon-name="utility:edit"
+                                                        class="slds-float_right" icon-class="slds-button__icon_hint"
+                                                        alternative-text="Update values" variant="bare"
+                                                        onclick={showhideval}></lightning-button-icon>
+                                                </template>
+                                            </template>
+                                            <template if:true={showhide}>
+                                                <lightning-input class="validate" type="Text" name="idb1"
+                                                    value={orgaddress1val} variant="label-hidden"
+                                                    onchange={handlechange} required>
+                                                </lightning-input>
+                                            </template>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <lightning-input class="validatelocal" type="Text" read-only={isReadOnly}
+                                                name="id21" value={address1val} variant="label-hidden"
+                                                onchange={handlechange} required>
+                                            </lightning-input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Billing Address Line 2</td>
+                                        <td></td>
+                                        <td>
+                                            <template if:false={showhide}>
+                                                <template if:true={ordObj}>
+                                                    <template if:true={ordObj.blng__BillingAccount__r}>
+                                                        {ordObj.blng__BillingAccount__r.Billing_Address_Line_2__c}
+                                                    </template>
+                                                </template>
+                                                <template if:false={isReadOnly}>
+                                                    <lightning-button-icon icon-name="utility:edit"
+                                                        class="slds-float_right" icon-class="slds-button__icon_hint"
+                                                        alternative-text="Update values" variant="bare"
+                                                        onclick={showhideval}></lightning-button-icon>
+                                                </template>
+                                            </template>
+                                            <template if:true={showhide}>
+                                                <lightning-input class="validate" type="Text" name="idb"
+                                                    value={orgaddressval} variant="label-hidden"
+                                                    onchange={handlechange}>
+                                                </lightning-input>
+                                            </template>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <lightning-input type="Text" read-only={isReadOnly}
+                                                name="id2" value={addressval} variant="label-hidden"
+                                                onchange={handlechange}>
+                                            </lightning-input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Billing Address Line 3</td>
+                                        <td></td>
+                                        <td>
+                                            <template if:false={showhide}>
+                                                <template if:true={ordObj}>
+                                                    <template if:true={ordObj.blng__BillingAccount__r}>
+                                                        {ordObj.blng__BillingAccount__r.Billing_Address_Line_3__c}
+                                                    </template>
+                                                </template>
+                                                <template if:false={isReadOnly}>
+                                                    <lightning-button-icon icon-name="utility:edit"
+                                                        class="slds-float_right" icon-class="slds-button__icon_hint"
+                                                        alternative-text="Update values" variant="bare"
+                                                        onclick={showhideval}></lightning-button-icon>
+                                                </template>
+                                            </template>
+                                            <template if:true={showhide}>
+                                                <lightning-input class="validate" type="Text" name="idbz"
+                                                    value={orgaddresslineval} variant="label-hidden"
+                                                    onchange={handlechange}>
+                                                </lightning-input>
+                                            </template>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <lightning-input type="Text" read-only={isReadOnly}
+                                                name="id45" value={addresslineval} variant="label-hidden"
+                                                onchange={handlechange}>
+                                            </lightning-input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Billing City <abbr class="req">*</abbr></td>
+                                        <td></td>
+                                        <td>
+                                            <template if:false={showhide}>
+                                                <template if:true={ordObj}>
+                                                    <template if:true={ordObj.blng__BillingAccount__r}>
+                                                        {ordObj.blng__BillingAccount__r.BillingCity}
+                                                    </template>
+                                                </template>
+                                                <template if:false={isReadOnly}>
+                                                    <lightning-button-icon icon-name="utility:edit"
+                                                        class="slds-float_right" icon-class="slds-button__icon_hint"
+                                                        alternative-text="Update values" variant="bare"
+                                                        onclick={showhideval}></lightning-button-icon>
+                                                </template>
+                                            </template>
+                                            <template if:true={showhide}>
+                                                <lightning-input class="validate" type="Text" name="idc"
+                                                    value={orgcityval} variant="label-hidden" onchange={handlechange}
+                                                    required>
+                                                </lightning-input>
+                                            </template>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <lightning-input class="validatelocal" type="Text" read-only={isReadOnly}
+                                                name="id3" value={cityval} variant="label-hidden"
+                                                onchange={handlechange} required>
+                                            </lightning-input>
+                                        </td>
+                                    </tr>
+                                    <!--<tr>
+                            <td>Billing Country</td>
+                            <td></td>
+                            <td>
+                                <template if:false={showhide}>
+                            <template if:true={ordObj}>
+                                <template if:true={ordObj.blng__BillingAccount__r}>
+                                    {ordObj.blng__BillingAccount__r.BillingCountry}
+                                </template>
+                            </template>
+                            <template if:false={isReadOnly}>
+                                <lightning-button-icon icon-name="utility:edit" class="slds-float_right" icon-class="slds-button__icon_hint" alternative-text="Update values" variant="bare" onclick={showhideval}></lightning-button-icon>
+                            </template>
+                        </template>
+                        <template if:true={showhide}>
+                            <lightning-combobox class="validate" name="billingcountry" variant="label-hidden" value={orgcountrycode} 
+                             options={countryOptions} onchange={handleChangeCountry} required></lightning-combobox>
+                        </template>
+                        </td>
+                        <td></td>
+                            <td><lightning-input class="validate" type="Text" read-only={isReadOnly} name="id4" value={countryval} variant="label-hidden" onchange={handlechange}> 
+                                </lightning-input></td>
+                        </tr>-->
+                                    <tr>
+                                        <td>Billing Zip/Postal Code 
+                                            <template if:true={isPostalCodeRequired}>
+                                                <abbr class="req"> *</abbr>
+                                            </template>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <template if:false={showhide}>
+                                                <template if:true={ordObj}>
+                                                    <template if:true={ordObj.blng__BillingAccount__r}>
+                                                        {ordObj.blng__BillingAccount__r.BillingPostalCode}
+                                                    </template>
+                                                </template>
+                                                <template if:false={isReadOnly}>
+                                                    <lightning-button-icon icon-name="utility:edit"
+                                                        class="slds-float_right" icon-class="slds-button__icon_hint"
+                                                        alternative-text="Update values" variant="bare"
+                                                        onclick={showhideval}></lightning-button-icon>
+                                                </template>
+                                            </template>
+                                            <template if:true={showhide}>
+                                                <lightning-input class="validate" type="Text" pattern="[a-zA-Z0-9\s]*"
+                                                    message-when-pattern-mismatch="You have entered an invalid Zip Code."
+                                                    name="idf" value={orgzipcodeval} variant="label-hidden"
+                                                    onchange={handlechange} required={isPostalCodeRequired}>
+                                                </lightning-input>
+                                            </template>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <lightning-input type="Text" pattern="[a-zA-Z0-9]*"
+                                                message-when-pattern-mismatch="You have entered an invalid Zip Code."
+                                                read-only={isReadOnly} name="id6" value={zipcodeval}
+                                                variant="label-hidden" onchange={handlechange}>
+                                            </lightning-input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Billing State/Province 
+                                            <template if:true={isStateRequired}>
+                                                <abbr class="req"> *</abbr>
+                                            </template>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <template if:false={showhide}>
+                                                <template if:true={ordObj}>
+                                                    <template if:true={ordObj.blng__BillingAccount__r}>
+                                                        {ordObj.blng__BillingAccount__r.BillingState}
+                                                    </template>
+                                                </template>
+                                                <template if:false={isReadOnly}>
+                                                    <lightning-button-icon icon-name="utility:edit"
+                                                        class="slds-float_right" icon-class="slds-button__icon_hint"
+                                                        alternative-text="Update values" variant="bare"
+                                                        onclick={showhideval}></lightning-button-icon>
+                                                </template>
+                                            </template>
+                                            <template if:true={showhide}>
+                                                <lightning-combobox dropdown-alignment="bottom-left" class="validate"
+                                                    name="billingstate" variant="label-hidden" value={orgstatecode}
+                                                    options={stateOptions} onchange={handleChangeState}
+                                                    required={isStateRequired}></lightning-combobox>
+                                            </template>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <lightning-combobox dropdown-alignment="bottom-left"
+                                                name="billingstate" variant="label-hidden" value={stateval}
+                                                options={stateOptions} onchange={handleLocalChangeState}
+                                                ></lightning-combobox>
+                                        </td>
+                                    </tr>
+
+                                    <!--<tr>
+                            <td>Salutation</td>
+                            <td></td>
+                            <td>
+                                <template if:false={showhide}>
+                            <template if:true={ordObj}>
+                                <template if:true={ordObj.BillToContact}>
+                                    {ordObj.BillToContact.Salutation}
+                                </template>
+                            </template>
+                            <template if:false={isReadOnly}>
+                                <lightning-button-icon icon-name="utility:edit" class="slds-float_right" icon-class="slds-button__icon_hint" alternative-text="Update values" variant="bare" onclick={showhideval}></lightning-button-icon>
+                            </template>
+                        </template>
+                        <template if:true={showhide}>
+                            <lightning-combobox name="salutation" variant="label-hidden" value={orgsalutation} 
+                             options={salutationOptions} onchange={handleSalutationCountry} ></lightning-combobox>
+                        </template>
+                        </td>
+                        <td></td>
+                            <td><lightning-input type="Text" read-only={isReadOnly} name="id22" value={salutation} variant="label-hidden" onchange={handlechange}> 
+                                </lightning-input></td>
+                        </tr>-->
+                                    <tr>
+                                        <td>Contact First Name <abbr class="req">*</abbr></td>
+                                        <td></td>
+                                        <td>
+                                            <template if:false={showhide}>
+                                                <template if:true={ordObj}>
+                                                    <template if:true={ordObj.BillToContact}>
+                                                        {ordObj.BillToContact.FirstName}
+                                                    </template>
+                                                </template>
+                                                <template if:false={isReadOnly}>
+                                                    <lightning-button-icon icon-name="utility:edit"
+                                                        class="slds-float_right" icon-class="slds-button__icon_hint"
+                                                        alternative-text="Update values" variant="bare"
+                                                        onclick={showhideval}></lightning-button-icon>
+                                                </template>
+                                            </template>
+                                            <template if:true={showhide}>
+                                                <lightning-input class="validate" type="Text" name="idg"
+                                                    value={orgfirstname} variant="label-hidden" onchange={handlechange}
+                                                    required>
+                                                </lightning-input>
+                                            </template>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <lightning-input type="Text" read-only={isReadOnly}
+                                                name="id7" value={firstname} variant="label-hidden"
+                                                onchange={handlechange}>
+                                            </lightning-input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Contact Last Name <abbr class="req">*</abbr></td>
+                                        <td></td>
+                                        <td>
+                                            <template if:false={showhide}>
+                                                <template if:true={ordObj}>
+                                                    <template if:true={ordObj.BillToContact}>
+                                                        {ordObj.BillToContact.LastName}
+                                                    </template>
+                                                </template>
+                                                <template if:false={isReadOnly}>
+                                                    <lightning-button-icon icon-name="utility:edit"
+                                                        class="slds-float_right" icon-class="slds-button__icon_hint"
+                                                        alternative-text="Update values" variant="bare"
+                                                        onclick={showhideval}></lightning-button-icon>
+                                                </template>
+                                            </template>
+                                            <template if:true={showhide}>
+                                                <lightning-input class="validate" type="Text" name="idh"
+                                                    value={orglastname} variant="label-hidden" onchange={handlechange}
+                                                    required>
+                                                </lightning-input>
+                                            </template>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <lightning-input type="Text" read-only={isReadOnly}
+                                                name="id8" value={lastname} variant="label-hidden"
+                                                onchange={handlechange}>
+                                            </lightning-input>
+                                        </td>
+                                    </tr>
+                                    <!--<tr>
+                            <td>Contact Title</td>
+                            <td></td>
+                        <td>
+                            <template if:false={showhide}>
+                            <template if:true={ordObj}>
+                                <template if:true={ordObj.BillToContact}>
+                                    {ordObj.BillToContact.Title}
+                                </template>
+                            </template>
+                            <template if:false={isReadOnly}>
+                                <lightning-button-icon icon-name="utility:edit" class="slds-float_right" icon-class="slds-button__icon_hint" alternative-text="Update values" variant="bare" onclick={showhideval}></lightning-button-icon>
+                            </template>
+                        </template>
+                        <template if:true={showhide}>
+                            <lightning-input class="validate" type="Text" name="idi" value={orgtitleval} variant="label-hidden" onchange={handlechange}> 
+                            </lightning-input>
+                        </template>
+                        </td>
+                        <td></td>
+                            <td><lightning-input class="validate" type="Text" read-only={isReadOnly} name="id9" value={titleval} variant="label-hidden" onchange={handlechange}> 
+                                </lightning-input></td>
+                        </tr>-->
+                                    <tr>
+                                        <td>Email Address <abbr class="req">*</abbr></td>
+                                        <td></td>
+                                        <td>
+                                            <template if:false={showhide}>
+                                                <template if:true={ordObj}>
+                                                    <template if:true={ordObj.BillToContact}>
+                                                        {ordObj.BillToContact.Email}
+                                                    </template>
+                                                </template>
+                                                <template if:false={isReadOnly}>
+                                                    <lightning-button-icon icon-name="utility:edit"
+                                                        class="slds-float_right" icon-class="slds-button__icon_hint"
+                                                        alternative-text="Update values" variant="bare"
+                                                        onclick={showhideval}></lightning-button-icon>
+                                                </template>
+                                            </template>
+                                            <template if:true={showhide}>
+                                                <lightning-input type="email" class="validate" name="idj"
+                                                    message-when-type-mismatch="You have entered an invalid Email."
+                                                    value={orgemailval} variant="label-hidden" onchange={handlechange}
+                                                    required>
+                                                </lightning-input>
+                                            </template>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <lightning-input type="email"
+                                                read-only={isReadOnly} name="id0" value={emailval}
+                                                variant="label-hidden" onchange={handlechange}>
+                                            </lightning-input>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </template>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button onclick={closeModal} label="Cancel" variant="destructive"
+                        icon-name="utility:close"></lightning-button>&nbsp;&nbsp;
+                    <template if:false={isReadOnly}>
+                        <lightning-button type="submit" class="save-button" variant="brand" icon-name="utility:check"
+                            label="Submit" onclick={switchModal}></lightning-button>&nbsp;&nbsp;
+                    </template>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <template if:true={isOpenSecondModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="edit-heading" aria-modal="true"
+            aria-describedby="modal-content-form" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button type="button" onclick={closeModal}
+                        class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning-icon icon-name="utility:close" variant="bare" size="small"></lightning-icon>
+                    </button>
+                    <h2 class="slds-text-heading_medium slds-hyphenate">Viewing Order: {ordName}</h2>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-form">
+                    <!-- Spinner -->
+                    <template if:true={showLoading}>
+                        <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass">
+                        </lightning-spinner>
+                    </template>
+                    <p style="text-align:center;">Are you sure you wish to submit the order for processing?</p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button onclick={closeModal} label="Cancel" variant="destructive"></lightning-button>&nbsp;&nbsp;
+                    <lightning-button type="submit" class="save-button" variant="brand" label="OK"
+                        onclick={updateRecords}></lightning-button>                   
+                    &nbsp;&nbsp;
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+</template>

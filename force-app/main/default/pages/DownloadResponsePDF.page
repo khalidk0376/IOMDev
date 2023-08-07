@@ -1,0 +1,32 @@
+<apex:page renderAs="pdf"  showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" docType="html-5.0">
+    <!--renderAs="pdf"-->
+    <html>
+       <head>
+           <title>Question Template</title>
+           <style type="text/css">           
+               @page {size: A4;margin: 7mm;font-family: sans-serif;}
+               @top-center {content: element(header);}
+               @bottom-left {content: element(footer);}
+               .description {font-size: 13px;margin-bottom: 5px;font-family: sans-serif;}
+               body {font-family: sans-serif;font-size: 12px;}
+               .Question-marTop {margin-top: 3px;margin-bottom: 3px;}
+               .main-heading {font-family: sans-serif;font-size: 20px;}
+               .text-center {font-family: sans-serif;text-align: center;}
+               .border {border: 1px #999 solid;}
+               .marginB10 {margin-bottom: 10px;}            
+               p {margin: 0;padding: 0;font-family: sans-serif;}
+               div.header {padding: 0.5px;position: running(header);font-family: sans-serif;}
+               div.footer {display: block;padding: 1px;position: running(footer);font-family: sans-serif;}
+               .pdf-table {width: 100%;border: 1px #ccc solid;font-size: 11px;margin-top: 5px;font-family: sans-serif;}
+               .pdf-table td,
+               .pdf-table th {font-family: sans-serif;padding: 5px;}
+               img{width:100%!important;}
+               .slds-hide{display:none}
+               table{page-break-inside : avoid;}
+           </style>
+      </head>
+      <body>
+          <c:DownloadResponse />
+      </body>
+   </html>
+</apex:page>

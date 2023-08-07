@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" description="Set active tab in header" access="global">
+	<!-- FBActiveHeaderEvent -->
+    <aura:attribute name="compName" type="String" description="which component want to set after active header menu tab"/> 
+	<aura:attribute name="QuesnaireId" type="String" description="which component want to set after active header menu tab"/> 
+</aura:event>

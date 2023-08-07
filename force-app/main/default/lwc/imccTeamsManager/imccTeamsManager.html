@@ -1,0 +1,364 @@
+<template>
+    <lightning-spinner if:true={spinner} size="small" variant="brand"></lightning-spinner>
+    <div class="forms-and-manuals fnm team-members">
+        <div><c-imcc-page-header></c-imcc-page-header></div>
+        <div class="slds-grid slds-wrap space-between">
+            <div class="my-team">
+                <h3 class="heading heading-d-large heading-m-large heading-m-medium">My Team</h3>
+            </div>
+            <div class="download-team">
+                <!-- <a class="item-link para paragraph-m-small paragraph-d-small" href="javascript:void(0)">Download team
+                    details</a> -->
+                <lightning-button class="add-team-member btn-md" icon-name="utility:add" label="Add a team member"
+                    variant="brand" onclick={handleConfirmClick}></lightning-button>
+            </div>
+        </div>
+        <div class="slds-grid slds-wrap space-between slds-p-top_large">
+            <!--
+            <div class="slds-size_9-of-12">
+                <div class="slds-combobox_container">
+                    <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+                      <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                        <lightning-input class="search-box" onchange={handleEmailSearch} type="search"
+                            placeholder="Search a team member" variant="label-hidden" label="search"></lightning-input>
+                      </div>
+                      <div id="listbox-id-4" if:true={isDataFound} class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid" role="listbox">
+                        <ul class="slds-listbox slds-listbox_vertical" role="presentation">                                                    
+                        <template for:each={searchConList} for:item="item" for:index="index">
+                            <li key={item.Id} data-index={index} onclick={selectContact} role="presentation" class="slds-listbox__item" data-con-name={item.Name} data-con-id={item.Id}>
+                                <div id={item.Id} class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small" role="option">
+                                    <span class="slds-media__figure slds-listbox__option-icon"></span>
+                                    <span class="slds-media__body">
+                                      <span class="slds-truncate" title={item.Name}>{item.Name}</span>
+                                    </span>
+                                </div>
+                            </li>
+                        </template>
+                        </ul>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+            <div class="slds-text-align_right slds-size_3-of-12">
+                <lightning-button class="add-team-member btn-md" icon-name="utility:add" label="Add a team member" 
+                    variant="brand" onclick={handleConfirmClick}></lightning-button>
+            </div>
+            -->
+            <div class="slds-size_12-of-12 slds-p-top_medium">
+                <div class="slds-card slds-p-vertical_small slds-p-horizontal_medium">
+                    <p class="para paragraph-m-small paragraph-d-tiny"><lightning-icon icon-name="utility:info_alt"
+                            size="small" variant=""></lightning-icon> &nbsp; {label.AddingTeamMemberText}</p>
+                    <!--<lightning-button if:false={isDataFound} class="add-team-member btn-md" icon-name="utility:add" label="Add new team member" onclick={addNewTeamMember}
+                variant="neutral"></lightning-button>-->
+                </div>
+            </div>
+        </div>
+        <div class="slds-grid slds-wrap space-between slds-p-top_small" if:true={memberDataFound}>
+            <template for:each={memberList} for:item="cem">
+                <div key={cem.Id} class="slds-size_6-of-12 slds-p-right_small box">
+                    <div class="slds-card slds-p-around_large">
+                        <div class="slds-p-right_small finalview">
+
+                            <p class="paragraph-m-small"><span class="slds-bold">{cem.Contact__r.Name}</span>&nbsp;
+                                <lightning-formatted-email
+                                    value={cem.Contact_Email__c}></lightning-formatted-email>&nbsp;&nbsp;&nbsp;
+                                <a href="javascript:void(0)" onclick={viewMemberDetails} data-id={cem.Id}>View</a>
+                            </p>
+                            <p class="paragraph-m-small">Admin privilege: <span class="slds-bold">{cem.Role__c}</span>
+                            </p>
+                            <p class="paragraph-m-small">Welcome Email Date:
+                                <span class="slds-bold">{cem.Email_Sent__c}
+                                </span>
+                            </p>
+                            <p class="paragraph-m-small">{label.Accepted_Logged_in}: <span
+                                    class="slds-bold">{cem.First_Login_Date_Time__c}</span></p>
+                            <div if:true={cem.isActionVisible}>
+                            <p class="paragraph-m-small"><a href="javascript:void(0)" onclick={handleReSendInviteClick}
+                                    data-id={cem.Id}>Re-send invite</a>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"
+                                    onclick={handleCancleInviteClick} data-id={cem.Id} data-name={cem.Contact__r.Name}>Remove team member</a>
+                            </p>
+                           </div>
+                           <div if:false={cem.isActionVisible}>
+                            <p class="paragraph-m-small"><a href="javascript:void(0)" onclick={handleReSendInviteClick}
+                                data-id={cem.Id} data-name={cem.Contact__r.Name}>Re-send invite</a></p>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+    </div>
+
+    <!--<div class="slds-grid slds-wrap space-between slds-p-top_large">
+        <div class="slds-size_6-of-12 slds-p-right_small">
+            <div class="slds-card slds-p-around_large">                
+                <div class="slds-p-right_small finalview">
+                    <p class="paragraph-m-small"><span class="slds-bold">River Karydi</span>&nbsp;<a
+                            href="#">river@health.ae</a></p>
+                    <p class="paragraph-m-small">Admin privilege: <span
+                            class="slds-bold">Platform</span>&nbsp;&nbsp;&nbsp;invited on: <span
+                            class="slds-bold">25 Jan 2023</span></p>
+                    <p class="paragraph-m-small"><a href="#">Re-send invite</a>&nbsp;&nbsp;&nbsp;<a href="#">Cancel
+                            invitation</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="slds-size_6-of-12 slds-p-left_small">
+            <div class="slds-card slds-p-around_large">                
+                <div class="slds-p-right_small finalview">
+                    <p class="paragraph-m-small"><span class="slds-bold">River Karydi</span>&nbsp;<a
+                            href="#">river@health.ae</a></p>
+                    <p class="paragraph-m-small">Admin privilege: <span
+                            class="slds-bold">Platform</span>&nbsp;&nbsp;&nbsp;invited on: <span
+                            class="slds-bold">25 Jan 2023</span></p>
+                    <p class="paragraph-m-small"><a href="#">Re-send invite</a>&nbsp;&nbsp;&nbsp;<a href="#">Cancel
+                            invitation</a></p>
+                </div>
+            </div>
+        </div>
+    </div>-->
+
+
+
+    <!--Add new team member modal-->
+    <template if:true={isOpenNewTeamMemberModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="new-team-member" aria-modal="true"
+            aria-describedby="new-team-member-id" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button onclick={closeNewTeamMemberModal}
+                        class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning-icon icon-name="utility:close" size="small" variant="bare"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="new-team-member" class="slds-modal__title slds-hyphenate">Invite a new team member</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="new-team-member-id">
+                    <div class="form" if:false={isNewInvitationSent}>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-p-right_small slds-m-bottom_x-small">
+                                <lightning-input name="firstname" onchange={handleContactFieldChange}
+                                    label="First Name: " value={firstName} max-length="100" required={isRequired}
+                                    disabled={isDisable}></lightning-input>
+                            </div>
+                            <div class="slds-col slds-p-left_small slds-m-bottom_x-small">
+                                <lightning-input name="lastname" onchange={handleContactFieldChange} label="Last Name: "
+                                    value={lastName} max-length="100" required={isRequired}
+                                    disabled={isDisable}></lightning-input>
+                            </div>
+                        </div>
+                        <div class="slds-m-bottom_small">
+                            <lightning-input name="email" onchange={handleContactFieldChange} label="Email Address: "
+                                value={emailId} max-length="100" required={isRequired}
+                                disabled={isDisable}></lightning-input>
+                        </div>
+
+                        <div class="para paragraph-m-small slds-m-bottom_small">
+                            <lightning-combobox name="role" label="Role" value={value} placeholder="Select a role"
+                                options={roleOptions} required={isRequired} disabled={isDisable}
+                                onchange={handleContactFieldChange}></lightning-combobox>
+                        </div>
+
+                        <div class="slds-border slds-border-radius4 slds-p-vertical_small slds-p-horizontal_medium">
+                            <p class="para paragraph-m-small paragraph-d-tiny">
+                                <lightning-icon icon-name="utility:warning" size="small" variant=""></lightning-icon>
+                                &nbsp; {label.AddingTeamMemberText}
+                            </p>
+                        </div>
+
+                        <lightning-spinner if:true={spinner} size="small" variant="brand"></lightning-spinner>
+                    </div>
+                    <div class="success-message" if:true={isNewInvitationSent}>
+                        <p class="paragraph-m-small slds-m-bottom_medium slds-text-align_center slds-m-top_large">
+                            <lightning-icon icon-name="action:approval" alternative-text="check" title="check"
+                                size="small"></lightning-icon>
+                        </p>
+                        <p class="paragraph-m-small slds-m-bottom_large slds-text-align_center">An invitation email will
+                            be
+                            sent to the email <span class="slds-bold"> <lightning-formatted-email
+                                    value={tempEmail}></lightning-formatted-email>.</span></p>
+                        <p class="paragraph-m-small slds-text-align_center">The invited person will have the option to
+                            accept or reject the invitation.<br> After accepting she/he can login and add his/her member
+                            details.</p>
+                        <p class="para paragraph-m-small slds-text-align_center slds-p-bottom_small">
+                            <a href="javascript:void(0);" onclick={closeNewTeamMemberModal} class="slds-bold">Done</a>
+                        </p>
+                    </div>
+                </div>
+                <footer if:false={isNewInvitationSent} class="slds-modal__footer">
+                    <button onclick={closeNewTeamMemberModal}
+                        class="slds-button slds-button_neutral">Cancel</button>&nbsp;&nbsp;&nbsp;
+                    <lightning-button icon-name="utility:send" icon-position="right"
+                        onclick={sendNewTeamMemberInvitation} variant="brand"
+                        label="Send Invitation"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <template if:true={isOpenViewTeamMemberModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="new-team-member" aria-modal="true"
+            aria-describedby="new-team-member-id" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button onclick={closeTeamMemberDetailModal}
+                        class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning-icon icon-name="utility:close" size="small" variant="bare"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="team-member-details-id">
+                    <div class="slds-grid slds-wrap slds-p-bottom_medium">
+                        <div class="slds-size_8-of-12 slds-p-right_small">
+                            <div class="team-member-icon">
+                                <img alt="Team member name" src="/IMCC/profilephoto/005/T">
+                            </div>
+                            <p class="heading heading-d-small slds-bold">{memberDetails.Name}</p>
+                            <!-- <p class="paragraph-m-small">Job title: {memberDetails.Job}</p> -->
+                            <p class="paragraph-m-small">Role: {memberDetails.AdminPrivilage}</p>
+                            <!-- <p class="paragraph-m-small">Admin privilege: {memberDetails.AdminPrivilage}</p> -->
+                            <p class="paragraph-m-small">Email address: <lightning-formatted-email
+                                    value={memberDetails.Email}></lightning-formatted-email></p>
+                            <p class="paragraph-m-small" if:true={memberDetails.Phone}>Contact number:
+                                {memberDetails.Phone}</p>
+                            <!-- <p class="paragraph-m-small">Working hours: 9AM - 6PM GMT+4</p> -->
+                            <p class="paragraph-m-small">Added on: {memberDetails.AddedOn}</p>
+                            <!-- <p class="paragraph-m-small">Location: {memberDetails.Location}</p> -->
+                        </div>
+                        <!--
+                        <div class="slds-size_6-of-12 slds-p-left_small">
+                            <div class="bg-gray slds-border-radius-small slds-p-around_medium slds-m-bottom_large">
+                                <p class="heading heading-d-small slds-bold">Task Details</p>
+                                <div class="slds-grid slds-wrap space-between slds-border_bottom slds-m-bottom_x-small">
+                                    <div class="my-team">
+                                        <p class="paragraph-m-small">Assigned</p>
+                                    </div>
+                                    <div class="">
+                                        <a class="item-link para paragraph-m-small paragraph-d-small"
+                                            href="javascript:void(0)">4</a>
+                                    </div>
+                                </div>
+                                <div class="slds-grid slds-wrap space-between slds-border_bottom slds-m-bottom_x-small">
+                                    <div class="my-team">
+                                        <p class="paragraph-m-small">Pending</p>
+                                    </div>
+                                    <div class="">
+                                        <a class="item-link para paragraph-m-small paragraph-d-small"
+                                            href="javascript:void(0)">4</a>
+                                    </div>
+                                </div>
+                                <div class="slds-grid slds-wrap space-between slds-border_bottom slds-m-bottom_x-small">
+                                    <div class="my-team">
+                                        <p class="paragraph-m-small">Completed</p>
+                                    </div>
+                                    <div class="">
+                                        <a class="item-link para paragraph-m-small paragraph-d-small"
+                                            href="javascript:void(0)">0</a>
+                                    </div>
+                                </div>
+                                <div><a class="slds-p-around_x-small" href="#">View assigned task</a><a
+                                        class="slds-p-around_x-small" href="#">Assigned task</a><a
+                                        class="slds-p-around_x-small" href="#">Create tasks</a></div>
+                            </div>
+                            <div class="bg-gray slds-border-radius-small slds-p-around_medium">
+                                <p class="heading heading-d-small slds-bold">Platform Access</p>
+                                <div class="slds-grid slds-wrap space-between slds-border_bottom slds-m-bottom_x-small">
+                                    <div class="my-team">
+                                        <p class="paragraph-m-small">Customer center</p>
+                                    </div>
+                                    <div class="">
+                                        <p><lightning-icon icon-name="utility:check" alternative-text="check" title="check"
+                                                size="x-small"></lightning-icon></p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <template if:true={showRemoveTeamMemberPopup}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+             <!-- modal header start -->
+               <header class="slds-modal__header">
+                  <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={onNoClick}>
+                     <lightning-icon icon-name="utility:close"
+                        alternative-text="close"
+                        variant="inverse"
+                        size="small" ></lightning-icon>
+                     <span class="slds-assistive-text">Close</span>
+                  </button>
+                  <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate"></h2>
+               </header>
+           
+               <!-- modal body start -->
+               <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <lightning-icon icon-name="action:delete" alternative-text="Delete" title="Delete" size="large"></lightning-icon>
+                <div class="slds-text-color_error slds-text-heading_medium">
+                    <p><b>Remove {selectedCEMToRemove}</b></p></div>
+                    <div if:true={isPrimary}>{label.Alert_Primary_CEM}</div>
+                     <p>Are you sure you want to remove <b>{selectedCEMToRemove}</b> from your <b>team</b>?</p>
+               </div>
+     
+               <!-- modal footer start-->
+               <footer class="slds-modal__footer">
+                <lightning-button variant="base" label="Cancel" onclick={onNoClick}>
+                </lightning-button>
+                <lightning-button variant="destructive" label="Remove" class="slds-m-left_x-small"
+                    onclick={onYesClick}>
+                </lightning-button>
+               </footer>
+            
+            </div>
+         </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <template if:true={showConfirmationPopup}>
+       <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+             <!-- modal header start -->
+               <header class="slds-modal__header">
+                  <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={onkeepChange}>
+                     <lightning-icon icon-name="utility:close"
+                        alternative-text="close"
+                        variant="inverse" 
+                        size="small" ></lightning-icon>
+                     <span class="slds-assistive-text">Close</span>
+                  </button>
+                  <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate"></h2>
+               </header>
+           
+               <!-- modal body start -->
+               
+               <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2"><lightning-icon icon-name="utility:success" alternative-text="Success!" variant="success"
+                title="success variant" size="large"></lightning-icon>
+                <div class="slds-text-color_success slds-text-heading_medium">
+                    <p><b>Team Member removed successfully</b></p>
+                </div>
+                     <p>The user <b>{selectedCEMToRemove}</b> will receive an informational email for the change.</p>
+               </div>
+     
+               <!-- modal footer start-->
+               <footer class="slds-modal__footer">
+                <lightning-button label="Undo" onclick={onUndo}>
+                </lightning-button>
+                <lightning-button variant="brand" label="Keep Changes" class="slds-m-left_x-small"
+                    onclick={onkeepChange}>
+                </lightning-button>
+               </footer>
+            
+            </div>
+         </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

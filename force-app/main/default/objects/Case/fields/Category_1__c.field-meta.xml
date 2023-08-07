@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Category_1__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Will consist Level 1 Categories</description>
+    <externalId>false</externalId>
+    <label>Category 1</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Case_Category__c.Level__c</field>
+            <operation>equals</operation>
+            <value>L1</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Case_Category__c</referenceTo>
+    <relationshipLabel>Cases</relationshipLabel>
+    <relationshipName>Cases</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

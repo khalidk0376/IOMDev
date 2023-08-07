@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Open_Amendment_Requests__c</fullName>
+    <description>Total count of Open Amendment Requests for processing</description>
+    <externalId>false</externalId>
+    <label>Open Amendment Requests</label>
+    <summaryFilterItems>
+        <field>Change_Request__c.Data_Synced__c</field>
+        <operation>equals</operation>
+        <value>False</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Change_Request__c.Change_Request_Status__c</field>
+        <operation>notEqual</operation>
+        <value>Completed, Rejected</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Change_Request__c.Opportunity__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

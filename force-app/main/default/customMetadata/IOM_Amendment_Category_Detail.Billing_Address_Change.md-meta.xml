@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Billing Address Change</label>
+    <protected>false</protected>
+    <values>
+        <field>IOM_Description__c</field>
+        <value xsi:type="xsd:string">Update required on existing Bill To Address where not tax impacting.</value>
+    </values>
+    <values>
+        <field>IOM_New_Label__c</field>
+        <value xsi:type="xsd:string">Account - Bill To Address Update Same Account</value>
+    </values>
+    <values>
+        <field>IOM_Priority__c</field>
+        <value xsi:type="xsd:double">3.0</value>
+    </values>
+    <values>
+        <field>IOM_Type__c</field>
+        <value xsi:type="xsd:string">Reprint Invoice Change Detail</value>
+    </values>
+</CustomMetadata>

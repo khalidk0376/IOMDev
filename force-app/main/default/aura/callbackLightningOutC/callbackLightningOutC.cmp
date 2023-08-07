@@ -1,0 +1,33 @@
+<!-- *
+* Project      	:   Order & Billing Plateform [IOM-519]
+* Created By	: 	Ashish (Girikon)
+* Created Date	: 	18 JAN 2022
+* ***************************************************************************
+* @description : to Show Collection Notes Data from IOM to CRM Orgs
+* -->
+<aura:component >	
+    <!-- GLOBAL Atributes-->
+    <aura:attribute name="iomRecordNumber" type="String" description="IOM Record Id" access="global" />
+    <aura:attribute name="componentCode" type="String" description="Component Code" access="global" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <div>
+        <aura:if isTrue="{!v.componentCode == 'CND01'}">
+            <c:oppInvCollectionNotesDetails imOppNo="{!v.iomRecordNumber}" />
+        </aura:if>
+        <aura:if isTrue="{!v.componentCode == 'CND02'}">
+            <c:accInvCollectionNotesDetails accId="{!v.iomRecordNumber}" />
+        </aura:if>
+        <aura:if isTrue="{!v.componentCode == 'CND03'}">
+            <c:oppInvDataDisplay imOppNo="{!v.iomRecordNumber}" />
+        </aura:if>
+    </div>
+</aura:component>
+
+<!--
+    /*****Component Code Library******/
+    Code  -  Description
+    ______________________________________________________
+    CND01 - Collection Note Details [IOM-519]
+-->

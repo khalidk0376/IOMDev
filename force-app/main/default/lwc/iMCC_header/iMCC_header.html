@@ -1,0 +1,343 @@
+<!--This is community header component-->
+<template>
+    <div class="section-header event-landing" onclick={closeMegaMenu}>
+      <div class="container-standard dashboard-h">
+          <lightning-layout multiple-rows="true" class="top">
+              <lightning-layout-item size="7" class="left-box">
+                  <div class="slds-grid slds-float_left">
+                      <div class="slds-col informa-logo">
+                          <img alt="Informa Logo" src="/sfsites/c/resource/IMCC/icons/informa-logo-2.png?v=1"/>
+                      </div>
+                      <div class="hide-in-only-small slds-col goto-dashboard">
+                          <span><a class="link link-d-small link-m-small" onclick={gotoDashboard} href="javascript:void(0);">Dashboard</a></span>
+                      </div>
+                  </div>
+              </lightning-layout-item>
+              <lightning-layout-item size="5" class="right-box">
+                  <div class="slds-grid slds-float_right">                    
+                    <div class="xl slds-col profile-pic" style="margin-right: 8px;margin-left:0px">
+                        <img src={userObj.SmallPhotoUrl} alt="User profile pic"/>
+                    </div>    
+                    <div class="xl slds-col user-name">
+                          <a class="link link-d-small-medium link-m-small-medium name-link" onclick={openProfileMenu} href="javascript:void(0);">{userObj.Name} </a>
+                          <div class="user-profile-dropdown" onclick={handleClickOnProfile}>
+                              <div class="slds-grid">
+                                  <div class="slds-col slds-size_9-of-12">
+                                      <div class="para paragraph-d-standard-medium paragraph-m-standard-medium p-header">{userObj.Name}</div>
+                                      <div class="para paragraph-d-tiny paragraph-m-tiny email">
+                                          <div class="slds-truncate" title={userObj.Username}>{userObj.Username}</div>
+                                      </div>
+                                  </div>
+                                  <div class="slds-col">
+                                      <div class="m-avatar p-link slds-float_right">
+                                          <img src={userObj.SmallPhotoUrl} alt="User profile pic"/>
+                                      </div>
+                                  </div>
+                              </div>
+                              <template if:true={isAdmin}>
+                                <div class="line"></div>
+                                <div class="para paragraph-d-standard-medium p-header">My Team</div>
+                                <div class="link link-d-small-medium p-link">
+                                    <a onclick={gotoTeamsManager} href="javascript:void(0);">Manage Team</a>
+                                </div>
+                                </template>
+                              <!--
+                              <div class="line"></div>
+                              <div class="para paragraph-d-standard-medium p-header">My Account</div>
+                              <div class="link link-d-small-medium p-link">
+                                  <a href="javascript:void(0);">Personal Profile</a>
+                              </div>
+                              <div class="line"></div>
+                              <div class="para paragraph-d-standard-medium p-header">Manage</div>
+                              <div class="link link-d-small-medium p-link">
+                                  <a href="javascript:void(0);">Company: Pfizer Middle East</a>
+                              </div>
+                              <div class="link link-d-small-medium p-link">
+                                  <a href="javascript:void(0);">Event Products</a>
+                              </div>
+                              <div class="link link-d-small-medium p-link">
+                                  <a href="javascript:void(0);">User Accounts</a>
+                              </div>
+                            -->
+                              <div class="line"></div>
+                              <div class="link link-d-small-medium p-link slds-float_right">
+                                  <a onclick={logOut} href="javascript:void(0);">Logout</a>
+                              </div>
+                          </div>
+                        </div>                            
+                      <!--<div class="xl slds-col profile-pic">
+                          <img src={userObj.SmallPhotoUrl} alt="User profile pic"/>
+                      </div>-->
+                      <div class="xl slds-col divider"></div>
+                      <div class="slds-col bell-icon" style="margin-left:20px;">
+                        <img class="xl" style="display:none;" src="/sfsites/c/resource/IMCC/icons/notification.svg"/>
+                      </div>
+                      <div class="hide-in-small2 slds-col divider"></div>
+                        <div class="mobile slds-col user-name">
+                            <div if:true={isNewFound} class="alert-container">
+                                <div class="alert"><span>{totalNewCount}</span></div>
+                            </div>
+                            <a class="" onclick={openMobileMenu} href="javascript:void(0);"><img src="/sfsites/c/resource/IMCC/icons/mobile-menu.png"/></a>
+                        </div>
+                  </div>
+              </lightning-layout-item>
+              <lightning-layout-item size="12">
+                  <div class="account-name-container">
+                      <span class="display display-d-large display-m-medium display-m-small slds-truncate">{eventName}</span>
+                  </div>
+                  <div class="event-summary slds-wrap">
+                      <div class="event-date">
+                          <span class="para paragraph-d-standard paragraph-m-standard paragraph-m-small">{eventDate}</span>
+                      </div>
+                      <div if:true={eventLocation} class="hide-in-only-small dot"></div>
+                      <div class="event-address">
+                          <span class="para paragraph-d-standard paragraph-m-standard paragraph-m-small">{eventLocation}</span>
+                      </div>
+                      <div class="hide-in-only-small divider"></div>
+                      <div class="switch-event">
+                          <a class="link link-d-small link-m-small paragraph-m-small switch-event-label" 
+                              onclick={openEventList} href="javascript:void(0);">
+                              Switch Event
+                          </a>
+                          <div class="event-list">
+                              <div id="eventdropdown" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid" role="listbox">
+                                  <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                      <template if:true={lstEventNameList} for:each={lstEventNameList} for:item="item">
+                                          <li key={item.value} role="presentation" class="slds-listbox__item event-name">
+                                              <div id={item.value} data-eventcode={item.value} onclick={switchEvent} class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small" role="option">
+                                                  <span class="slds-media__body">
+                                                      <span class="slds-truncate para paragraph-d-standard paragraph-m-standard" title={item.label}>{item.label}</span>
+                                                  </span>
+                                              </div>
+                                          </li>
+                                      </template>                                    
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </lightning-layout-item>
+              
+                <!--Tab Start-->
+                <lightning-layout-item size="12" class="xl">                        
+                    <ul class="nav">
+                        <template if:true={tabGroup} for:each={tabGroup} for:item="item" for:index="index">
+                            <template if:false={item.tabGroupDisable} >
+                            <li class={item.liClass} key={item.Id}>
+                                <div if:true={item.isShowNew} class="alert pos"><span>{item.count}</span></div>
+                                <a class={item.class} onclick={openMegaMenu} data-index={index} data-type={item.Type__c} data-menu-id={item.Id} href="javascript:void(0)">{item.Name}</a>
+                           </li>
+                           </template>
+                       </template>                        
+                    </ul>           
+                </lightning-layout-item>
+                <c-imcc-Pendo-Component></c-imcc-Pendo-Component>
+            </lightning-layout>
+        </div>
+    </div>
+
+  <!--mega menu child data-->
+  <!-- mega menu position absolute -->
+    <template if:true={tabGroup} for:each={tabGroup} for:item="item" for:index="index">
+        <div key={item.Id} if:true={item.hasChild} onclick={openMenuClick} class="section-dropdown xl" data-megamenu-id={item.Id} style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; display: none;">
+            <div class="container-standard mega-menu">
+                <lightning-layout multiple-rows="true">
+                    <template if:true={item.subMenu} for:each={item.subMenu} for:item="child" for:index="childIndex">
+                        <lightning-layout-item key={child.Id} size="3" class="sub-nav-item">
+                            <div class="icon-box">
+                                <span if:true={child.showNew} >
+                                    <!-- <img src={backgroundNewImageURL}/> -->
+                                    <div class="notify-icon">
+                                        <div class="notify-pill"></div>
+                                    </div>
+                                </span>
+                                <img if:false={child.Event_Tab__r.Icon__c} src="/sfsites/c/resource/IMCC/icons/account.png" width="24"/>
+                                <lightning-icon if:true={child.Event_Tab__r.Icon__c} icon-name={child.Event_Tab__r.Icon__c} size="small"></lightning-icon>
+                            </div>
+                            <div class="sub-nav-item-heading para paragraph-d-standard sub-menu-link" data-tab-contextid={child.tanConextId} data-id={child.Id} onclick={handleClick}>{child.Event_Tab__r.Tab_Title__c}</div>
+                            <div class="sub-nav-item-content para paragraph-d-tiny">{child.Event_Tab__r.Tab_Subtitle__c}</div>
+                        </lightning-layout-item>
+                    </template>                    
+                </lightning-layout>
+            </div>
+        </div>
+    </template>
+       
+    <!--Mobile Menu Start-->
+    <div class="mobile-menu" style="display: none;transform-style: preserve-3d;-webkit-transform:translate3d(480px, 0, 0px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(480px, 0, 0px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(480px, 0, 0px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(480px, 0, 0px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);">
+        <div class="mobile-menu-header">
+            <h1 class="header-s light-blue-5">Menu</h1>
+            <img onclick={closeMobileMenu} src="/sfsites/c/resource/IMCC/icons/close-light-blue.svg" alt="close" class="icon-24">
+        </div>
+        <div class="mobile-menu-body">
+            <template if:true={tabGroup} for:each={tabGroup} for:item="item" for:index="index">
+                <template if:false={item.tabGroupDisable} >
+                <div onclick={openMobileSubMenu} data-type={item.Type__c} data-menu-bodyid={item.Id} data-menu-label={item.Name} data-mobile-menuid={item.Id} class="mobile-menu-item" key={item.Id}>
+                    <div class="mobile-menu-item-left">
+                        <div class="paragraph standard white medium">{item.Name}</div>
+                    </div>
+                    <div if:true={item.hasChild} class="mobile-menu-item-right mobile-pos">
+                        <div if:true={item.isShowNew} class="alert"><span>{item.count}</span></div>
+                        <img src="/sfsites/c/resource/IMCC/icons/chevron-right.svg" alt="" class="icon-16"/>
+                    </div>
+                </div>    
+            </template>
+            </template>
+            
+            <!--User Profile and signout-->
+            
+            <div class="mobile-menu-title">
+                <h1 class="header-s light-blue-5">My Account</h1>
+            </div>
+            <div class="mobile-menu-user-account">
+                <div class="mobile-menu-item1">                    
+                    <div class="mobile-menu-item-left mobile-menu-userdetail">
+                        <div class="mobile-menu-profile">                            
+                            <img src={userObj.SmallPhotoUrl} alt="User profile pic" class="icon-40"/>
+                        </div>
+                        <div class="mobile-menu-name-box">
+                            <div>
+                                <div class="paragraph standard white medium slds-truncate">{userObj.Name}</div>
+                                <div class="paragraph tiny light-blue-5 slds-truncate">{userObj.Username}</div>                            
+                            </div>
+                            <div onclick={openMobileSubMenu} data-type="multiple" data-menu-bodyid="myprofilebody" data-menu-label="My Profile" data-mobile-menuid="user-profile" class="mobile-menu-item-right"><img src="/sfsites/c/resource/IMCC/icons/chevron-right.svg" alt="" class="icon-16"/></div>
+                        </div>
+                    </div>
+                    <div class="mobile-menu-item-left mobile-menu-logout">
+                        <div class="mobile-menu-item-left" style="width: auto;">
+                            <div class="paragraph standard white medium">Sign out</div>
+                        </div>
+                        <div class="mobile-menu-item-right" onclick={logOut}><img src="/sfsites/c/resource/IMCC/icons/sign-out.svg" alt="" class="icon-16"/></div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+        <div class="mobile-menu-footer">
+            <div onclick={gotoDashboard} class="link link-d-standard indigo-10">Go to My Dashboard</div>
+        </div>
+        <!--Mobile sub menu-->
+        <template if:true={tabGroup} for:each={tabGroup} for:item="item" for:index="index">    
+            <div key={item.Name} if:true={item.hasChild} data-mobile-menu-id={item.Id} style="display: none; transform: translate3d(480px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" class="mobile-menu---level-2">
+                <div class="mobile-menu-header level-2">
+                    <div onclick={closeMobileSubMenu} class="mobile-header-block-left">
+                        <img src="/sfsites/c/resource/IMCC/icons/back-light-blue.svg" alt="" class="icon-16 back">
+                        <h1 class="header-s light-blue-5">Back</h1>
+                    </div>
+                    <div onclick={closeMobileMenu} class="mobile-header-block-right"><img src="/sfsites/c/resource/IMCC/icons/close-light-blue.svg" alt="close" class="menuclose"></div>
+                </div>
+                <div class="mobile-menu-body" data-menu-body-id={item.Id}>
+                    <div class="mobile-menu-title level-2">
+                        <h1 class="header-s light-blue-5">{openMenuLabel}</h1>
+                    </div>
+                    <template if:true={item.subMenu} for:each={item.subMenu} for:item="child" for:index="ind">
+                        <div key={child.Id} class="mobile-menu-item primary">
+                            <div class="mobile-menu-item-left">
+                                <div class="mobile-menu-icon">
+                                    <img if:false={child.Event_Tab__r.Icon__c} src="/sfsites/c/resource/IMCC/icons/account-light-blue.svg" class="icon-24">
+                                    <lightning-icon if:true={child.Event_Tab__r.Icon__c} icon-name={child.Event_Tab__r.Icon__c} size="small"></lightning-icon>
+                                </div>
+                                <div class="div-block-8"> 
+                                    <div data-id={child.Id} data-type="mobile" onclick={handleClick} class="paragraph standard white medium">{child.Event_Tab__r.Tab_Title__c}</div>
+                                    
+                                    <div class="paragraph tiny light-blue-5">{child.Event_Tab__r.Tab_Subtitle__c}</div>
+                                </div>
+                            </div>
+                            <div class="mobile-menu-item-right">
+                                <span if:true={child.showNew} >
+                                    <!-- <img src={backgroundNewImageURL}/> -->
+                                    <div class="notify-icon">
+                                        <div class="notify-pill"></div>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </template>                                    
+                </div>
+            </div>
+        </template>
+        <!--Mobile sub User Profile menu-->
+        <div data-mobile-menu-id="user-profile" style="display: none; transform: translate3d(480px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" class="mobile-menu---level-2">
+            <div class="mobile-menu-header level-2">
+                <div onclick={closeMobileSubMenu} class="mobile-header-block-left">
+                    <img src="/sfsites/c/resource/IMCC/icons/back-light-blue.svg" alt="" class="icon-16 back">
+                    <h1 class="header-s light-blue-5">Back</h1>
+                </div>
+                <div onclick={closeMobileMenu} class="mobile-header-block-right"><img src="/sfsites/c/resource/IMCC/icons/close-light-blue.svg" alt="close" class="menuclose"></div>
+            </div>
+            <div class="mobile-menu-body" data-menu-body-id="myprofilebody">                
+                <div class="mobile-menu-item" style="border-bottom: 0px;padding-top: 24px;padding-bottom: 0px;">
+                    <div class="mobile-menu-item-left">                        
+                        <div class="div-block-8">
+                            <div class="paragraph heading-d-medium white">{userObj.Name}</div>
+                            <div class="paragraph tiny light-blue-5">{userObj.Username}</div>
+                        </div>
+                    </div>
+                </div>
+                <!--
+                <div class="mobile-menu-title" style="margin-top: 40px;">
+                    <h1 class="header-s light-blue-5">My Account</h1>
+                </div>
+                <div class="mobile-menu-item">
+                    <div class="mobile-menu-item-left">
+                        <span class="para white paragraph-m-standard-medium">Personal Profile</span>
+                    </div>
+                </div>
+                <div class="mobile-menu-title" style="margin-top: 62px;">
+                    <h1 class="header-s light-blue-5">Manage</h1>
+                </div>
+                <div class="mobile-menu-item">
+                    <div class="mobile-menu-item-left">
+                        <span class="para white paragraph-m-standard-medium">Company: Pfizer Middle East</span>
+                    </div>
+                </div>
+                <div class="mobile-menu-item">
+                    <div class="mobile-menu-item-left">
+                        <span class="para white paragraph-m-standard-medium">Event Products</span>
+                    </div>
+                </div>
+                <div class="mobile-menu-item">
+                    <div class="mobile-menu-item-left">
+                        <span class="para white paragraph-m-standard-medium">User Accounts</span>
+                    </div>
+                </div>
+            -->
+            </div>
+            <div class="sign-out mobile-menu-footer">
+                <div onclick={logOut} class="link-standard indigo-10">Sign Out</div>
+            </div>
+        </div>        
+    </div>
+    <div class="modal-overlay"></div>    
+    <!--Mobile Menu End-->
+    <c-i-m-c-c_how-to-section></c-i-m-c-c_how-to-section>
+    <div if:true={isHideBreadcrumb} class="breadcrumb">
+        <div class="container-standard">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="12">
+                    <ul class="list">
+                        <!--<li class="item">
+                            <a class="para paragraph-d-tiny" href="javascript:void(0)" onclick={gotoDashboard}>Dashboard</a></li>
+                        <li class="separator para paragraph-d-tiny">/</li>-->
+                        <li class="item show-in-only-small">
+                            <a class="para paragraph-d-tiny" href="javascript:void(0)">... Back</a>
+                        </li>
+
+                        <li class="item hide-in-only-small">
+                            <a class="para paragraph-d-tiny" href="javascript:void(0)">{eventName}</a>
+                        </li>
+                        <li if:true={activeTabName} class="hide-in-only-small separator para paragraph-d-tiny">/</li>
+                        <li class="item hide-in-only-small">
+                            <a class="para paragraph-d-tiny" href="javascript:void(0)">{activeTabName}</a>
+                        </li>
+                        
+                        <li if:true={openMenuLabel} class="separator para paragraph-d-tiny">/</li>
+                        <li class="item">
+                            <span class="para paragraph-d-tiny active">{openMenuLabel}</span>
+                        </li>
+                    </ul>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+    <div if:true={isHideBreadcrumb} class="breadcrumb-line"></div>
+</template>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Group_Name__c</fullName>
+    <description>Define template for particular group type.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Define template for particular group type.</inlineHelpText>
+    <label>Group Name</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Badges</fullName>
+                <default>false</default>
+                <label>Badges</label>
+            </value>
+            <value>
+                <fullName>Forms</fullName>
+                <default>false</default>
+                <label>Forms</label>
+            </value>
+            <value>
+                <fullName>Manuals</fullName>
+                <default>false</default>
+                <label>Manuals</label>
+            </value>
+            <value>
+                <fullName>Stand Contractor</fullName>
+                <default>false</default>
+                <label>Stand Contractor</label>
+            </value>
+            <value>
+                <fullName>Team Testing</fullName>
+                <default>false</default>
+                <label>Team Testing</label>
+            </value>
+            <value>
+                <fullName>Welcome Email</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Welcome Email</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

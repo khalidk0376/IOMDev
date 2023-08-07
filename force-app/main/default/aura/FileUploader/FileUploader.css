@@ -1,0 +1,19 @@
+.THIS .slds-file-selector__dropzone{padding: 0.125rem;border: 1px dashed #dddbda;border-radius: 0.25rem;}
+.THIS .file{    
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+}
+.THIS .file div:nth-child(2){
+    text-align: left;
+    width: 51%;
+    white-space: normal;
+    display: inline-block;
+    padding-top: 8px;
+    margin-left: 15px;
+}
+.THIS .file div:first-child{
+    text-align: left;
+    width: 2%;
+    display: inline-block;
+}

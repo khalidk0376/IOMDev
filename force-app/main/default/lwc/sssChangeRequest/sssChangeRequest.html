@@ -1,0 +1,600 @@
+<!-- sldsValidatorIgnore -->
+<!--
+Created By	 : Girikon(Sachin)(IML2R-742)
+Created On	 : Feb 24, 2020
+@description : Component to display Change request data in tabular format.         
+Modification log:
+Modified By	: Girikon (Ashish) : added label on Table for amend complete
+-->
+<template>
+    
+    <lightning-layout class="slds-m-bottom_small common-table">
+        <lightning-layout-item size="4" padding="horizontal-small action-buttons">
+            <template if:true={button1Label}>
+                <lightning-button icon-name="utility:add" icon-position="left" label={button1Label} variant="brand" onclick={openNewRecordModal}></lightning-button>&nbsp;&nbsp;
+            </template>
+            <template if:true={button2Label}>
+                <lightning-button icon-name="utility:add" icon-position="left" label={button2Label} variant="brand" onclick={openNewRecordModal2}></lightning-button>&nbsp;&nbsp;
+            </template>
+            <template if:true={selectedRows}>
+                <lightning-combobox options={bulkActionList} value="" label="Mass" variant="label-hidden" placeholder="--Mass Actions--" id="bulkActionDropdown" onchange={onChangeMassAction} class="mass-action-picklist"></lightning-combobox>
+            </template>
+        </lightning-layout-item>
+        <lightning-layout-item size="8" padding="horizontal-small" class="slds-clearfix">
+            <div style="float: right;text-align: right;">
+                <template if:true={showRefreshButton}>&nbsp;&nbsp;
+                    <lightning-button-icon icon-name="utility:refresh" alternative-text="Refresh"   class="slds-m-right_xx-small refreshMargin" title="Refresh" variant="border-filled" onclick={getData}></lightning-button-icon>
+                </template>
+                <template if:true={filterField3}>&nbsp;&nbsp;
+                    <template if:true={isMultiPicklistFilter3}>
+                        <c-multipicklist placeholder={filter3Label} options={filterField3Options} selected-options={filterField3Value} onmultipicklistselect={handleMultipicklistChange} filter-name="3"></c-multipicklist>
+                    </template>
+                    <template if:false={isMultiPicklistFilter3}>
+                        <lightning-combobox options={filterField3Options} class="filter3" value={filterField3Value} label="filter-1" variant="label-hidden" onchange={handleFilterChange}></lightning-combobox>
+                    </template>     
+                </template>
+            
+                <template if:true={filterField2}>&nbsp;&nbsp;
+                    <template if:true={isMultiPicklistFilter2}>
+                        <c-multipicklist placeholder={filter2Label} options={filterField2Options} selected-options={filterField2Value} onmultipicklistselect={handleMultipicklistChange} filter-name="2"></c-multipicklist>                            
+                    </template>
+                    <template if:false={isMultiPicklistFilter2}>
+                        <lightning-combobox options={filterField2Options} class="filter2" value={filterField2Value} label="filter-2" variant="label-hidden" onchange={handleFilterChange}></lightning-combobox>
+                    </template>
+                </template>
+
+                <template if:true={filterField1}>&nbsp;&nbsp;
+                    <template if:true={isMultiPicklistFilter1}>
+                        <c-multipicklist placeholder={filter1Label} options={filterField1Options} selected-options={filterField1Value} onmultipicklistselect={handleMultipicklistChange} filter-name="1"></c-multipicklist>                            
+                    </template>
+                    <template if:false={isMultiPicklistFilter1}>
+                        <lightning-combobox options={filterField1Options} class="filter1" value={filterField1Value} label="filter-3" variant="label-hidden" onchange={handleFilterChange}></lightning-combobox>
+                    </template>
+                </template>    
+
+            
+                <template if:true={isFilterByOwner}>&nbsp;&nbsp;
+                    <lightning-combobox options={ownerOptions} class="ownerfilter" value={selectedOwner} label="filter-4" variant="label-hidden" onchange={handleFilterChange}></lightning-combobox>
+                </template>
+
+                <template if:true={toggleFilterLabel}>&nbsp;&nbsp;                    
+                    <lightning-button-stateful
+                        label-when-off={toggleFilterLabel}
+                        label-when-on={toggleFilterLabel}
+                        label-when-hover="Remove Filter"                            
+                        icon-name-when-on="utility:check"
+                        icon-name-when-hover="utility:close"
+                        selected={toggleState}
+                        onclick={handleToggleButtonClick}>
+                    </lightning-button-stateful>
+                </template>
+                &nbsp;&nbsp;
+                <lightning-input type="search" value={searchValue} label="Search" placeholder="Search" variant="label-hidden" class="search-box" onchange={reloadData}></lightning-input>
+                <button style="display: inline-block;margin-top: -2px;margin-left: -5px;" class="slds-button slds-button_icon slds-button_icon-brand" title="Search" onclick={searchData}>
+                    <lightning-icon icon-name="utility:search" size="xx-small" variant="bare"></lightning-icon>
+                </button>  
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+        
+
+    <c-table-placeholder is-show={isShow}></c-table-placeholder>
+    <template if:true={isTrue}>
+        <lightning-spinner variant="brand" size="small" title="Loading..."></lightning-spinner>
+    </template>
+
+    <table aria-multiselectable="true" class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols" role="grid">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th class="slds-text-align_right" scope="col" style="width:4rem;"></th>
+                <th aria-label="Change Request Name" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+                    <a id="Name" onclick={handleSorting} class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">					          	
+                        <div class="slds-grid slds-truncate slds-grid_vertical-align-center" title="Change Request Name">
+                            <span class="slds-truncate" title="Change Request Name">Change Request Name</span>
+                            <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                <lightning-icon icon-name="utility:arrowup" size="xx-small" class="slds-is-sortable__icon"></lightning-icon>
+                            </span>
+                        </div>
+                    </a>
+                </th>               
+                <th aria-label="Edition" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+                    <a id="Default_Edition__r.Name" onclick={handleSorting} class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">					          	
+                        <div class="slds-truncate slds-truncate slds-grid slds-grid_vertical-align-center" title="Edition">
+                            <span class="slds-truncate" title="Edition">Edition</span>
+                            <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                <lightning-icon icon-name="utility:arrowup" size="xx-small" class="slds-is-sortable__icon"></lightning-icon>
+                            </span>
+                        </div>
+                    </a>
+                </th>
+                <!-- <th aria-label="Product Type" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+                    <a id="Product_Type__c" onclick={handleSorting} class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">					          	
+                        <div class="slds-grid slds-truncate slds-grid_vertical-align-center" title="Product Type">
+                            <span class="slds-truncate" title="Product Type">Product Type</span>
+                            <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                <lightning-icon icon-name="utility:arrowup" size="xx-small" class="slds-is-sortable__icon"></lightning-icon>
+                            </span>
+                        </div>
+                    </a>
+                </th> -->
+                
+                <th aria-label="Type of Change" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+                    <a id="Type_of_Change__c" onclick={handleSorting} class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">					          	
+                        <div class="slds-grid slds-grid_vertical-align-center">
+                            <span class="slds-truncate" title="Type of Change">Type of Change</span>
+                                <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                <lightning-icon icon-name="utility:arrowup" size="xx-small" class="slds-is-sortable__icon"></lightning-icon>
+                            </span>
+                        </div>
+                    </a>
+                </th>
+                <th aria-label="Amendment Request Status" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+                    <a id="Change_Request_Status__c" onclick={handleSorting} class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">					          	
+                        <div class="slds-grid slds-grid_vertical-align-center">
+                            <span class="slds-truncate" title="Change Request Status">Change Request Status</span>
+                            <span class="slds-icon_container slds-icon-utility-arrowdown">
+                            <lightning-icon icon-name="utility:arrowup" size="xx-small" class="slds-is-sortable__icon"></lightning-icon>
+                        </span>
+                        </div>
+                    </a>
+                </th>
+                <th aria-label="Requested By" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+                        <a id="Requested_By__c" onclick={handleSorting} class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">					          	
+                            <div class="slds-grid slds-grid_vertical-align-center">
+                                <span class="slds-truncate" title="Owner">Requested By</span>
+                                <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                <lightning-icon icon-name="utility:arrowup" size="xx-small" class="slds-is-sortable__icon"></lightning-icon>
+                            </span>
+                            </div>
+                        </a>
+                    </th>
+                    <th aria-label="Actioned By" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+                        <a id="Actioned_By__r.Name" onclick={handleSorting} class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">					          	
+                            <div class="slds-truncate slds-truncate slds-grid slds-grid_vertical-align-center" title="Actioned By">
+                                <span class="slds-truncate" title="Actioned By">Actioned By</span>
+                                <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                    <lightning-icon icon-name="utility:arrowup" size="xx-small" class="slds-is-sortable__icon"></lightning-icon>
+                                </span>
+                            </div>
+                        </a>
+                    </th>
+                    <th aria-label="Actioned Date Time" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+                        <a id="Actioned_Date_Time__c" onclick={handleSorting} class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">					          	
+                            <div class="slds-grid slds-grid_vertical-align-center">
+                                <span class="slds-truncate" title="Actioned Date Time">Actioned Date Time</span>
+                                <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                <lightning-icon icon-name="utility:arrowup" size="xx-small" class="slds-is-sortable__icon"></lightning-icon>
+                            </span>
+                            </div>
+                        </a>
+                    </th>
+                <!-- <th aria-label="SSC Notes" aria-sort="none" class="slds-is-resizable" scope="col">
+                    <a id="SSC_Notes__c" class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">					          	
+                        <div class="slds-grid slds-truncate slds-grid_vertical-align-center" title="SSC Notes">
+                            <span class="slds-truncate" title="SSC Notes">SSC Notes</span>
+                        </div>
+                    </a>
+                </th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <template for:each={tableData} for:item="item" for:index="ind">
+                <tr key={item.Id} aria-selected="false" class="slds-hint-parent">
+                    <td class="slds-text-align_left" role="gridcell">
+                        <!-- <template if:true={item.disabledApproved}>
+                            <lightning-button-icon icon-name="utility:multi_select_checkbox" alternative-text="Approve" variant="bare" value={item.Id}></lightning-button-icon>&nbsp;&nbsp;
+                        </template>
+                        <template if:true={item.disableRejected}>                            
+                            <lightning-button-icon icon-name="utility:error" alternative-text="Reject" variant="bare" value={item.Id}></lightning-button-icon>&nbsp;&nbsp;
+                        </template> -->
+
+                        <!-- <template if:true={item.enabledApproved_Rejected}>
+                            <lightning-button-icon icon-name="utility:multi_select_checkbox" alternative-text="Approve" variant="bare" value={item.Id} onclick={approveRequest}></lightning-button-icon>&nbsp;&nbsp;
+                            <lightning-button-icon icon-name="utility:error" alternative-text="Reject" variant="bare" value={item.Id} data-request-name={item.Name}  onclick={rejectRequest}></lightning-button-icon>&nbsp;&nbsp;
+                        </template> -->
+                        
+                        <lightning-button-icon icon-name="utility:forward_up" alternative-text="View record details" variant="bare" data-product-type={item.Product_Type__c} data-change-request-name={item.Name} value={item.Id} onclick={openRecordDetail}></lightning-button-icon>&nbsp;&nbsp;
+
+                        <!-- Removed under [GECI-236]-->
+                        <!-- <template if:true={item.showCompleteAmend}> 
+                            <lightning-button-icon icon-name="utility:trending" alternative-text="Complete Amend" variant="bare" data-request-type={item.Type_of_Change__c} value={item.Id} data-opportunity-id={item.Opportunity__c} onclick={completeAmend}></lightning-button-icon>
+                        </template> -->
+
+                        <!-- <lightning-button-icon icon-name="utility:file" alternative-text="View File" variant="bare" value={item.Id} onclick={viewFileAction}></lightning-button-icon>&nbsp;&nbsp; -->
+
+                        <!-- <lightning-button-icon icon-name="utility:open_folder" alternative-text="Uploaded Documents" variant="bare" value={item.Id} onclick={openAttachment}></lightning-button-icon> -->
+                        
+                    </td>
+                    <td tabindex="0">
+                        <div class="slds-truncate" title={item.Name} style="white-space: normal">        
+                            <a href={item.NameLink} target="_blank">{item.Name}</a>
+                        </div>
+                    </td>
+                    
+                    <td tabindex="0">
+                        <div class="slds-truncate" title={item.Edition__rName} style="white-space: normal">  
+                            <a href={item.Edition__rNameLink} target="_blank">{item.Edition__rName}</a>
+                        </div>
+                    </td>	
+                    <!-- <td tabindex="0">
+                        <div class="slds-truncate" style="white-space: normal">
+                            {item.Product_Type__c}
+                        </div>
+                    </td> -->
+                    <td tabindex="0">
+                        <div class="slds-truncate" title={item.Type_of_Change__c} style="white-space: normal">
+                            <span class="slds-truncate">{item.Amendment_Type_Label}</span>
+                        </div>
+                    </td>
+                    <td tabindex="0">
+                        <div class="slds-truncate" title={item.Change_Request_Status__c} style="white-space: normal">
+                            {item.Change_Request_Status__c}
+                        </div>
+                    </td>    
+                    <td tabindex="0">
+                            <div class="slds-truncate" title={item.Requested_By__c} style="white-space: normal">
+                                <!--<a href={item.CreatedByNameLink} target="_blank">{item.CreatedByName}</a>-->
+                                {item.Requested_By__c}
+                            </div>
+                        </td>               					    
+                        <td tabindex="0">
+                            <div class="slds-truncate" title={item.Actioned_By__rName} style="white-space: normal">  
+                                <a href={item.Actioned_By__rNameLink} target="_blank">{item.Actioned_By__rName}</a>
+                            </div>
+                        </td>	
+                        <td tabindex="0">
+                            <div class="slds-truncate" style="white-space: normal">
+                                <lightning-formatted-date-time value={item.Actioned_Date_Time__c} year="numeric" month="numeric" day="numeric" hour="2-digit" minute="2-digit" time-zone={timeZone} hour12={ampm}></lightning-formatted-date-time>
+                            </div>
+                        </td>              					    
+                    <!-- <td tabindex="0">
+                        <div class="slds-truncate" title={item.SSC_Notes__c} style="white-space: normal">  
+                            <a href={item.SSC_Notes__c} target="_blank">{item.SSC_Notes__c}</a>
+                        </div>
+                    </td> -->
+                </tr>
+            </template>
+        </tbody>
+
+    </table>
+    
+
+    <template if:true={error}>
+        <div class="slds-align_absolute-center">No {objectLabel} to Display</div>
+    </template>
+        
+    <template if:true={pageList}>
+        <lightning-layout multiple-rows="true" class="slds-m-around_small slds-clearfix">
+            <lightning-layout-item size="4" padding="horizontal_small">
+                &nbsp;
+            </lightning-layout-item>
+            <lightning-layout-item size="8" class="slds-float_right" padding="horizontal_small">
+                <div class="slds-float_right">
+                {showPageView} of &nbsp;
+                <template if:true={isMoreThan2000}>2000+</template>
+                <template if:false={isMoreThan2000}><span class="total-rows">{totalRows}</span></template>&nbsp;
+                <lightning-button-icon class="prev-btn" size="medium" icon-name="utility:chevronleft" onclick={getPrevData} variant="bare"></lightning-button-icon>&nbsp;
+                    <span class="slds-p-horizontal_x-small">
+                        <a href="javascript:void(0);" id="first" onclick={processMe} name="1" class={firstActiveClass}>1</a>
+                    </span>
+                    <span class="slds-p-horizontal_xxx-small">
+                        <a href="javascript:void(0);" id="none1">...</a>
+                    </span>
+                    <template for:each={pageList} for:item="item" for:index="ind">
+                        <span key={item} id={item} class="slds-p-horizontal_x-small">
+                            <a href="javascript:void(0);" id={item} onclick={processMe} name={item} class="">{item}</a>
+                        </span>
+                    </template>
+                    <span class="slds-p-horizontal_xxx-small">
+                        <a href="javascript:void(0);" id="none2">...</a>
+                    </span>
+                    <span key={item} id={item} class="slds-p-horizontal_x-small">
+                        <a href="javascript:void(0);" id="last" onclick={processMe} name={totalPage} class={lastActiveClass}>{totalPage}</a>
+                    </span>
+                <lightning-button-icon class="next-btn" size="medium" icon-name="utility:chevronright" onclick={getNextData} variant="bare"></lightning-button-icon>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+    
+    <template if:true={isOpenRecordDetail}>        
+        <section role="dialog" tabindex="-1" aria-labelledby="detail-modal-heading" aria-modal="true" aria-describedby="detail-modal-content" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button onclick={closeRecordDetail} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning-icon icon-name="utility:close" variant="bare" size="small"></lightning-icon>
+                    </button>
+                    <h2 id="detail-modal-heading" class="slds-text-heading_medium slds-hyphenate">Viewing Change Request: {recordName}
+                        
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="detail-modal-content">
+                    <!--
+                        *** Show Alert Notification
+                    -->
+                    <template if:true={showAmedmentCategoryDescriptionAlert}>
+                        <div class="slds-notify slds-notify_alert slds-notify_alert slds-m-left_small slds-m-right_small slds-m-bottom_medium" role="alert">
+                            <span class="slds-assistive-text">warning</span>
+                            <span class="slds-icon_container slds-m-right_x-small" title="Description">
+                                <lightning-icon size="x-small" icon-name="utility:info_alt" alternative-text="Info" variant="inverse" title="Info">
+                                </lightning-icon>
+                            </span>
+                            <h2>{amedmentCategoryDescriptionMsg}</h2>
+                            <div class="slds-notify__close">
+                            <button class="slds-button slds-button_icon slds-button_icon-small" onclick={closeAlert} title="Close">
+                                    <lightning-icon icon-name="utility:close" alternative-text="Connected" variant="inverse" size="x-small"
+                                    title="x-small size"></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            </div>
+                        </div>
+                    </template>            
+                    <!--
+                        **********END******
+                    -->
+                    <lightning-record-view-form record-id={selectedRecordId} object-api-name="Change_Request__c">
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="6" padding="horizontal-small">
+                                <div class="slds-form__item" role="listitem">
+                                    <div class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <lightning-output-field field-name="Account__c"></lightning-output-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <template if:true={parentOppId}>
+                                    <lightning-record-view-form record-id={parentOppId} object-api-name="Opportunity">
+                                        <div class="slds-form__item" role="listitem">
+                                            <div class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                                <div class="slds-form-element__control">
+                                                    <div class="slds-form-element__static slds-form-element_horizontal">
+                                                        <lightning-output-field field-name="Bill_To_Account__c"></lightning-output-field>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </lightning-record-view-form>
+                                </template>
+                                <div class="slds-form__item" role="listitem">
+                                    <div class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <lightning-output-field field-name="Opportunity__c"></lightning-output-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <template if:true={parentOppId}>
+                                    <lightning-record-view-form record-id={parentOppId} object-api-name="Opportunity">
+                                        <div class="slds-form__item" role="listitem">
+                                            <div class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                                <div class="slds-form-element__control">
+                                                    <div class="slds-form-element__static slds-form-element_horizontal">
+                                                        <lightning-output-field field-name="CRM_Opportunity__c"></lightning-output-field>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </lightning-record-view-form>
+                                </template>
+                                <div class="slds-form__item" role="listitem">
+                                    <div class="slds-form-element slds-form-element_stacked slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <lightning-output-field field-name="Edition__c"></lightning-output-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                           
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6" padding="horizontal-small">
+                                <div class="slds-form__item" role="listitem">
+                                    <div class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <lightning-output-field field-name="CRM_Change_Request_No__c"></lightning-output-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-form__item" role="listitem">
+                                    <div class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <lightning-output-field field-name="Change_Request_Status__c"></lightning-output-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-form__item" role="listitem">
+                                    <div class="slds-form-element slds-form-element_stacked slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <lightning-output-field field-name="Requested_By__c"></lightning-output-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </lightning-layout-item>
+
+                            <lightning-layout-item size="12" padding="horizontal-small">
+                                <div>
+                                    <div class="slds-form__item" role="listitem">
+                                        <div class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                            <div class="slds-form-element__control">
+                                                <div class="slds-form-element__static slds-border_top">
+                                                    <lightning-output-field field-name="Amendment_Type__c"></lightning-output-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-form__item" role="listitem">
+                                        <div class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                            <div class="slds-form-element__control">
+                                                <div class="slds-form-element__static">
+                                                    <lightning-output-field field-name="Sales_Comments__c"></lightning-output-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <template if:false={isSalesOperationsCommentEditable}>
+                                        <div class="slds-form__item" role="listitem">
+                                            <div class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                                <div class="slds-form-element__control">
+                                                    <div class="slds-form-element__static">
+                                                        <lightning-output-field field-name="Sales_Operations_Comments__c"></lightning-output-field>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+    
+                                    <template if:true={isSalesOperationsCommentEditable}>
+                                        <div class="slds-form__item" role="listitem">
+                                            <div class="slds-form-element slds-form-element_stacked slds-hint-parent">
+                                                <div class="slds-form-element__control">
+                                                    <div class="slds-form-element__static">
+                                                        <lightning-textarea label="Request Feedback" value={salesOperationsComment} variant="label-inline" class="sales-operations-comments"></lightning-textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-record-view-form>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeRecordDetail}>Close</button>
+                    <template if:true={showApproveButton}>
+                        &nbsp;&nbsp;
+                        <lightning-button icon-name="utility:check" variant="success" onclick={approveRequest} label="Approve"></lightning-button>
+                    </template>
+                    <template if:true={showRejectButton}>
+                        &nbsp;&nbsp;
+                        <lightning-button icon-name="utility:error" variant="destructive" onclick={rejectRequest} label="Reject" ></lightning-button>
+                    </template>
+                </footer>
+            </div>
+        </section>        
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    
+    <!-- Attachment modal-->
+    <template if:true={isOpenAttachment}>        
+        <section role="dialog" tabindex="-1" aria-labelledby="detail-modal-heading" aria-modal="true" aria-describedby="detail-modal-content" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button onclick={closeAttachment} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning-icon icon-name="utility:close" variant="bare" size="small"></lightning-icon>
+                    </button>
+                    <h2 id="detail-modal-heading-1" class="slds-text-heading_medium slds-hyphenate">Uploaded Documents
+                        
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="detail-modal-content-1">
+                    <template if:true={attachmentCondition}>
+                        <c-common-table object-name="Attachment" object-label="Attachments" is-view-file="true" fields="Name,Id,Description,Parent.Name"
+                        fields-label="File Name,Attachment ID,Description,Parent ID" condition={attachmentCondition}></c-common-table>
+                    </template>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeAttachment}>Close</button>
+                </footer>
+            </div>
+        </section>        
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!--
+    <template if:true={openRejectModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="detail-modal-heading" aria-modal="true" aria-describedby="detail-modal-content" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button onclick={hideRejectModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning-icon icon-name="utility:close" variant="bare" size="small"></lightning-icon>
+                    </button>
+                    <h2 id="detail-modal-heading-2" class="slds-text-heading_medium slds-hyphenate">Amend Change Request - {requestName}
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="detail-modal-content-2">
+                    <lightning-textarea label="SSC Notes" value="" class="ssc-note-text"></lightning-textarea>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={hideRejectModal}>Close</button>&nbsp;&nbsp;
+                    <lightning-button variant="destructive" label="Amend Reject" onclick={yesRejectRequest}></lightning-button>
+                </footer>
+            </div>
+        </section>        
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    -->
+
+    <!-- Amend Complete confirmation Box-->
+    <template if:true={isOpenConfirmAmendModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button onclick={closeAmendModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning-icon icon-name="utility:close" variant="bare" size="small"></lightning-icon>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Complete Amend</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <template if:true={isTrue}>
+                        <lightning-spinner variant="brand" size="small" title="Loading..."></lightning-spinner>
+                    </template>
+                    <div class="messageTxt"> You are about to complete the amendment and sync the data with CRM & ERP ,Make sure you have actually amended the opportunity.</div>
+                    <!--<lightning-textarea label="Comment" value="" class="comment"></lightning-textarea>-->
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeAmendModal}>Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={yesCompleteAmend}>Complete Amend</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- After Amend invoice Selection Box-->
+    <template if:true={showInvoiceSelectionModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-03" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button onclick={closeInvoiceSelectionModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning-icon icon-name="utility:close" variant="bare" size="small"></lightning-icon>
+                    </button>
+                    <h2 id="modal-heading-07" class="slds-text-heading_medium slds-hyphenate">Select Invoices/Credit Notes</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-9">                    
+                    <div>
+                        <div style="height: 250px;">
+                            <lightning-datatable
+                                    key-field="Id"
+                                    data={invCrTableData}
+                                    columns={invCrcolumns}
+                                    onrowselection={handleRowSelection}>
+                            </lightning-datatable>
+                        </div>  
+                        <!-- <c-common-table condition={invFilterCond}
+                            fields={invoiceFields}
+                            fields-label={invoiceFieldsLabels}
+                            object-name="blng__Invoice__c" object-label="Invoice" is-multi-language="true"   hide-checkbox-column="false" hide-mass-action="true" onrowselection={handleRowSelection}>
+                        </c-common-table> -->
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <template if:true={showRequiredInvMessage}>
+                        <div class="slds-align_absolute-center slds-text-color_error">{reqErrorMessage}</div>
+                    </template>
+                    <button class="slds-button slds-button_neutral" onclick={closeInvoiceSelectionModal}>Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={invoiceSelectionModalNext}>Next</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+</template>

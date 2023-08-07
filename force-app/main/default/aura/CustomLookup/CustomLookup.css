@@ -1,0 +1,10 @@
+.THIS .contact-type{
+	width: 450px;
+}
+
+.THIS .slds-modal__container {
+    width: fit-content;
+}
+.THIS .slds-spinner_container {
+    position: initial;
+}

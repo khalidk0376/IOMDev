@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Standard_Cutoff__c</fullName>
+    <description>Standard Price Plan cutoff date. After that we would use Late Price Plan</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Standard Price Plan cutoff date. After that we would use Late Price Plan</inlineHelpText>
+    <label>Standard Cutoff</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

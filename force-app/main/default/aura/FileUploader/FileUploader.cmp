@@ -1,0 +1,44 @@
+<aura:component description="FileUploader" controller="FileUploadCtrl">
+    
+    <aura:attribute name="questionId" type="String" default="" />
+    <aura:attribute name="entryId" type="String" default="" />
+    <aura:attribute name="questionerId" type="String" default="" />
+    <aura:attribute name="version" type="String" default="" />
+    <aura:attribute name="questionQuestionnairesId" type="String" default=""/>
+    <aura:attribute name="showLoadingSpinner" type="boolean" default="false" />
+    <aura:attribute name="fileName" type="String" default="No File Selected.." />
+    <aura:attribute name="fileFormat" type="String" default=".docx,.pdf,.ppt,.pptx,.xls,.xlsx,.gif,.jpg,.png,.doc" />    
+    <aura:attribute name="responseAttachmentId" type="String" default="" />
+    <aura:attribute name="disabled" type="boolean" default="false" />
+    <aura:attribute name="isAllowMultiple" type="boolean" default="false" />
+    <aura:attribute name="listAttchments" type="List" />
+   
+
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+
+    <!-- Object for Question Response  --> 
+    
+    <lightning:input disabled="{!v.disabled}" class="slds-clearfix" aura:id="fileId" onchange="{!c.handleFilesChange}" type="file" accept="{!v.fileFormat}" name="file" variant="label-hidden" label="Upload File" multiple="false"/>
+    <div class="slds-text-body_small slds-text-color_error">{!v.fileName==''?'No File Selected..':v.fileName} </div>
+	{!v.body}
+    <!--use aura:if for show-hide the loading spinner image--> 
+    <aura:if isTrue="{!v.showLoadingSpinner}">
+        <div class="slds-text-body_small slds-text-color_error">Uploading... 
+            <img src="/auraFW/resources/aura/images/spinner.gif" class="spinner-img" alt="Loading"/>'
+        </div>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.isAllowMultiple}">
+        <div>
+            <aura:iteration items="{!v.listAttchments}" var="file" indexVar="attachIndex">
+                <div class="file" key="{!file.Id}">
+                    <div>
+                        <lightning:buttonIcon value="{!file.Id+'_'+file.ParentId}"  iconName="utility:delete" variant="bare" onclick="{!c.handleDelete}" alternativeText="Remove" disabled="{!v.disabled}" />
+                    </div>
+                    <div class="slds-truncate">{!file.Name}</div>
+                    <!--<div>{!file.SystemModstamp}</div>-->                                            
+                </div>
+            </aura:iteration>
+        </div>
+    </aura:if>
+</aura:component>

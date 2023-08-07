@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_Status__c</fullName>
+    <description>Depended picklist which depends upon case status field</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Applicable for &quot;On Hold&quot; Status only</inlineHelpText>
+    <label>Sub Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Awaiting: Brand</fullName>
+                <default>false</default>
+                <label>Awaiting: Brand</label>
+            </value>
+            <value>
+                <fullName>Awaiting: Content</fullName>
+                <default>false</default>
+                <label>Awaiting: Content</label>
+            </value>
+            <value>
+                <fullName>Awaiting: Customer</fullName>
+                <default>false</default>
+                <label>Awaiting: Customer</label>
+            </value>
+            <value>
+                <fullName>Awaiting: Customer Service</fullName>
+                <default>false</default>
+                <label>Awaiting: Customer Service</label>
+            </value>
+            <value>
+                <fullName>Awaiting: Digital</fullName>
+                <default>false</default>
+                <label>Awaiting: Digital</label>
+            </value>
+            <value>
+                <fullName>Awaiting: Finance</fullName>
+                <default>false</default>
+                <label>Awaiting: Finance</label>
+            </value>
+            <value>
+                <fullName>Awaiting: ITSS</fullName>
+                <default>false</default>
+                <label>Awaiting: ITSS</label>
+            </value>
+            <value>
+                <fullName>Awaiting: Marketing</fullName>
+                <default>false</default>
+                <label>Awaiting: Marketing</label>
+            </value>
+            <value>
+                <fullName>Awaiting: Operations</fullName>
+                <default>false</default>
+                <label>Awaiting: Operations</label>
+            </value>
+            <value>
+                <fullName>Awaiting: Sales</fullName>
+                <default>false</default>
+                <label>Awaiting: Sales</label>
+            </value>
+            <value>
+                <fullName>Awaiting: Sales Ops</fullName>
+                <default>false</default>
+                <label>Awaiting: Sales Ops</label>
+            </value>
+            <value>
+                <fullName>Awaiting: Ticket</fullName>
+                <default>false</default>
+                <label>Awaiting: Ticket</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

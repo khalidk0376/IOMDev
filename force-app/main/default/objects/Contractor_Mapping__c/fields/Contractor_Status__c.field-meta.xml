@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contractor_Status__c</fullName>
+    <description>Contractor status shows status of contactor to Exhibitor who assigned them to work on their booth</description>
+    <externalId>false</externalId>
+    <label>Contractor Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>New Contractor Nomination In Review</fullName>
+                <default>false</default>
+                <label>New Contractor Nomination In Review</label>
+            </value>
+            <value>
+                <fullName>New Contractor Nomination Rejected</fullName>
+                <default>false</default>
+                <label>New Contractor Nomination Rejected</label>
+            </value>
+            <value>
+                <fullName>Contractor Nominated</fullName>
+                <default>false</default>
+                <label>Contractor Nominated</label>
+            </value>
+            <value>
+                <fullName>Contractor Accepted Nomination</fullName>
+                <default>false</default>
+                <label>Contractor Accepted Nomination</label>
+            </value>
+            <value>
+                <fullName>Contractor Declined Nomination</fullName>
+                <default>false</default>
+                <label>Contractor Declined Nomination</label>
+            </value>
+            <value>
+                <fullName>Not Started</fullName>
+                <default>false</default>
+                <label>Not Started</label>
+            </value>
+            <value>
+                <fullName>Viewed</fullName>
+                <default>false</default>
+                <label>Viewed</label>
+            </value>
+            <value>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+                <label>In Progress</label>
+            </value>
+            <value>
+                <fullName>In Review</fullName>
+                <default>false</default>
+                <label>In Review</label>
+            </value>
+            <value>
+                <fullName>Pending Sales Approval</fullName>
+                <default>false</default>
+                <label>Pending Sales Approval</label>
+            </value>
+            <value>
+                <fullName>Stand Design Rejected/Incomplete</fullName>
+                <default>false</default>
+                <label>Stand Design Rejected/Incomplete</label>
+            </value>
+            <value>
+                <fullName>Stand Design Resubmitted</fullName>
+                <default>false</default>
+                <label>Stand Design Resubmitted</label>
+            </value>
+            <value>
+                <fullName>Pending Venue Approval</fullName>
+                <default>false</default>
+                <label>Pending Venue Approval</label>
+            </value>
+            <value>
+                <fullName>Tentative Approval</fullName>
+                <default>false</default>
+                <label>Tentative Approval</label>
+            </value>
+            <value>
+                <fullName>Permission to Build</fullName>
+                <default>false</default>
+                <label>Permission to Build</label>
+            </value>
+            <value>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+                <label>Cancelled</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PC_AI_Sub_scenario__c</fullName>
+    <description>this will capture the value for the PC/AI  sub-scenario on the positive and negative lines pair ( for upgrade and downgrade) , on negative line ( product removal)  and on positive lines ( product Addition)</description>
+    <externalId>false</externalId>
+    <label>PC/AI Sub-scenario</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Product Upgrade</fullName>
+                <default>false</default>
+                <label>Product Upgrade</label>
+            </value>
+            <value>
+                <fullName>Product Downgrade</fullName>
+                <default>false</default>
+                <label>Product Downgrade</label>
+            </value>
+            <value>
+                <fullName>Product Addition</fullName>
+                <default>false</default>
+                <label>Product Addition</label>
+            </value>
+            <value>
+                <fullName>Product Removal</fullName>
+                <default>false</default>
+                <label>Product Removal</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

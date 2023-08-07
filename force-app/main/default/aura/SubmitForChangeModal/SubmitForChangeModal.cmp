@@ -1,0 +1,263 @@
+<!--
+* Created By   :   Girikon(Sachin)  
+* Created On   :   
+* *********************************************************************************
+* @description  : This component is used for Amendment Opportunity functionality.
+* controller    : OppActionButtonController
+* *********************************************************************************
+* Modification log : Girikon(Prashant) [IML2R-1799] 24th March 2020
+* 
+-->
+<aura:component controller="OppActionButtonController" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction" description="Submit for change action modal for opprtunity detail page">
+    <ltng:require scripts="{!$Resource.LtngUtility}"/>
+
+    <aura:attribute name="isOpenModal" type="Boolean" />
+    <aura:attribute name="oppObj" type="Object" access="public"/>
+    <aura:attribute name="orderObj" type="Object" access="public"/>
+    <aura:attribute name="changeRequestObj" type="Object" access="public" description="object type attribute of sobject(Change_Request__c)"/>
+    <aura:attribute name="selectedType" type="String" access="private"/>
+
+    <aura:attribute name="newOrderId" type="String" default=""/>
+    <aura:attribute name="newInvoiceId" type="String" default=""/>
+    <aura:attribute name="newBillToContactId" type="String" default=""/>
+    <aura:attribute name="newAccountTaxNumber" type="String" />
+    <aura:attribute name="newProductId" type="String" default=""/> 
+
+    <aura:attribute name="countryStateMap" type="Object" />
+    <aura:attribute name="countrylist" type="List" />
+    <aura:attribute name="statelist" type="List" />
+    <aura:attribute name="sObjectName" type="String" />
+	<aura:attribute name="fieldName" type="String" />
+	<aura:attribute name="picklistValues" type="Object" />
+    
+    <aura:attribute name="spinner" default="false" type="Boolean" access="private"/>
+    
+    <aura:attribute name="selectedTypeofChange" type="String" access="private"/>
+    
+    <aura:attribute name="productRecord" type="Object"/>
+    <aura:attribute name="accountRecord" type="Object"/>
+    <aura:attribute name="invoiceRecord" type="Object"/>
+    <aura:attribute name="recordLoadError" type="String"/>
+    
+    
+    <!-- handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <lightning:navigation aura:id="navService"/>
+    
+    <lightning:recordEditForm onload="{!c.showRequiredFields}" aura:id="Change_Request_Form" objectApiName="Change_Request__c" onsubmit="{!c.handleSubmit}" onsuccess="{!c.handleSuccess}" onerror="{!c.handleError}">
+        <lightning:messages />
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <aura:if isTrue="{!v.spinner}">
+                <lightning:spinner size="small" variant="brand"/>
+            </aura:if>
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button onclick="{!c.closeModal}" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning:icon iconName="utility:close" size="small" variant="bare"/>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Opportunity Amendment Request </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning:layout multipleRows="true">	        			        		
+                        <lightning:layoutItem size="6" class="slds-var-p-around_small">
+                            <lightning:inputField fieldName="Account__c" value="{!v.changeRequestObj.Account__c}" disabled="true"/>
+                            <div class="slds-var-p-top_x-small"></div>
+                            <lightning:inputField fieldName="Opportunity__c" value="{!v.changeRequestObj.Opportunity__c}" disabled="true"/>
+                            <div class="slds-var-p-top_x-small"></div>
+                            <lightning:inputField fieldName="Edition__c" value="{!v.changeRequestObj.Edition__c}" disabled="true"/>
+                            <div class="slds-var-p-top_x-small"></div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="6" class="slds-var-p-around_small">
+                            <lightning:inputField fieldName="Type_of_Change__c" class="customRequired none" aura:id="Type_of_Change" onchange="{!c.handleTypeOfChange}"/>
+                            <div class="slds-var-p-top_x-small"></div>
+                            <lightning:inputField fieldName="Product_Type__c" onchange="{!c.handleTypeChange}" disabled="true"/>
+                            <div class="slds-var-p-top_x-small"></div>
+                            <lightning:inputField fieldName="Change_Request_Status__c" disabled="true"/>
+                            <div class="slds-var-p-top_x-small"></div>
+                        </lightning:layoutItem>		        		
+                    </lightning:layout>
+                    
+                    <div class="{!v.selectedType==''?'slds-section slds-is-open slds-hide':'slds-section slds-is-open'}">
+                        <aura:if isTrue="{!(v.selectedType!='Financial Change')}">
+                            <h3 class="slds-section__title">
+                                <button type="button" aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action"> 
+                                    <span class="slds-truncate" title="{!v.selectedType=='Non Product' || v.selectedType=='Non-Financial Change'?v.selectedType:v.selectedType+' Change'}">{!v.selectedType=='Non Product' || v.selectedType=='Non-Financial Change'?v.selectedType:v.selectedType+' Change'}</span>
+                                </button>
+                            </h3>
+                        </aura:if>
+                        <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+                            <lightning:layout multipleRows="true">	
+                                <!-- Start adding section on the basis of request type and type of change -->
+
+                                <!-- Payment Schedule-->
+                                <aura:if isTrue="{!v.selectedTypeofChange=='Payment Schedule'}">
+                                    <lightning:layoutItem size="6" class="slds-var-p-around_small">
+                                        <aura:if isTrue="{!!v.oppObj.Payment_Schedule__c}">
+                                            <lightning:input disabled="true" value="{!v.oppObj.Event_Payment_ScheduleFor__c}" label="Default Payment Schedule" />
+                                            <div class="slds-var-p-top_x-small"></div>
+                                            <aura:set attribute="else">
+                                                <lightning:input disabled="true" value="{!v.oppObj.Payment_Schedule__c}" label="Payment Schedule" fieldLevelHelp="This picklist provides options for all payment schedules available" />
+                                                <div class="slds-var-p-top_x-small"></div>
+                                                <aura:if isTrue="{!v.oppObj.Payment_Schedule__c == 'Custom'}">
+                                                    <lightning:input type="date" fieldLevelHelp="First Due Date" dateStyle="short" disabled="true" value="{!v.oppObj.Start_Date__c}" label="Due Date" />
+                                                    <div class="slds-var-p-top_x-small"></div>
+                                                    <lightning:input disabled="true" value="{!v.oppObj.Total_No_of_payment__c}" label="Total No of Payment" />
+                                                    <div class="slds-var-p-top_x-small"></div>
+                                                </aura:if>
+                                            </aura:set> 
+                                        </aura:if>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem size="6" class="slds-var-p-around_small">
+                                        <lightning:select aura:id ="paymentOptions" label="New Payment Schedule" class="customRequired" >
+                                            <option value="">--None--</option>
+                                            <aura:iteration items="{!v.picklistValues}" var="item">
+                                                <option value="{!item.value}">
+                                                    {!item}
+                                                </option>
+                                            </aura:iteration>
+                                        </lightning:select>
+                                        <div class="slds-var-p-top_x-small"></div>
+                                    </lightning:layoutItem>
+                                </aura:if>
+                                <!-- End -->
+
+                                <!-- Cancellation [IML2R-212]-->
+                                <!-- Product Downgrade [IML2R-210]-->
+                                <!-- Product Upgrade [IML2R-208] -->
+                                <aura:if isTrue="{!(v.selectedTypeofChange=='Cancellation' || v.selectedTypeofChange=='Product Downgrade' || v.selectedTypeofChange=='Product Upgrade')}">
+                                    <lightning:layoutItem size="6" class="slds-var-p-around_small">
+                                        <lightning:inputField fieldName="Contract__c" value="{!v.changeRequestObj.Contract__c}" disabled="true"/>
+                                    </lightning:layoutItem>
+                                </aura:if>
+                                <!--End -->
+
+                                <!-- Incorrect Product Tax amendment [IML2R-215]-->
+                                <aura:if isTrue="{!v.selectedTypeofChange=='Incorrect Product Tax amendment'}">
+                                    <lightning:layoutItem size="6" class="slds-var-p-around_small">    
+                                        <c:sObjectLookUp  selectedRecordId="{!v.newOrderId}" objectName ="Order" filterByFieldName = "OpportunityId" filterByvalue="{!v.oppObj.Id}" label="Order" labelFieldAPI="OrderNumber" placeholder ="Search Order..." />
+                                        
+                                        <div class="slds-var-p-top_x-small"></div>                                
+                                        <aura:if isTrue="{!v.newProductId !=''}">
+                                            <force:recordData aura:id="recordLoader"
+                                                              recordId="{!v.newProductId}"
+                                                              fields="Name,Event_Product_Type__c"
+                                                              targetFields="{!v.productRecord}"
+                                                              targetError="{!v.recordLoadError}"
+                                                              />
+                                            <lightning:input disabled="true" value="{!v.productRecord.Event_Product_Type__c}" label="Event Product Type" />
+                                        </aura:if>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem size="6" class="slds-var-p-around_small">			
+                                        <aura:if isTrue="{!v.newOrderId !=''}">
+                                            <c:sObjectLookUp selectedRecordId="{!v.newProductId}" objectName ="OrderItem" filterByFieldName = "OrderId" filterByvalue="{!v.newOrderId}" label="Product" labelFieldAPI="Product2.Name" valueFieldAPI="Product2Id" placeholder ="Search Order..." />
+                                        </aura:if>
+
+                                        <div class="slds-var-p-top_x-small"></div>
+                                        <aura:if isTrue="{!v.newProductId !=''}">
+                                            <lightning:inputField fieldName="New_Event_Product_Type__c" class="customRequired"/>
+                                        </aura:if>											
+                                    </lightning:layoutItem>
+                                </aura:if>
+                                <!-- END -->
+
+                                <!--Updated VAT number Amendment [IML2R-207]-->
+                                <aura:if isTrue="{!v.selectedTypeofChange=='Updated VAT number Amendment'}">
+                                    <lightning:layoutItem size="6" class="slds-var-p-around_small">
+                                        <lightning:recordEditForm recordId="{!v.orderObj.Id}" objectApiName="Order">
+                                            <lightning:outputField fieldName="OrderNumber"/>
+                                            <lightning:inputField fieldName="Account_Tax_Number__c" disabled="true" aura:id="updatedVATOldAccountTaxNumber"/>
+                                        </lightning:recordEditForm>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem size="6" class="slds-var-p-around_small">
+                                        <c:sObjectLookUp  selectedRecordId="{!v.newOrderId}" objectName ="Order" filterByFieldName = "OpportunityId" filterByvalue="{!v.oppObj.Id}" label="Order" labelFieldAPI="OrderNumber" placeholder ="Search Order..." />
+                                        <div class="slds-var-p-top_x-small"></div>
+                                        <!-- New_Account_Tax_Number__c --> 
+                                        <c:sObjectLookUp  selectedRecordId="{!v.newAccountTaxNumber}" objectName ="Account_Tax_Number__c" filterByFieldName = "Account__c" filterByvalue="{!v.oppObj.AccountId}"  label="New Account Tax Number" labelFieldAPI="Name" placeholder ="Search Account Tax Number..." />									
+                                    </lightning:layoutItem>
+                                </aura:if>
+                                <!--END -->
+
+                                <!--Incorrect Account details with Tax impact Amendment [IML2R-207]-->
+                                <aura:if isTrue="{!v.selectedTypeofChange=='Incorrect Account details with Tax impact Amendment'}">
+                                    <lightning:layoutItem size="6" class="slds-var-p-around_small">
+                                        <lightning:recordViewForm recordId="{!v.oppObj.Id}" objectApiName="Opportunity">
+                                            <lightning:outputField fieldName="Bill_To_Account__c"/>
+                                        </lightning:recordViewForm>
+                                        <force:recordData aura:id="recordLoader"
+                                                              recordId="{!v.oppObj.Bill_To_Account__c}"
+                                                              fields="BillingCountryCode,BillingStreet,BillingCity,BillingStateCode,BillingPostalCode"
+                                                              targetFields="{!v.accountRecord}"
+                                                              targetError="{!v.recordLoadError}"
+                                                              />
+                                        <lightning:recordViewForm recordId="{!v.oppObj.Bill_To_Account__c}" objectApiName="Account">
+                                            <lightning:outputField fieldName="BillingCountryCode"/><div class="slds-var-p-top_x-small"></div>
+                                            <lightning:outputField fieldName="BillingStreet"/><div class="slds-var-p-top_x-small"></div>
+                                            <lightning:outputField fieldName="BillingCity"/><div class="slds-var-p-top_x-small"></div>
+                                            <lightning:outputField fieldName="BillingStateCode"/><div class="slds-var-p-top_x-small"></div>
+                                            <lightning:outputField fieldName="BillingPostalCode"/>
+                                        </lightning:recordViewForm>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem size="6" class="slds-var-p-around_small">
+                                        <c:sObjectLookUp  selectedRecordId="{!v.newOrderId}" objectName ="Order" filterByFieldName = "OpportunityId" filterByvalue="{!v.oppObj.Id}" label="Order" labelFieldAPI="OrderNumber" placeholder ="Search Order..." />
+                                        <div class="slds-var-p-top_x-small"></div>
+                                        <lightning:select aura:id="NewBillingCountry" label="New Billing Country" class="customRequired" onchange="{!c.CountryChange}">
+                                            <option value="">--None--</option>
+                                            <aura:iteration items="{!v.countrylist}" var="option">
+                                                <option text="{!option.label}" value="{!option.value}"/>
+                                            </aura:iteration>
+                                        </lightning:select><div class="slds-var-p-top_x-small"></div>
+                                        <lightning:inputField fieldName="New_Billing_Street__c" class="customRequired"/>
+                                        <lightning:inputField fieldName="New_Billing_City__c" class="customRequired"/>
+                                        <lightning:select aura:id="NewBillingState" label="New Billing State" disabled="{!v.statelist.length==0}">
+                                            <option value="">--None--</option>
+                                            <aura:iteration items="{!v.statelist}" var="option">
+                                                <option text="{!option.label}" value="{!option.value}"/>
+                                            </aura:iteration>
+                                        </lightning:select><div class="slds-var-p-top_x-small"></div>
+                                        <lightning:inputField fieldName="New_Billing_Postal_Code__c"/>
+                                    </lightning:layoutItem>
+                                </aura:if>
+                                <!--END -->
+
+
+                                <!-- Update Bill to Contact [IML2R-246]-->
+                                <aura:if isTrue="{!v.selectedTypeofChange=='Update Bill to Contact'}">
+                                    <lightning:layoutItem size="6" class="slds-var-p-around_small">
+                                        <!-- -->
+                                        <c:sObjectLookUp selectedRecordId="{!v.newInvoiceId}" objectName ="blng__Invoice__c" filterByFieldName = "blng__Order__r.OpportunityId" filterByvalue="{!v.oppObj.Id}" label="Invoice"  placeholder ="Search Invoice..." />
+                                    </lightning:layoutItem>
+                                    
+                                    <lightning:layoutItem size="6" class="slds-var-p-around_small">
+                                        <aura:if isTrue="{!v.newInvoiceId !=''}">
+                                            <force:recordData aura:id="recordLoader"
+                                                              recordId="{!v.newInvoiceId}"
+                                                              fields="Id,blng__Account__c,blng__BillToContact__c"
+                                                              targetFields="{!v.invoiceRecord}"
+                                                              targetError="{!v.recordLoadError}"
+                                                              />
+                                            
+                                            <aura:if isTrue="{!not(empty(v.invoiceRecord.blng__Account__c))}">
+                                                <c:sObjectLookUp selectedRecordId="{!v.newBillToContactId}" objectName ="Contact" filterByFieldName = "AccountId" filterByvalue="{!v.invoiceRecord.blng__Account__c}" label="New Bill To Contact" placeholder ="Search Contact..." />
+                                            </aura:if>
+                                        </aura:if>
+                                  </lightning:layoutItem>								
+                                </aura:if>
+                                <!--END -->
+                                
+                                <!-- End adding section on the basis of request type and type of change -->
+                                
+                            </lightning:layout>		        		
+                        </div>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button label="Cancel" onclick="{!c.closeModal}" iconName="utility:close" iconPosition="left" variant="destructive"/>
+                    <lightning:button label="Send for Approval" type="submit" iconName="utility:check" iconPosition="left" variant="brand"/> 
+                </footer>
+            </div>    	
+        </section>	
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </lightning:recordEditForm>
+</aura:component>

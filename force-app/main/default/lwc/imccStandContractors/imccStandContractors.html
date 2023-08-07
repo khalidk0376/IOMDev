@@ -1,0 +1,245 @@
+<template>
+    <!--Dynamic-->
+    <!--<lightning-layout multiple-rows="true" class="stand-contractors">
+        <lightning-layout-item size="12">
+            <c-imcc-page-header></c-imcc-page-header>
+        </lightning-layout-item>
+    </lightning-layout>-->
+    
+    <!-- List Account and contacts modal Start-->
+    <template if:true={isOpenAccountModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" 
+            class="slds-modal slds-modal_medium slds-fade-in-open">
+            <div class="slds-modal__container">                
+                <div class="slds-modal__header">
+                    <button onclick={closeAccountModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-icon icon-name="utility:close" size="small"></lightning-icon>
+                    </button>                    
+                    <h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate">Assign Contractor to Booth {selectedBoothName}</h1>
+                    <p class="slds-m-top_x-small para paragraph-d-tiny">Please select the contractor you'd like to assign by searching the list below. if you don't see the company you need, you may register a new one.</p>
+                    <div class="slds-m-top_small">
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_6-of-12">
+                                <lightning-input onchange={handleCompanySearch} type="search" placeholder="Search Company" label="Search Company" variant="label-hidden"></lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_1-of-12" style="justify-content:center;">
+                                OR
+                            </div>
+                            <div class="slds-col slds-size_5-of-12">
+                                <lightning-button onclick={openNewAccountModal} icon-name="utility:company" label="Register a New Contractor Company" variant="brand"></lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                    <div>
+                        <ul class="company-name">
+                            <template if:true={accountList} for:each={accountList} for:item="item" for:index="index">
+                                <li key={item.Id}>
+                                    <div class="acc-name" data-acc-country={item.BillingCountry} data-acc-name={item.Name} data-acc-id={item.Id} onclick={openChildContacts}>
+                                        <img class="plus-icon" src={plus} alt="plus" />
+                                        <span class="ac-name link link-d-small">&nbsp;{item.Name} ({item.total})</span>
+                                    </div>
+                                    <div class="acc-contact slds-m-left_x-large slds-hide" data-id={item.Id}>
+                                        <ul class="child-contacts">
+                                            <template if:true={item.AccountContactRelations} for:each={item.AccountContactRelations} for:item="con" for:index="index2">                                       
+                                                
+                                                <li key={con.ContactId}>
+                                                    {con.Contact.Name}&nbsp;<a data-acc-country={item.BillingCountry} data-con-id={con.ContactId} data-acc-id={item.Id} onclick={selectContact} href="javascript:void(0)" class="para paragraph-d-tiny">
+                                                        <span>(Select)</span>
+                                                    </a>
+                                                 </li>
+                                            </template>
+                                            <li>
+                                                <a onclick={openNewContactModal} href="javascript:void(0)" class="para paragraph-d-tiny">
+                                                    <span><img class="plus-icon" src={plus} alt="plus" style="width:12px"/> Add new contact for this company</span>
+                                                </a>
+                                            </li>
+                                        </ul>                                    
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slds-modal__footer modal-button">
+                    <lightning-button onclick={closeAccountModal} label="Close" class="btn-lg"></lightning-button>
+                </div>
+            </div>            
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+    <!--List Account and contact modal End-->
+
+    <!--Register New Company Start-->
+    <template if:true={isNewAccountModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" 
+            class="slds-modal slds-modal_medium slds-fade-in-open">
+            <div class="slds-modal__container">                
+                <div class="slds-modal__header">
+                    <button onclick={closeNewAccountModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-icon icon-name="utility:close" size="small"></lightning-icon>
+                    </button>
+                    <h1 id="modal-heading-03" class="slds-modal__title slds-hyphenate">Register New Company to Booth {selectedBoothName}</h1>
+                    <p class="slds-m-top_x-small para paragraph-d-tiny">Please enter the name of the company that you wish to register. If the company is already in the system, you will be prompted to select it.</p>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+                    <div>
+                        <lightning-spinner if:true={spinner} size="small" variant="brand"></lightning-spinner>
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <div class="slds-col slds-size_12-of-12">
+                                <div if:true={isDisabledSaveAcc} class="slds-text-color_destructive">Company already exists. Please click the cancel button below and search through the list of contractors.</div>
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                                            <lightning-input name="name" onchange={handleAccountFieldChange} type="search" label="Company:" value={newAccountObj.Name} max-length="80" required="true" message-when-value-missing="Please enter company name" autocomplete="off"></lightning-input>
+                                        </div>
+                                        <div class="slds-combobox_container">
+                                            <div class="temp-list slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">                        
+                                                <div id="listbox-id" class="slds-dropdown slds-dropdown_length-with-icon-5 slds-dropdown_fluid" role="listbox">
+                                                    <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                                        <template if:true={searchAccList} for:each={searchAccList} for:item="item" for:index="index">
+                                                            <li key={item.Id} data-index={index} data-acc-name={item.Name} onclick={selectAccount} role="presentation" class="slds-listbox__item">
+                                                                <div aria-selected="false" id={item.Id} class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option" tabindex="0">
+                                                                <span class="slds-media__figure slds-listbox__option-icon">
+                                                                    <lightning-icon icon-name="standard:account" size="small"></lightning-icon>
+                                                                </span>
+                                                                <span class="slds-media__body">
+                                                                    <span class="slds-listbox__option-text slds-listbox__option-text_entity">{item.Name}</span>                                                                    
+                                                                </span>
+                                                                </div>
+                                                            </li>
+                                                        </template>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_12-of-12 slds-p-top_small">
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-size_6-of-12 slds-p-right_x-small">
+                                        <lightning-input name="cty-name" onfocus={focusCountry} onchange={handleAccountFieldChange} type="search" value={newAccountObj.Country__c} max-length="50" placeholder="Search" label="Country: " required="true" message-when-value-missing="Please enter country name"  autocomplete="off"></lightning-input>
+                                        <div class="slds-combobox_container">
+                                            <div class="country-list slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">
+                                                <div id="listbox-id-2" class="slds-dropdown slds-dropdown_length-with-icon-5 slds-dropdown_fluid" role="listbox">
+                                                    <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                                        <template if:true={countries} for:each={countries} for:item="item" for:index="index">
+                                                            <li key={item.Country_Name__c} data-index={index} data-country-code={item.Controlling_Field_Code__c} data-country={item.Country_Name__c} onclick={selectCountry} role="presentation" class={item.class}>
+                                                                <div aria-selected="false" id={item.Country_Name__c} class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option" tabindex="0">
+                                                                    <span class="slds-media__body">
+                                                                        <span class="slds-listbox__option-text slds-listbox__option-text_entity">{item.Country_Name__c}</span>
+                                                                    </span>
+                                                                </div>
+                                                            </li>
+                                                        </template>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                    <div class="slds-size_6-of-12 slds-p-left_x-small">
+                                        <lightning-combobox name="state" options={stateListToDraw} disabled={isStateDisabled} onchange={handleAccountFieldChange} label="State:" value={newAccountObj.State__c} required={isStateRequired}></lightning-combobox>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_12-of-12 slds-p-top_small">
+                                <div class="slds-grid slds-wrap">                                    
+                                    <div class="slds-size_6-of-12 slds-p-right_x-small">
+                                        <lightning-input name="city" onchange={handleAccountFieldChange} type="text" value={newAccountObj.City__c} max-length="50" label="City: " required="true" message-when-value-missing="Please enter city"></lightning-input>
+                                    </div>
+                                    <div class="slds-size_6-of-12 slds-p-left_x-small slds-p-right_x-small">
+                                        <lightning-input name="zip" onchange={handleAccountFieldChange} type="text" label="P.O.Box:" value={newAccountObj.Zip__c} max-length="20"></lightning-input>
+                                    </div>                                    
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_12-of-12 slds-p-top_small">
+                                <lightning-textarea name="address" onchange={handleAccountFieldChange} label="Address: " value={newAccountObj.Address__c} max-length="255"></lightning-textarea>
+                            </div>
+                        </div>
+                    </div><br/><br/>
+                </div>
+                <div class="slds-modal__footer modal-button">
+                    <lightning-button onclick={closeNewAccountModal} icon-name="utility:close" label="Cancel" class="btn-lg"></lightning-button>&nbsp;&nbsp;
+                    <lightning-button onclick={saveNewAccount} disabled={isDisabledSaveAcc} label="Add this company and create new contact" icon-name="utility:check" variant="brand" class="btn-lg createnewacc"></lightning-button>
+                </div>
+            </div>            
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+    <!--Register New Company End-->
+
+    <!--Create temp contact modal start-->
+    <!--Thank you for your submission. 
+        An invitation has been sent to  Mukesh Gupta at mukesh.gupta@girikon.com. 
+        They will receive instructions to access their dashboard.
+    -->
+    <template if:true={isOpenNewContactModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-04" aria-modal="true" 
+            class="slds-modal slds-modal_medium slds-fade-in-open">
+            <div class="slds-modal__container">                
+                <div class="slds-modal__header">
+                    <button onclick={closeNewContactModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-icon icon-name="utility:close" size="small"></lightning-icon>
+                    </button>
+                    <h1 id="modal-heading-04" class="slds-modal__title slds-hyphenate"><span if:false={isDisable}>Create New Contact</span><span if:true={isDisable}>Invite Selected Contact</span> - {selectedBoothName}</h1>
+                    <p class="slds-m-top_x-small para paragraph-d-tiny">Please create the new contact by filling out the following information. 
+                        When you are finished, click on the "invite this contact" button to make the designation. 
+                        An email will be sent to the contact inviting them to the Customer Center.</p>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-4">
+                    <div>
+                        <lightning-spinner if:true={spinner} size="small" variant="brand"></lightning-spinner>
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <div class="slds-col slds-size_12-of-12">
+                                <lightning-input name="name" type="text" label="Company:" value={selectedAccountName} max-length="80" disabled></lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12 slds-m-top_small">
+                                <lightning-input name="firstname" onchange={handleContactFieldChange} label="First Name: " value={newContactObj.FirstName__c} max-length="100" required={isRequired} disabled={isDisable}></lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12 slds-m-top_small">
+                                <lightning-input name="lastname" onchange={handleContactFieldChange} label="Last Name: " value={newContactObj.LastName__c} max-length="100" required={isRequired} disabled={isDisable}></lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12 slds-m-top_small">
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-size_4-of-12 slds-p-right_x-small">
+                                        <lightning-input type="text" value={countryTelCode} label="Country Code: " disabled="true"></lightning-input>
+                                    </div>
+                                    <div class="slds-size_8-of-12 slds-p-left_x-small slds-p-right_x-small">
+                                        <lightning-input name="mobilephone" min-length="5" onchange={handleContactFieldChange} type="tel" value={newContactObj.MobilePhone__c} max-length="20" label="Mobile Phone: " required={isRequired} message-when-value-missing="Please enter mobile phone" message-when-pattern-mismatch="Please eneter valid mobile number" disabled={isDisable}></lightning-input>
+                                    </div>                   
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12 slds-m-top_small">
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-size_4-of-12 slds-p-right_x-small">
+                                        <lightning-input type="text" value={countryTelCode} label="Country Code: " disabled="true"></lightning-input>
+                                    </div>
+                                    <div class="slds-size_8-of-12 slds-p-left_x-small slds-p-right_x-small">
+                                        <lightning-input name="phone" min-length="5" onchange={handleContactFieldChange} type="tel" value={newContactObj.Phone__c} label="Phone: " required={isRequired} message-when-value-missing="Please enter phone number." message-when-pattern-mismatch="Please enter valid phone number" disabled={isDisable}></lightning-input>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_12-of-12 slds-m-top_small">
+                                <lightning-input name="email" onchange={handleContactFieldChange} label="Email: " value={newContactObj.Email__c} max-length="100" required={isRequired} disabled={isDisable}></lightning-input>
+                            </div>
+                        </div>
+                    </div>
+                    <div>  
+                        <lightning-checkbox-group name="Checkbox Group"
+                        label="OTHER BOOTHS TO BE ASSIGNED"
+                        options={options}
+                        value={selectedCheckbox}
+                        onchange={handleChange} if:true={showMultiBoothCheckBoxGroup}></lightning-checkbox-group>
+                    </div>  
+                </div>
+                <div class="slds-modal__footer modal-button">
+                    <lightning-button onclick={closeNewContactModal} icon-name="utility:close" label="Cancel" class="btn-lg"></lightning-button>&nbsp;&nbsp;
+                    <lightning-button onclick={saveNewContact} label="Invite This Contact" icon-name="utility:check" variant="brand" class="btn-lg createnewacc" disabled={isButtonDisable}></lightning-button>
+                </div>
+            </div>            
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

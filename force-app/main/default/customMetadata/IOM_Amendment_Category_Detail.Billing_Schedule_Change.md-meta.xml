@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Billing Schedule Change</label>
+    <protected>false</protected>
+    <values>
+        <field>IOM_Description__c</field>
+        <value xsi:type="xsd:string">From Monthly to Annually etc.</value>
+    </values>
+    <values>
+        <field>IOM_New_Label__c</field>
+        <value xsi:type="xsd:string">Billing Options Update</value>
+    </values>
+    <values>
+        <field>IOM_Priority__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>IOM_Type__c</field>
+        <value xsi:type="xsd:string">Full Cancel &amp; Rebill</value>
+    </values>
+</CustomMetadata>

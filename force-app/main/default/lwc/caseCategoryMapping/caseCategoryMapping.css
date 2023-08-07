@@ -1,0 +1,10 @@
+.longtext .slds-form-element__static{
+    width: 90% !important;
+}
+
+.slds-form-element__control .SysInfo, .slds-form-element__control .edit{
+    display: inline-block!important;
+}
+.slds-form-element__control .SysInfo{
+    width: 90%!important;
+}

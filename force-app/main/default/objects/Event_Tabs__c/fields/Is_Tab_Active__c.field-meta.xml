@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Tab_Active__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Depending on this status it will be displayed on community page but will be grayed out until it is Tab Visible Checkbox is checked</description>
+    <externalId>false</externalId>
+    <label>Is Tab Active</label>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

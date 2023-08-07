@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IOM_Contact_Identifier__c</fullName>
+    <description>The field is created to identify the contacts which have been created using the IOM Order Management process.</description>
+    <externalId>false</externalId>
+    <label>IOM Contact Identifier</label>
+    <length>50</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

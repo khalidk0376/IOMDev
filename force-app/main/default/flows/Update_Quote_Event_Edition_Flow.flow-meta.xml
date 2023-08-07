@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <environments>Default</environments>
+    <formulas>
+        <name>QuoteEditionName</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Edition__r.Name}+&quot;:&quot;+{!$Record.Quote__r.Name}</expression>
+    </formulas>
+    <interviewLabel>Update Quote Event Edition {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Update Quote Event Edition Flow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_Event_Edition_Name</name>
+        <label>Update Event Edition Name</label>
+        <locationX>405</locationX>
+        <locationY>283</locationY>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>QuoteEditionName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>330</locationX>
+        <locationY>48</locationY>
+        <connector>
+            <targetReference>Update_Event_Edition_Name</targetReference>
+        </connector>
+        <object>Quote_Edition__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

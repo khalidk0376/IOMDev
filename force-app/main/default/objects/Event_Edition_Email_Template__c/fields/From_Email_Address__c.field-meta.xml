@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>From_Email_Address__c</fullName>
+    <description>Choose the email address from which email will be sent</description>
+    <externalId>false</externalId>
+    <label>From</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Org_Wide_From_Email_Addresses</valueSetName>
+    </valueSet>
+</CustomField>

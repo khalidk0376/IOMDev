@@ -1,0 +1,28 @@
+<template>
+    <div class="forms-and-manuals">
+        <template if:true={isLeadRetrieval}>
+        <div class="slds-m-bottom_small">
+            <c-imcc-page-header></c-imcc-page-header> 
+            <div class="profile" style="background-color: var(--indigo-1);">
+                <div class="strand-heading">
+                    <span class="heading-content heading heading-d-small heading-m-small">Your licenses</span>
+                </div>
+                <div class="line"></div>
+                <div class="strand-subhead">
+                    <div class="strand-content">
+                        <span class="head para paragraph-d-tiny paragraph-m-tiny">Licenses</span>
+                        <span class="content para paragraph-d-small paragraph-m-small">Unlimited</span>
+                    </div>
+                    <div class="strand-content">
+                        <span class="head para paragraph-d-tiny paragraph-m-tiny">QR Code</span>
+                        <span class="content para paragraph-d-small paragraph-m-small">Unlimited</span>
+                    </div>
+                </div>
+            </div>
+         </div> </br></br>
+         <div class="slds-col slds-small-size_1-of-1 slds-text-align_right">
+            <lightning-button  onclick={handleButtonClick} icon-name="utility:forward" variant="brand" icon-position="right" label={externalLinkLabel}></lightning-button>
+        </div>
+    </template>
+    </div>
+</template>

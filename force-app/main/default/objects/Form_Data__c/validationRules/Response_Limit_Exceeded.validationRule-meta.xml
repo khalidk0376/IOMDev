@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Response_Limit_Exceeded</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+	AND(OR(ISPICKVAL(Forms_Permission__r.Form_Allocation__r.Form_Entry__c,&apos;Multiple Per Account&apos;),ISPICKVAL(Forms_Permission__r.Form_Allocation__r.Form_Entry__c,&apos;Multiple Per Booth&apos;)),(Allowed_Responses__c &lt;  Submitted_Responses__c)),
+	AND(NOT(OR(ISPICKVAL(Forms_Permission__r.Form_Allocation__r.Form_Entry__c,&apos;Multiple Per Account&apos;),ISPICKVAL(Forms_Permission__r.Form_Allocation__r.Form_Entry__c,&apos;Multiple Per Booth&apos;))),(Allowed_Responses__c &lt;  Response_Count_All__c))
+)</errorConditionFormula>
+    <errorMessage>Response Limit Reached.</errorMessage>
+</ValidationRule>

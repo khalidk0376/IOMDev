@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason_Lost__c</fullName>
+    <description>Reason of opportunity getting closed lost.</description>
+    <externalId>false</externalId>
+    <label>Reason Lost</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>AR Cancel / Re-bill</fullName>
+                <default>false</default>
+                <label>AR Cancel / Re-bill</label>
+            </value>
+            <value>
+                <fullName>Booth/Sponsorship Cancellation</fullName>
+                <default>false</default>
+                <label>Booth/Sponsorship Cancellation</label>
+            </value>
+            <value>
+                <fullName>Budget - Budget Decrease</fullName>
+                <default>false</default>
+                <label>Budget - Budget Decrease</label>
+            </value>
+            <value>
+                <fullName>Budget - Budget not approved yet</fullName>
+                <default>false</default>
+                <label>Budget - Budget not approved yet</label>
+            </value>
+            <value>
+                <fullName>Budget - Budget Reallocated</fullName>
+                <default>false</default>
+                <label>Budget - Budget Reallocated</label>
+            </value>
+            <value>
+                <fullName>Budget - No Budget</fullName>
+                <default>false</default>
+                <label>Budget - No Budget</label>
+            </value>
+            <value>
+                <fullName>Budget - No Budget left</fullName>
+                <default>false</default>
+                <label>Budget - No Budget left</label>
+            </value>
+            <value>
+                <fullName>Customer Unresponsive</fullName>
+                <default>false</default>
+                <label>Customer Unresponsive</label>
+            </value>
+            <value>
+                <fullName>Digital / Print Cancellation</fullName>
+                <default>false</default>
+                <label>Digital / Print Cancellation</label>
+            </value>
+            <value>
+                <fullName>Duplicate opportunity</fullName>
+                <default>false</default>
+                <label>Duplicate opportunity</label>
+            </value>
+            <value>
+                <fullName>Event Edition Closed</fullName>
+                <default>false</default>
+                <label>Event Edition Closed</label>
+            </value>
+            <value>
+                <fullName>Input error</fullName>
+                <default>false</default>
+                <label>Input error</label>
+            </value>
+            <value>
+                <fullName>Lost - Interested in Next Edition</fullName>
+                <default>false</default>
+                <label>Lost - Interested in Next Edition</label>
+            </value>
+            <value>
+                <fullName>Lost to Competitor</fullName>
+                <default>false</default>
+                <label>Lost to Competitor</label>
+            </value>
+            <value>
+                <fullName>Not enough reach to their target audience</fullName>
+                <default>false</default>
+                <label>Not enough reach to their target audience</label>
+            </value>
+            <value>
+                <fullName>Pricing/Cost – Too high</fullName>
+                <default>false</default>
+                <label>Pricing/Cost – Too high</label>
+            </value>
+            <value>
+                <fullName>Technical Error</fullName>
+                <default>false</default>
+                <label>Technical Error</label>
+            </value>
+            <value>
+                <fullName>Timing – Campaign Delayed</fullName>
+                <default>false</default>
+                <label>Timing – Campaign Delayed</label>
+            </value>
+            <value>
+                <fullName>Timing – Creative won’t be done in time</fullName>
+                <default>false</default>
+                <label>Timing – Creative won’t be done in time</label>
+            </value>
+            <value>
+                <fullName>Timing – Product still in Development</fullName>
+                <default>false</default>
+                <label>Timing – Product still in Development</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,35 @@
+.forceListViewPlaceholder {
+    position: absolute;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    background: rgb(255, 255, 255);
+}
+.placeholder.table_list_line_item .body {
+    padding: 1rem 1.5rem .3rem;
+}
+
+.placeholder .border-bottom {
+    border-bottom: 1px solid rgb(221, 219, 218);
+}
+.placeholder .body, .placeholder .card, .placeholder .anchor {
+    background-color: rgb(255, 255, 255);
+}
+.placeholder .text-body-col, .placeholder .text-body-no-col {
+    display: flex;
+    width: 100%;
+}
+.placeholder .text-body-col .text, .placeholder .text-body-no-col .text {
+    border-radius: 14px;
+    display: inline-block;
+    margin-bottom: .75rem;
+    height: .5rem;
+    margin-right: .75rem;
+}
+
+.placeholder .text, .placeholder .icon {
+    background-color: rgb(243, 242, 242);
+}
+.placeholder .text-short {
+    width: 45%;
+}

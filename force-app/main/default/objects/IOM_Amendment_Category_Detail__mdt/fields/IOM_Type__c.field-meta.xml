@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IOM_Type__c</fullName>
+    <description>Amendment Category Type</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Type</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Reprint Invoice Change Detail</fullName>
+                <default>true</default>
+                <label>Reprint Invoice Change Detail</label>
+            </value>
+            <value>
+                <fullName>Full Cancel &amp; Rebill</fullName>
+                <default>false</default>
+                <label>Full Cancel &amp; Rebill</label>
+            </value>
+            <value>
+                <fullName>Full Cancellation</fullName>
+                <default>false</default>
+                <label>Full Cancellation</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,177 @@
+<template>
+    <article class="slds-card slds-card_boundary headerBottomBorder forceRelatedListCardDesktop">   
+        <div class="slds-grid slds-page-header forceRelatedListCardHeader">
+           <header class="slds-media slds-media--center slds-has-flexi-truncate">
+                <div class="slds-media__figure stencil slds-avatar slds-avatar_small">
+                    <div class="extraSmall forceEntityIcon">
+                        <span class="uiImage">
+                            <lightning-icon icon-name="standard:file" size="medium"></lightning-icon>
+                        </span>
+                    </div>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <a class="slds-card__header-link baseCard__header-title-container" href="javascript:void(0)">
+                            <span class="slds-truncate slds-m-right--xx-small" title="Stand File Types">Stand File Types</span>
+                            <span class="slds-shrink-none slds-m-right--xx-small" title={fileCount}>({fileCount})</span>
+                        </a>
+                    </h2>
+                </div>
+            </header>
+            <div class="slds-no-flex" if:false={isPublished}>
+                <div class="actionsContainer">
+                    <div class="slds-float--right forceDeferredDropDownAction">                        
+                        <lightning-button label="Add New" class="imcc-btn" icon-name="utility:add" onclick={addFileType}></lightning-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="previewMode SMALL forceRelatedListPreview">            
+            <div>
+                <div class="slds-card__body">
+                    <ul class="uiAbstractList">
+                        <template if:true={fileTypes} for:each={fileTypes} for:item="item" for:index="ind">
+                            <li key={ind.Id} class="slds-var-p-horizontal_medium slds-var-p-vertical_xx-small desktop forceImageRelatedListStencil forceRecordLayout">
+                                <article class="listItemBody withActions slds-media">
+                                    <div class="slds-media__body">
+                                        <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+                                            <h3 class="primaryField slds-tile__title slds-truncate">
+                                                <div class="outputLookupContainer forceOutputLookupWithPreview">
+                                                    <a class="textUnderline outputLookupLink slds-truncate forceOutputLookup" data-index={ind} onclick={openRecord} href="javascript:void(0)" target="_blank" rel="noreferrer" title="">
+                                                        {item.Name}
+                                                    </a>
+                                                </div>
+                                            </h3>
+                                            <div if:false={isPublished} class="forceVirtualActionMarker forceVirtualAction">                                                        
+                                                <lightning-button-menu data-index={ind} onselect={handleMenuSelect} icon-size="x-small" tooltip="Click to view,edit and delete product" menu-alignment="right" alternative-text="View menu">
+                                                    <lightning-menu-item value="edit" icon-name="utility:edit" label="Edit"></lightning-menu-item>
+                                                    <lightning-menu-item value="delete" icon-name="utility:delete" label="Delete"></lightning-menu-item>
+                                                </lightning-button-menu>
+                                            </div>
+                                        </div>
+                                        <div class="slds-tile__detail">
+                                            <ul class="itemRows truncate">
+                                                <li class="tableRowGroup">
+                                                    <div class="slds-list--horizontal forceListRecordItem">
+                                                        <div class="slds-item--label slds-truncate recordCell" title="Type">Type:</div>
+                                                        <div class="slds-item--detail slds-truncate recordCell">
+                                                            <span dir="auto" class="uiOutputNumber">
+                                                                {item.Type__c}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+                        </template>
+                    </ul>
+                    <lightning-spinner if:true={spinner} size="small" variant="brand"></lightning-spinner>					
+                </div>
+            </div>        
+        </div>
+        
+        <template if:false={isFileTypeFound}>
+            <div class="slds-p-around_medium">
+                No record found.
+            </div>
+        </template>
+    </article>
+
+    <!--Delete  record-->
+    <template if:true={isDelete}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-03" aria-modal="true" 
+        aria-describedby="modal-content-id-3" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button onclick={close} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning-icon icon-name="utility:close" size="small" variant="bare"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-03" class="slds-modal__title slds-hyphenate">Confirmation</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+                    <p>Are you sure, you want to delete?</p>                    
+                    <lightning-spinner if:true={spinner} size="small" variant="brand"></lightning-spinner>
+                </div>
+                <footer class="slds-modal__footer">
+                <button onclick={close} class="slds-button slds-button_neutral">No</button>
+                <button onclick={yesRemove} class="slds-button slds-button_brand">Yes</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!--Create/Update Record-->
+    <template if:true={isEdit}>
+        <lightning-record-edit-form onsubmit={handleSubmit} onsuccess={handleSucess} record-id={selectedId} object-api-name="Stand_File_Type__c">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" 
+        aria-describedby="modal-content-id-1" class="slds-modal slds-modal_medium slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button onclick={close} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning-icon icon-name="utility:close" size="small" variant="bare"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">{btnLabel} Record</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">                                      
+                    <lightning-spinner if:true={spinner} size="small" variant="brand"></lightning-spinner>
+                    <lightning-messages> </lightning-messages>
+                    <div class="slds-m-bottom_small">
+                        <lightning-input-field field-name="Stand_Setting__c" value={recordId} disabled></lightning-input-field>
+                    </div>
+                    <div class="slds-m-bottom_small">
+                        <lightning-input-field field-name="Name"></lightning-input-field>
+                    </div>
+                    <div class="slds-m-bottom_small">
+                        <lightning-input-field field-name="Type__c"> </lightning-input-field>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button onclick={close} class="slds-button slds-button_neutral">Cancel</button>
+                    <button type="submit" class="slds-button slds-button_brand">{btnLabel}</button>
+                </footer>
+            </div>
+        </section>        
+    </lightning-record-edit-form>
+        <div class="slds-backdrop slds-backdrop_open"></div>        
+    </template>
+
+    <!--View Record-->
+    <template if:true={isView}>
+        <lightning-record-view-form record-id={selectedId} object-api-name="Stand_File_Type__c">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" 
+        aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button onclick={close} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning-icon icon-name="utility:close" size="small" variant="bare"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-02" class="slds-modal__title slds-hyphenate">View Record</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">                                      
+                    <div class="slds-m-bottom_small">
+                        <lightning-output-field field-name="Stand_Setting__c"></lightning-output-field>
+                    </div>
+                    <div class="slds-m-bottom_small">
+                        <lightning-output-field field-name="Name"></lightning-output-field>
+                    </div>
+                    <div class="slds-m-bottom_small">
+                        <lightning-output-field field-name="Type__c"> </lightning-output-field>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button onclick={close} class="slds-button slds-button_neutral">Close</button>                    
+                </footer>
+            </div>
+        </section>        
+    </lightning-record-view-form>
+        <div class="slds-backdrop slds-backdrop_open"></div>        
+    </template>
+</template>

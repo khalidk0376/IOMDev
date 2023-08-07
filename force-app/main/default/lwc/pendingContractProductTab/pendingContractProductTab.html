@@ -1,0 +1,22 @@
+<!--
+Created By	 : Girikon(Sachin)(IML2R-742)
+Created On	 : Feb 24, 2020
+@description : This is Product tab form component that shown after user click on row of pending contract tab
+
+Modification log:
+Modified By	: 
+-->
+<template>
+        <template if:true={condition}>
+            <c-common-table condition={condition}
+                fields="SBQQ__Product__r.Name,SBQQ__Quantity__c,SBQQ__StartDate__c,SBQQ__EndDate__c,SBQQ__NetTotal__c,SBQQ__Description__c"
+                fields-label={fieldsLabels}
+                object-name="SBQQ__QuoteLine__c" object-label="Product" is-multi-language="true" custom-label="-1,0,7">
+            </c-common-table>
+            <div class="slds-clearfix">
+                <div class="slds-float_right">
+                    <strong class="slds-text-heading_small">Total: {isoCode} {totalAmount}</strong>
+                </div>
+            </div>
+        </template>
+    </template>

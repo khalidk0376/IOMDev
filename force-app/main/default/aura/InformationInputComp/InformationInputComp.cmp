@@ -1,0 +1,77 @@
+<aura:component controller="InformationInputCtr">
+    <!-- Start attribute -->
+    <aura:attribute name="QnaireId" type="String" />
+    <aura:attribute name="QnaireName" type="String" />
+    <aura:attribute name="QuestnQnaireId" type="String" />
+    <aura:attribute name="QuestnGroupId" type="String" />
+    <aura:attribute name="Questntype" type="String" />
+    <aura:attribute name="isEditQue" type="Boolean" />
+    <aura:attribute name="modalHeader" type="String" />
+    <aura:attribute name="fieldType" type="String" />
+    <aura:attribute name="dropColNumber" type="String" />
+    <aura:attribute name="questOrderNum" type="String" default="0"/>
+    <aura:attribute name="isShowHelpText" type="Boolean" default="false" />
+    <aura:attribute name="lstQuesCategory" type="List" default="[]" />
+    <aura:attribute name="objCrteQues" type="Question__c" default="{'sobjectType': 'Question__c','Metadata__c':'#000000',background_Color__c:'#FFFFFF'}" />
+    <aura:attribute name="description" type="String" default=" " />
+    <aura:attribute name="objeditQues" type="Question__c" default="{ 'sobjectType': 'Question__c','Metadata__c':'#000000',background_Color__c:'#9df0c0'}" />
+    <aura:attribute name="lstColorCodes" type="List" default="[]" />
+    <aura:attribute name="colorCode" type="String" default="#9df0c0" />
+    <aura:attribute name="textcolor" type="String" default="#000000" />
+    <aura:attribute name="bgcolor" type="String" default="#9df0c0"/>
+    <!-- End attribute-->
+
+    <!-- event handlers -->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <!-- event handlers -->
+	{!v.body}
+    <!--Start body-->
+    <div class="slds-col slds-grid_vertical">
+        <div class="slds-grid slds-no-flex panelHeader">
+            <h2>Question Editor: Info output field</h2>
+            <a href="#"><lightning:buttonIcon iconName="utility:forward" onclick="{!c.hideModal}" variant="bare"/></a>
+        </div>
+    </div>
+    <div class="slds-col slds-scrollable_y">
+        <div class="panelBody">
+            <aura:if isTrue="{!v.isEditQue==false}">
+                <div class="slds-form-element ">
+                    <c:imcc_richTextEditor onsetinfo="{!c.handleChange}" qnaireId="{!v.QnaireId}" rvalue="{!v.description}" rlabel="Information"/>
+                    <!-- <lightning:inputRichText label="Information" onblur="{!c.checkTextLength}" messageWhenBadInput="Write text to print on form" aura:id="qustNameRich" placeholder="Info text..." value="{!v.description}" /> -->
+                </div>
+                <lightning:layout >
+                    <lightning:layoutItem size="6" padding="around-small">
+                        <div class="slds-form-element slds-var-m-top_small">
+                            <label class="slds-color-picker__summary-label" for="color-picker-summary-input">Background Color</label>
+                            <lightning:input type="color" variant="label-hidden" label="bgcolor" name="textColor" value="{!v.objCrteQues.background_Color__c}" onchange="{!c.handleColorChange}"/>
+                        </div>
+                    </lightning:layoutItem>                    
+                </lightning:layout>
+            </aura:if>
+            <aura:if isTrue="{!v.isEditQue==true}">
+                <div class="slds-form-element ">
+                    <c:imcc_richTextEditor onsetinfo="{!c.handleChange}" qnaireId="{!v.QnaireId}" rvalue="{!v.description}" rlabel="Information"/>
+                    <!-- <lightning:inputRichText label="Question Text" disabledCategories="" aura:id="qustNameRich2" placeholder="Compose text..." value="{!v.description}" /> -->
+                </div>
+                <lightning:layout >
+                    <lightning:layoutItem size="6">
+                        <div class="slds-form-element slds-var-m-top_small">
+                            <label class="slds-color-picker__summary-label" for="color-picker-summary-input">Background Color</label>
+                            <lightning:input type="color" variant="label-hidden" label="Background Color" name="bgcolor" value="{!v.objeditQues.background_Color__c}" onchange="{!c.handleColorChange}"/>                            
+                        </div>
+                    </lightning:layoutItem>                    
+                </lightning:layout>
+            </aura:if>
+            <br/>
+            <lightning:button label="Cancel" onclick="{!c.hideModal}" />
+            <aura:if isTrue="{!v.isEditQue==false}">
+                <lightning:button variant="brand" label="Save" onclick="{!c.saveQues}" />
+            </aura:if>
+            <aura:if isTrue="{!v.isEditQue==true}">
+                <lightning:button variant="brand" label="Save" onclick="{!c.saveEditQuesrecord}" />
+            </aura:if>
+        </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+    <!--end body-->
+</aura:component>

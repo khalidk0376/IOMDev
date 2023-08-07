@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Advance_Price__c</fullName>
+    <description>Advance Price for the product selected. Used from Price Rules.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Advance Price for the product selected. Used from Price Rules.</inlineHelpText>
+    <label>Advance Price</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

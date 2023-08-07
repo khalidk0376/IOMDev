@@ -1,0 +1,95 @@
+<aura:component controller="QuestionBranchingCtrl">
+    <!--Start Attribute Section area-->
+    <aura:attribute name="lstQuesQuetnnaire" type="Question_Questionnaire__c[]" />
+    <aura:attribute name="lstQuesOptions" type="list" default="[]" description="list of Question_Option__c"/>
+    <aura:attribute name="MainQuesQuetnnaireId" type="String" />
+    <aura:attribute name="QnaireId" type="String" />
+    <aura:attribute name="currentCoumn" type="String" default="col1"/>
+    <aura:attribute name="QuestnGroupId" type="String" />
+    <aura:attribute name="questionPrintOrder" type="Integer" />
+    <aura:attribute name="selectedOptionBranching" type="Object[]" />
+    <aura:attribute name="lstQuestinnaireDynLogic" type="Questionnaire_Dynamic_Logic__c[]" />
+    
+    <aura:attribute name="selectedOptionId" type="String" default="" />
+    <!--End Attribute Section area-->
+    {!v.body}
+    <!-- start event handlers -->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"></aura:handler>
+    <!-- start event handlers -->
+    <div>
+        <section  role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open" aria-labelledby="id-of-modalheader-h2" aria-modal="true" aria-describedby="modal-content-id-1">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick="{!c.closeModal}" />
+                    <h2 id="id-of-modalheader-h2" class="slds-text-heading_medium">Question Branching</h2>                    
+                </header>
+                <div class="slds-modal__content slds-grid slds-grow" id="modal-content-id-1">
+                    <div class="slds-grid slds-grid_vertical">
+                        <div class="slds-var-p-vertical_x-small slds-var-p-horizontal_large slds-shrink-none slds-theme_shade">
+                            <div class="slds-form-element">
+                                <lightning:select name="selectItem" value="{!v.selectedOptionId}" onchange="{!c.onChangeOption}">
+                                    <option value="">Select Option</option>
+                                    <aura:iteration items="{!v.lstQuesOptions}" var="QOption" indexVar="QuestionQuestionnaireIndex">
+                                        <option value="{!QOption.Id}">{!QOption.Name__c}</option>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+                        </div>
+                        <div class="slds-scrollable slds-grow">
+                            <table role="grid" class="slds-table slds-table_fixed-layout slds-table_bordered slds-table_resizable-cols slds-no-row-hover slds-scrollable_none">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <th scope="col" class="smallwidth"></th>
+                                        <th aria-label="Name" aria-sort="none" class="slds-is-sortable slds-is-resizable slds-text-title_caps" scope="col">
+                                            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">
+                                                <span class="slds-truncate" title="Name">Name</span>
+                                            </a>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <aura:if isTrue="{!and(v.selectedOptionId != null, v.selectedOptionId !='')}">
+                                        <aura:if isTrue="{!v.lstQuesQuetnnaire.length>0}">
+                                            <aura:iteration items="{!v.lstQuesQuetnnaire}" var="Question_Questionnaire" indexVar="QuestionQuestionnaireIndex">
+                                                <tr class="slds-hint-parent">
+                                                    <td role="gridcell" tabindex="QuestionQuestionnaireIndex" class="slds-text-align_right">
+                                                        <lightning:input type="checkbox" label="label" checked="{!Question_Questionnaire.SelectedQuestion}" onchange="{!c.addBranching}" value="{!Question_Questionnaire.Id}" variant="label-hidden" />
+                                                    </td>
+                                                    <th scope="row">
+                                                        <div class="slds-truncate">
+                                                            <lightning:formattedRichText value="{!Question_Questionnaire.Question__r.Label__c}" />
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </aura:iteration>
+                                            <aura:set attribute="else">
+                                                <tr class="slds-hint-parent">
+                                                    <td role="gridcell" tabindex="QuestionQuestionnaireIndex" class="slds-text-align_right"> No record found.
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                            </aura:set>
+                                        </aura:if>
+                                        <aura:set attribute="else">
+                                            <tr class="slds-hint-parent">
+                                                <td role="gridcell" tabindex="QuestionQuestionnaireIndex" class="slds-text-align_right"> Please select option.
+                                                </td>
+                                                <td>
+                                                </td>
+                                            </tr>
+                                        </aura:set>
+                                    </aura:if>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button label="Cancel" onclick="{!c.closeModal}" />
+                    <lightning:button variant="brand" label="Save" onclick="{!c.saveBranchingRecord}" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+</aura:component>

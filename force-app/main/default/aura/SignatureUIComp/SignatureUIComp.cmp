@@ -1,0 +1,40 @@
+<aura:component access="global" controller="UploadSignatureController">
+    <ltng:require afterScriptsLoaded="{!c.Init}" />
+    <aura:attribute name="questionId" type="String" default=""/>
+    <aura:attribute name="questionerId" type="String" default=""/>
+    <aura:attribute name="helpText" type="String" default="By signing you are agreeing to term and condition"/>
+    <aura:attribute name="questionQuestionnairesId" type="String" default=""/>
+    <aura:attribute name="spinner" type="boolean" default="false"/>
+    <aura:attribute name="formResponseEntryId" type="String"/>
+    <aura:attribute name="version" type="String"/>
+    <aura:attribute name="isNewEntry" type="Boolean" default="false"/>
+
+    <aura:if isTrue="{!v.spinner}">
+        <lightning:spinner size="medium" variant="brand"/>
+    </aura:if>
+    {!v.body}
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-modal_medium slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <lightning:buttonIcon iconName="utility:close" onclick="{!c.hideModal}" variant="bare" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" />
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Signature Pad</h2>
+            </header>
+            <div class="slds-modal__content slds-var-p-around_medium" aura:id="modal-content-id-1">
+                <canvas height="280" width="700" class="canvas"></canvas>
+            </div>
+            <footer class="slds-modal__footer">
+                <lightning:layout multipleRows="true">
+                    <lightning:layoutItem size="12" class="slds-text-align_left">
+                        <span class="slds-text-heading_medium slds-text-color_error">{!v.helpText}</span>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="12">
+                        <button class="slds-button slds-button_neutral" onclick="{!c.erase}">Clear</button>
+                        <button class="slds-button slds-button_brand" onclick="{!c.saveSignatureModal}">Save</button>
+                    </lightning:layoutItem>
+                </lightning:layout>                
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+
+</aura:component>

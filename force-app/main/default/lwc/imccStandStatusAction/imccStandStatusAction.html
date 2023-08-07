@@ -1,0 +1,25 @@
+<template>
+    <lightning-quick-action-panel header="Update stand detail status">
+        <lightning-spinner size="small" variant="brand" if:true={spinner}></lightning-spinner>
+        <lightning-record-edit-form record-id={recordId}
+                                    object-api-name='Stand_Detail__c'
+                                    onsuccess={handleSuccess}>
+            <lightning-input-field required="true" onchange={handleStatusChange} field-name="Stand_Detail_Status__c"></lightning-input-field>
+            <lightning-input-field if:true={isRejectedStepShow} required="true" onchange={handleStepChange} field-name="Rejected_Steps__c"></lightning-input-field>
+            <lightning-input-field if:true={isRejectedStepShow} required="true" onchange={handleRejectionReasonChange} field-name="Rejection_Reason__c"></lightning-input-field>
+            <lightning-input-field if:true={approvalDate} class="slds-hide" value={approvalDate} field-name="Approval_Date__c"></lightning-input-field>           
+        </lightning-record-edit-form>
+
+        <div slot="footer">
+            <lightning-layout>
+                <lightning-layout-item size="9" style="text-align:left">
+                    <span if:true={isStatusChanged}>Are you sure you want to change the status to <strong>{status}</strong>?</span>
+                </lightning-layout-item>
+                <lightning-layout-item size="3">                    
+                    <lightning-button onclick={handleSubmit} variant="brand" label="Yes"></lightning-button>
+                    <lightning-button onclick={closeModal} variant="neutral" class="slds-m-left_x-small" label="No"></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>            
+        </div>
+    </lightning-quick-action-panel>
+</template>

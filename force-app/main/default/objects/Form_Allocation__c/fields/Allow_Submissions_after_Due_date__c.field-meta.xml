@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allow_Submissions_after_Due_date__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Checkbox to define whether to Allow Submissions after Due date or not</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Whether to Allow Submissions after Due date or not</inlineHelpText>
+    <label>Allow Submissions after Due date</label>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

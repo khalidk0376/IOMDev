@@ -1,0 +1,3 @@
+<apex:page title="Question Response Reports" cache="true" showHeader="true" sidebar="false" readOnly="true">
+    <c:ReportByCommunityUser />
+</apex:page>

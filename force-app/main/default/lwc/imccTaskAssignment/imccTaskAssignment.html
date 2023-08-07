@@ -1,0 +1,357 @@
+<template>
+    <div class="required-form" style="border-bottom:0px;">
+        <h3 class="heading heading-d-large heading-m-large heading-m-medium">
+            {taskTitle} 
+            <span class="only-m slds-p-left_x-small para paragraph-d-small paragraph-m-small">
+                <strong if:true={tableData}>({totalTask} Tasks)</strong>
+                <strong if:false={tableData}>(0 Task)</strong>
+            </span>
+        </h3>
+    </div>
+    <lightning-card class="form-card">
+        <div slot="title" class="form-search">
+            <span class="only-d para paragraph-d-small paragraph-m-small">
+                <strong if:true={tableData}>{totalTask} Tasks</strong>
+                <strong if:false={tableData}>0 Task</strong>
+            </span>
+        </div>
+        <div slot="actions">            
+            <div class="action-filters">
+                <lightning-input type="search" onchange={searchForm} placeholder="Search" variant="label-hidden"
+                label="search"></lightning-input>
+                <div class="m-filter">
+                    <img onclick={openMobileMenu} src="/sfsites/c/resource/IMCC2/icons/filter.svg" class="icon-24" />
+                </div>
+                
+                <div if:true={filterField1Options} class="stand action-btn">
+                    <button onclick={openFilterOption} class="filter1 filter-btn slds-button slds-button_neutral">
+                    <span class="para paragraph-d-small paragraph-m-small">{filter1Label}</span>
+                    <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small"></lightning-icon>
+                    <div if:true={filterField1Value} class="badge-pill"></div>
+                    </button>
+                    <div onclick={onTopClick} class="button-menu">
+                    <template if:true={filterField1Options} for:each={filterField1Options} for:item="item" for:index="index">
+                        <div if:true={item.isShow} key={item.value} class="item">
+                            <div class="slds-checkbox item-checkbox">
+                                <lightning-input checked={item.isChecked} data-filter="1" data-index={index}
+                                onchange={handleFilterChange} class="para paragraph-d-small paragraph-m-small"
+                                type="checkbox" label={item.label}></lightning-input>
+                            </div>
+                        </div>
+                    </template>
+                    </div>
+                </div>
+                
+                <div if:true={filterField2Options} class="customer action-btn">
+                    <button onclick={openFilterOption} class="filter2 filter-btn slds-button slds-button_neutral">
+                    <span class="para paragraph-d-small paragraph-m-small">{filter2Label}</span>
+                    <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small"></lightning-icon>
+                    <div if:true={filterField2Value} class="badge-pill"></div>
+                    </button>
+                    <div onclick={onTopClick} class="button-menu">
+                    <template for:each={filterField2Options} for:item="item" for:index="index">
+                        <div if:true={item.value} key={item.value} class="item">
+                            <div class="slds-checkbox item-checkbox">
+                                <lightning-input data-filter="2" data-index={index} checked={item.isChecked}
+                                onchange={handleFilterChange} class="para paragraph-d-small paragraph-m-small"
+                                type="checkbox" label={item.label}></lightning-input>
+                            </div>
+                        </div>
+                    </template>
+                    </div>
+                </div>
+
+                <div if:true={filterField3Options} class="activity action-btn">
+                 <button onclick={openFilterOption} class="filter3 filter-btn slds-button slds-button_neutral">
+                    <span class="para paragraph-d-small paragraph-m-small">{filter3Label}</span>
+                    <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small"></lightning-icon>
+                    <div if:true={filterField3Value} class="badge-pill"></div>
+                 </button>
+                 <div onclick={onTopClick} class="button-menu">
+                    <template if:true={filterField3Options} for:each={filterField3Options} for:item="item"
+                       for:index="index">
+                       <div if:true={item.value} key={item.value} class="item">
+                          <div class="slds-checkbox item-checkbox">
+                             <lightning-input data-filter="3" data-index={index} checked={item.isChecked}
+                                onchange={handleFilterChange} class="para paragraph-d-small paragraph-m-small"
+                                type="checkbox" label={item.label}></lightning-input>
+                          </div>
+                       </div>
+                    </template>
+                 </div>
+              </div>                            
+              <div if:true={isFilterApplied} class="clear-filter action-btn">
+                 <button onclick={clearFilter} class="filter-btn slds-button">
+                    <span class="para paragraph-d-small paragraph-m-small">Clear filters</span>
+                 </button>
+              </div>
+           </div>
+        </div>
+        <div class="slds-scrollable_x scrollable_x">
+            <table aria-multiselectable="true"
+            class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered" role="grid">
+            <thead>
+                <tr class="slds-line-height_reset table-height ">                  
+                    <th style="min-width:224px;" aria-label="Form Name" aria-sort="none" class="" scope="col">
+                     <a id="formName" onclick={handleSorting} class="" href="javascript:void(0);" role="button">
+                        <div class="table-main">
+                           <div class="para paragraph-d-small paragraph-m-small" title="Form Name">
+                              Task Name
+                           </div>
+                           <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small">
+                           </lightning-icon>
+                        </div>
+                     </a>
+                    </th>
+                 
+                  <th style="min-width: 122px;" aria-label="Form Type" aria-sort="none" class="" scope="col">
+                        <a id="Form_Type__c" onclick={handleSorting} class="" href="javascript:void(0);" role="button">
+                            <div class="table-main">
+                                <div class="para paragraph-d-small paragraph-m-small" title="Form Name">Type</div>
+                                <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small">
+                                </lightning-icon>
+                            </div>
+                        </a>
+                  </th>
+                         
+                  <th style="min-width:130px;" aria-label="Form Category" aria-sort="none" class="" scope="col">
+                     <a id="AssignToName" onclick={handleSorting} class="" href="javascript:void(0);"
+                        role="button">
+                        <div class="table-main">
+                           <div class="para paragraph-d-small paragraph-m-small" title="Form Name">
+                              Assigned Manager</div>
+                           <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small">
+                           </lightning-icon>
+                        </div>
+                     </a>
+                  </th>
+                  <th aria-label="Form Provider" aria-sort="none" class="" scope="col">
+                     <a id="Form_Provider__c" onclick={handleSorting} class="" href="javascript:void(0);"
+                        role="button">
+                        <div class="table-main">
+                           <div class="para paragraph-d-small paragraph-m-small" title="Form Name">
+                              Provider</div>
+                           <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small">
+                           </lightning-icon>
+                        </div>
+                     </a>
+                  </th>
+                  <th aria-label="Deadline" aria-sort="none" class="" scope="col">
+                     <a id="Submission_Deadline__c" onclick={handleSorting} class="" href="javascript:void(0);"
+                        role="button">
+                        <div class="table-main">
+                           <div class="para paragraph-d-small paragraph-m-small" title="Form Name">Deadline</div>
+                           <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small">
+                           </lightning-icon>
+                        </div>
+                     </a>
+                  </th>
+                  <th style="min-width: 130px;" aria-label="Form Status" aria-sort="none" class="" scope="col">
+                     <a id="Overall_Status__c" onclick={handleSorting} class="" href="javascript:void(0);"
+                        role="button">
+                        <div class="table-main">
+                           <div class="para paragraph-d-small paragraph-m-small" title="Form Name">
+                              Status</div>
+                           <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small">
+                           </lightning-icon>
+                        </div>
+                     </a>
+                  </th>
+                  <th style="min-width: 191px;" aria-label="Form Type" aria-sort="none" class="" scope="col">
+                     <div class="table-main">
+                        <div class="para paragraph-d-small paragraph-m-small" title="Form Name">Action</div>
+                     </div>
+                  </th>
+               </tr>
+            </thead>
+ 
+            <tbody>
+                <tr if:false={tableData} aria-selected="false" class="slds-hint-parent table-height ">
+                    <td colspan="10" class="table-pad">
+                        <div class="slds-truncate para paragraph-d-small paragraph-m-small" title="No record found">
+                            <span style="color: var(--light-blue-7);">No record found!</span>
+                        </div>
+                    </td>
+                </tr>
+                <template for:each={tableData} for:item="item" for:index="ind">
+                    <!-- <template if:true={item.isShowFormData}> -->
+                        <tr key={item.Id} aria-selected="false" class={item.customCSS}>                            
+                            <td tabindex="0" scope="row">
+                                <div class="form-content slds-truncate" title="FORM NAME">
+                                    <span class="para paragraph-d-small paragraph-m-small">{item.formName}</span>
+                                </div>
+                            </td>
+                            
+                            <td class="table-pad">
+                            <div class="form-content slds-truncate" title="FORM NAME">
+                                <lightning-icon if:true={item.isPdf} icon-name="utility:pdf_ext" size="small"></lightning-icon>
+                                <lightning-icon if:true={item.isLink} icon-name="utility:linked" size="small"></lightning-icon>
+                                <lightning-icon if:true={item.isOnline} icon-name="utility:new_window" size="small"></lightning-icon>&nbsp;&nbsp;
+                                {item.Form_Type__c}
+                            </div>
+                            </td>
+                            
+                            <td class="table-pad">                                
+                                <template if:true={item.isCompleted}>{item.AssignToName}</template>
+                                <template if:false={item.isCompleted}>
+                                    <template if:true={isDisableToAssignTask}>{item.AssignToName}</template>
+                                    <template if:false={isDisableToAssignTask}>
+                                        <select disabled={isDisableToAssignTask} if:true={item.memberList} onchange={previousHandler} class="slds-select" data-index={ind}>
+                                            <template for:each={item.memberList} for:item="opt">                                        
+                                                <option if:true={opt.selected} key={opt.value} value={opt.value} selected>{opt.label}</option>
+                                                <option if:false={opt.selected} key={opt.value} value={opt.value}>{opt.label}</option>
+                                            </template>
+                                        </select>
+                                    </template>
+                                </template>
+                            </td>
+                            <td class="table-pad">
+                                <div class="slds-truncate para paragraph-d-small paragraph-m-small" title="FORM PROVIDER">
+                                {item.Form_Provider__c}
+                                </div>
+                            </td>
+                            <td class="table-pad">
+                            <div class={item.statusClassDate} title="DEADLINE" >
+                                {item.Submission_Deadline__c}                              
+                            </div>
+                            </td>
+                            <td class="table-pad">
+                            <div class="status-badge" title="FORM STATUS">                              
+                                <span class={item.statusClassDate}>{item.Overall_Status__c}</span>                              
+                            </div>
+                            </td>
+                            <td class="table-pad">
+                                <div class="slds-grid" style="align-items: center;justify-content: space-between; ">
+                                    <div title="ACTION">
+                                        <lightning-button if:false={item.isCompleted} disabled={isDisableToAssignTask} icon-name="utility:email" class="link link-d-small-medium send-reminder" label="Send Reminder"></lightning-button>                              
+                                    </div>
+                                    <div style="position: relative;">
+                                        <lightning-icon size="x-small" class="not-applicable" icon-name="utility:threedots_vertical"  alternative-text="Not Applicable" title="Not Applicable"></lightning-icon>
+                                        <!-- <div class="action-toggle-container">
+                                            Not Applicable
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    <!-- </template> -->
+                </template>
+            </tbody> 
+            </table>
+            <div if:true={enabledPagination} class="slds-m-top_x-small slds-p-around_small slds-align_absolute-center">
+                <c-imcc-pagination if:true={tableData} records={allTableData} record-size="2" onupdate={paginationHandler}></c-imcc-pagination>
+            </div>
+        </div>
+        <div>         
+        </div>
+        
+    </lightning-card>
+
+    <!--Table filter for mobie device start-->
+   <div class="mobile-menu form-mobile"
+    style="display:none;transform-style: preserve-3d;-webkit-transform:translate3d(480px, 0, 0px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(480px, 0, 0px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(480px, 0, 0px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(480px, 0, 0px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);">
+   <div class="mobile-menu-header">
+      <h1 class="heading filter-heading heading-d-small">Filters</h1>
+      <div if:true={isFilterApplied} class="clear-filter"><a class="para paragraph-d-standard"
+            href="javascript:void(0)" onclick={clearFilter}>Clear filters</a></div>
+   </div>
+
+   <div class="mobile-menu-body">
+      <div if:true={filter1Label} class="mob-filter1 filter-items">
+         <div class="filter-item">
+            <div class="filter-item-left">
+               <div class="heading heading-m-eyebrow">{filter1Label}</div>
+            </div>
+            <div class="filter-item-right">
+               <div class="badge-main">
+                  <div if:true={filterField1Value} class="badge-pill"></div>
+                  <a onclick={toggleMoboFilter} data-filter="filter1" href="javascript:void(0)"><img
+                        src="/sfsites/c/resource/IMCC2/icons/chevron-down-indigo.svg" alt="" class="icon-16" /></a>
+               </div>
+            </div>
+         </div>
+         <div if:true={filterField1Options} class="filter-dropdown">
+            <template for:each={filterField1Options} for:item="item" for:index="index">
+               <div key={item.value} class="filter-drop">
+                  <div class="dropdown-content">
+                     <span class="para paragraph-m-standard">{item.label}</span>
+                  </div>
+                  <div class="drop-check">
+                     <lightning-input checked={item.isChecked} onchange={moboFilterChange} data-index={index}
+                        data-filter="1" type="checkbox" variant="label-hidden" label="Small"></lightning-input>
+                  </div>
+               </div>
+            </template>
+         </div>
+      </div>
+      <div if:true={filter2Label} class="mob-filter2 filter-items">
+         <div class="filter-item">
+            <div class="filter-item-left">
+               <div class="heading heading-m-eyebrow">{filter2Label}</div>
+            </div>
+            <div class="filter-item-right">
+               <div class="badge-main">
+                  <div if:true={filterField2Value} class="badge-pill"></div>
+                  <a onclick={toggleMoboFilter} data-filter="filter2" href="javascript:void(0)"><img
+                        src="/sfsites/c/resource/IMCC2/icons/chevron-down-indigo.svg" alt="" class="icon-16" /></a>
+               </div>
+            </div>
+         </div>
+         <div if:true={filterField2Options} class="filter-dropdown">
+            <template for:each={filterField2Options} for:item="item" for:index="index">
+               <div key={item.value} class="filter-drop">
+                  <div class="dropdown-content">
+                     <span class="para paragraph-m-standard">{item.label}</span>
+                  </div>
+                  <div class="drop-check">
+                     <lightning-input checked={item.isChecked} onchange={moboFilterChange} data-index={index}
+                        data-filter="2" type="checkbox" variant="label-hidden" label="Small"></lightning-input>
+                  </div>
+               </div>
+            </template>
+         </div>
+      </div>
+      <div if:true={filter3Label} class="mob-filter3 filter-items">
+         <div class="filter-item">
+            <div class="filter-item-left">
+               <div class="heading heading-m-eyebrow">{filter3Label}</div>
+            </div>
+            <div class="filter-item-right">
+               <div class="badge-main">
+                  <div if:true={filterField3Value} class="badge-pill"></div>
+                  <a onclick={toggleMoboFilter} data-filter="filter3" href="javascript:void(0)"><img
+                        src="/sfsites/c/resource/IMCC2/icons/chevron-down-indigo.svg" alt="" class="icon-16" /></a>
+               </div>
+            </div>
+         </div>
+         <div if:true={filterField3Options} class="filter-dropdown">
+            <template for:each={filterField3Options} for:item="item" for:index="index">
+               <div key={item.value} class="filter-drop">
+                  <div class="dropdown-content">
+                     <span class="para paragraph-m-standard">{item.label}</span>
+                  </div>
+                  <div class="drop-check">
+                     <lightning-input checked={item.isChecked} onchange={moboFilterChange} data-index={index}
+                        data-filter="3" type="checkbox" variant="label-hidden" label="Small"></lightning-input>
+                  </div>
+               </div>
+            </template>
+         </div>
+      </div>
+   </div>
+   <div class="mobile-form-footer">
+      <div class="filter-footer">
+         <div onclick={gotoDashboard} class="link link-d-standard filter-cancel">
+            <lightning-button onclick={closeMobileMenu} class="btn-lg" variant="inverse" label="Cancel"
+               title="Looks like a link"></lightning-button>
+         </div>
+         <div class="apply-filters">
+            <lightning-button onclick={applyMobileFilter} class="btn-lg" variant="brand" label="Apply Filters"
+               title="Looks like a link"></lightning-button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal-overlay"></div>
+<!--Table filter for mobie device end-->
+</template>

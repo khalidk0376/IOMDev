@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Equipment_Required_for_Build_up__c</fullName>
+    <externalId>false</externalId>
+    <label>Equipment Required for Build up</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Crane</fullName>
+                <default>false</default>
+                <label>Crane</label>
+            </value>
+            <value>
+                <fullName>Genie Manual Lift</fullName>
+                <default>false</default>
+                <label>Genie Manual Lift</label>
+            </value>
+            <value>
+                <fullName>Compressor</fullName>
+                <default>false</default>
+                <label>Compressor</label>
+            </value>
+            <value>
+                <fullName>Forklift</fullName>
+                <default>false</default>
+                <label>Forklift</label>
+            </value>
+            <value>
+                <fullName>Scaffolding</fullName>
+                <default>false</default>
+                <label>Scaffolding</label>
+            </value>
+            <value>
+                <fullName>Power Tools</fullName>
+                <default>false</default>
+                <label>Power Tools</label>
+            </value>
+            <value>
+                <fullName>MWEP</fullName>
+                <default>false</default>
+                <label>MWEP</label>
+            </value>
+            <value>
+                <fullName>Ladders</fullName>
+                <default>false</default>
+                <label>Ladders</label>
+            </value>
+            <value>
+                <fullName>Hand Tools</fullName>
+                <default>false</default>
+                <label>Hand Tools</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

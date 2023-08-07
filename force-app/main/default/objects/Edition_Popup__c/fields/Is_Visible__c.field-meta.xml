@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Visible__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This field helps to control the pop up visibility for the community user by operations admin.</description>
+    <externalId>false</externalId>
+    <label>Is Visible</label>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Edition_All</fullName>
+    <columns>NAME</columns>
+    <columns>Edition_Status__c</columns>
+    <columns>Edition_Code__c</columns>
+    <columns>Part_of_Series__c</columns>
+    <columns>Customer_Support_Team__c</columns>
+    <columns>Start_Date__c</columns>
+    <columns>End_Date__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Edition All</label>
+</ListView>

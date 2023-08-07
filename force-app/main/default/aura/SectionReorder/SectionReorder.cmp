@@ -1,0 +1,33 @@
+<aura:component controller="AddQuestionInSectionCtr">
+    <ltng:require scripts="{!join(',', $Resource.FormBuilder+'/jquery_3.js', $Resource.FormBuilder+'/jquery_ui.js')}" afterScriptsLoaded="{!c.scriptsLoaded2}"/>
+    <aura:attribute name="lstQuestnGroup" type="Question_Group__c[]" />
+    <aura:attribute name="qstnQnaireObject" type="Question_Questionnaire__c" />
+    <aura:attribute name="selTabId" type="String" />
+    <aura:attribute name="QnaireId" type="String" />
+    <aura:attribute name="showConfirmModal" type="boolean" default="false" />
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    {!v.body}
+    
+    <div class="slds-col slds-grid_vertical">
+        <div class="slds-grid slds-no-flex panelHeader">
+            <h2>Reorder Sections</h2>
+            <a href="#"><lightning:buttonIcon iconName="utility:forward" onclick="{!c.hideModal}" variant="bare"/></a>
+        </div>
+    </div>
+    <div class="slds-col slds-scrollable_y">
+        <div class="panelBody">
+            <div class="slds-grid">
+                <div class="slds-col">
+                    <ul id="sortable">
+                        <aura:iteration items="{!v.lstQuestnGroup}" var="QuesGroup" indexVar="0">
+                            <li class="slds-box_link section ui-state-default">{!QuesGroup.Name}</li>
+                        </aura:iteration>  
+                    </ul>
+                </div>
+            </div>
+            <br/>
+            <lightning:button label="Cancel" onclick="{!c.hideModal}" />
+           <lightning:button class="slds-button_brand" label="Save" onclick="{!c.saveSortedSection}" />
+        </div>      
+    </div>    
+</aura:component>

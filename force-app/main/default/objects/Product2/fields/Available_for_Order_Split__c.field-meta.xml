@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Available_for_Order_Split__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Separate Order will be created for the product</description>
+    <externalId>false</externalId>
+    <label>Available for Order Split</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

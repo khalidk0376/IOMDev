@@ -1,0 +1,90 @@
+<aura:component controller="FieldInputCtr">
+    <!-- Start attribute -->
+    <aura:attribute name="QnaireId" type="String" />
+    
+    <aura:attribute name="uploadedDoc" type="list" default="[]"/>
+    <aura:attribute name="baseurl" type="String" default=""/>
+    <aura:attribute name="orgId" type="String" default=""/>
+    <aura:attribute name="page" type="integer" description="use for store page Number" />    
+    <aura:attribute name="total" type="integer" description="total records count store" />
+
+    <aura:attribute name="QnaireName" type="String" />
+    <aura:attribute name="QuestnQnaireId" type="String" />
+    <aura:attribute name="QuestnGroupId" type="String" />
+    <aura:attribute name="questOrderNum" type="String" default="0"/>
+    
+    <aura:attribute name="Questntype" type="String" />
+    <aura:attribute name="modalHeader" type="String" />
+    <aura:attribute name="fieldType" type="String" />
+    <aura:attribute name="dropColNumber" type="String" />
+    <aura:attribute name="isEditQue" type="Boolean" />
+    <aura:attribute name="lstQuesCategory" type="List" default="[]" />
+    <aura:attribute name="objCrteQues" type="Object" default="{ 'sobjectType': 'Question__c'}" />
+    <aura:attribute name="isShowbutton" type="Boolean" default="false" />
+    <!-- End attribute-->
+    <!-- event handlers -->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"></aura:handler>
+    <!-- event handlers -->
+    {!v.body}
+    
+    <div class="slds-col slds-grid_vertical">
+        <div class="slds-grid slds-no-flex panelHeader">
+            <h2>Question Editor: Header or Footer output</h2>
+            <a href="#"><lightning:buttonIcon iconName="utility:forward" onclick="{!c.hideModal}" variant="bare"/></a>
+        </div>
+    </div>
+    <div class="slds-col slds-scrollable_y">
+        <div class="panelBody">
+            <p>
+                <lightning:button label="Select Image" onclick="{!c.showModal2}" variant="brand"/>
+                <lightning:button iconName="utility:upload" label="Upload Image" onclick="{!c.uploadDocPage}" variant="brand"/>
+            </p><br/>
+            <lightning:inputRichText label="Design header/footer using images" onblur="{!c.checkTextLength}" messageWhenBadInput="Write your header text" aura:id="qustNameRich" placeholder="Compose text..." value="{!v.objCrteQues.Label__c}"/>
+            <div class="slds-var-m-top_small">
+                <lightning:button label="Cancel" onclick="{!c.hideModal}"/>
+                <lightning:button disabled="{!v.isShowbutton}" label="Save" variant="brand" onclick="{!c.saveQues}" />
+            </div>
+        </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+
+    <div aura:id="mms_selection" role="dialog" tabindex="-1" aria-labelledby="document-modal-heading" aria-modal="true" aria-describedby="document-modal-content" class="mms_selection slds-modal_medium slds-modal slds-fade-in-close">
+        <div class="slds-modal__container">            
+            <header class="slds-modal__header slds-modal__header_empty">                
+                <lightning:buttonIcon iconName="utility:close" onclick="{!c.hideModal2}" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" />
+            </header>
+            <div class="slds-modal__content br slds-var-p-around_medium" id="document-modal-content">                
+                <aura:iteration var="item" items="{!v.uploadedDoc}" indexVar="index">                    
+                    <input class="radiobutton slds-hide" id="{!item.Id}" type="radio" name="mmsurl" value="{!item.Id}"/>
+                    <label for="{!item.Id}">
+                        <img src="{!v.baseurl+'/servlet/servlet.ImageServer?id='+item.Id+'&amp;oid='+v.orgId}" class="img"/>
+                    </label>
+                </aura:iteration>                
+                <aura:if isTrue="{!v.uploadedDoc.length==0}">
+                    <h1 class="slds-page-header__title slds-truncate slds-align-middle">No media file found!</h1>
+                </aura:if>                
+            </div>
+            <footer class="slds-modal__footer"> 
+                <div class="slds-var-m-top_small slds-grid slds-gutters">
+                    <aura:if isTrue="{!v.uploadedDoc.length!=0}">
+                        <div class="slds-col slds-text-align_left">
+                            Shows {!(v.page*25+1)-25}-{!v.page*25>v.total?v.total:v.page*25} of {!v.total} Items 
+                            <lightning:buttonIcon iconName="utility:chevronleft" disabled="{!v.page>1?false:true}" variant="brand" onclick="{!c.paginate}"/>
+                            <lightning:buttonIcon iconName="utility:chevronright" disabled="{!v.uploadedDoc.length==25?false:true}" variant="brand" onclick="{!c.paginate}"/>
+                            &nbsp;
+                            <lightning:buttonIcon iconName="utility:refresh" variant="brand" onclick="{!c.reloadDoc}"/>
+                        </div>
+                    </aura:if>
+                    
+                    <div class="slds-col slds-text-align_right">
+                        <lightning:button label="Cancel" onclick="{!c.hideModal2}"/>
+                        <lightning:button label="Select" onclick="{!c.selectedURL}" disabled="{!v.uploadedDoc.length==0?true:false}" variant="brand"/>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <div aura:id="mms_selection_backdrop" class="slds-backdrop slds-backdrop_close"></div>
+
+    
+</aura:component>

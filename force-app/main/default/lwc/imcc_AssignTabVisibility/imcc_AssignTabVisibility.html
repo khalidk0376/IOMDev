@@ -1,0 +1,63 @@
+<template>
+    <lightning-card title="">
+        <template if:true={fieldName}>
+            <template if:true={isBoothProductTypeAvailable}>
+                <div class="slds-theme_default slds-p-left_medium slds-p-right_medium">
+                    <template if:true={showPath}>
+                        <lightning-progress-indicator current-step={currentStep} type="path" variant="base">
+                            <lightning-progress-step label="Step 1" value="1" onclick={handleOnStepClick}></lightning-progress-step>
+                            <lightning-progress-step label="Step 2" value="2" onclick={handleOnStepClick}></lightning-progress-step>
+                        </lightning-progress-indicator>
+                    </template>
+                </div>
+            </template>
+        </template>
+        <template if:false={isStepTwo}>
+            <div class="slds-p-around_small">
+                <lightning-dual-listbox name="userTypes" label="Select User Type" source-label="Available"
+                    selected-label="Selected"
+                    field-level-help="Select user type from available list in order to give permission to this tab"
+                    options={lstOptions} value={values} onchange={handleChangeUserType}></lightning-dual-listbox>
+                <br />
+                <template if:false={isBoothProductTypeAvailable}>
+                    <strong style="color: red;">{label.NoteOnUserTypeOnlySelectionOnAssignVisibility}</strong>
+                </template>
+                <template if:true={isBoothProductTypeAvailable}>
+                    <strong style="color: red;">{label.NoteOnUserTypeWithProdTypeSelectionOnAssignVisibility}</strong>
+                </template>
+            </div>
+            <footer class="slds-modal__footer slds-align_absolute-center">
+                <template if:true={isBoothProductTypeAvailable}>
+                    <lightning-button variant="Brand" label="Save Selected and Next" class="slds-m-right_medium" onclick={SaveSelectedNext} disabled={isUserBtnDisable}>
+                    </lightning-button>
+                    <lightning-button variant="Brand" label="Select All and Next" onclick={SelectAllandNext} disabled={isUserBtnDisable}>
+                    </lightning-button>
+                </template>
+                <template if:false={isBoothProductTypeAvailable}>
+                    <lightning-button variant="Brand" label="Save Selected" class="slds-m-right_medium" onclick={SaveSelectedNext} disabled={isUserBtnDisable}>
+                    </lightning-button>
+                    <lightning-button variant="Brand" label="Select All and Save" onclick={SelectAllandNext} disabled={isUserBtnDisable}>
+                    </lightning-button>
+                </template>
+            </footer>
+        </template>
+        <template if:true={isStepTwo}>
+            <div class="slds-p-around_small">
+                <lightning-dual-listbox name="ProductTypes" label="Select Product Type" source-label="Available"
+                    selected-label="Selected"
+                    field-level-help="Select product type from available list in order to give permission to this tab"
+                    options={lstOptionsProd} value={valuesProd} onchange={handleChangeProdType}>
+                </lightning-dual-listbox>
+
+                <strong style="color: red;">{label.NoteOnProductTypeSelectionOnAssignVisibility}</strong>
+            </div>
+            <footer class="slds-modal__footer slds-align_absolute-center">
+                <lightning-button label="Save Selected" variant="Brand" class="slds-m-right_medium" onclick={SaveSelectedProductType}  disabled={isProductBtnDisable}>
+                </lightning-button>
+                <lightning-button label="Select All and Save" variant="Brand" onclick={SelectAllandSaveProductType}  disabled={isProductBtnDisable}>
+                </lightning-button>
+            </footer>
+        </template>
+        
+    </lightning-card>
+</template>

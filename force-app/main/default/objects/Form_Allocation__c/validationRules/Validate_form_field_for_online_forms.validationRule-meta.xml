@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_form_field_for_online_forms</fullName>
+    <active>true</active>
+    <description>To validate whether the form field is filled when form type is online form</description>
+    <errorConditionFormula>ISPICKVAL( Form_Type__c , &apos;Online&apos;) &amp;&amp; (ISBLANK(Form__c))</errorConditionFormula>
+    <errorDisplayField>Form__c</errorDisplayField>
+    <errorMessage>Please select the Form when the form type is Online form</errorMessage>
+</ValidationRule>

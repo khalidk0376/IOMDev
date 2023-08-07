@@ -1,0 +1,176 @@
+<!--
+    This component use on community portal page stand contractor page
+    Feature includes for stand design and stand contractor
+-->
+<template>
+    <lightning-layout multiple-rows="true" class="stand-contractor">
+        <lightning-layout-item size="12">
+            <div class="left-sidebar slds-m-bottom_small">
+                <div class="event-summary-box">
+                <div class="event-progress">
+                    <div class="your-progress">
+                        <span class="heading heading-d-small heading-m-small">Your progress</span>
+                    </div>
+                    <div class="event-progress-count">
+                        <span class="heading event-count-number">{totalProgressValue}</span>
+                        <span class="link link-d-small-medium percent">%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <lightning-progress-bar value={totalProgressValue} size="medium" variant="circular">
+                        </lightning-progress-bar>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="12">
+            <c-imcc-page-header></c-imcc-page-header>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="12">
+            <lightning-card title="BOOTH CONTRACTOR DATA">
+                <div class="slds-p-left_medium">
+                    <template if:true={DueDate}>
+                        Contractor Nomination Due Date:
+                        <lightning-formatted-date-time value={DueDate.Contractor_Nomination_Due_Date__c} year="numeric"
+                            month="numeric" day="numeric" class="slds-p-left_small">
+                        </lightning-formatted-date-time><br />
+                        Stand Design Submission Due Date:
+                        <lightning-formatted-date-time value={DueDate.Stand_Design_Completion_Due_Date__c}
+                            year="numeric" month="numeric" day="numeric" class="slds-p-left_small">
+                        </lightning-formatted-date-time>
+                    </template>
+                </div>
+                <div class="slds-p-around_medium">
+                    <div class="slds-scrollable_x">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th>BOOTH NO</th>
+                                    <th>CONTRACTOR COMPANY NAME</th>
+                                    <th>CONTRACTOR CONTACT NAME</th>
+                                    <th>STATUS</th>
+                                    <template if:true={showRejectReasonHeader}>
+                                        <th>REJECTION REASON</th>
+                                    </template>
+                                    <th>LAST SUBMITTED<br /> DATE</th>
+                                    <th>VIEW PROGRESS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <template if:true={data} for:each={data} for:item="booth" for:index="index">
+                                    <tr key={booth.boothId}>
+                                        <td>{booth.boothNumber}</td>
+                                        <template if:true={booth.isContextVisible}>
+                                            <td>{booth.accountName}</td>
+                                            <td>{booth.contactName}</td>
+                                            <td>{booth.contractor.Contractor_Status__c}</td>
+                                            <template if:true={showRejectReasonHeader}>
+                                                <template if:true={booth.showRejectReason}>
+                                                    <td>
+                                                        <lightning-button-icon variant="bare"
+                                                            value={booth.rejectionReason}
+                                                            icon-class="slds-button_icon-error"
+                                                            onclick={openReasonModal} icon-name="utility:warning"
+                                                            alternative-text="View" title="View" size="large">
+                                                        </lightning-button-icon>
+                                                    </td>
+                                                </template>
+                                                <template if:false={booth.showRejectReason}>
+                                                    <td></td>
+                                                </template>
+                                            </template>
+                                            <td>
+                                                <lightning-formatted-date-time value={booth.submissionDate}
+                                                    year="numeric" month="numeric" day="numeric">
+                                                </lightning-formatted-date-time>
+                                            </td>
+                                            <td>
+                                                <lightning-button value={booth.contractor.Id} variant="base"
+                                                    label="View" onclick={viewStandDesign} class="slds-m-left_x-small"
+                                                    disabled={booth.isButtonDisable}></lightning-button>
+                                            </td>
+                                        </template>
+                                        <template if:false={booth.isContextVisible}>
+                                            <td>
+                                                <lightning-button data-booth-id={booth.boothId}
+                                                    data-booth-name={booth.boothNumber} onclick={openSearchModal}
+                                                    icon-name="utility:add" disabled={booth.isButtonDisable}
+                                                    label="Add Contractor" variant="brand" class="slds-m-right_x-small">
+                                                </lightning-button>
+                                                or
+                                                <lightning-button data-booth-id={booth.boothId}
+                                                    data-booth-name={booth.boothNumber} variant="base"
+                                                    label="Build my own stand" onclick={handleClick}
+                                                    class="slds-m-left_x-small" disabled={booth.isButtonDisable}>
+                                                </lightning-button>
+                                            </td>
+                                            <td></td>
+                                            <td>{booth.contractor.Contractor_Status__c}</td>
+                                            <template if:true={showRejectReasonHeader}>
+                                                <template if:true={booth.showRejectReason}>
+                                                    <td>
+                                                        <lightning-button-icon variant="bare"
+                                                            value={booth.rejectionReason}
+                                                            icon-class="slds-button_icon-error"
+                                                            onclick={openReasonModal} icon-name="utility:warning"
+                                                            alternative-text="View" title="View" size="large">
+                                                        </lightning-button-icon>
+                                                    </td>
+                                                </template>
+                                                <template if:false={booth.showRejectReason}>
+                                                    <td></td>
+                                                </template>
+                                            </template>
+                                            <td></td>
+                                            <td></td>
+                                        </template>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </lightning-card>
+        </lightning-layout-item>
+
+    </lightning-layout>
+    <c-imcc-stand-contractors onclosesearchmodal={handleClose} selected-booth-name={selectedBoothName}
+        selected-booth-id={selectedBoothId} selected-booth-data={selectedBoothData} edition-code={editionCode} by-ops-user="false"></c-imcc-stand-contractors>
+
+    <!-- Modal for Rejection Reason starts here-->
+    <template if:true={isReasonModal}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="rejectionReasonHeader" aria-modal="true"
+            aria-describedby="rejectionReasonContent" class="slds-modal slds-fade-in-open modalpopup">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                            size="small">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="rejectionReasonHeader" class="slds-text-heading_medium slds-hyphenate">
+                        Rejection
+                        Reason</h2>
+                </header>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-modal__content slds-p-around_medium" id="rejectionReasonContent">
+                    <p>
+                        {contactRejectionReason}
+                    </p>
+                </div>
+                <footer class="slds-modal__footer">
+
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!-- Modal for Rejection Reason ends here-->
+</template>

@@ -1,0 +1,12 @@
+<template>
+    <template if:true={ordFields}>
+        <c-common-table filter1-label="Editions" filter-field1="Edition__r.Name" condition={pendingOrderCond}
+            fields={ordFields}
+            fields-label={ordFieldsLabels} is-multi-language="true" custom-label="-1,0,1,3,5,8"
+            object-name="Order" modal-icon-name1="View Record Details" object-label="Order" is-support-new-record="false" onopenactionmodal={handleActionModal} is-show-action="false" show-action-button="true" is-view-file="false">
+            <div slot="actionRecordModal">
+               <c-pending-order-modal onrefreshtable={handleRefreshPendingOrder} is-open-action-modal={openActionModal} is-read-only={readonly} record-id={recordId} object-name="Order"></c-pending-order-modal>
+            </div>
+        </c-common-table>
+    </template>
+</template>

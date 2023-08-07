@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Barter_Opportunity__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If Checkbox is checked then opportunity is a barter deal.</description>
+    <externalId>false</externalId>
+    <label>Is Barter Opportunity</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

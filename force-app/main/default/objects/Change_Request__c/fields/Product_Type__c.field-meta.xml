@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Type__c</fullName>
+    <description>Amendment Type. Financial/ Non-Financial</description>
+    <externalId>false</externalId>
+    <label>Request Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Type_of_Change__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Financial</fullName>
+                <default>false</default>
+                <label>Financial</label>
+            </value>
+            <value>
+                <fullName>Non-Financial</fullName>
+                <default>false</default>
+                <label>Non-Financial</label>
+            </value>
+            <value>
+                <fullName>Booth</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Booth</label>
+            </value>
+            <value>
+                <fullName>Digital</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Digital</label>
+            </value>
+            <value>
+                <fullName>Financial Change</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Financial Change</label>
+            </value>
+            <value>
+                <fullName>Non Product</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Non Product</label>
+            </value>
+            <value>
+                <fullName>Non-Financial Change</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Non-Financial Change</label>
+            </value>
+            <value>
+                <fullName>Opportunity Detail</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Opportunity Detail</label>
+            </value>
+            <value>
+                <fullName>Publishing</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Publishing</label>
+            </value>
+            <value>
+                <fullName>Sponsorship</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Sponsorship</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Cancellation</controllingFieldValue>
+            <valueName>Financial</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PO number change</controllingFieldValue>
+            <controllingFieldValue>Update Bill To Contact</controllingFieldValue>
+            <controllingFieldValue>Account Name Change</controllingFieldValue>
+            <controllingFieldValue>Shipping Address Change</controllingFieldValue>
+            <controllingFieldValue>Bill To Account Change</controllingFieldValue>
+            <controllingFieldValue>Billing Address Change</controllingFieldValue>
+            <controllingFieldValue>Ship To Account Change</controllingFieldValue>
+            <controllingFieldValue>VAT Registration Number Change</controllingFieldValue>
+            <controllingFieldValue>Bill to Contact Details Change</controllingFieldValue>
+            <valueName>Non-Financial</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

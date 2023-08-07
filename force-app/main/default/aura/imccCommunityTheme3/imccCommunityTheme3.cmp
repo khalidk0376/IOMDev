@@ -1,0 +1,46 @@
+<!--
+  @description       : 
+  @author            : Girikon[Mukesh Gupta]
+  @group             : 
+  @last modified on  : 24-Nov-2021
+  @last modified by  : Mukesh Gupta
+  Modifications Log 
+  Ver   Date          Author         Modification
+  1.0   24-Nov-2021   Mukesh Gupta   Initial Version
+-->
+<aura:component implements="forceCommunity:themeLayout" access="global" description="IMCC custom theme for dashboard">
+    <aura:attribute name="header" type="Aura.Component[]" required="false"/>
+    <aura:attribute name="body" type="Aura.Component[]" required="false"/>
+    <aura:attribute name="footer" type="Aura.Component[]" required="false"/>
+
+    <div class="imcc-container">
+        <!-- <div class="container-standard eventaccount" style="height: 0px;">
+            <div class="notifications">
+                <forceCommunity:notifications/>
+            </div>
+        </div> -->
+        <div class="header-container">
+            {!v.header}           
+        </div>
+        <div class="body-container">
+            <div class="container-standard body-content">
+                {!v.body}
+            </div>
+            <!-- <div class="imcc-slider">
+                <div class="container-standard">
+                    <c:imccSlider/>
+                </div>
+            </div> -->
+        </div>        
+        <!-- <div class="body-container">
+            <div class="container-standard">
+                <c:imccDashboardPromo/>
+            </div>
+        </div>         -->    
+        <div class="footer-container">
+            <div class="container-standard footer-content">
+                {!v.footer}
+            </div>
+        </div>
+    </div>
+</aura:component>

@@ -1,0 +1,94 @@
+<template>
+    <lightning-spinner if:true={spinner} size="small" variant="brand"></lightning-spinner>
+    <h2 class="tab-heading slds-p-horizontal_small">Step 4: Stand Design Submission</h2>
+    <div class="manuals slds-m-around_small">
+        <div class="tab-sub-heading">
+            <span>Submission Requirment</span>
+        </div>
+        <div class="slds-box">
+            <div class="slds-m-bottom_small">
+                <lightning-formatted-rich-text value={infoLabel}></lightning-formatted-rich-text>
+            </div>
+
+            <!--
+                <lightning-textarea if:true={isShowQ1} onchange={handleChange} disabled={isInReview} value={standDetail.Uploaded_Document_Description__c} label="Customized Text" class="customize-text" placeholder="Customized Text" required></lightning-textarea>
+            -->
+            <div class="slds-scrollable_x scrollable_x">
+                <table class="upload-doc slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                        <tr>
+                            <th>Document Type</th>
+                            <th>Choose file</th>
+                            <th if:true={isFileFound} style="width: 52%;">Uploaded Files</th>
+                        </tr>
+                    </thead>
+                    <tbody if:true={fileTypes}>
+                        <template for:each={fileTypes} for:item="item" for:index="index">
+                            <tr key={item.id}>
+                                <td>
+                                    {item.label}
+                                </td>
+                                <td>          
+                                    <lightning-file-upload disabled={isInReview} data-type={item.value} onclick={chooseFile} ondrop={chooseFile} class="slds-show" 
+                                    label="Choose file" name={item.id}                        
+                                    accept={acceptedFormats} 
+                                    record-id={standDetail.Id}                         
+                                    onuploadfinished={handleUploadFinished}
+                                    style="cursor: pointer;"></lightning-file-upload>                            
+                                </td>
+                                <td if:true={isFileFound}>
+                                    <div class="child-files">
+                                        <template for:each={item.child} for:item="file" for:index="ind">
+                                            <div class="file" key={file.ContentDocumentId}>
+                                                <div>
+                                                    <lightning-icon if:false={isInReview} data-doc-id={file.ContentDocumentId} onclick={handleDelete} icon-name="utility:delete" size="xx-small" alternative-text="Remove"></lightning-icon>
+                                                    <lightning-icon data-type={file.ContentDocument.FileType} data-doc-id={file.ContentDocument.LatestPublishedVersionId} onclick={handleDocPreview} icon-name="utility:preview" size="xx-small" class="slds-m-left_small" alternative-text="Preview"></lightning-icon>
+                                                </div>
+                                                <div class="slds-truncate">{file.ContentDocument.Title}.pdf</div>
+                                                <div>{file.SystemModstamp}</div>                                            
+                                            </div>
+                                        </template>
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <section if:true={selectedDocId} role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open" aria-labelledby="modal-heading-01" aria-modal="true">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Delete Confirmation</h1>
+                <button onclick={noDelete} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                    <lightning-icon icon-name="utility:close" size="small"></lightning-icon>
+                </button>
+            </div>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <p class="para paragraph-d-standard">Do you really want to delete document?</p>                
+            </div>
+            <div class="slds-modal__footer">
+                <lightning-button onclick={yesDelete} label="Yes Delete" variant="brand"></lightning-button>
+                <lightning-button onclick={noDelete} label="No" class="slds-m-left_small"></lightning-button>
+            </div>
+        </div>
+    </section>
+    <div if:true={selectedDocId} class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+
+    <template if:true={showPdf}>        
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-slide-up-saving slds-modal_large">
+            <div class="slds-modal__container">
+                <div class="slds-modal__content slds-p-around_medium" style="overflow:hidden;padding: 0px;border-top-left-radius:10px;border-top-right-radius:10px;" id="modal-content-id-2">
+                    <iframe src={showPdf} style="width:100%; border:0px;min-height:510px;padding-bottom:50px;"></iframe>
+                </div>
+
+                <footer style="padding: 10px;" class="slds-modal__footer">                    
+                    <lightning-button label="Close" icon-name="utility:close" title="Close" class="slds-m-left_small" onclick={closeModal}></lightning-button>                    
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>    
+    </template>
+</template>

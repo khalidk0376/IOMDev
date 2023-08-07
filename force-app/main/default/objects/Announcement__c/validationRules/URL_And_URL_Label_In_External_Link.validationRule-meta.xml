@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>URL_And_URL_Label_In_External_Link</fullName>
+    <active>true</active>
+    <description>External Link and Internal/External Link Label are mandatory when the Link Type is External</description>
+    <errorConditionFormula>AND( ISPICKVAL(Link_Type__c, &apos;External&apos;), OR(ISBLANK(URL__c),ISBLANK(URL_Label__c)))</errorConditionFormula>
+    <errorMessage>External Link and Internal/External Link Label are mandatory when the Link Type is External</errorMessage>
+</ValidationRule>

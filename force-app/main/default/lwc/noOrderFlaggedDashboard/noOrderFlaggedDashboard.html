@@ -1,0 +1,19 @@
+<!--
+Created By	 : Girikon(Sachin)(IML2R-742)
+Created On	 : Feb 20, 2020
+@description : That is populating all the opportunities if No order checkbox true.
+
+Modification log --
+Modified By	:  
+-->
+<template>
+        <template if:true={oppFields}>
+        <c-common-table filter1-label="Editions" filter-field1="Default_Edition__r.Name" condition={noorderflagged} 
+            fields={oppFields}
+            object-name="Opportunity" object-label="Opportunity"
+            fields-label={oppFieldsLabels}
+            is-show-action="false" modal-icon-name1="View Details" show-action-button="false" is-view-file="false">
+            
+        </c-common-table>
+        </template>
+    </template>

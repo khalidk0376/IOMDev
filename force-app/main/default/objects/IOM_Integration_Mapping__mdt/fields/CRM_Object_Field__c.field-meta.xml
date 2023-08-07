@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CRM_Object_Field__c</fullName>
+    <description>CRM Object field API name</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Add field API Name like
+For account name from opportunity add Account.Name
+&amp; for Edition Name from add Edition__r.Name</inlineHelpText>
+    <label>CRM Object Field</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

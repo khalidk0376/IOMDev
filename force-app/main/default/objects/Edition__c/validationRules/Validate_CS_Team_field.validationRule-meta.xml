@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_CS_Team_field</fullName>
+    <active>true</active>
+    <description>CS team field should not be blank if live agent online field is true</description>
+    <errorConditionFormula>IF( Live_Agent_Online__c = true &amp;&amp; (Customer_Support_Team__c = &apos;&apos; || ( Customer_Support_Team__r.AgentDevName__c = &apos;&apos; ||  Customer_Support_Team__r.baseLiveAgentContentURL__c = &apos;&apos; ||  Customer_Support_Team__r.baseLiveAgentURL__c = &apos;&apos; ||  Customer_Support_Team__r.Button_ID__c = &apos;&apos; ||  Customer_Support_Team__r.Chat_Deployment__c = &apos;&apos; || Customer_Support_Team__r.Deployment_Id__c = &apos;&apos; || TEXT(Customer_Support_Team__r.SupportTeam__c) = &apos;&apos;)) , true, false)</errorConditionFormula>
+    <errorDisplayField>Customer_Support_Team__c</errorDisplayField>
+    <errorMessage>Customer Support Team and its Live agent setup fields should not be blank if Live Agent Online is true</errorMessage>
+</ValidationRule>

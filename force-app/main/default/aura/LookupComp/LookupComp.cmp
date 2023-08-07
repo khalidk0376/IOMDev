@@ -1,0 +1,60 @@
+<aura:component controller="LookupCtrl">
+    <aura:attribute Name="selrecord" type="object" />
+    <aura:attribute Name="record_result" type="object[]" />
+    <aura:attribute name="sobjectName" type="String" default="" />
+    <aura:attribute name="field_API_Name" type="String" default="" />
+    <aura:attribute name="field_ID" type="String" default="" />
+    <aura:attribute name="last_SearchText" type="String" default="" />
+    <aura:attribute name="last_ServerResult" type="object[]" />
+    <aura:attribute name="isRequired" type="Boolean" default="false"/>
+    <aura:attribute name="disabled" type="Boolean" default="false"/>
+    
+    <aura:attribute name="response" type="String" default=""/>
+
+    <aura:attribute name="questionId" type="String" default=""/>
+    <aura:handler event="c:validateLookupFieldEvt" action="{!c.handleSubmitButton}" />
+
+    <c:imcc_lwcUtility aura:id="imcc_lwcUtility" /> 
+    <aura:attribute name="compName" type="String" default="LookupComp" />
+
+    <div class="slds-form-element__control">
+        <div class="slds-combobox_container slds-has-inline-listbox">
+            <div class="combobox slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open" aria-expanded="true" aria-haspopup="listbox" role="combobox">
+                <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right">
+                    <aura:if isTrue="{!empty(v.selrecord)||v.selrecord=='null'}">
+                        <lightning:input disabled="{!v.disabled}" aura:id="inputFields" type="search" class="slds-combobox__input" placeholder="Search ...." onchange="{!c.recordCall}" variant="label-hidden" label="Search.." required="{!v.isRequired}"/>
+                        <aura:set attribute="else">                            
+                            <span class="slds-pill slds-pill_link slds-container_fluid"> 
+                                <a href="javascript:void(0);" class="slds-pill__action slds-var-p-around_x-small" title="{!v.response}"> 
+                                    <span class="slds-pill__label slds-var-p-left_x-small">{!v.response}</span>
+                                </a>
+                                <aura:if isTrue="{!!v.disabled}">
+                                    <button onclick="{!c.clearSelected}" class="btn-right slds-button slds-button_icon slds-pill__remove" title="Remove">
+                                        <lightning:icon iconName="utility:clear" size="medium" alternativeText="remove" />
+                                    </button>
+                                </aura:if>
+                            </span>
+                        </aura:set>
+                    </aura:if>
+                </div>
+                <aura:if isTrue="{! greaterthanorequal(v.record_result.length,1) }">
+                    <div id="listbox-unique-id" role="listbox">
+                        <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid" role="presentation">
+                            <aura:iteration items="{!v.record_result}" var="item" indexVar="index">
+                                <li role="presentation" class="slds-listbox__item" data-selectedIndex="{#index}" onclick="{!c.Selectedrecord}">
+                                    <span id="{#'listbox-option-unique-id-'+index+1}" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                        <span class="slds-media__body singleRow">
+                                            <span class="optionTitle slds-listbox__option-text slds-listbox__option-text_entity">{!item.text}
+                                            </span>
+                                        </span>
+                                    </span>
+                                </li>
+                            </aura:iteration>
+                        </ul>
+                    </div>
+                </aura:if>
+            </div>
+        </div>
+    </div>
+        
+</aura:component>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Country_should_be_required_On_converting__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Profile-based is converting a Lead, then Country should be required.</description>
+    <externalId>false</externalId>
+    <label>Country should be required On converting</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

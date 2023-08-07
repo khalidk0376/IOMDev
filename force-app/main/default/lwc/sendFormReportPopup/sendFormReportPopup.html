@@ -1,0 +1,69 @@
+<template>
+    <!--update page modal start-->    
+    <template if:true={isOpenReportModal}>
+        <div class="modal-container">
+            <section role="dialog" id="text-plain-popup4" tabindex="-1" aria-labelledby="modal-heading-04" 
+                aria-modal="true" aria-describedby="modal-content-id-4" class="slds-modal slds-modal_medium slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h3 id="modal-heading-04" class="slds-text-heading_medium slds-hyphenate">
+                            <strong>Send Form Report</strong>
+                        </h3>
+                        <button onclick={hideModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                            <lightning-icon icon-name="utility:close" size="small" variant="bare"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </header>
+                    <div class="slds-modal__content slds-var-p-around_small" id="modal-content-id-4">     
+                        <lightning-spinner if:true={spinner} size="small" variant="brand"></lightning-spinner>               
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_12-of-12">
+                                <div class="slds-section slds-is-open">
+                                    <h3 class="slds-section__title slds-theme_shade">
+                                        <span class="slds-truncate slds-p-horizontal_small" title="Email Subject">Email Subject</span>
+                                    </h3>
+                                    <div class="slds-p-horizontal_small">
+                                        <div class="slds-grid">
+                                            <div class="slds-col slds-size_12-of-12">
+                                                <lightning-textarea name="Subject" onchange={changeSubInput} value={emailSub}></lightning-textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-section slds-is-open">
+                                    <h3 class="slds-section__title slds-theme_shade">
+                                        <span class="slds-truncate slds-p-horizontal_small" title="Email Body">Email Body</span>
+                                    </h3>
+                                    <div class="slds-p-horizontal_small">
+                                        <div class="slds-grid">
+                                            <div class="slds-col slds-size_12-of-12">
+                                                <lightning-input-rich-text onchange={changeBodyInput} value={emailBody}></lightning-input-rich-text>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-section slds-is-open">
+                                    <h3 class="slds-section__title slds-theme_shade">
+                                        <span class="slds-truncate slds-p-horizontal_small" title="Custom logic">Email Addresses</span>
+                                    </h3>
+                                    <div class="slds-p-horizontal_small">
+                                        <div class="slds-grid">
+                                            <div class="slds-col slds-size_12-of-12">
+                                                <lightning-textarea name="Email" onchange={changeInput} placeholder="Input Multiple Email Ids here separated by comma or semicolon"></lightning-textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>                        
+                    </div>
+                    <footer class="slds-modal__footer">                        
+                        <lightning-button label="Close" onclick={hideModal}></lightning-button>&nbsp; &nbsp; 
+                        <lightning-button variant="brand" label="Send Report" onclick={uploadFirst} disabled={disableBtn}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>    
+</template>

@@ -1,0 +1,17 @@
+.THIS .header{background-color: var(--indigo-9);color: #f5f7f9;padding: 15.3px 0px;}
+.THIS .body-content {
+    padding-bottom: var(--space-10);
+}
+.THIS .dashboard-h{
+    padding-bottom: var(--space-5);
+}
+.THIS .left-box{
+    display: flex;
+    justify-content: start;
+    flex-direction: row;
+    align-items: center;
+}
+.THIS .left-box .customer-center{
+    margin-left: var(--space-6);
+    margin-top: 5px;
+}

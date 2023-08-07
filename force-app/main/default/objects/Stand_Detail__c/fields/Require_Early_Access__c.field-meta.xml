@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Require_Early_Access__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Check if contactor requires early access of satnd to do stand design work at venue.</description>
+    <externalId>false</externalId>
+    <label>Require Early Access?</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

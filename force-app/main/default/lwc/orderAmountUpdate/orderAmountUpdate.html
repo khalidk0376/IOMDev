@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Update Billing Detail">
+        <template if:true={spinner}>
+            <lightning-spinner alternative-text="Loading" variant="brand" size="medium"></lightning-spinner>
+        </template>
+        <p class="slds-p-horizontal_small">
+            <lightning-input type="number" label="Unit Price" value={UnitPrice} onchange={handleUnitPriceChange} class="slds-m-bottom_x-small" required></lightning-input>
+
+            <lightning-input type="date" label="Start Date" value={StartDate} onchange={handleStartDateChange} class="slds-m-bottom_x-small" required></lightning-input>
+
+            <lightning-input type="date" label="End Date" value={EndDate} onchange={handleEndDateChange} class="slds-m-bottom_x-small" required></lightning-input>
+
+            <lightning-button label="Update" variant="brand" onclick={updatedata}></lightning-button>
+        </p>
+    </lightning-card>
+</template>

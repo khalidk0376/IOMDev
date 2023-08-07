@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Network__c</fullName>
+    <description>Shows Account belongs to which business unit of Informa.</description>
+    <externalId>false</externalId>
+    <label>Business Unit</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CANADA</fullName>
+                <default>false</default>
+                <label>CANADA</label>
+            </value>
+            <value>
+                <fullName>DUBAI</fullName>
+                <default>false</default>
+                <label>DUBAI</label>
+            </value>
+            <value>
+                <fullName>GHNN</fullName>
+                <default>false</default>
+                <label>GHNN</label>
+            </value>
+            <value>
+                <fullName>ICRE</fullName>
+                <default>false</default>
+                <label>ICRE</label>
+            </value>
+            <value>
+                <fullName>UK</fullName>
+                <default>false</default>
+                <label>UK</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

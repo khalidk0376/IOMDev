@@ -1,0 +1,34 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader,force:hasSObjectName" access="global" >
+	<aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="recordId" type="String" />
+	<aura:handler name="destroy" value="{!this}" action="{!c.handleDestroy}"/>
+    <aura:if isTrue="{!v.sObjectName=='Event_Tabs__c'}">
+        <c:imcc_AssignTabVisibility recordId="{!v.recordId}" fieldName="Event_Tab__c" objectName="{!v.sObjectName}" boothProductTypeFieldName="Booth_Product_Types__c" onclose="{!c.modalClose}"></c:imcc_AssignTabVisibility>
+    </aura:if>
+    <aura:if isTrue="{!v.sObjectName=='Announcement__c'}">
+        <c:imcc_AssignTabVisibility recordId="{!v.recordId}" fieldName="Announcement__c" objectName="{!v.sObjectName}" boothProductTypeFieldName="Booth_Product_Types__c" onclose="{!c.modalClose}"></c:imcc_AssignTabVisibility>
+    </aura:if>
+    <aura:if isTrue="{!v.sObjectName=='Edition_Popup__c'}">
+        <c:imcc_AssignTabVisibility recordId="{!v.recordId}" fieldName="Edition_Popup__c" objectName="{!v.sObjectName}" boothProductTypeFieldName="Booth_Product_Type__c" onclose="{!c.modalClose}"></c:imcc_AssignTabVisibility>
+    </aura:if>
+    <aura:if isTrue="{!v.sObjectName=='Form_Allocation__c'}">
+        <c:imcc_AssignTabVisibility recordId="{!v.recordId}" fieldName="Form_Allocation__c" objectName="{!v.sObjectName}" boothProductTypeFieldName="Booth_Product_Types__c" onclose="{!c.modalClose}"></c:imcc_AssignTabVisibility>
+    </aura:if>
+    <aura:if isTrue="{!v.sObjectName=='Tab_Context__c'}">
+        <c:imcc_AssignTabVisibility recordId="{!v.recordId}" objectName="{!v.sObjectName}" boothProductTypeFieldName="Booth_Product_Type__c" onclose="{!c.modalClose}"></c:imcc_AssignTabVisibility>
+    </aura:if>
+    <aura:if isTrue="{!v.sObjectName=='Contact_Edition_Mapping__c'}">
+        <c:imcc_SendWelcomeEmail recordId="{!v.recordId}" onclose="{!c.modalClose}"></c:imcc_SendWelcomeEmail>
+    </aura:if>
+    <aura:html tag="style">
+        .slds-modal__content{
+        	height:fit-content!important;
+        	max-height:fit-content!important;
+        	padding:0px!important;
+        	
+        }
+        .cuf-content{
+        	padding:0px!important;
+        }
+    </aura:html>
+</aura:component>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_formUrl_field_for_Link_forms</fullName>
+    <active>true</active>
+    <description>Validate form Url field when form type is Link</description>
+    <errorConditionFormula>ISPICKVAL( Form_Type__c , &apos;Link&apos;) &amp;&amp; (ISBLANK( Form_Url__c ))</errorConditionFormula>
+    <errorDisplayField>Form_Url__c</errorDisplayField>
+    <errorMessage>Form Url can not be blank if form type is &apos;Link&apos;</errorMessage>
+</ValidationRule>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Event_Edition_Status</fullName>
+    <active>true</active>
+    <description>This validation rule will call once the legal entity field is blank on having the edition status active.</description>
+    <errorConditionFormula>IF( 
+							AND( 
+								ISPICKVAL(Edition_Status__c, &apos;Active&apos;) ,  ISBLANK( Legal_Entity__c ) 
+							), true,false)</errorConditionFormula>
+    <errorMessage>Legal Entity cannot be blank when Edition Status is Active</errorMessage>
+</ValidationRule>

@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="close delete component modal" access="global">
+	<aura:attribute name="closeDeleteModel" type="Boolean" description="close the  model" /> 
+    <aura:attribute name="deleteRecord" type="Boolean" description="deleting the record" /> 
+</aura:event>

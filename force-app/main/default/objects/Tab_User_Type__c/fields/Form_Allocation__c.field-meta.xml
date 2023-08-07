@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Form_Allocation__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Look up field to form allocation object. One form allocation can have many tab user types.</description>
+    <externalId>false</externalId>
+    <label>Form Allocation</label>
+    <referenceTo>Form_Allocation__c</referenceTo>
+    <relationshipLabel>Tab User Types</relationshipLabel>
+    <relationshipName>Tab_User_Types</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

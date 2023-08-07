@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReportFolder xmlns="http://soap.sforce.com/2006/04/metadata">
+    <folderShares>
+        <accessLevel>Manage</accessLevel>
+        <sharedTo>kishore.soram@informa.com</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <folderShares>
+        <accessLevel>Manage</accessLevel>
+        <sharedTo>anarita.antunesdosreis@informa.com.im</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <name>CPHI Barcelona Forms report</name>
+</ReportFolder>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Event_Ops_Category__c</fullName>
+    <description>Event Ops Category</description>
+    <externalId>false</externalId>
+    <label>Event Ops Category</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Activities</fullName>
+                <default>false</default>
+                <label>Activities</label>
+            </value>
+            <value>
+                <fullName>Education</fullName>
+                <default>false</default>
+                <label>Education</label>
+            </value>
+            <value>
+                <fullName>Exhibit Hall</fullName>
+                <default>false</default>
+                <label>Exhibit Hall</label>
+            </value>
+            <value>
+                <fullName>Reg Area</fullName>
+                <default>false</default>
+                <label>Reg Area</label>
+            </value>
+            <value>
+                <fullName>Rooms</fullName>
+                <default>false</default>
+                <label>Rooms</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

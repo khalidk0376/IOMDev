@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Badge_Form__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>This field defines the form builder form for this particular badge allocation.</description>
+    <externalId>false</externalId>
+    <label>Badge Form</label>
+    <referenceTo>Questionnaire__c</referenceTo>
+    <relationshipLabel>Badge Allocation</relationshipLabel>
+    <relationshipName>Badge_Allocation</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

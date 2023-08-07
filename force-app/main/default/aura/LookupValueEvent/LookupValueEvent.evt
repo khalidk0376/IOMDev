@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Event template">
+    <aura:attribute name="questionId" type="string" default=""/>
+    <aura:attribute name="responseText" type="string" default=""/>    
+</aura:event>

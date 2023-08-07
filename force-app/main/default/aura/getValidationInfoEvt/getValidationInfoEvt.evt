@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" description="Event template">
+    <!--getValidationInfoEvt-->
+    <aura:attribute name="isValid" type="boolean" default="false"/>
+    <aura:attribute name="questionId" type="String" default=""/>
+</aura:event>

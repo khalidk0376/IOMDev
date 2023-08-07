@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Company_Information_ID__c</fullName>
+    <description>record Id for company profile =&gt; company information</description>
+    <externalId>false</externalId>
+    <inlineHelpText>record Id for company profile =&gt; company information</inlineHelpText>
+    <label>Company Information ID</label>
+    <length>100</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

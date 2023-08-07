@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>AET22GAT_GE</label>
+    <protected>false</protected>
+    <values>
+        <field>Amber_Countries_Needs_SalesOps_Approval__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>ByPass_Automatic_Order_Activation__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Disable_Tax_Calculation__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Edition_Code__c</field>
+        <value xsi:type="xsd:string">AET22GAT</value>
+    </values>
+    <values>
+        <field>Edition_Name__c</field>
+        <value xsi:type="xsd:string">Autotech Egypt 2023 (Postponed from 2022)</value>
+    </values>
+    <values>
+        <field>Legacy_CRM_Instance__c</field>
+        <value xsi:type="xsd:string">GE</value>
+    </values>
+    <values>
+        <field>OH_ContainsParentProduct__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>OH_DisplayBillingScheduleNodes__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>OH_DisplayHeader_Footer__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>OH_Include_Emails__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>OH_LineItemdescription__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>OH_SalesPersonNameSplit__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Order_Translation_Status_override__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Set_Override_Billing_Date_to_OrderDate__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Sync_Payment_Transaction__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+</CustomMetadata>

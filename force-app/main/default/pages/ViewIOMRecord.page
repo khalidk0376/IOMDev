@@ -1,0 +1,6 @@
+<apex:page action="{!redirectToRecordPage}" controller="ViewIOMRecordController" >
+    <apex:pageBlock >
+    	<apex:pageMessage title="Error" summary="Opporunity Record not found" severity="error" rendered="{!showErrorMessage}">
+        </apex:pageMessage>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Statement_Billing__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Does this event need a statement, in addition to an invoice?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Does this event need a statement, in addition to an invoice?</inlineHelpText>
+    <label>Statement Billing</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

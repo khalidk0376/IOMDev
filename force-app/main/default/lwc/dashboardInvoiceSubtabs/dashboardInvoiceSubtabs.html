@@ -1,0 +1,40 @@
+<!--
+    Created By		: Girikon(Sachin)(IML2R-742)
+    Created On		: 25/2/2020
+    @description 	: This component is used to show the list of Invoices related tabs.
+    Modified By		: 
+-->
+<template>
+    <div class="slds-card slds-p-around_small">
+        <lightning-tabset>
+            
+            <!--Table for Sent Invoices-->
+            <lightning-tab label="Invoice Need to be Sent to Customer">
+                <template if:true={sentInvoiceCond}>
+                        <!-- onopenlinkbutton={handleOpenlinkbutton} open-link-button-text="Click To Send Email" -->
+                    <c-common-table  filter1-label="Editions" filter-field1="blng__Order__r.SBQQ__Quote__r.Edition__r.Name" condition={sentInvoiceCond}
+                        fields="Name,blng__DueDate__c,Contract_Number__c,blng__Order__r.SBQQ__Quote__r.Edition__r.Name,blng__Account__r.Name,blng__InvoiceStatus__c,CreatedDate"
+                        object-name="blng__Invoice__c" object-label="Invoice" is-multi-language="true" custom-label="-1,0"
+                        fields-label="Invoice Number,Due Date,Contract Number,Edition Name,Account,Status,Created Date">
+                    </c-common-table>
+                </template>
+            </lightning-tab>
+            <!--Table for Draft Invoice-->
+            <lightning-tab label="All Draft Invoice">
+                <div class="slds-card slds-p-around_small">
+                    <lightning-tabset>
+                        <lightning-tab label="Non-Zero Value Invoices">
+                            <c-invoice-non-zero is-multi-language="true" custom-label="-1,1"></c-invoice-non-zero>
+                        </lightning-tab>
+                        <lightning-tab label="Zero Value Invoices">
+                            <c-invoice-zero is-multi-language="true" custom-label="-1,1"></c-invoice-zero>
+                        </lightning-tab>
+                    </lightning-tabset>
+                </div> 
+            </lightning-tab>
+        </lightning-tabset> 
+    </div>
+    <template if:true={spinner}>
+        <lightning-spinner variant="brand" size="small"></lightning-spinner>
+    </template>
+</template>

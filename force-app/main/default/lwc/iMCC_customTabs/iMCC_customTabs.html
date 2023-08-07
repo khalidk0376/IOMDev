@@ -1,0 +1,55 @@
+<!-- Created By		: Girikon(Garima[IMCC-191])
+Created On		: Sep 20 2021
+@description 	: This LWC is called when we click on any custom Tab.It fetches the layout type and content of the tabs.
+Modified By     : Girikon(Garima[IMCC-288])
+Modified On     : Oct 13 2021
+-->
+
+<template>
+    <section class="exhg-middle-content">
+        <div class="container">
+            <template for:each={tabContext} for:item="tab">
+                <p key={tab.Id}>
+                    <lightning-layout multiple-rows>
+                        <template if:true={showHeader3Column}>
+                            <lightning-layout-item size="12" padding="around-small">
+                                <lightning-formatted-rich-text value={tab.Header__c}></lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="4" padding="around-small">
+                                <lightning-formatted-rich-text value={tab.Section_1__c}></lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="4" padding="around-small">
+                                <lightning-formatted-rich-text value={tab.Section_2__c}></lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="4" padding="around-small">
+                                <lightning-formatted-rich-text value={tab.Section_3__c}></lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={showHeader2Column}>
+                            <lightning-layout-item size="12" padding="around-small">
+                                <lightning-formatted-rich-text value={tab.Header__c}></lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6" padding="around-small">
+                                <lightning-formatted-rich-text value={tab.Section_1__c}></lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6" padding="around-small">
+                                <lightning-formatted-rich-text value={tab.Section_2__c}></lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={show3Column}>
+                            <lightning-layout-item size="4" padding="around-small">
+                                <lightning-formatted-rich-text value={tab.Section_1__c}></lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="4" padding="around-small">
+                                <lightning-formatted-rich-text value={tab.Section_2__c}></lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="4" padding="around-small">
+                                <lightning-formatted-rich-text value={tab.Section_3__c}></lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                        </template> <br /> <br />
+                    </lightning-layout>
+                </p>
+            </template>
+        </div>
+    </section>
+</template>

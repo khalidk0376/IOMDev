@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Case_Assignment_Email</name>
+        <label>Send Case Assignment Email</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <actionName>Case.Welcome_Email</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Update_the_case_assignment_email_field_to_true</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>56.0</apiVersion>
+    <description>Migrated from the: IMSC_Send Welcome Email workflow rule
+Workflow rule description: This workflow is used for sending welcome email to customer  whenever a new case is created for Customer Service team&quot;</description>
+    <environments>Default</environments>
+    <interviewLabel>IMSC_Send Welcome Email_Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>IMSC_Send Welcome Email_Flow</label>
+    <migratedFromWorkflowRuleName>IMSC_Send Welcome Email</migratedFromWorkflowRuleName>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_the_case_assignment_email_field_to_true</name>
+        <label>Update the case assignment email field to true</label>
+        <locationX>176</locationX>
+        <locationY>455</locationY>
+        <inputAssignments>
+            <field>Sent_Case_Assignment_Email__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Send_Case_Assignment_Email</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterFormula>Not(isblank(  {!$Record.Brand__c}  )) &amp;&amp; Not(isblank(  {!$Record.Edition__c}  )) &amp;&amp;  (ISPICKVAL({!$Record.Origin} , &apos;Phone&apos;) || ISPICKVAL({!$Record.Origin} , &apos;Email&apos;) ||  (ISPICKVAL({!$Record.Origin} , &apos;Web&apos;) &amp;&amp;  NOt(isblank({!$Record.Edition_Code__c})) )) &amp;&amp; NOT(BEGINS( {!$Record.Subject} , &apos;ESOP&apos;)) &amp;&amp; NOT( ISPICKVAL( {!$Record.Support_Type__c} , &apos;SalesOps Support&apos;) ) &amp;&amp; ISPICKVAL({!$Record.Status}, &apos;New&apos;) &amp;&amp; ( {!$Record.Sent_Case_Assignment_Email__c} == false)</filterFormula>
+        <object>Case</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

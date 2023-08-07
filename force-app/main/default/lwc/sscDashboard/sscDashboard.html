@@ -1,0 +1,38 @@
+<!--
+    Created By      : Girikon(Sachin)(IML2R-742)
+    Created On      : 18/02/2020
+    @description    : This component is used show the various tabs of Action Dashboard.
+-->
+<template>
+    <template if:true={noActionTeamMember}>
+        <div class="slds-card">
+            <p>You are not a part of any Action Dashboard Team.</p>
+        </div>
+    </template>
+    <template if:true={isActionTeamMember}>
+        <div class="slds-card slds-p-around_small" style="min-height:500px;max-height:auto;">
+            <lightning-tabset>
+
+                <lightning-tab label="Opportunity">
+                    <c-opportunity-subtabs></c-opportunity-subtabs>
+                </lightning-tab>
+                <lightning-tab label="Amendment Requests">
+                    <template if:true={amendRequestCondition}>
+                        <c-amendment-requests condition={amendRequestCondition} filter1-label="Editions"
+                            filter-field1="Default_Edition__r.Name"></c-amendment-requests>
+                    </template>
+                </lightning-tab>
+                <lightning-tab label="Orders for Translations">
+                    <c-order-trans-subtabs></c-order-trans-subtabs>
+                </lightning-tab>
+                <!-- Removed Under IOM-775  -->
+                <!-- <lightning-tab label="Orders"> 
+                    <c-order-subtabs></c-order-subtabs>
+                </lightning-tab>
+                <lightning-tab label="Invoices">
+                    <c-dashboard-invoice-subtabs></c-dashboard-invoice-subtabs>
+                </lightning-tab> -->
+            </lightning-tabset>
+        </div>
+    </template>
+</template>

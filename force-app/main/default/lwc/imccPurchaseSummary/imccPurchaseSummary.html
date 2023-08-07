@@ -1,0 +1,228 @@
+<template>
+    
+    <template if:true={purchaseSummaryList} for:each={purchaseSummaryList} for:item="item" for:index="index">
+        <div key={item.Id} class="line-pad">
+            <div class="line"></div>
+        </div>
+        <div key={item.key} class="purchase-list">
+            <div class="item">
+                <div class="purchase-content">
+                    <a href="javascript:void(0)" data-index={index} onclick={openGenericModal}
+                        class={item.className}>{item.Name}</a>
+                </div>
+                <div class="purchase-icon">
+                    <lightning-icon data-index={index} onclick={openGenericModal} icon-name="utility:forward" alternative-text="Approved"
+                        class={item.className} size="xx-small" title="Click to open detail"></lightning-icon>
+                </div>
+            </div>
+            <div class="purchase-content">
+                <span class="para paragraph-d-tiny paragraph-m-tiny">{item.Information_Label__c}</span>
+            </div>
+        </div>
+    </template> 
+    
+
+    <template if:true={openStandSummaryModal}>
+        <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" aria-modal="true"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <div class="work-header heading heading-d-large heading-m-large heading-m-small">{standSummaryHeader}</div>
+                    <div class="work-content para paragraph-m-standard paragraph-m-small">{standSummaryInfo}</div>
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        onclick={cancelModal}>
+                        <img src="/sfsites/c/resource/IMCC2/icons/Cross-light-blue-7.svg" class="icon-32" alt="close" />
+                        <span class="slds-assistive-text">Cancel and close</span>
+                    </button>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+                    <template for:each={boothDtls} for:item="item" for:index="ind">
+                        <div class="profile" key={item.Id}>
+                            <div class="strand-heading">
+                                <span
+                                    class="heading-content heading heading-d-small heading-m-small">Stand {item.BoothNumber}</span>
+                                <a href={item.ViewBoothLink} class="floorplan" target="_blank">
+                                    <span class="link link-d-small-medium link-m-small-medium"> See Floorplan</span>
+                                    <img src="/sfsites/c/resource/IMCC2/icons/external-link-blue.svg" class="icon-12" />
+                                </a>
+                            </div>
+                            <div class="line"></div>
+                            <div class="strand-subhead">
+                                <div class="strand-content">
+                                    <span class="head para paragraph-d-tiny paragraph-m-tiny">Exhibitor</span>
+                                    <span
+                                        class="content para paragraph-d-small paragraph-m-small">{item.ExhibitorName}</span>
+                                </div>
+                                <div class="strand-content">
+                                    <span class="head para paragraph-d-tiny paragraph-m-tiny">Size</span>
+                                    <span class="content para paragraph-d-small paragraph-m-small">{item.BoothSize}&nbsp;
+                                        <template if:true={item.UnitMeasurement}>{item.UnitMeasurement}<sup>2</sup></template></span>
+                                </div>
+                                <div class="strand-content">
+                                    <span class="head para paragraph-d-tiny paragraph-m-tiny">Type</span>
+                                    <span
+                                        class="content para paragraph-d-small paragraph-m-small">{item.BoothType}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                </div>
+                <div class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" aria-label="Cancel and close"
+                        onclick={cancelModal}>Close</button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+
+    <template if:true={openGenricModal}>
+        <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" aria-modal="true"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <div class="work-header heading heading-d-large heading-m-large heading-m-small">{selectedPurchaseData.Standard_Header_Text__c}</div>
+                    <div class="work-content para paragraph-m-standard paragraph-m-small">{selectedPurchaseData.Standard_Sub_Header_Text__c}</div>
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        onclick={cancelModal}>
+                        <img src="/sfsites/c/resource/IMCC2/icons/Cross-light-blue-7.svg" class="icon-32" alt="close" />
+                        <span class="slds-assistive-text">Cancel and close</span>
+                    </button>
+                </div>
+                <div class="home-ps slds-modal__content slds-p-around_medium" id="modal-content-id-5">
+                    <div class="media-container" if:true={selectedPurchaseData.mediaURL}>
+                        <video style="height:100%; width:100%" controls="controls">
+                            <source src={selectedPurchaseData.mediaURL} type="video/mp4">                            
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="sub-heading">
+                        <span class="heading heading-d-small">{selectedPurchaseData.Sub_Header_Text__c}</span>
+                    </div>
+                    <div class="sub-note">
+                        <span class="para paragraph-d-standard">{selectedPurchaseData.Sub_Header_Notes__c}</span>
+                    </div>
+                    <div class="ex-link" if:true={selectedPurchaseData.internalLink}>
+                        <div class=""><a href="javascript:void(0);" onclick={openInernalPage} class="link link-d-small-medium">{selectedPurchaseData.internalLink} 
+                            <lightning-icon icon-name="utility:forward" size="xx-small"></lightning-icon>
+                        </a></div>
+                    </div>
+                    <!--Badge table-->
+                    <template if:true={selectedPurchaseData.isBadge} for:each={selectedPurchaseData.badges} for:item="item" for:index="ind">
+                        <div class="profile" key={item.Id} style="background-color: var(--indigo-1);">
+                            <div class="strand-heading">
+                                <span class="heading-content heading heading-d-small heading-m-small">{item.Booth_Number__c} <span if:false={item.isOnline} style="color: var(--light-blue-7);" class="para paragraph-d-standard">({item.Stand_Length__c}{item.Unit_of_Measurement__c} x {item.Stand_Width__c}{item.Unit_of_Measurement__c})</span></span>
+                            </div>
+                            <div class="line"></div>
+                            <div class="strand-subhead">
+                                <div class="strand-content">
+                                    <span class="head para paragraph-d-tiny paragraph-m-tiny">Total Badges</span>
+                                    <template if:true={item.Unlimited_Badges__c} >
+                                        <span class="content para paragraph-d-small paragraph-m-small">Unlimited</span>
+                                    </template>
+                                    <template if:false={item.Unlimited_Badges__c}>
+                                        <span class="content para paragraph-d-small paragraph-m-small">{item.Total_Badges__c}</span>
+                                    </template>
+                                </div>                                                                
+                            </div>
+                        </div>
+                    </template>                    
+                    <!--Badge table-->
+
+                    <!--Lead Retrieval-->
+                    <template if:true={selectedPurchaseData.isLeadRetrieval}>
+                        <div class="profile" style="background-color: var(--indigo-1);">
+                            <div class="strand-heading">
+                                <span class="heading-content heading heading-d-small heading-m-small">Your licenses</span>
+                            </div>
+                            <div class="line"></div>
+                            <div class="strand-subhead">
+                                <div class="strand-content">
+                                    <span class="head para paragraph-d-tiny paragraph-m-tiny">Licenses</span>
+                                    <span class="content para paragraph-d-small paragraph-m-small">Unlimited</span>
+                                </div>
+                                <div class="strand-content">
+                                    <span class="head para paragraph-d-tiny paragraph-m-tiny">QR Code</span>
+                                    <span class="content para paragraph-d-small paragraph-m-small">Unlimited</span>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <!--Lead Retrieval-->
+
+                    <!--Virtual Event-->
+                    <template if:true={selectedPurchaseData.isVirtualEvent} for:each={selectedPurchaseData.virtualEvents} for:item="ev">
+                        <div key={ev.Booth_Product_Type__c} class="profile" style="background-color: var(--indigo-1);">
+                            <div class="strand-heading">
+                                <span class="heading-content heading heading-d-small heading-m-small">Your Profile Type</span>
+                            </div>
+                            <div class="line"></div>
+                            <div class="strand-subhead">
+                                <div class="strand-content">
+                                    <span class="head para paragraph-d-tiny paragraph-m-tiny">Licenses</span>
+                                    <span class="content para paragraph-d-small paragraph-m-small">{ev.Booth_Product_Type__c}</span>
+                                </div>
+                                <div class="strand-content">
+                                    <span class="head para paragraph-d-tiny paragraph-m-tiny">QR Code</span>
+                                    <span class="content para paragraph-d-small paragraph-m-small">Unlimited</span>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <!--Virtual Event-->
+                </div>
+                <div class="slds-modal__footer">
+                    <div class="slds-grid btn-container slds-wrap slds-grid_align-spread" style="align-items: center;">
+                        <div class="slds-col slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12" if:false={selectedPurchaseData.isLeadRetrieval}>
+                            <div class="slds-grid" style="align-items: center;gap:5px">
+                                <div class="slds-col">
+                                    <lightning-input name="is-completed" type="checkbox" checked={selectedPurchaseData.isCompleted} disabled={selectedPurchaseData.isCompleted} label="Mark this task as completed" onchange={makeTaskAsComplete}></lightning-input>
+                                </div>
+                                <div class="slds-col">
+                                    <lightning-helptext if:true={selectedPurchaseData.Mark_This_Task_Helptext__c} icon-name="utility:info_alt" content={selectedPurchaseData.Mark_This_Task_Helptext__c}></lightning-helptext>
+                                </div>
+                            </div>                             
+                        </div>
+                        <div class="slds-col slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-text-align_right" if:false={selectedPurchaseData.isLeadRetrieval}>
+                            <lightning-button if:true={selectedPurchaseData.External_Link_Label__c} onclick={handleButtonClick} icon-name="utility:forward" variant="brand" icon-position="right" label={selectedPurchaseData.External_Link_Label__c}></lightning-button>
+                        </div>
+                        <div class="slds-col slds-small-size_1-of-1 slds-text-align_right" if:true={selectedPurchaseData.isLeadRetrieval}>
+                            <lightning-button if:true={selectedPurchaseData.External_Link_Label__c} onclick={handleButtonClick} icon-name="utility:forward" variant="brand" icon-position="right" label={selectedPurchaseData.External_Link_Label__c}></lightning-button>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+    
+    <template if:true={isOpenConfirmation}>        
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-describedby="taskCompleteContent"
+            class="slds-modal slds-fade-in-open" style="z-index: 99999;">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        onclick={noClose}>
+                        <img src="/sfsites/c/resource/IMCC2/icons/Cross-light-blue-7.svg" class="icon-32" alt="close" />
+                        <span class="slds-assistive-text">Cancel and close</span>
+                    </button>
+                    <h2 id="taskComplete" class="slds-text-heading_medium slds-hyphenate">
+                        Confirmation
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="taskCompleteContent">
+                    <div>
+                        <span class="para para-d-standard">Do you really want to mark this task as completed?</span>
+                    </div>                    
+                </div>
+                <footer class="slds-modal__footer" style="margin-top:0px">
+                    <button class="slds-button slds-button_neutral" onclick={noClose}>No</button>
+
+                    <button class="slds-button slds-button_brand" onclick={yesComplete}>Yes, Complete</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="z-index: 90000;"></div>    
+    </template>
+</template>

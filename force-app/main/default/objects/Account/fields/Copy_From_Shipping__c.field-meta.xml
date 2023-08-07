@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Copy_From_Shipping__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If Checked Billing address will be copied from Shipping Address (Not in Use).</description>
+    <externalId>false</externalId>
+    <label>Copy From Shipping</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

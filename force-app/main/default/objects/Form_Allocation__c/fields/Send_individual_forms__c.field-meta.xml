@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Send_individual_forms__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>To control whether to send email to mentioned email ids in the Email To field</description>
+    <externalId>false</externalId>
+    <inlineHelpText>To control whether to send email to mentioned email ids in the Email To field</inlineHelpText>
+    <label>Send individual forms</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

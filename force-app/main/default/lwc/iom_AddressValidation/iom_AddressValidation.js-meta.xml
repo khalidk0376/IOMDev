@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <objects>
+                <object>Account</object>
+                <object>Contact</object>
+                <object>Lead</object>
+            </objects>
+            <property name="sObjectname" type="String" datasource="Account,Contact,Lead" />
+            <property name="streetField" type="String" />
+            <property name="cityField" type="String" />
+            <property name="stateField" type="String" />
+            <property name="stateCodeField" type="String" />
+            <property name="countryField" type="String" />
+            <property name="countryCodeField" type="String" />
+            <property name="zipCodeField" type="String" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

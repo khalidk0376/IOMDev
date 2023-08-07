@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Default_Edition_Required</fullName>
+    <active>true</active>
+    <description>Validation rule to make default edition mandatory on opportunity.</description>
+    <errorConditionFormula>AND(ISBLANK(Default_Edition__c),
+NOT($Setup.Application_Bypass__c.Bypass_Edition_Required_Validation__c),
+NOT(CONTAINS($CustomMetadata.IOM_Global_Configuration_Data__mdt.ByPass_IOM_Validation.IOM_Value__c, $User.FirstName))  
+)</errorConditionFormula>
+    <errorDisplayField>Default_Edition__c</errorDisplayField>
+    <errorMessage>Default Edition is Required.</errorMessage>
+</ValidationRule>

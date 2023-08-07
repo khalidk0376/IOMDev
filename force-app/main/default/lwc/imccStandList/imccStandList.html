@@ -1,0 +1,80 @@
+<template>
+    <lightning-card style="height: 350px;">
+        <lightning-spinner size="small" variant="brand" if:true={spinner}></lightning-spinner>
+        <template if:false={approveConfirmation}>
+            <span slot="actions" >
+            <lightning-button onclick={openApprovalModal} label="Approve" disabled={isActionBtnDisabled}
+                variant="brand-outline"></lightning-button>
+            <lightning-button onclick={openRejectionModal} label="Reject" disabled={isActionBtnDisabled}
+                variant="destructive-text" class="slds-m-left_xx-small"></lightning-button>
+            </span>
+            <lightning-datatable key-field="Id" data={tableData} onrowaction={handleRowAction}
+                onrowselection={handleRowSelect} columns={columns}>
+            </lightning-datatable>
+        </template>
+    </lightning-card>
+
+    <!--Approve Stand Design modal-->
+    <template if:true={approveConfirmation}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Approval Confirmation</h1>
+                    <button onclick={closeApprovalModal}
+                        class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-icon icon-name="utility:close" size="small" variant="bare"></lightning-icon>
+                    </button>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="approval-modal" style="height: 300px;">
+                    <lightning-spinner size="small" variant="brand" if:true={spinner}></lightning-spinner>
+                    <lightning-combobox label="Status" value={status} required options={statusOptions}
+                        onchange={handleStatusChange}></lightning-combobox>
+                    <!--<lightning-input-field if:true={approvalDate} class="slds-hide" value={approvalDate}
+                        field-name="Approval_Date__c"></lightning-input-field>-->
+                </div>
+                <div class="slds-modal__footer">
+                    <lightning-button onclick={handleSubmit} variant="brand" label="Yes" disabled={yesBtnDisabled}></lightning-button>
+                    <lightning-button onclick={closeApprovalModal} variant="neutral" class="slds-m-left_x-small"
+                        label="No">
+                    </lightning-button>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <!--Reject Stand Design modal-->
+    <template if:true={rejectConfirmation}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate">Rejection confirmation</h1>
+                    <button onclick={closeRejectionModal}
+                        class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-icon icon-name="utility:close" size="small" variant="bare"></lightning-icon>
+                    </button>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="rejection-modal">
+                    <lightning-combobox name="Status" label="Status" value="Stand Design Rejected/Incomplete"
+                        options={statusOptions} disabled></lightning-combobox>
+                    <lightning-dual-listbox name="Rejected Steps" label="Rejected Steps" source-label="Available"
+                        selected-label="Chosen" required="true" field-level-help="Select stand Design Step Rejection"
+                        options={lstrejectedStepsOptions} value={values} onchange={handleStepChange}>
+                    </lightning-dual-listbox>
+
+                    <lightning-textarea label="Rejection Reason" placeholder="reason...."
+                        onchange={handleRejectionReasonChange} value="" style="height: 100px;" required>
+                    </lightning-textarea>
+                </div>
+                <div class="slds-modal__footer">
+                    <button disabled={isYesRejectButtonDisable} onclick={yesReject}
+                        class="slds-button slds-button_brand">Yes</button>
+                    <button onclick={closeRejectionModal} class="slds-button slds-button_neutral"
+                        aria-label="No">No</button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

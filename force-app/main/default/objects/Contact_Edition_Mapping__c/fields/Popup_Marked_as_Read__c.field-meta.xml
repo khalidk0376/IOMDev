@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Popup_Marked_as_Read__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Use to track if greeting pop up message is read by customer</description>
+    <externalId>false</externalId>
+    <label>Popup Marked as Read</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

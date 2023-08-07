@@ -1,0 +1,102 @@
+<template>
+    <div class="forms-and-manuals">
+        <div class="left-sidebar">
+            <div class="event-summary-box">
+                <div class="event-progress">
+                    <div class="your-progress">
+                        <span class="heading heading-d-small heading-m-small">Your progress</span>
+                    </div>
+                    <div class="event-progress-count">
+                        <span class="heading event-count-number">{progressPercent}</span>
+                        <span class="link link-d-small-medium percent">%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <lightning-progress-bar value={progressPercent} size="medium" variant="circular">
+                        </lightning-progress-bar>
+                    </div>
+                </div>
+            </div>
+        </div> </br></br>
+
+        <div class="slds-m-bottom_small">
+            <c-imcc-page-header></c-imcc-page-header>
+        </div> </br></br>
+        <template if:true={isVirtualEvent}>
+                <template for:each={virtualEventLst} for:item="ve">
+                    <div key={ve.Booth_Product_Type__c}>
+                    <div class="profile" style="background-color: var(--indigo-1);">
+                        <div class="strand-heading">
+                            <span class="heading-content heading heading-d-small heading-m-small">Your Profile
+                                Type</span>
+                        </div>
+                        <div class="line"></div>
+                        <div class="strand-subhead">
+                            <div class="strand-content">
+                                <span class="head para paragraph-d-tiny paragraph-m-tiny">Profile</span>
+                                <span
+                                    class="content para paragraph-d-small paragraph-m-small">{ve.Booth_Product_Type__c}</span>
+                            </div>
+                            <div class="strand-content">
+                                <span class="head para paragraph-d-tiny paragraph-m-tiny">QR Code</span>
+                                <span class="content para paragraph-d-small paragraph-m-small">Unlimited</span>
+                            </div>
+                        </div>
+                    </div> <br/> 
+                </div> 
+                </template>
+            <div class="slds-grid btn-container slds-wrap slds-grid_align-spread slds-m-top_small slds-m-bottom_small"
+                style="align-items: center;">
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 ">
+                    <div class="slds-grid" style="align-items: center;gap:5px">
+                        <div class="slds-col">
+                            <lightning-input name="is-completed" type="checkbox" checked={isCompleted}
+                                disabled={isCompleted} label="Mark this task as completed"
+                                onchange={makeTaskAsComplete}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col">
+                            <lightning-helptext if:true={markTaskHelpText} icon-name="utility:info_alt"
+                                content={markTaskHelpText}></lightning-helptext>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="slds-col slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-text-align_right">
+                    <lightning-button onclick={handleButtonClick} icon-name="utility:forward"
+                        variant="brand" icon-position="right" label={externalLinkLabel}></lightning-button>
+                </div>
+            </div>
+        </template>
+
+
+        <template if:true={isOpenConfirmation}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-describedby="taskCompleteContent"
+                class="slds-modal slds-fade-in-open" style="z-index: 99999;">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            onclick={noClose}>
+                            <img src="/sfsites/c/resource/IMCC2/icons/Cross-light-blue-7.svg" class="icon-32"
+                                alt="close" />
+                            <span class="slds-assistive-text">Cancel and close</span>
+                        </button>
+                        <h2 id="taskComplete" class="slds-text-heading_medium slds-hyphenate">
+                            Confirmation
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="taskCompleteContent">
+                        <div>
+                            <span class="para para-d-standard">Do you really want to mark this task as completed?</span>
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer" style="margin-top:0px">
+                        <button class="slds-button slds-button_neutral" onclick={noClose}>No</button>
+
+                        <button class="slds-button slds-button_brand" onclick={yesComplete}>Yes, Complete</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" style="z-index: 90000;"></div>
+        </template>
+    </div>
+</template>

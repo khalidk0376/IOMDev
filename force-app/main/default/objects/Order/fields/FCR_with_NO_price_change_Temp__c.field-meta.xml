@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FCR_with_NO_price_change_Temp__c</fullName>
+    <description>This temporary field is created for the &apos;FCR with nO price Change scenarios&apos; . This is temporary because the 2 modules of functionalities run on the back of this field will be called by Girikon code once that is built</description>
+    <externalId>false</externalId>
+    <label>FCR with NO price change_Temp</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Cancel-Rebill and Hold</fullName>
+                <default>false</default>
+                <label>Cancel-Rebill and Hold</label>
+            </value>
+            <value>
+                <fullName>Unhold</fullName>
+                <default>false</default>
+                <label>Unhold</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,52 @@
+<aura:component controller="FieldInputCtr">
+    <!-- Start attribute -->
+    <aura:attribute name="QnaireId" type="String" />
+    <aura:attribute name="QnaireName" type="String" />
+    <aura:attribute name="QuestnQnaireId" type="String" />
+    <aura:attribute name="QuestnGroupId" type="String" />
+    <aura:attribute name="Questntype" type="String" />
+    <aura:attribute name="modalHeader" type="String" />
+    <aura:attribute name="fieldType" type="String" />
+    <aura:attribute name="dropColNumber" type="String" />
+    <aura:attribute name="questOrderNum" type="String" default="0" />
+    <aura:attribute name="isEditQue" type="Boolean" />
+    <aura:attribute name="lstQuesCategory" type="List" default="[]" />
+    <aura:attribute name="objCrteQues" type="Question__c" default="{ 'sobjectType': 'Question__c'}" />
+    <aura:attribute name="isShowbutton" type="Boolean" default="false" />
+    <aura:attribute name="isShowAttachmentandCommentCheckBox" type="Boolean" default="false" />
+    <!-- End attribute-->
+    <!-- event handlers -->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"></aura:handler>
+    <!-- event handlers -->
+    {!v.body}
+    <!--Start body-->
+    <div class="slds-col slds-grid_vertical">
+        <div class="slds-grid slds-no-flex panelHeader">
+            <h2>Question Editor: Address Input Field</h2>
+            <a href="#">
+                <lightning:buttonIcon iconName="utility:forward" onclick="{!c.hideModal}" variant="bare" />
+            </a>
+        </div>
+    </div>
+    <div class="slds-col slds-scrollable_y">
+        <div class="panelBody">
+            <div class="slds-form-element ">
+                <lightning:inputRichText formats="['bold', 'italic', 'underline','list', 'align']" label="Question Text" onblur="{!c.checkTextLength}" messageWhenBadInput="write your question" aura:id="qustNameRich" placeholder="Compose text..." value="{!v.objCrteQues.Label__c}" />
+            </div>
+            <div class="slds-grid slds-gutters slds-float_left slds-left_none slds-var-m-bottom_small">
+                <div class="slds-col ">
+                    <aura:if isTrue="{!(v.isShowAttachmentandCommentCheckBox)}">
+                        <div class="slds-form-element slds-var-m-top_x-small slds-var-m-left_small">
+                            <lightning:input type="checkbox" label="Allow Comment" name="Comment" checked="{!v.objCrteQues.Allow_Comment__c}" />
+                        </div>
+                    </aura:if>
+                </div>
+            </div>
+            <div class="slds-var-m-top_small">
+                <lightning:button label="Cancel" onclick="{!c.hideModal}" />
+                <lightning:button disabled="{!v.isShowbutton}" label="Save" variant="brand" onclick="{!c.saveQues}" />
+            </div>
+        </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</aura:component>

@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Opportunity_Account_Hold</fullName>
+    <active>true</active>
+    <businessProcess>Stage</businessProcess>
+    <label>Opportunity Account Hold</label>
+    <picklistValues>
+        <picklist>Address_Status__c</picklist>
+        <values>
+            <fullName>Invalid</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Valid</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Exhibitor_Paid_By__c</picklist>
+        <values>
+            <fullName>Co-Exhibitor Paid by Exhibitor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Co-Exhibitor Split Pay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Exhibitor Paid by Agent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Exhibitor Paid by Exhibitor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Individual Contract</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-Exhibiting Customer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SubAgent Paid By Exhibitor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SubAgent Paid By Subagent</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ForecastCategoryName</picklist>
+        <values>
+            <fullName>Best Case</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Omitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pipeline</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>IOM_Approval_Status__c</picklist>
+        <values>
+            <fullName>Approval Required</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approval not Required</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In-Approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>IOM_Payment_Term__c</picklist>
+        <values>
+            <fullName>Due on receipt</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Net 15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Net 30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Net 45</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Net 60</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Net 90</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>IOM_Ready_For_Ordering__c</picklist>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>IOM_Sync_Status__c</picklist>
+        <values>
+            <fullName>Complete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Error</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ready</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>IOM_Validation_Status__c</picklist>
+        <values>
+            <fullName>Error</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Success</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Invoice_to_be_issued_before_in_Days__c</picklist>
+        <values>
+            <fullName>30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>60</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>90</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>LeadSource</picklist>
+        <values>
+            <fullName>Advertisement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Event</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Employee Referral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Google AdWords</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchased List</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trade Show</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Webinar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Legacy_CRM_Instance__c</picklist>
+        <values>
+            <fullName>EMEA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Penton</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Loss_Reason__c</picklist>
+        <values>
+            <fullName>Lost to Competitor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Budget %2F Lost Funding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Decision %2F Non-Responsive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Price</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Payment_Schedule__c</picklist>
+        <values>
+            <fullName>10-40-50</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>10-45-45</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>100</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>25-25-25-25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>25-25-50</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>50-50</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Custom</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Payment_Status__c</picklist>
+        <values>
+            <fullName>Free</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Invoice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Paid</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Paid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partial Paid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Past Due</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Reason_Lost__c</picklist>
+        <values>
+            <fullName>AR Cancel %2F Re-bill</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Booth%2FSponsorship Cancellation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Budget - Budget Decrease</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Budget - Budget Reallocated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Budget - Budget not approved yet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Budget - No Budget</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Budget - No Budget left</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Unresponsive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Digital %2F Print Cancellation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Duplicate opportunity</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Event Edition Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Input error</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lost - Interested in Next Edition</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lost to Competitor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not enough reach to their target audience</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pricing%2FCost %E2%80%93 Too high</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technical Error</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Timing %E2%80%93 Campaign Delayed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Timing %E2%80%93 Creative won%E2%80%99t be done in time</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Timing %E2%80%93 Product still in Development</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>AR Cancel %2F Re-bill</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Accounting Rejected</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Amended</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Awaiting Payment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Booth%2FSponsorship Cancellation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Contacted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Engaged</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customize</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Digital %2F Print Cancellation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Discover</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Legacy Cancelled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Legacy Lost</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Legacy Won</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Online Booth Form In Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Opportunity Cancelled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partial Payment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending Accounting Approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending Change</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Proposal Sent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recalled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Revised Proposal Sent</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tax_Exemption_Status__c</picklist>
+        <values>
+            <fullName>Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>File Uploaded</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tax_Rule__c</picklist>
+        <values>
+            <fullName>UAE VAT Refund</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tax_Scenario__c</picklist>
+        <values>
+            <fullName>UK Exhibitor VAT Invoicing</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tax_Validation_Status__c</picklist>
+        <values>
+            <fullName>Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Required</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Required Approval</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>Existing Business</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Existing Customer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lapsed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lost</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Business</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Customer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rebook</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Retention</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Returning Customer</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>UAE_VAT_Refund_Status__c</picklist>
+        <values>
+            <fullName>Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>File Uploaded</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>UAE_VAT_Refund__c</picklist>
+        <values>
+            <fullName>Eligible</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Eligible</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+</RecordType>

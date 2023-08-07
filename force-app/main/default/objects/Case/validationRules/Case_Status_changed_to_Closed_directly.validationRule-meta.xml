@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case_Status_changed_to_Closed_directly</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT(OR(ISPICKVAL( Delete_Request_Reason__c,&apos;Marketing&apos; ),ISPICKVAL( Delete_Request_Reason__c,&apos;Spam&apos;))),
+ISPICKVAL(Status, &apos;Closed&apos;),
+ISNULL(Closure_Confirmation__c), 
+OR($Profile.Name  &lt;&gt; &apos;System Administrator&apos;, $Profile.Name &lt;&gt;&apos;IM System Administrator&apos;)
+
+)</errorConditionFormula>
+    <errorMessage>Please change status to Closure Confirmation.</errorMessage>
+</ValidationRule>

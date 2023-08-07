@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Show_Deliverables__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Uncheck the checkbox to hide deliverables on the quote/contract template.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Uncheck the checkbox to hide deliverables on the quote/contract template.</inlineHelpText>
+    <label>Show Deliverables</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

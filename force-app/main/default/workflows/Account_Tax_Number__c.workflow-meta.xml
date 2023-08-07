@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Update_Tax_Number_Name</fullName>
+        <description>Update Tax Number Name: Country - Account Name</description>
+        <field>Tax_Number_Name__c</field>
+        <formula>TEXT(Tax_Country__c)  &amp; &quot; &quot; &amp; &quot;-&quot; &amp; &quot; &quot; &amp; Account__r.Name</formula>
+        <name>Update_Tax_Number_Name</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Set Account Tax Number</fullName>
+        <actions>
+            <name>Update_Tax_Number_Name</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account_Tax_Number__c.CreatedDate</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>Standardize the Tax Number Name: Tax Country -  Account Name</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

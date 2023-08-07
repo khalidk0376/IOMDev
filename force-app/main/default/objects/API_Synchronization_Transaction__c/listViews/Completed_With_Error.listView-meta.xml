@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Completed_With_Error</fullName>
+    <columns>NAME</columns>
+    <columns>Interface_Log__c</columns>
+    <columns>Status__c</columns>
+    <columns>Total_Items__c</columns>
+    <columns>X3rd_Party_ERP_System__c</columns>
+    <columns>External_Tax_System__c</columns>
+    <columns>Type__c</columns>
+    <columns>Started_From__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>UPDATEDBY_USER</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Completed With Errors</value>
+    </filters>
+    <label>Completed With Error</label>
+</ListView>

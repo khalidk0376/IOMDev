@@ -1,0 +1,110 @@
+<template>
+    
+    <!-- Spinner Start -->
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </template>
+    <!-- Spinner End   -->
+
+    <!-- Error Screen-->
+    <template if:false={showCustomBillingScreen}>
+        <div class="slds-var-m-top_large slds-m-bottom_xx-large slds-text-heading_medium slds-text-color_error slds-text-align_center">
+            <span>{errorMsg}</span>
+        </div>
+    </template>
+
+    <!-- Body -->
+    <template if:true={showCustomBillingScreen}>
+        <div>
+            <!---->
+            <div class="slds-grid slds-wrap">
+                <!--<div class="slds-col slds-size_6-of-12 slds-p-left_medium">
+                    <lightning-input type="date" name="closeDate" label="Due Date" value={formatedDueDate} field-level-help="First Due Date." disabled></lightning-input>
+                  </div>-->
+                <div class="slds-col slds-size_6-of-12 slds-p-left_medium">
+                    <label class="slds-form-element__label" for="text-input-id-1">Total No of Billing Schedules</label>
+                    <lightning-helptext content="If you require a custom billing schedule please set the field ‘Total No of Billing Schedule’ to the required number and complete the dates & percentage fields for each."></lightning-helptext>
+                    <lightning-input variant="label-hidden" type="number" name="totalNoOfPayment" value={totalNoOfPayment} label="Total No of Billing Schedules" data-index="0" onchange={handleDataChange} read-only={isReadOnly}></lightning-input>
+                </div>
+            </div>
+    
+            <!-- Custom Billing Section -->
+            <template if:true={showCustomBillingInput}>
+                <div class="slds-m-top_medium">
+                    <table class="slds-table slds-table_cell-buffer ">
+                        <thead>
+                        <tr>
+                            <th> Start Date </th>
+                            <th> Percentage </th>
+                            <!-- <th> Amount</th> -->
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={customBillingList} for:item="cbl">
+                                <tr key={cbl.index}>
+                                    <td>
+                                        <lightning-input type="date" data-index={cbl.index} name="paymentDate" label={cbl.datelabel} onchange={handleDataChange} value={cbl.date} read-only={isReadOnly}></lightning-input>
+                                    </td>
+    
+                                    <td>
+                                        <!-- formatter="percent"  -->
+                                        <lightning-input type="number" name="paymentPercent" data-index={cbl.index} value={cbl.percent} label={cbl.percentageLabel} onchange={handleDataChange} step="0.01" disabled={cbl.isLast} read-only={isReadOnly}></lightning-input>
+                                    </td>
+    
+                                    <!-- <td>
+    
+                                    </td> -->
+                                </tr>
+                            </template>                         
+                            <!-- <tr>
+                                <td></td>
+                                <td></td>
+                                <td>Total : {oppTotal}</td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+            </template>
+            <!-- Final Update Button -->
+            <div>
+                <lightning-layout-item size="12" padding="horizontal-small">
+                    <div class="slds-clearfix">
+                        <div class="slds-float_right">
+                            <lightning-button type="submit" class="save-button" variant="brand"
+                                icon-name="utility:change_request" label="Update" onclick={handleSave} disabled={isReadOnly}>
+                            </lightning-button>&nbsp;&nbsp;                                
+                        </div>
+                    </div>
+                </lightning-layout-item>
+            </div>
+            <div class="slds-m-bottom_large"></div>
+        </div>
+    </template>  
+
+     <!-- Reset/O payments Confirmation Box before update-->
+    <template if:true={showResetPaymentsConfirmationModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button onclick={closeModal}
+                        class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning-icon icon-name="utility:close" variant="bare" size="small"></lightning-icon>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Reset Custom Billing Schedule</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <!-- <template if:true={isTrue}>
+                        <lightning-spinner variant="brand" size="small" title="Loading..."></lightning-spinner>
+                    </template> -->
+                    <div class="messageTxt"> You are about to reset the custom billing schedule and revert it back to the default Edition schedule.Are you sure, you wish to proceed?</div>                    
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeModal}>Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={resetPayments}>Yes</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>  
+</template>

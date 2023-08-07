@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Not_By_pass_Local_Template__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If Checked then Local language Conga templates will be used.</description>
+    <externalId>false</externalId>
+    <label>Not By pass Local Template</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

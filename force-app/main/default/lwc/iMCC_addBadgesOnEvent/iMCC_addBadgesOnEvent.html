@@ -1,0 +1,17 @@
+<!-- Created By		: Girikon(Arushi[IMCC-59])
+Created On		: 21/12/2021
+@description 	: This LWC is used add additional badges to the related Purchase Data from the Edition Record Page.
+-->
+<template>
+       <lightning-quick-action-panel header="Add Badges">
+ 
+            <div class="slds-p-around_medium lgc-bg">
+                <lightning-input type="number" label="How many additional Badges you want to give to each Purchase?"
+                    placeholder="type here..." onchange={handleNumberChange} required></lightning-input>
+            </div>
+            <div slot="footer">
+                <lightning-button variant="neutral" label="Cancel" onclick={cancel}></lightning-button>
+                <lightning-button variant="brand" label="Add" class="slds-m-left_x-small" disabled={disableAddNow} onclick={addNow}></lightning-button>
+            </div>
+        </lightning-quick-action-panel>
+</template>

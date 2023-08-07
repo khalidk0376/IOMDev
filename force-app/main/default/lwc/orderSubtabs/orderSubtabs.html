@@ -1,0 +1,21 @@
+<!--
+    Created By		: Girikon( Sachin)[IML2R-742]
+    Created On		: 24/02/2020 
+    @description 	: This component is used to showing all the tabs for Order.
+-->
+
+<template>
+    <div class="slds-card slds-p-around_small">
+    <lightning-tabset>
+        <lightning-tab label="Order Need to be Activated">
+           <c-order-activation-dashboard></c-order-activation-dashboard>
+        </lightning-tab>        
+        <lightning-tab label="Order with Error" >
+                <c-order-error-dashboard></c-order-error-dashboard>
+        </lightning-tab>
+        <lightning-tab label="No Invoice Flagged Option">
+            <c-order-noinvoice-dashboard></c-order-noinvoice-dashboard>
+        </lightning-tab>
+    </lightning-tabset>
+    </div>
+</template>

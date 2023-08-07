@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_fields_on_Case_Closure</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(ISPICKVAL(Status, &apos;Closed&apos;),ISPICKVAL(Status, &apos;Closure Confirmation&apos;)) &amp;&amp;  (AccountId  = &apos;&apos;  ||  ContactId  = &apos;&apos; ||  Edition__c = &apos;&apos; ||  Category_1__c = &apos;&apos; ||  Category_2__c = &apos;&apos; ||  Category_3__c = &apos;&apos; ) &amp;&amp; ISPICKVAL( Delete_Request_Reason__c ,&apos;&apos;)</errorConditionFormula>
+    <errorMessage>Account, Contact, Edition, Categories should not be blank</errorMessage>
+</ValidationRule>

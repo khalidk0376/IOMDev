@@ -1,0 +1,90 @@
+<apex:page showHeader="false" sidebar="false" lightningStylesheets="true" standardStylesheets="false" cache="false">
+    <apex:slds />
+    <html>
+        <head>
+            <title>Post Install Instructions  | Informa Order Management</title>
+            <style>
+                @font-face {
+                    font-family: Aleo;
+                    src: local(Aleo-Regular), url("/sfsites/c/resource/IMCC/fonts/Aleo-Regular.ttf") format("truetype");
+                    font-weight: normal;
+                    font-style: normal;
+                    font-stretch: normal;
+                }
+
+                @font-face {
+                    font-family: NotoSans;
+                    src: local(NotoSans-Regular),
+                    url("/sfsites/c/resource/IMCC/fonts/NotoSans-Regular.ttf") format("truetype");
+                    font-weight: normal;
+                    font-style: normal;
+                    font-stretch: normal;
+                }
+
+                @font-face {
+                    font-family: NotoSans;
+                    src: local(NotoSans-Medium),
+                    url("/sfsites/c/resource/IMCC/fonts/NotoSans-Medium.ttf") format("truetype");
+                    font-weight: 500;
+                    font-style: normal;
+                    font-stretch: normal;
+                }
+
+                @font-face {
+                    font-family: NotoSans;
+                    src: local(NotoSans-SemiBold),
+                    url("/sfsites/c/resource/IMCC/fonts/NotoSans-SemiBold.ttf") format("truetype");
+                    font-weight: 600;
+                    font-style: normal;
+                    font-stretch: normal;
+                }
+
+                @font-face {
+                    font-family: NotoSans;
+                    src: local(NotoSans-Bold),
+                    url("/sfsites/c/resource/IMCC/fonts/NotoSans-Bold.ttf") format("truetype");
+                    font-weight: bold;
+                    font-style: normal;
+                    font-stretch: normal;
+                }
+                .slds-scope ol, .slds-scope ul {
+                    list-style: auto!important;
+                }
+            </style>
+            <link rel="stylesheet" href="/sfsites/c/resource/IMCC/style.css?v=128.19" />
+            <link rel="stylesheet" href="/sfsites/c/resource/IMCC/global.css?v=128.19" />
+            <link rel="stylesheet" href="/sfsites/c/resource/IMCC2/style-two.css?v=128.19" />
+        </head>
+
+        <body class="loginBody">
+            <div class="section-header">
+                <div class="container-standard dashboard-h">
+                    <div class="slds-grid">
+                        <div class="left-box" style="display: flex;align-items: center;gap: 30px;">
+                            <div class="informa-logo">
+                                <a href="javascript:void(0);">
+                                    <img alt="Informa Logo" src="/sfsites/c/resource/IMCC/icons/informa-logo-2.png?v=1" />
+                                </a>
+                            </div>
+                            <div class="customer-center hide-in-only-small">
+                                <span class="link link-d-small">Informa Order Management</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="body-container">
+                <div class="container-standard body-content" style="padding-top: var(--space-8); padding-bottom:var(--space-8);">
+                    <div>
+                        <ol type="1">
+                            <li>Update Lightning Redirect URL</li>
+                            <li>Update Product Autonumber Field</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </body>
+
+    </html>
+</apex:page>

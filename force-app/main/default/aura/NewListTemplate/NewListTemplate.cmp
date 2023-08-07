@@ -1,0 +1,183 @@
+<aura:component controller="ListTemplateCtrl" implements="force:appHostable" access="GLOBAL">
+    <aura:attribute name="isShowCreateModal" type="Boolean" default="false" />
+    <aura:attribute name="lstQuenaireCategory" type="List" default="[]" />
+    <aura:attribute name="lstLanguage" type="List" default="[]" />
+    <aura:attribute name="columnOpt" type="List" default="[{label:'1',value:'1'},{label:'2',value:'2'},{label:'3',value:'3'}]" />
+    <!-- About section attribute-->
+    <aura:attribute name="isQuestionMapEnabled" type="Boolean" default="false" />
+
+    <aura:attribute name="selColumnNo" type="String" default="1" />
+    <aura:attribute name="sectionName" type="String" default="Step 1" />
+    <aura:attribute name="QnaireId" type="String" default="" />
+    <aura:attribute name="lstQuestionnaire" type="Questionnaire__c[]" />
+    <aura:attribute name="objQuesnaire" type="Questionnaire__c" default="{'sobjectType':'Questionnaire__c'}" />
+    <aura:attribute name="isCloneTemplate" type="Boolean" default="false" />
+    <aura:attribute name="searchValue" type="String" default="" />
+    <aura:attribute name="selectCategory" type="String" default="" />
+    <aura:attribute name="templateIdAndName" type="object" default="null" />
+    
+    <aura:attribute name="isFilter" type="Boolean" default="false" />
+    <aura:attribute name="sidebar_title" type="String" default="" />
+    <!-- DATATABLE Attributes -->
+    <!--Set object and fields to create datatable-->
+    <aura:attribute name="object" type="string" default="Questionnaire__c" />
+    <aura:attribute name="fields" type="String" default="Id,Name,Category__c,Language__c,Description__c,CreatedDate,is_Published__c" />
+
+    <!-- Datatable column Sorting attributes-->
+    <aura:attribute name="sortedBy" type="string" default="CreatedDate" />
+    <aura:attribute name="show_page_view" type="string" default="" />
+    <aura:attribute name="publicURL" type="String" default="" />
+
+    <aura:attribute name="sortedDirection" type="string" default="desc" />
+    <!--Attribute which hold datas and table columns (label,type,...other properties)-->
+    <aura:attribute name="mydata" type="list" default="[]" />
+    <aura:attribute name="mycolumn" type="object" default="{}" />
+    <!--Pagination attribute-->
+    <aura:attribute name="pagesize" type="integer" default="10" />
+    <aura:attribute name="totalrows" type="integer" default="0" />
+    <aura:attribute name="offset" type="integer" default="0" />
+    <aura:attribute name="next" type="boolean" default="0" />
+    <aura:attribute name="prev" type="boolean" default="0" />
+    <!-- DATATABLE Attributes END HERE-->
+
+    <!-- event handlers -->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:attribute name="Spinner" type="boolean" default="false" />
+    <aura:handler event="c:FBCloseEvent" action="{!c.sidebarHandler}" />    
+    <aura:handler event="c:Go_Back_Event" action="{!c.goBackHandler}" />
+
+    <aura:handler name="change" value="{!v.QnaireId}" action="{!c.doInit}" />
+    <!-- event handlers -->
+    <aura:if isTrue="{!v.Spinner}">
+        <lightning:spinner size="small" variant="brand" />
+    </aura:if>
+    {!v.body}
+    
+    <aura:if isTrue="{!v.QnaireId=='' &amp;&amp; v.isQuestionMapEnabled==false}">
+        <div class="slds-template_default">
+            <!--Start sub header section-->
+            <lightning:card aura:id="templateHeader" class="gkn-page-header">
+                <aura:set attribute="title">
+                    <div class="slds-media slds-no-space slds-grow">
+                        <div class="slds-media__figure gkn-media__figure">
+                            <lightning:icon iconName="utility:file" title="Form Template" variant="inverse" />
+                        </div>
+                        <div class="slds-media__body">
+                            <h1 class="slds-page-header__title slds-var-p-right_x-small">
+                                <button class="slds-button slds-button_reset slds-type-focus slds-truncate" aria-haspopup="true" title="">
+                                    <span class="slds-grid slds-has-flexi-truncate slds-grid_vertical-align-center">
+                                        <span class="slds-truncate" title="Recently Viewed">Form Template</span>
+                                    </span>
+                                </button>
+                            </h1>
+                            <nav class="slds-text-heading_small">
+                                Design form with multi-columns of all lightning input fields.
+                            </nav>
+                        </div>
+                    </div>
+                </aura:set>
+                <aura:set attribute="actions">
+                    <lightning:buttonGroup>
+                        <lightning:button aura:id="new_btn" label="New" onclick="{!c.createNewForm}" />
+                        <!--<lightning:button aura:id="mapFormWithObject" label="Map Form With Object" onclick="{!c.mapFormWithObject}" />-->
+                        <lightning:buttonIcon aura:id="filter_btn" iconName="utility:filterList" alternativeText="Settings" onclick="{!c.showFilter}" class="slds-button_last" />
+                    </lightning:buttonGroup>
+                </aura:set>
+            </lightning:card>
+            <!--End sub header section-->
+
+            <lightning:layout multipleRows="true">
+                <lightning:layoutItem aura:id="left_box" size="12" class="ease-in whitebg">
+                    <lightning:datatable data="{!v.mydata}" columns="{!v.mycolumn}" hideCheckboxColumn="true" onsort="{!c.updateColumnSorting}" sortedBy="{!v.sortedBy}" sortedDirection="{!v.sortedDirection}" keyField="Id" onrowaction="{!c.handleRowAction}" />
+                    <div class="slds-p-around_xx-small slds-float_right">
+                        Showing {!v.show_page_view} of {!v.totalrows} &nbsp;
+                        <lightning:button variant="brand" iconPosition="left" iconName="utility:chevronleft" onclick="{!c.previousDatas}" label="Previous" disabled="{!v.prev}" />
+                        <lightning:button variant="brand" iconPosition="right" iconName="utility:chevronright" onclick="{!c.nextDatas}" label="Next" disabled="{!v.next}" />
+                    </div>
+                </lightning:layoutItem>
+                <lightning:layoutItem aura:id="right_box" size="4" class="slds-hide ease-in gkn-sidebar">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-size_12-of-12 slds-grid_vertical">
+                            <div class="slds-grid slds-no-flex panelHeader">
+                                <h2 class="">{!v.sidebar_title}</h2>
+                                <a href="#">
+                                    <lightning:buttonIcon iconName="utility:forward" onclick="{!c.hideFilter}" variant="bare" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="slds-size_12-of-12 slds-scrollable_y">
+                            <div class="panelBody">
+                                <aura:if isTrue="{!v.isFilter}">
+                                    <div class="slds-grid slds-wrap">
+                                        <div class="slds-size_12-of-12 ">
+                                            <lightning:combobox aura:id="Category" name="Category" label="Category" placeholder="Choose Category" value="{!v.selectCategory}" onchange="{!c.filterDataTable}" options="{!v.lstQuenaireCategory}" class="combo-box" />
+                                        </div>
+                                        <div class="slds-size_12-of-12 slds-var-p-top_medium">
+                                            <div class="slds-form-element">
+                                                <div class="slds-input-has-icon slds-input-has-icon--right">
+                                                    <lightning:buttonIcon iconName="utility:search" variant="bare" alternativeText="Search" class="slds-input__icon" />
+                                                    <ui:inputText class="slds-lookup__search-input slds-input" placeholder="Search Form" value="{!v.searchValue}" keyup="{!c.filterDataTable}" updateOn="keyup" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </aura:if>
+                                <aura:if isTrue="{!v.isShowCreateModal==true}">
+                                    <lightning:input aura:id="fieldId" required="true" pattern="\S+.*" title="This field is required" label="Form title" name="TemplateTitle" placeholder="Enter template title" minlength="2" maxlength="80" messageWhenValueMissing="Please enter the template name."
+                                        value="{!v.objQuesnaire.Name}" />
+                                    
+                                    <lightning:textarea class="slds-var-p-top_x-small" aura:id="templatedesc" label="Form description" placeholder="Enter a Template Description" messageWhenBadInput="Please enter the template description." value="{!v.objQuesnaire.Description__c}"
+                                    />
+                                    <lightning:select aura:id="fieldId" label="Select Category" required="true" messageWhenValueMissing="Please select Category." value="{!v.objQuesnaire.Category__c}">
+                                        <aura:iteration items="{!v.lstQuenaireCategory}" var="c">
+                                            <option value="{!c.value}">{!c.label}</option>
+                                        </aura:iteration>                                        
+                                    </lightning:select>
+                                    
+                                    <lightning:input class="slds-var-p-top_x-small" label="First Section Name" type="text" value="{!v.sectionName}" aura:id="fieldId" required="true" pattern="\S+.*" title="This field is required" />
+                                    
+                                    <lightning:select value="{!v.objQuesnaire.Language__c}" label="Select Language">
+                                        <aura:iteration items="{!v.lstLanguage}" var="l">
+                                            <option value="{!l.value}">{!l.value}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                    
+                                    <lightning:input class="slds-var-p-top_x-small" label="Do you want to Show Main Title to user?" type="checkbox" value="{!v.objQuesnaire.Show_Main_Title_to_User__c}" aura:id="showtitleuser" />
+                                    <br/>
+                                    
+                                    <div class="slds-clear">
+                                        <lightning:button label="Cancel" onclick="{!c.hideFilter}" />
+                                        <lightning:button iconName="utility:check" class="slds-button_brand" label="Create Form" onclick="{!c.saveQQuesnaireRecrod}" />
+                                    </div>
+                                </aura:if>
+                                
+                                <aura:if isTrue="{!v.isCloneTemplate==true}">
+                                    <div class="slds-form-element slds-var-m-top_x-small slds-var-m-left_small">
+                                        <lightning:input aura:id="fieldId" required="true" pattern="\S+.*" title="This field is required" label="Template title" name="TemplateTitle" placeholder="Enter template title" minlength="2" maxlength="80" messageWhenValueMissing="Please enter the template name."
+                                            value="{!v.objQuesnaire.Name}" />
+                                        <lightning:textarea class="slds-var-p-top_x-small" aura:id="fieldId" label="Template description" name="TemplateDescription" placeholder="Enter a Template Description" minlength="1" maxlength="150" messageWhenValueMissing="Please enter the template description."
+                                            value="{!v.objQuesnaire.Description__c}" />
+                                        <lightning:combobox aura:id="fieldId" name="category" label="Select Category" placeholder="Select Category" messageWhenValueMissing="Please select Category." value="{!v.objQuesnaire.Category__c}" options="{!v.lstQuenaireCategory}" required="true"
+                                            class="combo-box slds-var-p-top_x-small" />
+                                        <!--<lightning:input class="slds-var-p-top_x-small" label="Do you want to merge all section?" type="checkbox" value="{!v.objQuesnaire.isMerge__c}" aura:id="mergefieldid" />-->
+                                    </div>
+                                    <br/>
+                                    <div class="slds-clear">
+                                        <lightning:button label="Cancel" onclick="{!c.hideFilter}" />
+                                        <lightning:button label="Clone Form" onclick="{!c.cloneFormTemplate}" variant="brand" />
+                                    </div>
+
+                                </aura:if>
+                            </div>
+                        </div>
+                        <div class="slds-backdrop slds-backdrop_close" aura:id="backdrop"></div>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.QnaireId!='' &amp;&amp; v.isQuestionMapEnabled==false}">
+        <!-- <c:testFormBuilder QnaireId="{!v.QnaireId}" /> -->
+        <c:NewCreateTemplate QnaireId="{!v.QnaireId}" />
+    </aura:if>    
+</aura:component>

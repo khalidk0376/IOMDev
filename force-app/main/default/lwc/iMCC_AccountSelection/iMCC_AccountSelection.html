@@ -1,0 +1,111 @@
+<!-- Created By		: Girikon(Garima[IMCC-2]),[Aishwarya Girikon 29 March 2023 IMCC-5042]
+Created On		: Sep 8 2021
+@description 	: This LWC is used for IMCC account selection page.
+-->
+<template>    
+    <div class="account-selection-name-list">
+        <div class="account-select-heading heading heading-d-large heading-m-large">Select your account</div>
+        <div class="account-select-description para paragraph-d-standard paragraph-m-standard">You have access to the company accounts below. Select one to get started.</div>
+        <div if:true={showAccountPage} class="account-card-container">
+            <template if:true={accLst} for:each={accLst} for:item="item">
+                <div key={item.Id} class="card account-card">
+                    <div class="name">
+                        <div class="heading heading-d-medium heading-m-medium">{item.Name}</div>
+                        <div class="event-count">
+                            <span class="event-count para paragraph-m-small">{item.eventCount} event<span if:true={item.isMoreThanOne}>s</span></span> 
+                            <lightning-icon data-acc-id={item.Id} onclick={openTooltip} class="event-count-icon" icon-name="utility:info_alt" size="xx-small"></lightning-icon>
+                            <div class="slds-popover slds-popover_tooltip slds-nubbin_top-left slds-fall-into-ground" role="tooltip" 
+                                id={item.Id}>
+                                <div class="slds-popover__body">
+                                    <template iterator:it={item.eventList}>
+                                        <div key={it.value.Id} class="e-list">
+                                            <a href="javascript:void(0)" class="para paragraph-d-small slds-truncate">
+                                                {it.value.Name}<!--Pfizer US company with a very long name lorem ipsum dolar-->
+                                            </a>
+                                        </div>
+                                        <div key={it.value.Id} if:false={it.last} class="line">&nbsp;</div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="account-action">
+                        <lightning-button-icon class="hide-in-only-small" onclick={selectedRec} data-acc-id={item.Id} icon-name="utility:forward"></lightning-button-icon>
+                        <lightning-button class="btn-lg show-in-only-small" label="Launch dashboard" onclick={selectedRec} data-acc-id={item.Id}></lightning-button>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>        
+    
+    <template if:true={noActiAccError}>
+        <section
+            role="dialog"
+            tabindex="-1"
+            aria-labelledby="modal-heading-01"
+            aria-modal="true"
+            aria-describedby="modal-content-id-1"
+            class="slds-modal slds-fade-in-open"
+        >
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon
+                    class="slds-modal__close"
+                    title="Close"
+                    icon-name="utility:close"
+                    icon-class="slds-button_icon-inverse"
+                    onclick={handleDialogClose}
+                    ></lightning-button-icon>
+
+                    <h3 class="slds-text-heading_small slds-hyphenate header-string">
+                        Your Account is Disabled<br/>
+                    </h3>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <slot>
+                       <h3>{label}</h3>                    
+                    </slot>
+                </div>
+
+            </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <template if:true={noActiAccErrorEdition}>
+        <section
+            role="dialog"
+            tabindex="-1"
+            aria-labelledby="modal-heading-01"
+            aria-modal="true"
+            aria-describedby="modal-content-id-1"
+            class="slds-modal slds-fade-in-open"
+        >
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon
+                    class="slds-modal__close"
+                    title="Close"
+                    icon-name="utility:close"
+                    icon-class="slds-button_icon-inverse"
+                    onclick={handleDialogClose2}
+                    ></lightning-button-icon>
+
+                    <h3 class="slds-text-heading_small slds-hyphenate header-string">
+                        Your Account is Disabled<br/>
+                    </h3>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                    <slot>
+                       <h3>System is unable to find your company in the list of confirmed exhibitors for {editionName} event. If you find this information incorrect, please contact our Customer Service team to assist you</h3>                    
+                    </slot>
+                </div>
+
+            </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <iframe src="/IMCC/apex/IMCC_Live_Chat" width="0" class="maxHeight chatWindowFrame" ></iframe> 
+</template>

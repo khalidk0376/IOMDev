@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Amendment_Type__c</fullName>
+    <description>Type of Amendment.</description>
+    <externalId>false</externalId>
+    <label>Type of Change</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bill To Account Change</fullName>
+                <default>false</default>
+                <label>Account - Bill To Account Change To Different Account</label>
+            </value>
+            <value>
+                <fullName>Billing Address Change</fullName>
+                <default>false</default>
+                <label>Account - Bill To Address Update Same Account</label>
+            </value>
+            <value>
+                <fullName>Account Name Change</fullName>
+                <default>false</default>
+                <label>Account - Name Update</label>
+            </value>
+            <value>
+                <fullName>Ship To Account Change</fullName>
+                <default>false</default>
+                <label>Account - Ship To Account Change To Different Account</label>
+            </value>
+            <value>
+                <fullName>Shipping Address Change</fullName>
+                <default>false</default>
+                <label>Account - Ship To Address Update Same Account</label>
+            </value>
+            <value>
+                <fullName>Billing Schedule Change</fullName>
+                <default>false</default>
+                <label>Billing Schedule Change</label>
+            </value>
+            <value>
+                <fullName>Update Bill To Contact</fullName>
+                <default>false</default>
+                <label>Contact - Bill To Contact Change To Different Contact</label>
+            </value>
+            <value>
+                <fullName>Bill to Contact Details Change</fullName>
+                <default>false</default>
+                <label>Contact - Bill To Contact Update Same Contact</label>
+            </value>
+            <value>
+                <fullName>PO number change</fullName>
+                <default>false</default>
+                <label>PO Number Update</label>
+            </value>
+            <value>
+                <fullName>VAT Registration Number Change</fullName>
+                <default>false</default>
+                <label>VAT Registration Number Update</label>
+            </value>
+            <value>
+                <fullName>Billing Options Update</fullName>
+                <default>false</default>
+                <label>Subscription Billing Options Update</label>
+            </value>
+            <value>
+                <fullName>Cancellation</fullName>
+                <default>false</default>
+                <label>Cancellation</label>
+            </value>
+            <value>
+                <fullName>Tax Exempt Rebill</fullName>
+                <default>false</default>
+                <label>Tax Exempt Rebill</label>
+            </value>
+            <value>
+                <fullName>Campaign Run Dates Change</fullName>
+                <default>false</default>
+                <label>Campaign Run Dates/Amounts Change</label>
+            </value>
+            <value>
+                <fullName>Number of Impressions Amendment</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Number of Impressions Amendment</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

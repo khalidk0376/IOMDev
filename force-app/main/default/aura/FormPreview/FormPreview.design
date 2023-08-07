@@ -1,0 +1,6 @@
+<design:component label="Girikon Form">
+	<design:attribute name="recordId" label="Form Id"/>
+	<design:attribute name="thankyouMessage" label="Thankyou Message" default="Thankyou for submit."/>
+	<!-- thankyou_page uri used to redirect to next page-->
+	<design:attribute name="thankyou_page" label="Thankyou Page URI" default="/thankyou" description="Thankyou page URI used to redirect to next page. If page not exist, then create a Thankyou page."/>
+</design:component>

@@ -1,0 +1,20 @@
+<template>
+    <!--
+    <lightning-card title="">
+       <div class="slds-theme_default slds-p-left_medium slds-p-right_medium">
+        <lightning-button variant="Brand" label="Clone Templates" class="slds-m-right_medium" onclick={CloneTemplates}>
+        </lightning-button>
+       </div>
+          
+    </lightning-card> --> 
+    <lightning-quick-action-panel header="Clone Templates">
+ 
+        <div class="slds-p-around_medium lgc-bg">
+           <strong style="color: red;">Are you sure want to clone the email templates? If yes, Click on Proceed.</strong>
+        </div>
+        <div slot="footer">
+            <lightning-button variant="neutral" label="Cancel" onclick={cancel}></lightning-button>
+            <lightning-button variant="brand" label="Proceed" class="slds-m-left_x-small" onclick={CloneTemplates}></lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>

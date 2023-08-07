@@ -1,0 +1,167 @@
+<aura:component access="GLOBAL">
+    <aura:attribute name="isShow" type="Boolean" default="false"/>
+    <div class="{!v.isShow?'forceListViewPlaceholder':'slds-hide forceListViewPlaceholder'}">
+        <div class="slds-grid slds-wrap rect">
+            <div class="slds-size_1-of-1">
+                <div class="placeholder related_record">                    
+                    <div class="body flex-grid flex-v-center">
+                        <div class="box"></div>
+                        <div class="text-body bottom1">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                            <div class="text text-medium opacity30"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-grid slds-wrap slds-var-p-top_medium">
+
+            <div class="slds-size--2-of-4 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-small-size_12-of-12">
+
+                <div class="placeholder related_record ">
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>                
+                </div>
+            </div>
+
+            <div class="slds-size--2-of-4 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-small-size_12-of-12">
+
+                <div class="placeholder related_record ">
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                    <div class="body flex-grid flex-v-center">
+                        <div class="text-body">
+                            <div class="text text-medium opacity30"></div>
+                            <div class="text text-long"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</aura:component>

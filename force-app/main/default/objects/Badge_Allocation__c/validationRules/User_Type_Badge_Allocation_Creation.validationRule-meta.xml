@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>User_Type_Badge_Allocation_Creation</fullName>
+    <active>true</active>
+    <description>User Type Badge Allocation Creation</description>
+    <errorConditionFormula>INCLUDES(User_Type__c, &apos;Agent&apos;)|| INCLUDES(User_Type__c, &apos;Co-Exhibitor&apos;) || INCLUDES(User_Type__c, &apos;Contractor&apos;)</errorConditionFormula>
+    <errorMessage>Badge Allocation can be created only for Exhibitor and Online User Type</errorMessage>
+</ValidationRule>

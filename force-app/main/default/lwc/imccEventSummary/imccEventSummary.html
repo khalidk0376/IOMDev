@@ -1,0 +1,254 @@
+<template>  
+    <template if:true={isShowSummaryData}> 
+        <div if:false={isAllTaskCompleted} class="event-progress">        
+            <div class="your-progress">
+                <span class="heading heading-d-small heading-m-small">Your progress</span>
+            </div>
+            <div class="event-progress-count">
+                <span class="heading event-count-number">{totalProgress}</span>
+                <span class="link link-d-small-medium percent">%</span>
+            </div>
+            <div class="progress-bar">
+                <lightning-progress-bar class={progressColor} value={totalProgress} size="medium" variant="circular">
+                </lightning-progress-bar>
+            </div>    
+        </div>
+        <div if:true={isAllTaskCompleted} class="event-progress">        
+            <div class="your-progress">
+                <div class="slds-grid" style="align-items: center;gap: 20px;">
+                    <div class="slds-col">
+                        <img src="/sfsites/c/resource/IMCC/icons/congratulations.png" style="width:64px" alt=""/>
+                    </div>
+                    <div class="slds-col">
+                        <span class="heading heading-d-small heading-m-small">{message}</span>
+                    </div>
+                </div>
+            </div>
+        </div>    
+        <div if:false={isAllTaskCompleted} class="task-list">
+            <template if:true={taskList} for:each={taskList} for:item="item" for:index="index">
+                <div key={item.Id} if:true={item.isEnabled} class="item">
+                    <div class="task-content">
+                        <span class="para paragraph-d-small paragraph-m-small">{item.label}</span>
+                    </div>
+                    <div if:true={item.isCompleted}>
+                        <img src="/sfsites/c/resource/IMCC2/icons/Green-tick.svg" class="icon-16" />
+                    </div>
+                    <div if:false={item.isCompleted} class="task-content">
+                        <span class="para paragraph-d-small paragraph-m-small"><a data-index={index} onclick={openTask} href="javascript:void(0);">{item.completed}/{item.total}</a></span>
+                    </div>
+                </div>
+            </template>
+            <template if:true={isTaskNotFound}>
+                <div class="item">
+                    <div class="task-content">
+                        <span class="para paragraph-d-small paragraph-m-small">You have no assigned tasks at the moment</span>
+                    </div>                
+                </div>
+            </template>        
+            <div class="line-pad">
+                <div class="line"></div>
+            </div>
+            <div class="work-link">
+                <a href="javascript:void(0)" class="link link-d-small-medium link-m-small-medium"
+                    onclick={openHowTo}>How it Works</a>
+                <div class="link-icon">
+                    <img src="/sfsites/c/resource/IMCC2/icons/Blue-tooltip.svg" class="icon-12" />
+                </div>
+            </div>
+        </div>
+    </template> 
+
+    <template if:false={isShowSummaryData}>
+        <div class="event-progress">
+            <div class="slds-grid slds-wrap rect">
+                <div class="slds-size_1-of-1">
+                    <div class="placeholder related_record">                    
+                        <div class="body flex-grid flex-v-center">
+                            <div class="box"></div>
+                            <div class="text-body bottom1">
+                                <div class="text text-medium opacity30"></div>
+                                <div class="text text-long"></div>
+                                <div class="text text-medium opacity30"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="task-list">
+            <div class="slds-grid slds-wrap rect">
+                <div class="slds-size_1-of-1">
+                    <div class="placeholder related_record">                    
+                        <div class="body flex-grid flex-v-center">
+                            <div class="box"></div>
+                            <div class="text-body bottom1">
+                                <div class="text text-medium opacity30"></div>
+                                <div class="text text-long"></div>
+                                <div class="text text-medium opacity30"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap rect">
+                <div class="slds-size_1-of-1">
+                    <div class="placeholder related_record">                    
+                        <div class="body flex-grid flex-v-center">
+                            <div class="box"></div>
+                            <div class="text-body bottom1">
+                                <div class="text text-medium opacity30"></div>
+                                <div class="text text-long"></div>
+                                <div class="text text-medium opacity30"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>      
+            <div class="line-pad">
+                <div class="line"></div>
+            </div>
+            <div class="work-link">
+                <div class="slds-grid slds-wrap rect">
+                    <div class="slds-size_1-of-1">
+                        <div class="placeholder related_record">                    
+                            <div class="body flex-grid flex-v-center">
+                                <div class="box"></div>
+                                <div class="text-body bottom1">
+                                    <div class="text text-medium opacity30"></div>
+                                    <div class="text text-long"></div>
+                                    <div class="text text-medium opacity30"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template if:true={openHowItWorkModal}>
+        <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" aria-modal="true"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <div class="work-header heading heading-d-large heading-m-large heading-m-small">How it works.</div>
+                    <div class="work-content para paragraph-m-standard paragraph-m-small">This helpful tool will guide
+                        you through your event setup, prioritise urgent tasks and seamlessly gather information.</div>
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        onclick={cancelModal}>
+                        <img src="/sfsites/c/resource/IMCC2/icons/Cross-light-blue-7.svg" class="icon-32" alt="close" />
+                        <span class="slds-assistive-text">Cancel and close</span>
+                    </button>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                    <!--IMCC-5139-->
+                    <!--<div class="profile">
+                        <div class="profile-heading">
+                            <img src="/sfsites/c/resource/IMCC2/icons/company-profile-indigo-10.svg" class="icon-24" />
+                            <span class="heading-content heading heading-d-small heading-m-small">Complete your company
+                                profile</span>
+                        </div>
+                        <div class="profile-content">
+                            <div class="profile-subhead">
+                                <span class="subheading para paragraph-d-small paragraph-m-small">Promote your company
+                                    and showcase the relevant products and services.</span>
+                            </div>
+                            <div class="profile-badge">
+                                <span class="stage para paragraph-d-tiny paragraph-m-tiny">1 stage</span>
+                                <div class="dot"></div>
+                                <span class="time para paragraph-d-tiny paragraph-m-tiny">Time: 5 minutes</span>
+                            </div>
+                        </div>
+                    </div>-->
+
+                    <div class="profile">
+                        <div class="profile-heading">
+                            <img src="/sfsites/c/resource/IMCC2/icons/form-indigo-10.svg" class="icon-24" />
+                            <span class="heading-content heading heading-d-small heading-m-small">Fill in the required
+                                forms</span>
+                        </div>
+                        <div class="profile-content">
+                            <div class="profile-subhead">
+                                <span class="subheading para paragraph-d-small paragraph-m-small">Take your time to fill
+                                    out forms that are required in the setup of your event.</span>
+                            </div>
+                            <div class="profile-badge">
+                                <span class="stage para paragraph-d-tiny paragraph-m-tiny">1 stage</span>
+                                <div class="dot"></div>
+                                <span class="time para paragraph-d-tiny paragraph-m-tiny">Time: 5 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile">
+                        <div class="profile-heading">
+                            <img src="/sfsites/c/resource/IMCC2/icons/read-indigo-10.svg" class="icon-24" />
+                            <span class="heading-content heading heading-d-small heading-m-small">Read &amp; agree to
+                                important information</span>
+                        </div>
+                        <div class="profile-content">
+                            <div class="profile-subhead">
+                                <span class="subheading para paragraph-d-small paragraph-m-small">Make sure that you
+                                    read, agree and understand the important terms and regulations for the event.</span>
+                            </div>
+                            <div class="profile-badge">
+                                <span class="stage para paragraph-d-tiny paragraph-m-tiny">1 stage</span>
+                                <div class="dot"></div>
+                                <span class="time para paragraph-d-tiny paragraph-m-tiny">Time: 5 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--IMCC-5139-->
+                    <!--<div class="profile">
+                        <div class="profile-heading">
+                            <img src="/sfsites/c/resource/IMCC2/icons/edit-indigo-10.svg" class="icon-24" />
+                            <span class="heading-content heading heading-d-small heading-m-small">Submit your stand
+                                designs</span>
+                        </div>
+                        <div class="profile-content">
+                            <div class="profile-subhead">
+                                <span class="subheading para paragraph-d-small paragraph-m-small">Upload your own stand
+                                    designs or add a contractor to the platform to do it on your behalf.</span>
+                            </div>
+                            <div class="profile-badge">
+                                <span class="stage para paragraph-d-tiny paragraph-m-tiny">1 stage</span>
+                                <div class="dot"></div>
+                                <span class="time para paragraph-d-tiny paragraph-m-tiny">Time: 5 minutes</span>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="profile">
+                        <div class="profile-heading">
+                            <img src="/sfsites/c/resource/IMCC2/icons/event-indigo-10.svg" class="icon-24" />
+                            <span class="heading-content heading heading-d-small heading-m-small">{label.Badge_registration_and_Lead_Retrieval}</span>
+                        </div>
+                        <div class="profile-content">
+                            <!--IMCC-5139-->
+                            <!--<div class="profile-subhead">
+                                <span class="subheading para paragraph-d-small paragraph-m-small">Upload your own stand
+                                    designs or add a contractor to the platform to do it on your behalf.</span>
+                            </div> -->
+                            <div class="profile-subhead">
+                                <span class="subheading para paragraph-d-small paragraph-m-small">Register your staff for exhibitor badges ahead of the event.</span>
+                            </div>
+                            <div class="profile-badge">
+                                <span class="stage para paragraph-d-tiny paragraph-m-tiny">1 stage</span>
+                                <div class="dot"></div>
+                                <span class="time para paragraph-d-tiny paragraph-m-tiny">Time: 5 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" aria-label="Cancel and close"
+                        onclick={cancelModal}>Close</button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

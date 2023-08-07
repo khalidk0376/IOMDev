@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Amendment_Request__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Opportunity Amendment Request</description>
+    <externalId>false</externalId>
+    <label>Amendment Request</label>
+    <referenceTo>Change_Request__c</referenceTo>
+    <relationshipLabel>API Synchronization Items</relationshipLabel>
+    <relationshipName>API_Synchronization_Items</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

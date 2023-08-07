@@ -1,0 +1,91 @@
+<aura:component controller="FieldInputCtr">
+    <!-- Start attribute -->
+    <aura:attribute name="QnaireId" type="String" />
+    <aura:attribute name="QnaireName" type="String" />
+    <aura:attribute name="QuestnQnaireId" type="String" />
+    <aura:attribute name="QuestnGroupId" type="String" />
+    <aura:attribute name="Questntype" type="String" />
+    <aura:attribute name="modalHeader" type="String" />
+    <aura:attribute name="fieldType" type="String" />
+    <aura:attribute name="dropColNumber" type="String" />
+    <aura:attribute name="questOrderNum" type="String" default="0" />
+    <aura:attribute name="isEditQue" type="Boolean" />
+    <aura:attribute name="lstQuesCategory" type="List" default="[]" />
+    <aura:attribute name="objCrteQues" type="Question__c" default="{ 'sobjectType': 'Question__c'}" />
+    <aura:attribute name="isShowbutton" type="Boolean" default="false" />
+    <aura:attribute name="isShowAttachmentandCommentCheckBox" type="Boolean" default="false" />
+    <!-- End attribute-->
+    <!-- event handlers -->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"></aura:handler>
+    <!-- event handlers -->
+    {!v.body}
+    <!--Start body-->
+    <div class="slds-col slds-grid_vertical">
+        <div class="slds-grid slds-no-flex panelHeader">
+            <h2>Question Editor: {!v.modalHeader}</h2>
+            <a href="#">
+                <lightning:buttonIcon iconName="utility:forward" onclick="{!c.hideModal}" variant="bare" />
+            </a>
+        </div>
+    </div>
+    <div class="slds-col slds-scrollable_y">
+        <div class="panelBody">
+            <div class="slds-form-element ">
+                <lightning:inputRichText formats="['bold', 'italic', 'underline','list', 'align']" label="Question Text" onblur="{!c.checkTextLength}" messageWhenBadInput="write your question" aura:id="qustNameRich" placeholder="Compose text..." value="{!v.objCrteQues.Label__c}" />
+            </div>
+            <div class="slds-form-element slds-var-m-top_small">
+                <div class="slds-form-element">
+                    <lightning:input type="checkbox" label="Help Text" name="helptext" checked="{!v.objCrteQues.Help_Text_Required__c}" />
+                </div>
+                <aura:if isTrue="{!v.objCrteQues.Help_Text_Required__c==true}">
+                    <div class="slds-form-element slds-var-m-bottom_x-small slds-var-m-top_x-small">
+                        <lightning:input aura:id="helpTextInp" label="Help" placeholder="Help Text" name="Help Text" value="{!v.objCrteQues.Help_Text__c}" maxlength="255" minlength="0" variant="label-hidden" />
+                    </div>
+                </aura:if>
+            </div>
+            <div class="slds-grid slds-var-m-top_x-small">
+                <div class="slds-col ">
+                    <div class="slds-form-element slds-var-m-top_x-small">
+                        <lightning:input type="checkbox" label="Required" name="reimbursed" checked="{!v.objCrteQues.Required__c}" />
+                    </div>
+                </div>
+                <aura:if isTrue="{!v.isShowAttachmentandCommentCheckBox}">
+                    <div class="slds-col ">
+                        <div class="slds-form-element slds-var-m-top_x-small slds-var-m-left_small">
+                            <lightning:input type="checkbox" label="Allow Comment" name="Comment" checked="{!v.objCrteQues.Allow_Comment__c}" />
+                        </div>
+                    </div>
+                    <div class="slds-col ">
+                        <div class="slds-form-element slds-var-m-top_x-small slds-var-m-left_small">
+                            <lightning:input type="checkbox" label="Allow Attachments" name="Upload file" checked="{!v.objCrteQues.Allow_Attachments__c}" />
+                        </div>
+                    </div>
+                </aura:if>
+            </div>
+            <div class="slds-grid slds-var-m-bottom_small">
+                <div class="slds-form-element slds-var-m-top_x-small">
+                    <lightning:input type="number" label="Minimum Value" name="Maximum_value" value="{!v.objCrteQues.Minimum_Value__c}" maxlength="12" min="0" messageWhenStepMismatch="Not allow decimal number" messageWhenValueMissing="Please enter min value" messageWhenBadInput="please enter valid value (Not allow decimal)"
+                        required="true" />
+                </div>
+                <div class="slds-form-element slds-var-m-top_x-small slds-var-m-left_small">
+                    <lightning:input type="number" messageWhenBadInput="please enter valid value (Not allow decimal)" label="Maximum Value" name="Maximum_value" messageWhenStepMismatch="Not allow decimal number" value="{!v.objCrteQues.Maximum_value__c}" messageWhenValueMissing="Please enter max value"
+                        maxlength="12" min="0" required="true" />
+                </div>
+            </div>
+            <div class="slds-grid slds-var-m-bottom_small">
+                <div class="slds-form-element">
+                    <lightning:input messageWhenStepMismatch="Only allow 2 point decimal number" messageWhenBadInput="please enter valid value" label="Step Size" name="Step_Size" value="{!v.objCrteQues.Step_Size__c}" maxlength="12" min="0" required="true" messageWhenValueMissing="Please enter step size value"
+                    />
+                </div>
+                <div class="slds-form-element slds-var-m-left_small">
+                    <lightning:input type="number" messageWhenStepMismatch="Not allow decimal number" messageWhenBadInput="please enter valid value (Not allow decimal)" label="Default Value" name="Step_Size" value="{!v.objCrteQues.Default_Value__c}" maxlength="12"
+                        min="0" messageWhenValueMissing="Please enter default value" required="true" />
+                </div>
+            </div>
+            <br/>
+            <lightning:button label="Cancel" onclick="{!c.hideModal}" />
+            <lightning:button disabled="{!v.isShowbutton}" label="Save" variant="brand" onclick="{!c.saveQues}" />
+        </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</aura:component>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <description>API Synchronization Item Type</description>
+    <externalId>false</externalId>
+    <label>Type</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Tax</fullName>
+                <default>false</default>
+                <label>Tax</label>
+            </value>
+            <value>
+                <fullName>Post Documents</fullName>
+                <default>false</default>
+                <label>Post Documents</label>
+            </value>
+            <value>
+                <fullName>Accounting Credit Status</fullName>
+                <default>false</default>
+                <label>Accounting Credit Status</label>
+            </value>
+            <value>
+                <fullName>Amendment Request Approved/Rejected</fullName>
+                <default>false</default>
+                <label>Amendment Request Approved/Rejected</label>
+            </value>
+            <value>
+                <fullName>Opportunity Rejected</fullName>
+                <default>false</default>
+                <label>Opportunity Rejected</label>
+            </value>
+            <value>
+                <fullName>Opportunity Closed Lost</fullName>
+                <default>false</default>
+                <label>Opportunity Closed Lost</label>
+            </value>
+            <value>
+                <fullName>Amendment Completed</fullName>
+                <default>false</default>
+                <label>Amendment Completed</label>
+            </value>
+            <value>
+                <fullName>Re-Print for PO number change</fullName>
+                <default>false</default>
+                <label>Re-Print for PO number change</label>
+            </value>
+            <value>
+                <fullName>Re-Print for Bill To Account Details Change</fullName>
+                <default>false</default>
+                <label>Re-Print for Bill To Account Details Change</label>
+            </value>
+            <value>
+                <fullName>Re-Print for Contact Details Change</fullName>
+                <default>false</default>
+                <label>Re-Print for Contact Details Change</label>
+            </value>
+            <value>
+                <fullName>Amended Data Sync</fullName>
+                <default>false</default>
+                <label>Amended Data Sync - CRM</label>
+            </value>
+            <value>
+                <fullName>Re-Print for Ship To Account Details Change</fullName>
+                <default>false</default>
+                <label>Re-Print for Ship To Account Details Change</label>
+            </value>
+            <value>
+                <fullName>Re-Print for Account Details Change</fullName>
+                <default>false</default>
+                <label>Re-Print for Account Details Change</label>
+            </value>
+            <value>
+                <fullName>Account ERP Number Update</fullName>
+                <default>false</default>
+                <label>Account ERP Number Update</label>
+            </value>
+            <value>
+                <fullName>Post Payment Transactions</fullName>
+                <default>false</default>
+                <label>Post Payment Transactions</label>
+            </value>
+            <value>
+                <fullName>OLI Start End Amount Update</fullName>
+                <default>false</default>
+                <label>OLI Start End Amount Update</label>
+            </value>
+            <value>
+                <fullName>Amended Data Sync - OH</fullName>
+                <default>false</default>
+                <label>Amended Data Sync - OH</label>
+            </value>
+            <value>
+                <fullName>ERP Ref. Number back update to CRM</fullName>
+                <default>false</default>
+                <label>ERP Ref. Number back update to CRM</label>
+            </value>
+            <value>
+                <fullName>Document Pull request from ERP</fullName>
+                <default>false</default>
+                <label>Document Pull request from ERP</label>
+            </value>
+            <value>
+                <fullName>Account Billing Address Change</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Account Billing Address Change</label>
+            </value>
+            <value>
+                <fullName>Account Credit Status</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Account Credit Status</label>
+            </value>
+            <value>
+                <fullName>Account Name Change</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Account Name Change</label>
+            </value>
+            <value>
+                <fullName>Account Shipping Address Change</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Account Shipping Address Change</label>
+            </value>
+            <value>
+                <fullName>Bill To Account change</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Bill To Account change</label>
+            </value>
+            <value>
+                <fullName>Change Request Completed</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Change Request Completed</label>
+            </value>
+            <value>
+                <fullName>Ship To Account change</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Ship To Account change</label>
+            </value>
+            <value>
+                <fullName>VAT Registration Number Change</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VAT Registration Number Change</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

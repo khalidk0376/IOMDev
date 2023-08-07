@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Default IOM Synchronization Status</label>
+    <protected>false</protected>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>IOM_Description__c</field>
+        <value xsi:type="xsd:string">IOM Synchronization Status to set default value in Sync status for all the IOM Synchronization Transaction records created for IOM callouts - 
+Use Options [Queued / Paused]</value>
+    </values>
+    <values>
+        <field>IOM_Value__c</field>
+        <value xsi:type="xsd:string">Queued</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,21 @@
+<!--
+* Created By   :   Girikon(Ansh) : JIRA ref: [IOM-1659]
+* Created On   :   23rd June 2022
+* *********************************************************************************
+* @description  : Override Standard Quote Line delete button
+* controller    : DeleteOverrideCtrl
+* *********************************************************************************
+* Modification log :
+* 
+-->
+<apex:page standardController="SBQQ__QuoteLine__c" extensions="DeleteOverrideCtrl" action="{!IF(isDelete == False, null, URLFOR($Action.SBQQ__QuoteLine__c.Delete, SBQQ__QuoteLine__c.Id, [nooverride=1], true))}">
+    <apex:slds />
+    <div class="slds-text-align_center slds-m-top_medium">
+        <h1  style="font-weight:bold; font-size:12pt; color:red;">Insufficient Privileges</h1>
+    </div>
+    <br/>
+    <div>
+        <p style="text-align:center; font-size:10pt; color:red;">{!$Label.Delete_Validation_Message}</p>        
+    </div>
+
+</apex:page>

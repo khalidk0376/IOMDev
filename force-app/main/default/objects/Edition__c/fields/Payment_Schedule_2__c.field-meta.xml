@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Payment_Schedule_2__c</fullName>
+    <description>Payment Schedules defined at Edition level for Invoice Plan Products.</description>
+    <externalId>false</externalId>
+    <label>Payment Schedule 2</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>50-50</fullName>
+                <default>false</default>
+                <label>50-50</label>
+            </value>
+            <value>
+                <fullName>10-40-50</fullName>
+                <default>false</default>
+                <label>10-40-50</label>
+            </value>
+            <value>
+                <fullName>10-45-45</fullName>
+                <default>false</default>
+                <label>10-45-45</label>
+            </value>
+            <value>
+                <fullName>25-25-50</fullName>
+                <default>false</default>
+                <label>25-25-50</label>
+            </value>
+            <value>
+                <fullName>25-25-25-25</fullName>
+                <default>false</default>
+                <label>25-25-25-25</label>
+            </value>
+            <value>
+                <fullName>100</fullName>
+                <default>false</default>
+                <label>100</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

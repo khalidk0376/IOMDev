@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IOM_Opportunity__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>Parent Opportunity for Amendment request</description>
+    <externalId>false</externalId>
+    <label>Opportunity</label>
+    <referenceTo>Opportunity</referenceTo>
+    <relationshipLabel>Amendment Requests</relationshipLabel>
+    <relationshipName>IOM_Amendment_Requests</relationshipName>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Form_Allocation</fullName>
+    <fields>Name</fields>
+    <fields>Form_Type__c</fields>
+    <fields>Form_Provider__c</fields>
+    <fields>Form_Entry__c</fields>
+    <fields>Form_Setting__c</fields>
+    <label>Form Allocation</label>
+</CompactLayout>

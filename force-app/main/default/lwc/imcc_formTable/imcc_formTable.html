@@ -1,0 +1,964 @@
+<template>
+   <lightning-spinner if:true={showSpinner} variant="brand" size="small" title="Loading..." class="loaderCss">
+   </lightning-spinner>
+   <template if:false={nodata}>
+      <template if:true={showTable}>
+         <template if:true={showMan}>
+            <div class="left-sidebar">
+               <div class="event-summary-box">
+                  <div class="event-progress">
+                     <div class="your-progress">
+                        <span class="heading heading-d-small heading-m-small">Your progress</span>
+                     </div>
+                     <div class="event-progress-count">
+                        <span class="heading event-count-number">{progressPercent}</span>
+                        <span class="link link-d-small-medium percent">%</span>
+                     </div>
+                     <div class="progress-bar">
+                        <lightning-progress-bar value={progressPercent} size="medium" variant="circular">
+                        </lightning-progress-bar>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </template>
+
+         <template if:true={showMan}>
+            <template if:true={isShowInMan}>
+               <div class="slds-m-bottom_small">
+                  <c-imcc-page-header></c-imcc-page-header>
+               </div>
+            </template>
+            <div class="required-form">
+               <h3 class="heading heading-d-large heading-m-large heading-m-medium">Mandatory {tabtype}</h3>
+            </div>
+         </template>
+
+         <template if:true={showAdd}>
+            <template if:true={isShowInAdd}>
+               <div class="slds-m-bottom_small">
+                  <c-imcc-page-header></c-imcc-page-header>
+               </div>
+            </template>
+            <div class="required-form form-secondary">
+               <h3 class="heading heading-d-large heading-m-large heading-m-medium">Additional {tabtype}</h3>
+            </div>
+         </template>
+         <template if:true={showOpt}>
+            <template if:true={isShowInOpt}>
+               <div class="slds-m-bottom_small">
+                  <c-imcc-page-header></c-imcc-page-header>
+               </div>
+            </template>
+            <div class="required-form form-secondary">
+               <h3 class="heading heading-d-large heading-m-large heading-m-medium">Optional {tabtype}</h3>
+            </div>
+         </template>
+
+         <div class="form-count">
+            <span class="para paragraph-d-small paragraph-m-small">{showFormCount}</span>
+            <!-- <div class="line"></div> -->
+            <!--<a href="javascript:void(0)" onclick={openAssignToModal}>
+               <lightning-icon icon-name="utility:adduser" size="x-small"></lightning-icon>
+               <span class="count-share para paragraph-d-small-medium">Assign To</span>            
+            </a>-->
+         </div>
+
+         <lightning-card class="form-card">
+            <div slot="title" class="form-search">
+               <lightning-input type="search" onchange={searchForm} placeholder="Search" variant="label-hidden"
+                  label="search"></lightning-input>
+               <div class="m-filter">
+                  <img onclick={openMobileMenu} src="/sfsites/c/resource/IMCC2/icons/filter.svg" class="icon-24" />
+               </div>
+            </div>
+            <div slot="actions">
+               <div class="action-filters">
+                  <div if:true={filterField3Options} class="activity action-btn">
+                     <button onclick={openFilterOption} class="filter3 filter-btn slds-button slds-button_neutral">
+                        <span class="para paragraph-d-small paragraph-m-small">{filter3Label}</span>
+                        <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small"></lightning-icon>
+                        <div if:true={filterField3Value} class="badge-pill"></div>
+                     </button>
+                     <div onclick={onTopClick} class="button-menu">
+                        <template if:true={filterField3Options} for:each={filterField3Options} for:item="item"
+                           for:index="index">
+                           <div key={item.value} class="item">
+                              <div class="slds-checkbox item-checkbox">
+                                 <lightning-input data-filter="3" data-index={index} checked={item.isChecked}
+                                    onchange={handleFilterChange} class="para paragraph-d-small paragraph-m-small"
+                                    type="checkbox" label={item.label}></lightning-input>
+                              </div>
+                           </div>
+                        </template>
+                     </div>
+                  </div>
+                  <div if:true={filterField2Options} class="customer action-btn">
+                     <button onclick={openFilterOption} class="filter2 filter-btn slds-button slds-button_neutral">
+                        <span class="para paragraph-d-small paragraph-m-small">{filter2Label}</span>
+                        <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small"></lightning-icon>
+                        <div if:true={filterField2Value} class="badge-pill"></div>
+                     </button>
+                     <div onclick={onTopClick} class="button-menu">
+                        <template for:each={filterField2Options} for:item="item" for:index="index">
+                           <div key={item.value} class="item">
+                              <div class="slds-checkbox item-checkbox">
+                                 <lightning-input data-filter="2" data-index={index} checked={item.isChecked}
+                                    onchange={handleFilterChange} class="para paragraph-d-small paragraph-m-small"
+                                    type="checkbox" label={item.label}></lightning-input>
+                              </div>
+                           </div>
+                        </template>
+                     </div>
+                  </div>
+                  <div if:true={filter1Label} class="stand action-btn">
+                     <button onclick={openFilterOption} class="filter1 filter-btn slds-button slds-button_neutral">
+                        <span class="para paragraph-d-small paragraph-m-small">{filter1Label}</span>
+                        <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small"></lightning-icon>
+                        <div if:true={filterField1Value} class="badge-pill"></div>
+                     </button>
+                     <div onclick={onTopClick} class="button-menu">
+                        <template if:true={filterField1Options} for:each={filterField1Options} for:item="item"
+                           for:index="index">
+                           <div key={item.value} class="item">
+                              <div class="slds-checkbox item-checkbox">
+                                 <lightning-input checked={item.isChecked} data-filter="1" data-index={index}
+                                    onchange={handleFilterChange} class="para paragraph-d-small paragraph-m-small"
+                                    type="checkbox" label={item.label}></lightning-input>
+                              </div>
+                           </div>
+                        </template>
+                     </div>
+                  </div>
+                  <div if:true={isFilterApplied} class="clear-filter action-btn">
+                     <button onclick={clearFilter} class="filter-btn slds-button">
+                        <span class="para paragraph-d-small paragraph-m-small">Clear filters</span>
+                     </button>
+                  </div>
+               </div>
+            </div>
+            <div class="slds-scrollable_x scrollable_x">
+               <lightning-spinner if:true={isTrue} variant="brand" size="small" title="Loading..."></lightning-spinner>
+               <table aria-multiselectable="true"
+                  class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered" role="grid">
+                  <thead>
+                     <tr class="slds-line-height_reset table-height ">
+                        <!--<th class="table-check" scope="col">
+                           <div class="slds-checkbox">
+                              <lightning-input onchange={selectAllRows} type="checkbox" class="all" variant="label-hidden" label="Select All"></lightning-input>
+                           </div>
+                        </th>-->
+                        <th tabindex="0" aria-label="View Responses" aria-sort="none" class="" scope="col">
+                        </th>
+                        <th style="min-width:224px;" aria-label="Form Name" aria-sort="none" class="" scope="col">
+                           <a id="formName" onclick={handleSorting} class="" href="javascript:void(0);" role="button">
+                              <div class="table-main">
+                                 <div class="para paragraph-d-small paragraph-m-small" title="Form Name">{formHeader}
+                                    Name
+                                 </div>
+                                 <lightning-icon class="action-icon" icon-name="utility:up" size="xx-small">
+                                 </lightning-icon>
+                              </div>
+                           </a>
+                        </th>
+                        <template if:false={isManual}>
+                           <th style="min-width: 169px;" aria-label="Form Type" aria-sort="none" class="" scope="col">
+                              <div class="table-main">
+                                 <div class="para paragraph-d-small paragraph-m-small" title="Form Name">Type</div>
+                              </div>
+                           </th>
+                        </template>
+                        <th style="min-width:150px;" aria-label="Form Category" aria-sort="none" class="" scope="col">
+                           <a id="Form_Category__c" onclick={handleSorting} class="" href="javascript:void(0);"
+                              role="button">
+                              <div class="table-main">
+                                 <div class="para paragraph-d-small paragraph-m-small" title="Form Name">{formHeader}
+                                    Category</div>
+                                 <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small">
+                                 </lightning-icon>
+                              </div>
+                           </a>
+                        </th>
+                        <th aria-label="Form Provider" aria-sort="none" class="" scope="col">
+                           <a id="Form_Provider__c" onclick={handleSorting} class="" href="javascript:void(0);"
+                              role="button">
+                              <div class="table-main">
+                                 <div class="para paragraph-d-small paragraph-m-small" title="Form Name">{formHeader}
+                                    Provider</div>
+                                 <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small">
+                                 </lightning-icon>
+                              </div>
+                           </a>
+                        </th>
+                        <th aria-label="Deadline" aria-sort="none" class="" scope="col">
+                           <a id="Submission_Deadline__c" onclick={handleSorting} class="" href="javascript:void(0);"
+                              role="button">
+                              <div class="table-main">
+                                 <div class="para paragraph-d-small paragraph-m-small" title="Form Name">Deadline</div>
+                                 <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small">
+                                 </lightning-icon>
+                              </div>
+                           </a>
+                        </th>
+                        <th style="min-width: 150px;" aria-label="Form Status" aria-sort="none" class="" scope="col">
+                           <a id="Overall_Status__c" onclick={handleSorting} class="" href="javascript:void(0);"
+                              role="button">
+                              <div class="table-main">
+                                 <div class="para paragraph-d-small paragraph-m-small" title="Form Name">{formHeader}
+                                    Status</div>
+                                 <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small">
+                                 </lightning-icon>
+                              </div>
+                           </a>
+                        </th>
+                        <template if:false={isManual}>
+                           <th aria-label="Not Applicable" aria-sort="none" class="" scope="col">
+                              <div class="table-main">
+                                 <div class="para paragraph-d-small paragraph-m-small" title="Form Name">Not Applicable
+                                 </div>
+                              </div>
+                           </th>
+                        </template>
+                        <td>&nbsp;</td>
+                     </tr>
+                  </thead>
+
+                  <tbody>
+                     <tr if:false={tableData} aria-selected="false" class="slds-hint-parent table-height ">
+                        <td colspan="10" class="table-pad">
+                           <div class="slds-truncate para paragraph-d-small paragraph-m-small" title="No record found">
+                              <span style="color: var(--light-blue-7);">No record found!</span>
+                           </div>
+                        </td>
+                     </tr>
+                     <template for:each={tableData} for:item="item" for:index="ind">
+                        <template if:true={item.isShowFormData}>
+                           <tr key={item.Id} aria-selected="false" class={item.customCSS}>
+                              <!--<td class="table-check" scope="col">
+                                 <div class="slds-checkbox">
+                                    <lightning-input type="checkbox" variant="label-hidden" label="Select item 1" checked={item.isChecked} data-id={ind} onchange={checkAssignTo}></lightning-input>
+                                 </div>
+                              </td>-->
+
+                              <td tabindex="0" class="table-pad" scope="row">
+                                 <template if:true={item.isMultiEntry}>
+                                    <template if:true={item.expand}>
+                                       <lightning-button-icon data-id={ind} onclick={toggleDrawer}
+                                          icon-name="utility:chevrondown" alternative-text="chevrondown"
+                                          title="Collapse">
+                                       </lightning-button-icon>
+                                    </template>
+                                    <template if:false={item.expand}>
+                                       <lightning-button-icon data-id={ind} onclick={toggleDrawer}
+                                          icon-name="utility:chevronright" alternative-text="chevronright"
+                                          title="Expand">
+                                       </lightning-button-icon>
+                                    </template>
+                                 </template>
+                              </td>
+
+                              <td tabindex="0" class="table-pad" scope="row">
+                                 <div class="form-content slds-truncate" title="FORM NAME">
+                                    <template if:false={item.notShowAsLink}>
+                                       <a href="javascript:void(0);" onclick={openAction} data-id={ind}
+                                          class="para paragraph-d-small paragraph-m-small" tabindex="-1">
+                                          {item.Forms_Permission__r.Form_Allocation__r.Name}
+                                       </a>
+                                    </template>
+                                    <template if:true={item.notShowAsLink}>
+                                       <span class="para paragraph-d-small paragraph-m-small"
+                                          tabindex="-1">{item.Forms_Permission__r.Form_Allocation__r.Name}</span>
+                                    </template>
+                                 </div>
+                              </td>
+                              <template if:false={isManual}>
+                                 <td class="table-pad">
+                                    <template if:true={item.showFormIcon}>
+                                       <lightning-icon icon-name="utility:form" alternative-text="Online"
+                                          title="Online">
+                                       </lightning-icon>
+                                    </template>
+                                    <template if:true={item.showPdfIcon}>
+                                       <lightning-icon icon-name="utility:pdf_ext" alternative-text="Pdf" title="Pdf">
+                                       </lightning-icon>
+                                    </template>
+                                    <template if:true={item.showLinkIcon}>
+                                       <lightning-icon icon-name="utility:link" alternative-text="Link" title="Link">
+                                       </lightning-icon>
+                                    </template>
+                                    <template if:true={item.showRelateIcon}>
+                                       <lightning-icon icon-name="utility:relate"
+                                          alternative-text={item.titleForMultiple} title={item.titleForMultiple}>
+                                       </lightning-icon>
+                                    </template>
+                                 </td>
+                              </template>
+                              <td class="table-pad">
+                                 <div class="slds-truncate para paragraph-d-small paragraph-m-small" title="FORM TYPE">
+                                    {item.Forms_Permission__r.Form_Allocation__r.Form_Category__c}
+                                 </div>
+                              </td>
+                              <td class="table-pad">
+                                 <div class="slds-truncate para paragraph-d-small paragraph-m-small"
+                                    title="FORM PROVIDER">
+                                    {item.Forms_Permission__r.Form_Allocation__r.Form_Provider__c}
+                                 </div>
+                              </td>
+                              <td class="table-pad">
+                                 <div if:true={item.Forms_Permission__r.Form_Allocation__r.Submission_Deadline__c}
+                                    class={item.statusClassDate} title="DEADLINE">
+                                    {item.Forms_Permission__r.Form_Allocation__r.Submission_Deadline__c}
+                                    <!--
+                                    <lightning-formatted-date-time
+                                       value={item.Forms_Permission__r.Form_Allocation__r.Submission_Deadline__c}
+                                       year="numeric" month="numeric" day="numeric"></lightning-formatted-date-time>
+                                    -->
+                                 </div>
+                              </td>
+                              <td class="table-pad">
+                                 <div class="status-badge" title="FORM STATUS">
+                                    <div>
+                                       <span
+                                          class="para paragraph-d-tiny paragraph-m-tiny">{item.Overall_Status__c}</span>
+                                    </div>
+                                 </div>
+                              </td>
+                              <template if:false={isManual}>
+                                 <td class="table-check">
+                                    <div class="slds-checkbox" title="Not Applicable">
+                                       <lightning-input type="checkbox" variant="label-hidden" data-id={ind}
+                                          checked={item.Not_Applicable__c} onchange={saveApplicable}
+                                          label="not applicable 1">
+                                       </lightning-input>
+                                    </div>
+                                 </td>
+                              </template>
+                           </tr>
+                           <template if:true={item.expand}>
+                              <tr key={item.Id} aria-selected="false" class="slds-hint-parent table-height">
+                                 <td class="table-pad" colspan={item.colspan} style="border:0!important;">
+                                    <table aria-multiselectable="true"
+                                       class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered"
+                                       role="grid">
+                                       <thead>
+                                          <tr class="slds-line-height_reset table-height">
+                                             <th style="min-width:224px;" aria-label="Entry Name" aria-sort="none"
+                                                class="" scope="col">
+                                                <div class="table-main">
+                                                   <div class="para paragraph-d-small paragraph-m-small"
+                                                      title="Entry Name">
+                                                      Entry Name </div>
+                                                </div>
+                                             </th>
+                                             <th style="min-width: 150px;" aria-label="Status" aria-sort="none" class=""
+                                                scope="col">
+                                                <div class="table-main">
+                                                   <div class="para paragraph-d-small paragraph-m-small" title="Status">
+                                                      Status
+                                                   </div>
+                                                </div>
+                                             </th>
+                                             <template if:true={item.isRejected}>
+                                                <th style="min-width: 150px;" aria-label="Rejection Reason"
+                                                   aria-sort="none" class="" scope="col">
+                                                   <div class="table-main">
+                                                      <div class="para paragraph-d-small paragraph-m-small"
+                                                         title="Rejection Reason">Rejection Reason</div>
+                                                   </div>
+                                                </th>
+                                             </template>
+                                             <th aria-label="Action" aria-sort="none" class="" scope="col">
+                                                <div class="table-main">
+                                                   <div class="para paragraph-d-small paragraph-m-small" title="Action">
+                                                      Action
+                                                   </div>
+                                                </div>
+                                             </th>
+                                          </tr>
+                                       </thead>
+
+                                       <tbody>
+                                          <tr if:true={item.noData} aria-selected="false"
+                                             class="slds-hint-parent table-height">
+                                             <td colspan="5" class="table-pad">
+                                                <div class="slds-truncate para paragraph-d-small paragraph-m-small"
+                                                   title="No record found">
+                                                   <span style="color: var(--light-blue-7);">No record found!</span>
+                                                </div>
+                                             </td>
+                                          </tr>
+                                          <template for:each={item.Form_Response_Entries__r} for:item="entry"
+                                             for:index="indEntry">
+                                             <tr key={entry.Id} if:true={entry.Show} aria-selected="false"
+                                                class="slds-hint-parent table-height">
+
+                                                <td tabindex="0" class="table-pad" scope="row">
+                                                   <div class="form-content slds-truncate" title="ENTRY NAME">
+                                                      <a href="javascript:void(0);" onclick={openActionEntry}
+                                                         data-parentid={ind} data-id={indEntry}
+                                                         class="para paragraph-d-small paragraph-m-small" tabindex="-1">
+                                                         {entry.responseName}
+                                                      </a>
+                                                   </div>
+                                                </td>
+                                                <td class="table-pad">
+                                                   <div class="slds-truncate para paragraph-d-small paragraph-m-small"
+                                                      title="STATUS">
+                                                      {entry.Status}
+                                                   </div>
+                                                </td>
+                                                <template if:true={item.isRejected}>
+                                                   <td class="table-pad">
+                                                      <div
+                                                         class="slds-truncate para paragraph-d-small paragraph-m-small"
+                                                         title="Rejection Reason">
+                                                         <template if:true={entry.rejectIcon}>
+                                                            <lightning-button-icon variant="bare" data-id={indEntry}
+                                                               data-parentid={ind} icon-class="slds-button_icon-error"
+                                                               onclick={openReasonModal} icon-name="utility:warning"
+                                                               alternative-text="View" title="View"
+                                                               size="large"></lightning-button-icon>
+                                                         </template>
+                                                      </div>
+                                                   </td>
+                                                </template>
+                                                <td class="table-pad">
+                                                   <div class="slds-truncate para paragraph-d-small paragraph-m-small"
+                                                      title="ACTION">
+                                                      <template if:true={entry.showDeleteOption}>
+                                                         <lightning-button data-id={indEntry} data-parentid={ind}
+                                                            variant="brand" label="Delete" title="Primary action"
+                                                            onclick={handleDelete} class="slds-m-left_x-small">
+                                                         </lightning-button>
+                                                      </template>
+                                                   </div>
+                                                </td>
+                                             </tr>
+                                          </template>
+                                       </tbody>
+                                    </table>
+                                 </td>
+                              </tr>
+                           </template>
+                        </template>
+                     </template>
+                  </tbody>
+               </table>
+            </div>
+         </lightning-card>
+      </template>
+   </template>
+
+   <template if:true={nodata}>
+      <template if:true={showMan}>
+         <div class="slds-m-bottom_small">
+            <c-imcc-page-header></c-imcc-page-header>
+         </div>
+         <div class="required-form">
+            <h3 class="heading heading-d-large heading-m-large heading-m-medium">No {tabtype} Found</h3>
+         </div>
+      </template>
+   </template>
+
+   <template if:true={downloadModal}>
+      <template if:true={isManual}>
+         <div class="demo-only modalCss">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+               aria-describedby="modal-content-id-1" class="slds-modal pdf-modal slds-slide-up-saving slds-modal_large">
+               <div class="slds-modal__container">
+                  <header class="slds-modal__header">
+                     <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={ClosePopup}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                           size="small">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                     </button>
+                  </header>
+                  <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-23">
+                     <iframe src={showPdf} style="width:100%; min-height:600px;padding-bottom:0px;"></iframe>
+                  </div>
+                  <footer style="padding: 10px;" class="slds-modal__footer">
+                     <div class="slds-grid slds-wrap">
+                        <div class="slds-size_7-of-12 slds-p-right_x-small">
+                           <div class="slds-grid" style="margin-top: 13px;">
+                              <template if:true={isPdfAgreed}>
+                                 <div class="slds-size_7-of-12 slds-mright_xx-small slds-m-left_xx-large">
+                                    <lightning-input onchange={handleAgreeManual} type="checkbox" checked="true"
+                                       label={manualTermCon}></lightning-input>
+                                 </div>
+                              </template>
+                              <template if:false={isPdfAgreed}>
+                                 <div class="slds-size_7-of-12">
+                                    <lightning-input onchange={handleAgreeManual} type="checkbox"
+                                       label={manualTermCon}></lightning-input>
+                                 </div>
+                              </template>
+                           </div>
+                        </div>
+                        <div class="slds-size_5-of-12 slds-p-left_x-small">
+                           <a href={showPdf} class="slds-button slds-button_brand" download="MyFile">
+                              <lightning-icon icon-name="utility:arrow_bottom" size="xx-small"></lightning-icon>
+                              &nbsp;Download &nbsp;
+                           </a>&nbsp;
+                           <template if:true={isVisibleSaveOnLoad}>
+                              <lightning-button disabled={isSaveBtnDisable} onclick={saveFormData} label="Submit"
+                                 variant="brand" icon-name="utility:save" class="slds-m-left_large"></lightning-button>
+                           </template>
+                           <template if:false={isVisibleSaveOnLoad}>
+                              <lightning-button disabled=true onclick={saveFormData} label="Submit" variant="brand"
+                                 icon-name="utility:save" class="slds-m-left_large"></lightning-button>
+                           </template>
+
+                           <lightning-button variant="neutral" label="Close" title="Close" onclick={ClosePopup}
+                              class="slds-m-left_x-small"></lightning-button>
+                        </div>
+                     </div>
+                  </footer>
+               </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+         </div>
+      </template>
+      <template if:false={isManual}>
+         <div class="demo-only modalCss">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+               aria-describedby="modal-content-id-1" class="slds-modal pdf-modal slds-slide-up-saving slds-modal_large">
+               <div class="slds-modal__container">
+                  <header class="slds-modal__header">
+                     <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={ClosePopup}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                           size="small">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                     </button>
+                  </header>
+                  <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-24">
+                     <div class="row">
+                        <div style="float: left; width: 30%; white-space: pre-line">
+                              <p><lightning-icon icon-name="action:info" alternative-text="info"
+                                 size="xx-small" variant="success"></lightning-icon>&nbsp;
+                              <b>How to submit a pdf form:</b></p>&nbsp;&nbsp;
+                           <p>{Instruction}</p>
+                        </div>
+                        <div style="float: left; width: 70%;"><iframe src={showPdf}
+                              style="width:100%; min-height:600px;padding-bottom:0px;"></iframe></div>
+                     </div>
+                  </div>
+                  <footer style="padding: 10px;" class="slds-modal__footer">
+                     <div
+                        class="slds-grid btn-container slds-wrap slds-grid_align-spread slds-m-top_small slds-m-bottom_small slds-p-left_medium slds-p-right_medium"
+                        style="align-items: center;">
+                        <div class="slds-col slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 ">
+                           <div class="slds-grid" style="align-items: center;gap:5px">
+                              <div class="slds-col">
+                                 <template if:true={isViewPDFFormEntry}>
+                                    <a href={showPdf} class="slds-button slds-button_brand" download="MyFile">
+                                       <lightning-icon icon-name="utility:arrow_bottom"
+                                          size="xx-small"></lightning-icon>
+                                       &nbsp;Download Empty form &nbsp;
+                                    </a>&nbsp;
+                                 </template>
+                                 <template if:false={isViewPDFFormEntry}>
+                                    <a href={showPdf} class="slds-button slds-button_brand" download="MyFile">
+                                       <lightning-icon icon-name="utility:arrow_bottom"
+                                          size="xx-small"></lightning-icon>
+                                       &nbsp;Download Empty form &nbsp;
+                                    </a>&nbsp;
+                                 </template>
+                              </div>
+                              <div class="slds-col " style="margin-top:-20px">
+                                 <template if:true={isUploadEnable}>
+                                    <lightning-file-upload name="fileUploader" accept={acceptedFormats}
+                                       record-id={entryId} onuploadfinished={handleUploadFinished}
+                                       variant="label-hidden">
+                                    </lightning-file-upload>
+                                 </template>
+                              </div>
+                           </div>
+                        </div>
+                        <div
+                           class="slds-col slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-text-align_right">
+                           <lightning-button variant="neutral" label="Close" title="Close" onclick={ClosePopup}
+                              icon-position="right"></lightning-button>
+                        </div>
+                     </div>
+
+                     <template if:true={showAfterUploadBtn}>
+                        <template for:each={fileData} for:item="item" for:index="index">
+                           <div key={item.name} class="item">
+                              <div class="slds-size_7-of-12 slds-p-top_x-small">
+                                 &nbsp;
+                              </div>
+                              <div
+                                 class="slds-grid btn-container slds-wrap slds-grid_align-spread slds-m-top_small slds-m-bottom_small slds-p-left_medium slds-p-right_medium"
+                                 style="align-items: center;">
+                                 <div
+                                    class="slds-col slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 ">
+                                    <div class="slds-grid" style="align-items: center;gap:5px">
+                                       <div class="slds-col">
+                                          <lightning-icon icon-name="doctype:pdf" size="medium"></lightning-icon>
+                                       </div>
+                                       <div class="slds-col " style="text-align: left;gap:5px">
+                                          {item.Title}</br>{item.sizeInKB} KB
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div
+                                    class="slds-col slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-text-align_right">
+
+                                    <lightning-button label="View" variant="neutral" disabled={disableViewBtn}
+                                       onclick={viewModel} name={item.Id}></lightning-button>&nbsp;
+
+                                    <lightning-button variant="destructive" label="Delete" title="Close"
+                                       onclick={handledeletePdfModal} disabled={disableDeleteBtn}>
+                                    </lightning-button>&nbsp;
+
+                                    <lightning-button variant="brand" label="Submit" title="Submit"
+                                       disabled={disableSubmitBtn} onclick={submitPdf}></lightning-button>
+                                 </div>
+                              </div>
+                           </div>
+                        </template>
+                     </template>
+
+                  </footer>
+               </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+         </div>
+      </template>
+   </template>
+
+   <template if:true={viewModal}>
+      <div class="demo-only modalCss">
+         <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-11" class="slds-modal pdf-modal slds-slide-up-saving slds-modal_large">
+            <div class="slds-modal__container">
+               <header class="slds-modal__header">
+                  <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                     onclick={closeViewPopup}>
+                     <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small">
+                     </lightning-icon>
+                     <span class="slds-assistive-text">Close</span>
+                  </button>
+               </header>
+               <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-22">
+                  <iframe src={viewPdf} style="width:100%; min-height:600px;padding-bottom:0px;"></iframe>
+               </div>
+               <footer class="slds-modal__footer">
+                  <a href={viewPdf} class="slds-button slds-button_brand" download="MyFile">
+                     <lightning-icon icon-name="utility:arrow_bottom" size="xx-small"></lightning-icon>&nbsp;Download
+                     &nbsp;
+                  </a>&nbsp;
+                  <lightning-button variant="neutral" label="Close" title="Close" onclick={closeViewPopup}
+                     class="slds-m-left_x-small"></lightning-button>
+               </footer>
+            </div>
+         </section>
+         <div class="slds-backdrop slds-backdrop_open"></div>
+      </div>
+   </template>
+
+   <template if:true={isOpenBoothSelector}>
+      <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small"
+         aria-labelledby="modal-heading-03" aria-modal="true">
+         <div class="slds-modal__container">
+            <button onclick={closeBoothSelector}
+               class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+               <lightning-icon icon-name="utility:close" size="small" variant="bare"></lightning-icon>
+            </button>
+            <div class="slds-modal__header">
+               <h1 id="modal-heading-03" class="slds-modal__title slds-hyphenate">Select booth to open form</h1>
+            </div>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3" style="min-height: 320px;">
+               <div class="slds-p-bottom_x-large">
+                  <lightning-combobox label="Select Booth" required="true" onchange={handleBoothSelect}
+                     options={boothList} value={selectedBooth}></lightning-combobox>
+               </div>
+            </div>
+            <div class="slds-modal__footer">
+               <button onclick={closeBoothSelector} class="slds-button slds-button_neutral"
+                  aria-label="Cancel and close">Cancel</button>
+               <button onclick={openFormForBooth} class="slds-button slds-button_brand">Open Form</button>
+            </div>
+         </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+   </template>
+
+   <template if:true={isModalOpen}>
+      <!-- Modal/Popup Box LWC starts here -->
+      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+         aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+         <div class="slds-modal__container">
+            <!-- Modal/Popup Box LWC header here -->
+            <header class="slds-modal__header">
+               <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                  onclick={closeModal}>
+                  <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small">
+                  </lightning-icon>
+                  <span class="slds-assistive-text">Close</span>
+               </button>
+               <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Delegate Forms </h2>
+            </header>
+            <!-- Modal/Popup Box LWC body starts here -->
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+               <p>
+                  <lightning-radio-group name="radioGroup" label="Select Contact" options={options} value={selectedCon}
+                     type="radio" onchange={handleRadioChange}>
+                  </lightning-radio-group>
+               </p>
+            </div>
+            <!-- Modal/Popup Box LWC footer starts here -->
+            <footer class="slds-modal__footer">
+               <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+               <button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">OK</button>
+            </footer>
+         </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+   </template>
+
+   <!-- Modal for Delete Confirmation starts here-->
+   <template if:true={isDeleteModal}>
+      <!-- Modal/Popup Box LWC starts here -->
+      <section role="dialog" tabindex="-1" aria-labelledby="deleteFormHeader" aria-modal="true"
+         aria-describedby="deleteFormModalContent" class="slds-modal slds-fade-in-open modalpopup">
+         <div class="slds-modal__container">
+            <!-- Modal/Popup Box LWC header here -->
+            <header class="slds-modal__header">
+               <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                  onclick={closeModal}>
+                  <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small">
+                  </lightning-icon>
+                  <span class="slds-assistive-text">Close</span>
+               </button>
+               <h2 id="deleteFormHeader" class="slds-text-heading_medium slds-hyphenate">Form Deletion</h2>
+            </header>
+            <!-- Modal/Popup Box LWC body starts here -->
+            <div class="slds-modal__content slds-p-around_medium" id="deleteFormModalContent">
+               <p>
+                  Are you sure you want to delete this form submission ?
+               </p>
+            </div>
+            <!-- Modal/Popup Box LWC footer starts here -->
+            <footer class="slds-modal__footer">
+               <button class="slds-button slds-button_brand" onclick={openDeleteAction} title="Agree">Delete</button>
+               <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+
+            </footer>
+         </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+   </template>
+   <template if:true={isDeletePdfModal}>
+      <!-- Modal/Popup Box LWC starts here -->
+      <section role="dialog" tabindex="-1" aria-labelledby="deleteFormHeader" aria-modal="true"
+         aria-describedby="deleteFormModalContent" class="slds-modal slds-fade-in-open modalpopup">
+         <div class="slds-modal__container">
+            <!-- Modal/Popup Box LWC header here -->
+            <header class="slds-modal__header">
+               <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                  onclick={closePdfDeleteModal}>
+                  <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small">
+                  </lightning-icon>
+                  <span class="slds-assistive-text">Close</span>
+               </button>
+               <h2 id="deletePdfHeader" class="slds-text-heading_medium slds-hyphenate">Pdf Form Deletion</h2>
+            </header>
+            <!-- Modal/Popup Box LWC body starts here -->
+            <div class="slds-modal__content slds-p-around_medium" id="deletePdfFormModalContent">
+               <p>
+                  Are you sure you want to delete this Pdf submission ?
+               </p>
+            </div>
+            <!-- Modal/Popup Box LWC footer starts here -->
+            <footer class="slds-modal__footer">
+               <button class="slds-button slds-button_brand" onclick={deletePdf} title="Yes">Yes</button>
+               <button class="slds-button slds-button_neutral" onclick={closePdfDeleteModal} title="No">No</button>
+
+            </footer>
+         </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+   </template>
+   <!-- Modal for Delete Confirmation ends here-->
+
+   <!-- Modal for Rejection Reason starts here-->
+   <template if:true={isReasonModal}>
+      <!-- Modal/Popup Box LWC starts here -->
+      <section role="dialog" tabindex="-1" aria-labelledby="rejectionReasonHeader" aria-modal="true"
+         aria-describedby="rejectionReasonContent" class="slds-modal slds-fade-in-open modalpopup">
+         <div class="slds-modal__container">
+            <!-- Modal/Popup Box LWC header here -->
+            <header class="slds-modal__header">
+               <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                  onclick={closeModal}>
+                  <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small">
+                  </lightning-icon>
+                  <span class="slds-assistive-text">Close</span>
+               </button>
+               <h2 id="rejectionReasonHeader" class="slds-text-heading_medium slds-hyphenate">Rejection Reason</h2>
+            </header>
+            <!-- Modal/Popup Box LWC body starts here -->
+            <div class="slds-modal__content slds-p-around_medium" id="rejectionReasonContent">
+               <p>
+                  {rejectionReason}
+               </p>
+            </div>
+            <footer class="slds-modal__footer">
+
+            </footer>
+         </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+   </template>
+   <!-- Modal for Rejection Reason ends here-->
+
+
+   <template if:true={isModalOpenLink}>
+      <!-- Modal/Popup Box LWC starts here -->
+      <section role="dialog" tabindex="-1" aria-labelledby="linkformagreementHeader" aria-modal="true"
+         aria-describedby="linkformagreementContent" class="slds-modal slds-fade-in-open modalpopup">
+         <div class="slds-modal__container">
+            <!-- Modal/Popup Box LWC header here -->
+            <header class="slds-modal__header">
+               <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                  onclick={closeModalLinkForm}>
+                  <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small">
+                  </lightning-icon>
+                  <span class="slds-assistive-text">Close</span>
+               </button>
+               <h2 id="linkformagreementHeader" class="slds-text-heading_medium slds-hyphenate">Form Agreement</h2>
+            </header>
+            <!-- Modal/Popup Box LWC body starts here -->
+            <div class="slds-modal__content slds-p-around_medium" id="linkformagreementContent">
+               <p>
+                  You are viewing a form that is tracked outside of this system. By clicking agree, you agree to
+                  complete this form immediately.
+               </p>
+            </div>
+            <!-- Modal/Popup Box LWC footer starts here -->
+            <footer class="slds-modal__footer">
+               <button class="slds-button slds-button_brand" onclick={openLinkForm} title="Agree">Agree</button>
+               <button class="slds-button slds-button_neutral" onclick={closeModalLinkForm}
+                  title="Cancel">Cancel</button>
+
+               <!--<button class="slds-button slds-button_brand" onclick={openLinkForm} title="Agree">Agree</button>-->
+            </footer>
+         </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+   </template>
+
+   <!--Table filter for mobie device start-->
+   <div class="mobile-menu form-mobile"
+      style="display:none;transform-style: preserve-3d;-webkit-transform:translate3d(480px, 0, 0px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(480px, 0, 0px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(480px, 0, 0px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(480px, 0, 0px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);">
+      <div class="mobile-menu-header">
+         <h1 class="heading filter-heading heading-d-small">Filters</h1>
+         <div if:true={isFilterApplied} class="clear-filter"><a class="para paragraph-d-standard"
+               href="javascript:void(0)" onclick={clearFilter}>Clear filters</a></div>
+      </div>
+
+      <div class="mobile-menu-body">
+         <div if:true={filter1Label} class="mob-filter1 filter-items">
+            <div class="filter-item">
+               <div class="filter-item-left">
+                  <div class="heading heading-m-eyebrow">{filter1Label}</div>
+               </div>
+               <div class="filter-item-right">
+                  <div class="badge-main">
+                     <div if:true={filterField1Value} class="badge-pill"></div>
+                     <a onclick={toggleMoboFilter} data-filter="filter1" href="javascript:void(0)"><img
+                           src="/sfsites/c/resource/IMCC2/icons/chevron-down-indigo.svg" alt="" class="icon-16" /></a>
+                  </div>
+               </div>
+            </div>
+            <div if:true={filterField1Options} class="filter-dropdown">
+               <template for:each={filterField1Options} for:item="item" for:index="index">
+                  <div key={item.value} class="filter-drop">
+                     <div class="dropdown-content">
+                        <span class="para paragraph-m-standard">{item.label}</span>
+                     </div>
+                     <div class="drop-check">
+                        <lightning-input checked={item.isChecked} onchange={moboFilterChange} data-index={index}
+                           data-filter="1" type="checkbox" variant="label-hidden" label="Small"></lightning-input>
+                     </div>
+                  </div>
+               </template>
+            </div>
+         </div>
+         <div if:true={filter2Label} class="mob-filter2 filter-items">
+            <div class="filter-item">
+               <div class="filter-item-left">
+                  <div class="heading heading-m-eyebrow">{filter2Label}</div>
+               </div>
+               <div class="filter-item-right">
+                  <div class="badge-main">
+                     <div if:true={filterField2Value} class="badge-pill"></div>
+                     <a onclick={toggleMoboFilter} data-filter="filter2" href="javascript:void(0)"><img
+                           src="/sfsites/c/resource/IMCC2/icons/chevron-down-indigo.svg" alt="" class="icon-16" /></a>
+                  </div>
+               </div>
+            </div>
+            <div if:true={filterField2Options} class="filter-dropdown">
+               <template for:each={filterField2Options} for:item="item" for:index="index">
+                  <div key={item.value} class="filter-drop">
+                     <div class="dropdown-content">
+                        <span class="para paragraph-m-standard">{item.label}</span>
+                     </div>
+                     <div class="drop-check">
+                        <lightning-input checked={item.isChecked} onchange={moboFilterChange} data-index={index}
+                           data-filter="2" type="checkbox" variant="label-hidden" label="Small"></lightning-input>
+                     </div>
+                  </div>
+               </template>
+            </div>
+         </div>
+         <div if:true={filter3Label} class="mob-filter3 filter-items">
+            <div class="filter-item">
+               <div class="filter-item-left">
+                  <div class="heading heading-m-eyebrow">{filter3Label}</div>
+               </div>
+               <div class="filter-item-right">
+                  <div class="badge-main">
+                     <div if:true={filterField3Value} class="badge-pill"></div>
+                     <a onclick={toggleMoboFilter} data-filter="filter3" href="javascript:void(0)"><img
+                           src="/sfsites/c/resource/IMCC2/icons/chevron-down-indigo.svg" alt="" class="icon-16" /></a>
+                  </div>
+               </div>
+            </div>
+            <div if:true={filterField3Options} class="filter-dropdown">
+               <template for:each={filterField3Options} for:item="item" for:index="index">
+                  <div key={item.value} class="filter-drop">
+                     <div class="dropdown-content">
+                        <span class="para paragraph-m-standard">{item.label}</span>
+                     </div>
+                     <div class="drop-check">
+                        <lightning-input checked={item.isChecked} onchange={moboFilterChange} data-index={index}
+                           data-filter="3" type="checkbox" variant="label-hidden" label="Small"></lightning-input>
+                     </div>
+                  </div>
+               </template>
+            </div>
+         </div>
+      </div>
+      <div class="mobile-form-footer">
+         <div class="filter-footer">
+            <div onclick={gotoDashboard} class="link link-d-standard filter-cancel">
+               <lightning-button onclick={closeMobileMenu} class="btn-lg" variant="inverse" label="Cancel"
+                  title="Looks like a link"></lightning-button>
+            </div>
+            <div class="apply-filters">
+               <lightning-button onclick={applyMobileFilter} class="btn-lg" variant="brand" label="Apply Filters"
+                  title="Looks like a link"></lightning-button>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="modal-overlay"></div>
+   <!--Table filter for mobie device end-->
+
+</template>

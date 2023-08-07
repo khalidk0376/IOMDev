@@ -1,0 +1,72 @@
+<template>
+    <!--update page modal start-->
+    <template if:true={isOpenDownloadModal}>
+        <div class="modal-container">
+            <section role="dialog" id="text-plain-popup4" tabindex="-1" aria-labelledby="modal-heading-04" 
+                aria-modal="true" aria-describedby="modal-content-id-4" class="slds-modal slds-modal_medium slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h3 id="modal-heading-04" class="slds-text-heading_medium slds-hyphenate">
+                            <strong>Download Form Report</strong>
+                        </h3>
+                        <button onclick={hideModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                            <lightning-icon icon-name="utility:close" size="small" variant="bare"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </header>
+                    <div class="slds-modal__content slds-var-p-around_small" id="modal-content-id-4">                    
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_12-of-12">
+                                <div class="slds-section slds-is-open">
+                                    <h3 class="slds-section__title slds-theme_shade">
+                                        <span class="slds-truncate slds-p-horizontal_small" title="Custom logic">Custom logic</span>
+                                    </h3>
+                                    <div class="slds-p-horizontal_small">
+                                        <div class="slds-grid">
+                                            <div class="slds-col slds-size_6-of-12">
+                                                <lightning-input type="text" onchange={changeInput} label="Enter condition" variant="label-hidden" placeholder="Custom logic"></lightning-input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-section slds-is-open">
+                                    <h3 class="slds-section__title slds-theme_shade">
+                                        <span class="slds-truncate slds-p-horizontal_small" title="Select questions">
+                                            If you want to get all questions in report, then don't need to select.</span>
+                                    </h3>
+                                    <div class="slds-p-around_small">
+                                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+                                            <thead>
+                                                <tr class="slds-line-height_reset">
+                                                    <th scope="col" width="50">#</th>
+                                                    <th scope="col">Questions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template for:each={questionList} for:item="item" for:index="ind">
+                                                    <tr key={item.Question__c} class="slds-hint-parent">
+                                                        <td>
+                                                            <lightning-input type="checkbox" checked={item.checked} data-index={ind} onchange={handleCheckboxChange} label="checkbox" variant="label-hidden"></lightning-input>
+                                                        </td>
+                                                        <td data-index={ind}>
+                                                            <lightning-formatted-rich-text value={item.Question__r.Label__c}></lightning-formatted-rich-text>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Close" onclick={hideModal}></lightning-button>
+                        <lightning-button icon-name="utility:download" variant="brand" label="Download" onclick={downloadReport}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+</template>

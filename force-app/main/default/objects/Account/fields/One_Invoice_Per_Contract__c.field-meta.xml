@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>One_Invoice_Per_Contract__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>It will control the creation of single Invoice created on opportunity.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>It will control the creation of single Invoice created on opportunity.</inlineHelpText>
+    <label>One Invoice Per Contract</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

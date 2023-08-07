@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RejectionReasonCannotBeNullWhenRejected</fullName>
+    <active>true</active>
+    <description>Rejection Reason Cannot Be Null When status is Rejected</description>
+    <errorConditionFormula>IF(ISPICKVAL(Contractor_Status__c , &apos;Rejected&apos;)&amp;&amp; ISBLANK( Rejection_Reason__c ),true,false)</errorConditionFormula>
+    <errorDisplayField>Rejection_Reason__c</errorDisplayField>
+    <errorMessage>Rejection Reason Cannot Be Null When the status is Rejected</errorMessage>
+</ValidationRule>

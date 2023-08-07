@@ -1,0 +1,23 @@
+<!--
+Created By	 : Girikon(Sachin)(IML2R-742)
+Created On	 : Feb 20, 2020
+@description : This is simple drawer table that get all the approved Contract.
+Modification log --
+Modified By	:  
+-->
+<template>
+        <template if:true={oppFields}>
+            <template if:true={showTable}>
+                <c-common-table filter1-label="Editions" filter-field1="Default_Edition__r.Name" 
+                condition={pendingContractCond}  toggle-filter-condition={toggleCondition}
+                fields={oppFields}
+                fields-label={oppFieldsLabels}
+                object-name="Opportunity" modal-icon-name1='View Record Details' object-label="Opportunity" is-multi-language="true" custom-label="-1,0,1,4,7,8,9,10" is-show-action="false" show-action-button="true" is-view-file="false" onopenactionmodal={handleActionModal}>
+                     <div slot="actionRecordModal">
+                       <!-- <c-approved-contract-dashboard-model record-id={recordId} is-open-action-modal={openActionModal}></c-approved-contract-dashboard-model>-->
+                        <c-pending-contract-modal record-id={recordId} onrefreshpendingcontract={handleRefreshPendingContract} is-open-action-modal={openActionModal}  object-name="Opportunity"></c-pending-contract-modal>
+                    </div>
+                </c-common-table>
+            </template>
+        </template>
+    </template>

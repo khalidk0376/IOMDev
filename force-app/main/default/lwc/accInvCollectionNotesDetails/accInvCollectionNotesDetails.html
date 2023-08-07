@@ -1,0 +1,160 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <article class="slds-var-m-around_small">
+        <!-- Header-->
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">                            
+                            <lightning-icon icon-name="custom:custom17" alternative-text="Event" title="Event"
+                                size="small"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h3>
+                                        <span class="slds-page-header__title slds-truncate slds-text-title"
+                                            title="Collection Notes" style="font-size: medium;"><b>Collection Notes ({recordSize})</b></span>
+                                    </h3>
+                                </div>
+                            </div>
+                            <p class="slds-page-header__name-meta"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BODY-->
+        <!-- Collection Table-->
+        <div class="slds-m-top_small">
+            <!-- If No Data -->
+            <template if:false={hasData}>
+                <div class="slds-align_absolute-center" style="height:5rem;font-size:larger;font-weight:500;">
+                    {erMessage}
+                </div> 
+            </template>
+            <!-- Show Data table  -->
+            <template if:true={hasData}>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                        <tr class="slds-line-height_reset">                        
+                            <th class="tabHeaderSort" scope="col" id="cNoteId">
+                                <div class="slds-truncate" title="Contact">
+                                    ERP Note Number
+                                </div>
+                            </th>
+                            <th class="tabHeaderSort" scope="col" id="invNum">
+                                <div class="slds-truncate" title="Contact">
+                                    Invoice Number
+                                </div>
+                            </th>
+                            <th class="tabHeaderSort" scope="col" id="outStandingbal">
+                                <div class="slds-truncate" title="Contact">
+                                    Invoice Status
+                                </div>
+                            </th>
+                            <th class="tabHeaderSort" scope="col" id="InStatus">
+                                <div class="slds-truncate" title="Contact">
+                                    Outstanding Balance
+                                </div>
+                            </th>
+                            <th class="tabHeaderSort" scope="col" id="type">
+                                <div class="slds-truncate" title="Contact">
+                                    Note Type
+                                </div>
+                            </th>
+                            <th class="tabHeaderSort" scope="col" id="noteDate">
+                                <div class="slds-truncate" title="Contact">
+                                    Note Date
+                                </div>
+                            </th>
+                            <th class="tabHeaderSort" scope="col" id="Enteredby">
+                                <div class="slds-truncate" title="Contact">
+                                    Entered By
+                                </div>
+                            </th>
+                            <th class="tabHeader" scope="col" id="viewDetails">
+                                <div class="slds-truncate">
+                                    Note
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={pageData} for:item="cn">
+                            <tr key={cn.Id}>
+                                <!-- <td>   
+                                    <lightning-button-icon icon-name="utility:preview" onclick={selectCon} size="small" data-id={cn.Id} alternative-text="Select Contact" class="slds-m-left_x-small"></lightning-button-icon>
+                                </td> -->
+                                <td>   
+                                    {cn.NoteID__c}
+                                </td>
+                                <td>   
+                                    {cn.InvoiceNumber}
+                                </td>
+                                <td>
+                                    {cn.InvoiceStatus}
+                                </td>
+                                <td>   
+                                    <lightning-formatted-number value={cn.InvoiceOutStandingBalc} format-style="currency" currency-code={cn.InvoiceCurrencyISOCode}></lightning-formatted-number>
+                                </td>
+                                <td>
+                                    {cn.Note_Type__c}
+                                </td>
+                                <td>   
+                                    <!-- {cn.Note_Date__c} -->
+                                    <lightning-formatted-date-time value={cn.Note_Date__c} year="numeric" month="short" day="numeric"></lightning-formatted-date-time>
+                                </td> 
+                                <td>   
+                                    {cn.User__c}
+                                </td>  
+                                <td>
+                                    <template if:true={cn.hasNote}>
+                                        <a data-id={cn.Id} onclick={handleNoteClick}>View Note</a>
+                                    </template>
+                                </td>                          
+                            </tr>
+                        </template>
+                    </tbody>        
+                </table> 
+            </template>
+        </div>
+    </article>
+
+    <template if:true={isNoteModalOpen}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container fullModel">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeNoteModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                        <b>Collection Note - {cNote.NoteID__c}</b> 
+                    </h2>
+                </header>
+                <!-- Modal/Popup Box LWC body starts here -->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <div class="slds-align_absolute-center" style="min-height:5rem">
+                            {cNote.Note__c}
+                        </div> 
+                        <!-- <div class="slds-align_absolute-center" >                            
+                            <lightning-button variant="brand-outline" label="Close" title="Close" onclick={closeNoteModal}></lightning-button>
+                        </div>                            -->
+                    </div>
+                <!-- Modal/Popup Box LWC footer starts here -->
+                <!-- <footer class="slds-modal__footer">
+                </footer> -->
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+
+</template>

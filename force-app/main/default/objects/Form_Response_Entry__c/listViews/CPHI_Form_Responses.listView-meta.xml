@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPHI_Form_Responses</fullName>
+    <columns>NAME</columns>
+    <columns>Company_Name__c</columns>
+    <columns>Ops_Contact_Name__c</columns>
+    <columns>Form_Name__c</columns>
+    <columns>Form_Type__c</columns>
+    <columns>Form_Deadline__c</columns>
+    <columns>Response_Status__c</columns>
+    <columns>Approval_Status__c</columns>
+    <columns>View_Response__c</columns>
+    <columns>Submission_Date__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Form_Data_Status__c</field>
+        <operation>equals</operation>
+        <value>Active</value>
+    </filters>
+    <filters>
+        <field>Event_Name__c</field>
+        <operation>equals</operation>
+        <value>CPHI Frankfurt 2022</value>
+    </filters>
+    <filters>
+        <field>Company_Name__c</field>
+        <operation>notContain</operation>
+        <value>test</value>
+    </filters>
+    <label>CPHI 2022 - All Form Responses</label>
+</ListView>

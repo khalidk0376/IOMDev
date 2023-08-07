@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="LookupValidationEvent Used to validate lookup input fields">
+    <aura:attribute name="isValid" type="Boolean" description="" default="true"/>
+</aura:event>

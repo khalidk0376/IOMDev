@@ -1,0 +1,15 @@
+.stand-contractors{
+    margin-top: -40px;
+    padding-bottom: var(--space-10);
+}
+.ac-name{
+    color: rgb(1 118 211);
+    font-weight: 500;
+    margin-left: 5px;
+    font-size: 15px;
+}
+.ac-name:hover{color: var(--light-blue-7);cursor: pointer;}
+.plus-icon{
+    width: 16px;
+    cursor: pointer;
+}

@@ -1,0 +1,36 @@
+<aura:component controller="NewCreateTemplateCtr">
+    <aura:attribute name="isDelete" type="Boolean" default="false" />
+    <aura:attribute name="deleteContent" type="String" />
+    <aura:attribute name="sectionId" type="String" />
+    <aura:attribute name="qnaireId" type="String" />
+    <!-- Start Delete section modal -->
+    <aura:if isTrue="{!v.isDelete==true}">
+        <div class="modal-container hideModalCSS" aura:id="modalcontainer">
+            <section role="dialog" id="text-plain-popup" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal  slds-modal_prompt slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header  slds-theme_error slds-theme_alert-texture">                        
+                        <h3 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate "><strong>Delete Section</strong></h3>
+                    </header>
+                    <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                        <fieldset class="slds-form-element slds-var-m-top_small">
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col slds-size_7-of-12">
+                                    <div class="slds-form-element">
+                                        <div class="slds-form-element__control">{!v.deleteContent}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning:button label="No" onclick="{!c.hideModal}" />
+                        <lightning:button class="slds-button slds-button_brand" label="Yes" onclick="{!c.deleteSection}" />
+                    </footer>
+                </div>
+            </section>
+            <!--<div class="slds-backdrop slds-backdrop_open"></div>-->
+            <div class="slds-backdrop  slds-backdrop_open" id="slds-backdrop"></div>
+        </div>
+    </aura:if>
+    <!-- End Delete section modal -->
+</aura:component>

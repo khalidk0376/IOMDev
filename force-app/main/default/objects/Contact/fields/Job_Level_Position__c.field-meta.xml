@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Job_Level_Position__c</fullName>
+    <externalId>false</externalId>
+    <label>Job Level/Position</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Subject Matter Expert</fullName>
+                <default>false</default>
+                <label>Subject Matter Expert</label>
+            </value>
+            <value>
+                <fullName>Consultant/Engineer</fullName>
+                <default>false</default>
+                <label>Consultant/Engineer</label>
+            </value>
+            <value>
+                <fullName>Individual Contributor</fullName>
+                <default>false</default>
+                <label>Individual Contributor</label>
+            </value>
+            <value>
+                <fullName>Administrator</fullName>
+                <default>false</default>
+                <label>Administrator</label>
+            </value>
+            <value>
+                <fullName>Assistant</fullName>
+                <default>false</default>
+                <label>Assistant</label>
+            </value>
+            <value>
+                <fullName>Board Director</fullName>
+                <default>false</default>
+                <label>Board Director</label>
+            </value>
+            <value>
+                <fullName>CEO/COO/President/Chairman</fullName>
+                <default>false</default>
+                <label>CEO/COO/President/Chairman</label>
+            </value>
+            <value>
+                <fullName>Consultant</fullName>
+                <default>false</default>
+                <label>Consultant</label>
+            </value>
+            <value>
+                <fullName>Head of Department</fullName>
+                <default>false</default>
+                <label>Head of Department</label>
+            </value>
+            <value>
+                <fullName>Manager with staff</fullName>
+                <default>false</default>
+                <label>Manager with staff</label>
+            </value>
+            <value>
+                <fullName>Manager without Staff</fullName>
+                <default>false</default>
+                <label>Manager without Staff</label>
+            </value>
+            <value>
+                <fullName>Managing Director/ Sr. VP / EVP</fullName>
+                <default>false</default>
+                <label>Managing Director/ Sr. VP / EVP</label>
+            </value>
+            <value>
+                <fullName>Non Board Member</fullName>
+                <default>false</default>
+                <label>Non Board Member</label>
+            </value>
+            <value>
+                <fullName>Non-management</fullName>
+                <default>false</default>
+                <label>Non-management</label>
+            </value>
+            <value>
+                <fullName>Owner/Proprietor</fullName>
+                <default>false</default>
+                <label>Owner/Proprietor</label>
+            </value>
+            <value>
+                <fullName>VP / Director</fullName>
+                <default>false</default>
+                <label>VP / Director</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

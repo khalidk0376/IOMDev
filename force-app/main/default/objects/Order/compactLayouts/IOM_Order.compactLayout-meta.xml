@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IOM_Order</fullName>
+    <fields>OrderNumber</fields>
+    <fields>blng__BillingAccount__c</fields>
+    <fields>TotalAmount</fields>
+    <fields>EffectiveDate</fields>
+    <fields>Tax_Status__c</fields>
+    <fields>Status</fields>
+    <label>IOM Order</label>
+</CompactLayout>

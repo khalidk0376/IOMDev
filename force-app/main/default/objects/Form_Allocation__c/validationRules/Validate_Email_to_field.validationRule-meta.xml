@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Email_to_field</fullName>
+    <active>true</active>
+    <description>Validate Email to field when send individual form checkbox is checked</description>
+    <errorConditionFormula>IF( (Send_individual_forms__c = true  &amp;&amp;  Email_To__c =&apos;&apos;), true, false)</errorConditionFormula>
+    <errorDisplayField>Email_To__c</errorDisplayField>
+    <errorMessage>Email to can not be blanked if Send Individual forms is true</errorMessage>
+</ValidationRule>

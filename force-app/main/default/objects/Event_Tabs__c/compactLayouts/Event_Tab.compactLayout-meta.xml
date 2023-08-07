@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Event_Tab</fullName>
+    <fields>Name</fields>
+    <fields>Tab_Code__c</fields>
+    <fields>Event_Setting__c</fields>
+    <fields>Tab_Type__c</fields>
+    <fields>Tab_Title__c</fields>
+    <label>Event Tab</label>
+</CompactLayout>

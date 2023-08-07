@@ -1,0 +1,19 @@
+<!-- 
+	<c:GirikonFormComp> is the global component you can use this component to create your own 
+	visualforce page and add in custom site or any where in salesforce where you want 
+	Note: There are three attribute in <c:GirikonFormComp> component 
+	[@formId required attribute pass form id]
+	[@thankyouMessage pass custom thankyou message]
+	[@thankyouPage pass thankyou page name prefix with slash(/)]	
+-->
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false">        
+<html>
+	<head>
+		<title>Survey Form</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	</head>
+	<body>		
+        <c:GirikonFormComp formId="{!$CurrentPage.parameters.id}" thankyouMessage="Thank You for submitting form." thankyouPage="thankyou"/>
+    </body>
+</html>
+</apex:page>

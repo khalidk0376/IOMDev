@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Form_Permissions</fullName>
+    <fields>Name</fields>
+    <fields>Form_Allocation__c</fields>
+    <fields>Tab_User_Type__c</fields>
+    <label>Form Permissions</label>
+</CompactLayout>

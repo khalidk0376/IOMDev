@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case_Age_in_Hours__c</fullName>
+    <description>Elapsed time from Case creation in Hours</description>
+    <externalId>false</externalId>
+    <formula>IF((ISPICKVAL( Status , &apos;On Hold&apos;) || ISPICKVAL( Status , &apos;Closure Confirmation&apos;)|| ISPICKVAL( Status , &apos;Closed&apos;) ) ,Previous_SLA__c ,IF((ISNULL(SLA_Start_Date__c)|| ISBLANK(SLA_Start_Date__c)) ,(NOW() - CreatedDate)*24,Previous_SLA__c +((NOW() - SLA_Start_Date__c)*24)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Elapsed time from Case creation in Hours</inlineHelpText>
+    <label>Case Age in Hours</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

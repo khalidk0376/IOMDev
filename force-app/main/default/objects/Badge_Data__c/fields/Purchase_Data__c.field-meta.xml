@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Purchase_Data__c</fullName>
+    <description>Badge related with PurchaseData object.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Badge related with PurchaseData object.</inlineHelpText>
+    <label>Purchase Data</label>
+    <referenceTo>Purchase_Data__c</referenceTo>
+    <relationshipLabel>Badges Data</relationshipLabel>
+    <relationshipName>Badges_Data</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

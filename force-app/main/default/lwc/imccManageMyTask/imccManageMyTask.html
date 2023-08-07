@@ -1,0 +1,47 @@
+<template>
+    <div class="forms-and-manuals fnm">
+        <div class="slds-m-bottom_small">
+            <c-imcc-page-header></c-imcc-page-header>
+        </div>
+       
+        <c-imcc-task-assignment 
+            if:true={mandatoryTasks} form-data={mandatoryTasks}
+            option1={memberOpt} 
+            option2={providerOptMandat} platform-admin-cem-id={platformAdminCEMId}
+            option3={statusOptMandat} 
+            filter1-label="Assignee" user-info={userInfo}
+            filter2-label="Form Provider"
+            filter3-label="Status"
+            task-title="Mandatory Tasks"
+            tab-id={tabId}
+            event-code={eventCode}
+            account-id={accountId}></c-imcc-task-assignment>
+        
+        <c-imcc-task-assignment 
+            if:true={rulesAndRegulations} form-data={rulesAndRegulations}
+            option1={memberOpt} 
+            option2={providerOptRules} platform-admin-cem-id={platformAdminCEMId}
+            option3={statusOptRules} 
+            filter1-label="Assignee" user-info={userInfo}
+            filter2-label="Form Provider"
+            filter3-label="Status"
+            task-title="Rules and Regulations"
+            tab-id={tabId}
+            event-code={eventCode}
+            account-id={accountId}></c-imcc-task-assignment>
+
+        <c-imcc-task-assignment 
+            if:true={optionalTasks} form-data={optionalTasks}
+            option1={memberOpt} 
+            option2={providerOptOptional} platform-admin-cem-id={platformAdminCEMId}
+            option3={statusOptOptional} 
+            filter1-label="Assignee" user-info={userInfo}
+            filter2-label="Form Provider"
+            filter3-label="Status" enabled-pagination
+            task-title="Optional Tasks"
+            tab-id={tabId}
+            event-code={eventCode}
+            account-id={accountId}></c-imcc-task-assignment>
+        
+    </div>
+</template>

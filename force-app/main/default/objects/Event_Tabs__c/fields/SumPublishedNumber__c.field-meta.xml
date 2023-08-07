@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SumPublishedNumber__c</fullName>
+    <description>This field will be used to sum up all the publish numbers of a related event tab</description>
+    <externalId>false</externalId>
+    <label>SumPublishedNumber</label>
+    <summarizedField>Tab_Context__c.Last_Published_Number__c</summarizedField>
+    <summaryForeignKey>Tab_Context__c.Event_Tab__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

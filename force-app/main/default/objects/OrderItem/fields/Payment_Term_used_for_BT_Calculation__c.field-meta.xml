@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Payment_Term_used_for_BT_Calculation__c</fullName>
+    <description>effective Payment Term used in Billing Transaction Calculation -  it could be from one of the 5 levels :
+
+• Event within 60 days
+• Product-Edition level ( Invoice Property and Payment Terms)
+• Override at Opportunity(Billing Schedule)/Quote(Payment Term) level
+• Account level ( only payment Term)
+• Edition Level</description>
+    <externalId>false</externalId>
+    <label>Payment Term used for BT Calculation</label>
+    <length>255</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

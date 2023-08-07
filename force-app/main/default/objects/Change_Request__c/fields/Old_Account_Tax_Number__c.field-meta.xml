@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Old_Account_Tax_Number__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Old Account Tax Number</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Old Account Tax Number</inlineHelpText>
+    <label>Old Account Tax Number</label>
+    <referenceTo>Account_Tax_Number__c</referenceTo>
+    <relationshipName>Amendments1</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

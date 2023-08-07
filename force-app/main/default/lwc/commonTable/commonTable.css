@@ -1,0 +1,55 @@
+.selected{
+    color:orange;
+}
+lightning-combobox{width: 210px;display: inline-block;text-align: left}
+
+/* Wrap text and hidden arrow from table header start*/
+table .slds-button_icon-bare{
+    display: none;
+}
+table .slds-truncate {
+    text-overflow: inherit;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word; 
+}
+/* Wrap text and hidden arrow from table header END*/
+
+.mass-action-picklist{width: 160px}
+.slds-no-flex{width: 100%!important}
+.slds-hide{
+    display:none;
+}
+.action-buttons lightning-button{
+    display: inline-block;
+}
+.slds-card__body{
+    border-top: 1px solid #e1e1e1;
+}
+
+.pagesize-btn-container{
+    width: 100px;
+    display: inline-block;
+    margin: 0px 10px;
+}
+.slds-modal:focus {
+    border: 0px !important;
+    outline: 0px !important;
+}
+.hide-title h2{
+	display: none!important;
+}
+
+.search-box{width: 210px;display: inline-block!important;}
+
+.pagesize{
+    width: 80px;
+    display: inline-block;
+    margin: 0px 2px;
+}
+
+.slds-truncate lightning-formatted-text {
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}

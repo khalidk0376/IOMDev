@@ -1,0 +1,22 @@
+<!--
+Created By	 : Girikon(Sachin)(IML2R-742)
+Created On	 : Feb 24, 2020
+@description : This is showing all the Rejected Contract record details from Pending Contract Tab.
+
+Modification log:
+Modified By	: 
+-->
+<template>
+    <template if:true={oppFields}>
+    <c-common-table filter1-label="Editions" filter-field1="Default_Edition__r.Name" condition={rejectedContractCond} 
+        fields={oppFields}
+        object-name="Opportunity" object-label="Opportunities"
+        fields-label={oppFieldsLabels}
+        is-show-action="false" modal-icon-name1="View Details" show-action-button="true" is-view-file="false" onopenactionmodal={handleActionModal}>
+        <div slot="actionRecordModal">    
+            <!--<c-rejected-contract-model record-id={recordId} is-open-action-modal={openActionModal} object-name="Agreement__c"></c-rejected-contract-model>-->
+            <c-pending-contract-modal onrefreshpendingcontract={handleRefreshPendingContract} is-open-action-modal={openActionModal} record-id={recordId} object-name="Opportunity"></c-pending-contract-modal>
+        </div>
+    </c-common-table>
+    </template>
+</template>

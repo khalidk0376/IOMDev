@@ -1,0 +1,26 @@
+<!--
+Created By	 : Girikon(Sachin)(IML2R-742)
+Created On	 : Feb 20, 2020
+@description     : This is shwoing all the opportunity Contracts detail.
+
+Modification log:
+Modified By	:  
+-->
+<template>
+        <div class="slds-card slds-p-around_small">
+        <lightning-tabset>
+            <lightning-tab label="Pending Contracts">
+               <c-pending-contract-dashboard></c-pending-contract-dashboard>
+            </lightning-tab>        
+            <lightning-tab label="Approved Contracts" onactive={handleTabClick}>
+                    <c-approved-contract-dashboard></c-approved-contract-dashboard>
+            </lightning-tab>
+            <lightning-tab label="Rejected Contracts" onactive={handleTabClick}>
+                <c-rejected-contract-dashboard></c-rejected-contract-dashboard>
+            </lightning-tab>
+            <lightning-tab label="No Order Flagged Option" onactive={handleTabClick}>
+                 <c-no-Order-Flagged-Dashboard></c-no-Order-Flagged-Dashboard>
+            </lightning-tab>
+        </lightning-tabset>
+        </div>
+</template>

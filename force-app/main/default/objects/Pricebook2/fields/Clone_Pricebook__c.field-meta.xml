@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Clone_Pricebook__c</fullName>
+    <description>URL link to clone the pricebook.</description>
+    <externalId>false</externalId>
+    <formula>HYPERLINK(&quot;https://informage.my.salesforce.com/apex/priceBookClone?id=&quot;+ Id , IMAGE(&quot;/resource/1493641401000/ClonePBImg&quot;, &quot;Clone Pricebook&quot;,25,85))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Clone Pricebook</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

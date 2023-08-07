@@ -1,0 +1,65 @@
+.loaderCss {
+    position: fixed;
+    opacity: 0.3;
+}
+
+.alignCss {
+    text-align: center;
+}
+
+.form-mobile .mobile-menu-body .filter-items .filter-dropdown {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: 200ms all;
+}
+
+.form-mobile .mobile-menu-body .filter-items.active .filter-dropdown {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+
+.form-mobile .mobile-menu-body .filter-items.active img.icon-16 {
+    transform: rotate(180deg);
+}
+
+.s-red {
+    background-color: var(--red-1);
+    color: var(--red-7);
+}
+
+.s-purple {
+    background-color: var(--hex-1);
+    color: var(--hex-3);
+}
+
+.s-gray {
+    background-color: var(--neutral-1);
+    color: var(--neutral-7);
+}
+
+.s-green {
+    background-color: var(--jade-1);
+    color: var(--jade-8);
+}
+
+.modalpopup {
+    position: fixed !important;
+    top: 50% !important;
+    margin-top: -40% !important;
+}
+
+.red-icon {
+    --lwc-colorTextIconDefault: #F62217;
+}
+
+.strikeThrough {
+    text-decoration: line-through;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}

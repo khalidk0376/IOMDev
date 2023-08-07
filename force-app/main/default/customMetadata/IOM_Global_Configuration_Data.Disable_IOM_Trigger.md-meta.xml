@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Disable IOM Trigger</label>
+    <protected>false</protected>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>IOM_Description__c</field>
+        <value xsi:type="xsd:string">Disable the IOM (Unlock Package) all Triggers &amp; Flows with value - True
+Default is False , for which all triggers &amp; Flows will be active</value>
+    </values>
+    <values>
+        <field>IOM_Value__c</field>
+        <value xsi:type="xsd:string">True</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,85 @@
+<template>
+    <lightning-card icon-name="standard:user" title="Contractor Submissions">
+        <span if:true={showContractor} slot="actions">
+            <lightning-button onclick={openApprovalModal} label="Approve" disabled={isActionBtnDisabled} variant="brand-outline"></lightning-button>
+            <lightning-button onclick={openRejectionModal} label="Reject" disabled={isActionBtnDisabled} variant="destructive-text" class="slds-m-left_xx-small"></lightning-button>
+        </span>
+        <div class="slds-p-around_xx-small">
+            <lightning-spinner if:true={spinner} size="small" variant="brand"></lightning-spinner>
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-combobox options={editionsList} onchange={handleEditionChange} label="Select Edition" value={eId}></lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-combobox options={options} onchange={handleSTChange} label="Submission Type" value={st}></lightning-combobox>
+                </lightning-layout-item>
+
+                <!--Show datatable-->
+                <lightning-layout-item  if:true={showContractor} size="12" padding="around-small">
+                    <div style="height: 350px;">
+                        <lightning-datatable                            
+                            key-field="Id"
+                            data={tableData} onrowaction={handleRowAction}
+                            onrowselection={handleRowSelect}
+                            columns={columns}>
+                        </lightning-datatable>
+                    </div>
+                </lightning-layout-item>
+
+                <lightning-layout-item  if:true={showBooth} size="12" padding="around-small">
+                    <c-imcc-contractor-booth-list edition-id={eId} current-option={st} event-code={eventCode}></c-imcc-contractor-booth-list>
+                </lightning-layout-item>
+
+                <lightning-layout-item  if:true={showStand} size="12" padding="around-small">
+                    <c-imcc-stand-list edition-id={eId}></c-imcc-stand-list>
+                </lightning-layout-item>
+            </lightning-layout>
+            
+        </div>
+    </lightning-card>
+
+    <!--Approve Contractors confirmation modal-->
+    <template if:true={approveConfirmation}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Approval confirmation</h1>
+                    <button onclick={closeApprovalModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-icon icon-name="utility:close" size="small" variant="bare"></lightning-icon>
+                    </button>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="approval-modal">
+                    <p>Do you really want to approve all selected contractors?</p>
+                    <lightning-spinner if:true={spinner} size="small" variant="brand"></lightning-spinner>
+                </div>
+                <div class="slds-modal__footer">
+                    <button onclick={yesApprove} class="slds-button slds-button_brand">Yes</button>
+                    <button onclick={closeApprovalModal} class="slds-button slds-button_neutral" aria-label="No">No</button>                    
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+
+    <!--Contractor Rejection Modal-->
+    <template if:true={rejectConfirmation}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate">Rejection confirmation</h1>
+                    <button onclick={closeRejectionModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-icon icon-name="utility:close" size="small" variant="bare"></lightning-icon>
+                    </button>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="rejection-modal">
+                    <lightning-textarea required onchange={rejectionReasonChange} label="Rejection Reason" style="height: 100px;"></lightning-textarea>
+                </div>
+                <div class="slds-modal__footer">
+                    <button disabled={isYesRejectButtonDisable} onclick={yesReject} class="slds-button slds-button_brand">Yes</button>
+                    <button onclick={closeRejectionModal} class="slds-button slds-button_neutral" aria-label="No">No</button>                    
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

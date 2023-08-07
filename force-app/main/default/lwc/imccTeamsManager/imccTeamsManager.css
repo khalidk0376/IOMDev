@@ -1,0 +1,44 @@
+:host{
+    /* --slds-c-input-spacing-horizontal-start:40px;
+    --slds-c-input-spacing-horizontal-end:40px; */
+    --lwc-heightInput:2.35rem;
+    --slds-c-input-color-background:transparent;
+    --sds-c-button-brand-color-background:var(--jade-6);
+}
+.slds-icon-action-approval {
+    background-color: #63bd92;
+}
+lightning-confirm p{font-size: 17px;}
+.box{
+    margin-top: 10px;
+}
+.box:nth-child(2n){
+    padding-right: 0px!important;
+}
+.space-between{
+    align-items: center;
+    justify-content: space-between;
+}
+.slds-theme_white{background-color: #fff;}
+.slds-theme_white svg {
+    fill: gray;
+}
+.bg-gray{
+    background-color:#f0f3f5
+}
+.team-member-icon{
+    height: 55px;
+    width: 55px;
+    border: 2px solid #e2e2e2;
+    border-radius: 99%;
+}
+.team-member-icon img{
+    border-radius: 99%;
+    height: 51px;
+    width: 51px;
+}
+.slds-bold{ font-weight: 700;}
+.slds-border{ border: 1px solid #D4D4D4;}
+.slds-border-radius-small{ border-radius: 5px;}
+.slds-border-radius4{ border-radius: 4px;}
+.finalview a{ color: #3372fa;}

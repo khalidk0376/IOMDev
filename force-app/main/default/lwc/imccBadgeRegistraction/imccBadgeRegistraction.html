@@ -1,0 +1,97 @@
+<template>
+   <div class="forms-and-manuals">
+      <template if:true={confirmationPopup}>
+         <section role="dialog" tabindex="-1" aria-modal="true" aria-describedby="taskCompleteContent"
+            class="slds-modal slds-fade-in-open" style="z-index: 99999;">
+            <div class="slds-modal__container">
+               <header class="slds-modal__header">
+                  <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                     onclick={closeModal}>
+                     <img src="/sfsites/c/resource/IMCC2/icons/Cross-light-blue-7.svg" class="icon-32" alt="close" />
+                     <span class="slds-assistive-text">Cancel and close</span>
+                  </button>
+                  <h2 id="taskComplete" class="slds-text-heading_medium slds-hyphenate">
+                     Confirmation
+                  </h2>
+               </header>
+               <div class="slds-modal__content slds-p-around_medium" id="taskCompleteContent">
+                  <div>
+                     <span class="para para-d-standard">Do you want to mark this task as completed?</span>
+                  </div>
+               </div>
+               <footer class="slds-modal__footer" style="margin-top:0px">
+                  <lightning-button label="No" onclick={onNoClick}>
+                  </lightning-button>
+                  <lightning-button variant="brand" label="Yes" class="slds-m-left_x-small" onclick={onYesClick}>
+                  </lightning-button>
+               </footer>
+            </div>
+         </section>
+         <div class="slds-backdrop slds-backdrop_open" style="z-index: 90000;"></div>
+      </template>
+
+      <div class="left-sidebar">
+         <div class="event-summary-box">
+            <div class="event-progress">
+               <div class="your-progress">
+                  <span class="heading heading-d-small heading-m-small">Your progress</span>
+               </div>
+               <div class="event-progress-count">
+                  <span class="heading event-count-number">{progressPercent}</span>
+                  <span class="link link-d-small-medium percent">%</span>
+               </div>
+               <div class="progress-bar">
+                  <lightning-progress-bar value={progressPercent} size="medium" variant="circular">
+                  </lightning-progress-bar>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="slds-m-bottom_small slds-m-top_">
+         <c-imcc-page-header></c-imcc-page-header>
+      </div>
+
+        <div class="slds-grid slds-wrap slds-m-top_medium" if:true={badges}>
+            <template for:each={badges} for:item="badge">
+               <div key={badge.Id} class="slds-col slds-size_1-of-2 slds-p-small slds-m-right_small"
+                  style="height:150px ;width:180px">
+                  <lightning-card title={badge.Booth_Number__c}>
+                     <p class="slds-p-horizontal_small slds-border_top slds-p-top_medium slds-text-body_small">Total
+                        Badges
+                        <br />
+                        <template if:true={badge.Unlimited_Badges__c} >
+                           Unlimited
+                        </template>
+                        <template if:false={badge.Unlimited_Badges__c}>
+                           {badge.Total_Badges__c}
+                        </template>
+                     </p>
+                  </lightning-card>
+               </div>
+            </template>
+         </div>
+
+
+         <div class="slds-grid btn-container slds-wrap slds-grid_align-spread slds-m-top_small slds-m-bottom_small"
+            style="align-items: center;" if:true={showPortalButton}>
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 ">
+               <div class="slds-grid" style="align-items: center;gap:5px">
+                  <div class="slds-col">
+                     <lightning-input name="is-completed" type="checkbox" label="Mark this task as completed"
+                        checked={taskIsCompleted} disabled={taskIsCompleted} onchange={makeTaskAsComplete}>
+                     </lightning-input>
+                  </div>
+                  <div class="slds-col">
+                     <lightning-helptext if:true={selectedPurchaseSummary.Mark_This_Task_Helptext__c}
+                        icon-name="utility:info_alt" content={selectedPurchaseSummary.Mark_This_Task_Helptext__c}>
+                     </lightning-helptext>
+                  </div>
+               </div>
+            </div>
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-text-align_right">
+               <lightning-button onclick={handleButtonClick} icon-name="utility:forward" variant="brand"
+                  icon-position="right" label={selectedPurchaseSummary.External_Link_Label__c}></lightning-button>
+            </div>
+         </div>
+   </div>
+</template>

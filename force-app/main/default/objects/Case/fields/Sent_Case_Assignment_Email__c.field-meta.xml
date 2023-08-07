@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sent_Case_Assignment_Email__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This field is used in Flow to track if the email is sent to customer and need not send again even if any of the field changes again</description>
+    <externalId>false</externalId>
+    <label>Sent Case Assignment Email</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

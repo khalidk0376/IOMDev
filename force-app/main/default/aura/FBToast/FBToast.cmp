@@ -1,0 +1,26 @@
+<aura:component >
+	<aura:attribute type="string" default="" name="msgbody"/>
+    <aura:attribute type="string" default="" name="msgtype"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:if isTrue="{!v.msgbody!=''}">
+        <div>
+            <div class="slds-notify_container slds-fade-in-open slds-is-fixed" aura:id="gkn_fb_toast">
+                <div class="{!'slds-notify slds-notify_toast slds-theme_'+v.msgtype}" role="alert">
+                    <span class="slds-assistive-text">{!v.msgtype}</span>
+                    <span class="{!'slds-icon_container slds-icon-utility-'+v.msgtype+' slds-var-m-right_small slds-no-flex slds-align-top'}" title="Description of icon when needed">
+                        <lightning:icon iconName="{!'utility:'+v.msgtype}" size="x-small" variant="inverse"/>
+                    </span>
+                    <div class="slds-notify__content">
+                        <h2 class="slds-text-heading_small msgbody">{!v.msgbody}</h2>
+                    </div>
+                    <button class="slds-button slds-button_icon slds-notify__close slds-button_icon-inverse" title="Close" onclick="{!c.closeToast}">
+                        <lightning:icon iconName="utility:close" size="x-small" variant="inverse"/>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </aura:if>
+</aura:component>

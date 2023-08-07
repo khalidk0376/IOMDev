@@ -1,0 +1,36 @@
+<template>
+    <h2 class="tab-heading slds-p-horizontal_small">Step 5: Build and Breakdown information</h2>
+    <lightning-spinner if:true={spinner} variant="brand" size="small" title="Loading..."></lightning-spinner>
+
+    <div class="manuals slds-m-around_small">
+        <div class="tab-sub-heading">
+            <span>Equipment Required for Build up</span>
+        </div>
+        <div class="slds-box s-1of3">
+            <lightning-layout multiple-rows="true">
+                <template if:true={buildUpOpt} for:each={buildUpOpt} for:item="item" for:index="index">
+                    <lightning-layout-item key={item.name} size="4" small-device-size="12" medium-device-size="6" large-device-size="4" padding="horizontal_small">
+                        <lightning-radio-group disabled={isInReview} name={item.name} data-index={index} data-selected-option={item.value} label={item.label} required  message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" onchange={handleChange} value={item.selectedValue} options={yesNoOption}></lightning-radio-group>                    
+                    </lightning-layout-item>
+                </template> 
+            </lightning-layout>            
+        </div>
+    </div>
+
+    <div class="manuals slds-m-around_small">
+        <div class="tab-sub-heading">
+            <span>Equipment Required for Breakdown</span>
+        </div>
+        <div class="slds-box s-1of3">
+            <lightning-layout multiple-rows="true">
+                <template if:true={breakDownOpt} for:each={breakDownOpt} for:item="item" for:index="index">
+                    <lightning-layout-item key={item.name} size="4" small-device-size="12" medium-device-size="6" large-device-size="4" padding="horizontal_small">
+                        <lightning-radio-group disabled={isInReview} name={item.name} data-index={index} data-selected-option={item.value} label={item.label} required  message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" onchange={handleChange2} value={item.selectedValue} options={yesNoOption}></lightning-radio-group>                    
+                    </lightning-layout-item>
+                </template>                
+            </lightning-layout>            
+        </div>
+    </div>
+</template>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Riggering_Options__c</fullName>
+    <description>Riggering Options</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Riggering Options</inlineHelpText>
+    <label>Riggering Options</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Hanging structure with logo</fullName>
+                <default>false</default>
+                <label>Hanging structure with logo</label>
+            </value>
+            <value>
+                <fullName>Hanging structure without logo</fullName>
+                <default>false</default>
+                <label>Hanging structure without logo</label>
+            </value>
+            <value>
+                <fullName>Truss with logo</fullName>
+                <default>false</default>
+                <label>Truss with logo</label>
+            </value>
+            <value>
+                <fullName>Truss without logo</fullName>
+                <default>false</default>
+                <label>Truss without logo</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

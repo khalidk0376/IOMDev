@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IOM_Approval_Status__c</fullName>
+    <description>This field is used to show approval status in the case of Sanctioned Amber Countries Accounts
+before Close Winning the Opportunity. &amp; In the case of normal Countries, Approval is not Required.</description>
+    <externalId>false</externalId>
+    <label>IOM Approval Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Approval not Required</fullName>
+                <default>false</default>
+                <label>Approval not Required</label>
+            </value>
+            <value>
+                <fullName>Approval Required</fullName>
+                <default>false</default>
+                <label>Approval Required</label>
+            </value>
+            <value>
+                <fullName>In-Approval</fullName>
+                <default>false</default>
+                <label>In-Approval</label>
+            </value>
+            <value>
+                <fullName>Approved</fullName>
+                <default>false</default>
+                <label>Approved</label>
+            </value>
+            <value>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+                <label>Rejected</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

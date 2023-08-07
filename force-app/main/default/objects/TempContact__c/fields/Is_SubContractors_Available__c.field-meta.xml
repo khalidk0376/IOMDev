@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_SubContractors_Available__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>if true then SubContractors is Available</description>
+    <externalId>false</externalId>
+    <label>Is SubContractors Available</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

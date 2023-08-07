@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Edition__c</fullName>
+    <description>Define name of the edition</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Define name of the edition</inlineHelpText>
+    <label>Edition</label>
+    <referenceTo>Edition__c</referenceTo>
+    <relationshipLabel>Event Edition Email Templates</relationshipLabel>
+    <relationshipName>Event_Edition_Email_Templates</relationshipName>
+    <relationshipOrder>1</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

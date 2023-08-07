@@ -1,0 +1,145 @@
+<!--
+  @description       : 
+  @author            : Mukesh
+  @group             : 
+  @last modified on  : 02-10-2022
+  @last modified by  : mukesh.gupta@girikon.com
+-->
+<template>        
+    <!--tab heading-->    
+    <h2 class="tab-heading slds-p-horizontal_small">{basicInfo}</h2>
+    <lightning-spinner if:true={spinner} variant="brand" size="small"></lightning-spinner>
+    <!--Event Info-->
+    <div class="event-info slds-m-around_small">
+        <div class="tab-sub-heading">
+            <span>{standInfo}</span>
+        </div>
+        <div class="slds-box">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6" class="slds-p-around_xx-small">
+                    <lightning-input type="text" if:true={isShowQ1} value={detailObj.exhibitorName} label="Exhibitor Name" variant="label-inline" disabled></lightning-input>
+                    <div class="slds-grid" if:true={isShowQ2}>
+                        <div class="slds-size_4-of-12">
+                            <span class="slds-form-element__label">Dimension</span>
+                        </div>
+                        <div class="slds-size_3-of-12">
+                            <lightning-input name="width" onchange={handleChange} value={detailObj.Purchase_Data__r.Stand_Length__c} type="number" label="l" variant="label-hidden" disabled></lightning-input>
+                        </div>
+                        <div class="slds-size_2-of-12 center">X</div>
+                        <div class="slds-size_3-of-12">
+                            <lightning-input name="height" onchange={handleChange} value={detailObj.Purchase_Data__r.Stand_Width__c} type="number" label="b" variant="label-hidden" disabled></lightning-input>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6" class="slds-p-around_xx-small">
+                    <lightning-input if:true={isShowQ3} type="text" value={detailObj.Purchase_Data__r.Booth_Number__c} label="Stand No." variant="label-inline" disabled></lightning-input>
+                    <lightning-input if:true={isShowQ4} type="text" value={detailObj.Purchase_Data__r.Quantity_Area__c} label="Area" variant="label-inline" disabled></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6" class="slds-p-around_xx-small">
+                    <lightning-input if:true={isShowQ5} type="text" value={detailObj.Purchase_Data__r.Hall_Name__c} label="Hall" variant="label-inline" disabled></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+
+    <!--contractor Info-->
+    <div class="contractor-info slds-m-around_small" if:true={detailObj.Contact__r}>
+        <div class="tab-sub-heading">
+            <span>{contractorInfo}</span>
+        </div>
+        <div class="slds-box">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6" class="slds-p-around_xx-small">
+                    <template if:true={detailObj.Account__r}>
+                        <lightning-input if:true={isShowQ6} type="text" value={detailObj.Account__r.Name} label="Company" variant="label-inline" disabled></lightning-input>
+                    </template>
+                    <template if:true={detailObj.Contact__r}>
+                        <lightning-input if:true={isShowQ7} type="text" value={detailObj.Contact__r.Name} label="Contact Name" variant="label-inline" disabled></lightning-input>                    
+                    </template>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6" class="slds-p-around_xx-small">
+                    <lightning-input if:true={isShowQ8} type="text" value={detailObj.Contact__r.Email} label="Contact Email" variant="label-inline" disabled></lightning-input>
+                    <lightning-input if:true={isShowQ9} type="text" value={detailObj.Contact__r.Phone} label="Contact Number" variant="label-inline" disabled></lightning-input>                
+                </lightning-layout-item>
+                <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6" class="slds-p-around_xx-small">
+                    <lightning-combobox if:true={isShowQ10} value={detailObj.Contact__r.Account.BillingCountryCode} options={countryList} label="Country" variant="label-inline" disabled></lightning-combobox>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+    
+
+    <!--subcontractor Info-->
+    <div class="sub-contractor-info slds-m-around_small" if:true={isShowAddSubContractorBtn}>
+        <div class="tab-sub-heading">
+            <span>{subcontractorInfo}</span>
+        </div>
+        <div if:false={isShowSubContractor} class="slds-m-bottom_small">
+            <lightning-button disabled={isInReview} icon-name="utility:add" variant="brand" label="Add Subcontractor" onclick={addSubContractor}></lightning-button>
+        </div>
+        <div if:true={isShowSubContractor} class="slds-m-bottom_small">
+            <lightning-button disabled={isInReview} icon-name="utility:close" label="Remove Subcontractor" onclick={removeSubContractor}></lightning-button>
+        </div>
+
+        <div if:true={isShowSubContractor} class="slds-box">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6" class="slds-p-around_xx-small">
+                    <lightning-input if:true={isShowQ11} disabled={isInReview} name="sub_company" type="text" onchange={handleChange} value={standDetail.Subcontractor_Company__c} label="Company" variant="label-inline" required></lightning-input>
+                    <lightning-input if:true={isShowQ12} disabled={isInReview} name="sub_name" type="text" onchange={handleChange} value={standDetail.Subcontractor_Name__c} label="Contact Name" variant="label-inline" required></lightning-input>                        
+                </lightning-layout-item>
+                <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6" class="slds-p-around_xx-small">
+                    <lightning-input if:true={isShowQ13} disabled={isInReview} name="sub_email" type="email" onchange={handleChange} value={standDetail.Subcontractor_Email__c} label="Contact Email" variant="label-inline" required></lightning-input>
+                    <lightning-input if:true={isShowQ14} disabled={isInReview} name="sub_number" type="tel" onchange={handleChange} value={standDetail.Subcontractor_Number__c} label="Contact Number" variant="label-inline" required></lightning-input>                
+                </lightning-layout-item>
+                <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6" class="slds-p-around_xx-small">
+                    <lightning-combobox if:true={isShowQ15} disabled={isInReview} name="sub_country" onchange={handleChange} value={standDetail.Subcontractor_Country__c} options={countryList} label="Country" variant="label-inline" required></lightning-combobox>                    
+                </lightning-layout-item>
+                <lightning-layout-item size="8" small-device-size="12" medium-device-size="8" large-device-size="8" class="slds-p-around_xx-small">
+                    <lightning-dual-listbox if:true={isShowQ16} disabled={isInReview}  name="sub_task" onchange={handleChange} options={taskActivityOptions} source-label="Available"
+                    selected-label="Selected" value={standDetail.Task_Activity__c} label="Task/Activity" variant="label-inline"></lightning-dual-listbox>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>              
+    </div>
+
+    <!--health and safety contact-->
+    <div class="health-safety-info slds-m-around_small" if:true={isShowHealth}>
+        <div class="tab-sub-heading">
+            <span>{Health_Safety_Contact_L}</span>
+        </div>
+        <div class="slds-box">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item if:true={isShowQ17} size="6" small-device-size="12" medium-device-size="12" large-device-size="6" class="slds-p-around_xx-small">
+                    <lightning-input disabled={isInReview} name="safety_con_name" onchange={handleChange} value={standDetail.Onsite_Health_and_Safety_Contact_Name__c} type="text" label="Contact Name" variant="label-inline" required></lightning-input>                    
+                </lightning-layout-item>
+                <lightning-layout-item if:true={isShowQ18} size="6" small-device-size="12" medium-device-size="12" large-device-size="6" class="slds-p-around_xx-small">
+                    <lightning-input disabled={isInReview} name="safety_con_number" onchange={handleChange} value={standDetail.Onsite_Health_and_Safety_Contact_Number__c} type="tel" label="Contact Number" variant="label-inline" required></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item if:true={isShowQ19} size="6" small-device-size="12" medium-device-size="12" large-device-size="6" class="slds-p-around_xx-small">
+                    <lightning-input disabled={isInReview} name="safety_con_email" onchange={handleChange} value={standDetail.Onsite_Health_and_Safety_Contact_Email__c} type="email" label="Contact Email" variant="label-inline" required></lightning-input>                    
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+    
+    <!--general Info-->
+    <div class="general-info slds-m-around_small" if:true={isShowGeneralInformation}>
+        <div class="tab-sub-heading">
+            <span>{generalInfo}</span>
+        </div>
+        <div class="slds-box">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="12" class="slds-p-around_xx-small">
+                    <lightning-radio-group if:true={isShowQ20} disabled={isInReview} name="radioGroup1" label="Does the contractor hold adequate public liability insurance?" required  message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" onchange={handleChange} value={standDetail.Does_the_contractor_hold_adequate_public__c} options={yesNoOption}></lightning-radio-group>
+
+                    <lightning-radio-group if:true={isShowQ21} disabled={isInReview} name="radioGroup2" label="Are you aware of the onsite welfare facilities; E.g. Toilets, Catering, Emergency Assembly & Fire Aid points" required  message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" onchange={handleChange} value={standDetail.Are_you_aware_of_the_onsite_welfare__c} options={yesNoOption} class="slds-m-top_x-small"></lightning-radio-group>
+
+                    <lightning-radio-group if:true={isShowQ22} disabled={isInReview} name="radioGroup3" label="Is the appointed contractor travelling less than 50 miles ( 80 Km) of the venue?" required message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" onchange={handleChange} value={standDetail.Is_the_appointed_contractor_travelling__c} options={yesNoOption} class="slds-m-top_x-small"></lightning-radio-group>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>    
+</template>

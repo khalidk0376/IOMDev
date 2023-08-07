@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Enabled__c</columns>
+    <columns>Object__c</columns>
+    <columns>Recursive_Execution_Allowed__c</columns>
+    <columns>Before_Insert__c</columns>
+    <columns>After_Insert__c</columns>
+    <columns>Before_Update__c</columns>
+    <columns>After_Update__c</columns>
+    <columns>Before_Delete__c</columns>
+    <columns>After_Delete__c</columns>
+    <columns>After_UnDelete__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

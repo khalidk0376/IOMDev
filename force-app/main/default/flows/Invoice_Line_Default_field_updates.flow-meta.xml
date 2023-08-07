@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <assignments>
+        <name>Assign_Default_value_from_Billing_Transaction</name>
+        <label>Assign Default value from Billing Transaction</label>
+        <locationX>176</locationX>
+        <locationY>311</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Billing_Percentage__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.blng__BillingTransaction__r.Billing_Percentage__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Billing_Sequence__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.blng__BillingTransaction__r.Billing_sequence__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Parent_Sum_Net_Value__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ParentSumNetvalue</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>Invoice Line Default field values set from different objects
+[GECI-679] - Removed default dates</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>ParentSumNetvalue</name>
+        <dataType>Number</dataType>
+        <expression>(NULLVALUE({!$Record.blng__BillingTransaction__r.Billing_Percentage__c}, 100) /100)*{!$Record.blng__OrderProduct__r.ParentSumNetValue__c}</expression>
+        <scale>2</scale>
+    </formulas>
+    <interviewLabel>Invoice Line Default field updates {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Invoice Line Default field updates</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Assign_Default_value_from_Billing_Transaction</targetReference>
+        </connector>
+        <object>blng__InvoiceLine__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

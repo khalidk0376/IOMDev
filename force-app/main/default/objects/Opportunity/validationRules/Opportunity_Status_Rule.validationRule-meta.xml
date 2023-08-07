@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Opportunity_Status_Rule</fullName>
+    <active>true</active>
+    <description>Validation to validate opportunity status</description>
+    <errorConditionFormula>AND(ISPICKVAL(StageName, &apos;Closed Won&apos;), 
+    ISPICKVAL(Status__c, &apos;Pending Accounting Approval&apos;), 
+    ISPICKVAL(Tax_Validation_Status__c, &apos;Required Approval&apos;))</errorConditionFormula>
+    <errorMessage>Tax Validation Status should be  Approved.</errorMessage>
+</ValidationRule>

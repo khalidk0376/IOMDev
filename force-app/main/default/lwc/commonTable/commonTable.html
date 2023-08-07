@@ -1,0 +1,236 @@
+<!--
+    Created By		: Girikon(Sachin)(IML2R-742)
+    Created On		: 25/2/2020
+    @description 	: This component is used as a commontable table for showing all tables in UI.
+    Modified By		: 
+-->
+<template>
+    
+        <lightning-layout class="slds-m-bottom_small common-table">
+            <lightning-layout-item size="4" padding="horizontal-small action-buttons">
+                <template if:true={button1Label}>
+                    <lightning-button icon-name="utility:add" icon-position="left" label={button1Label} variant="brand" onclick={openNewRecordModal}></lightning-button>&nbsp;&nbsp;
+                </template>
+                <template if:true={button2Label}>
+                    <lightning-button icon-name="utility:add" icon-position="left" label={button2Label} variant="brand" onclick={openNewRecordModal2}></lightning-button>&nbsp;&nbsp;
+                </template>
+                <template if:true={showActionList}>
+                    <lightning-combobox options={bulkActionList} value="" label="Mass" variant="label-hidden" placeholder="--Mass Actions--" id="bulkActionDropdown" onchange={onChangeMassAction} class="mass-action-picklist"></lightning-combobox>
+                </template>
+            </lightning-layout-item>
+            <lightning-layout-item size="8" padding="horizontal-small" class="slds-clearfix">
+                <div class="slds-float_right">
+                    <template if:true={showRefreshButton}>&nbsp;&nbsp;
+                        <lightning-button-icon icon-name="utility:refresh" alternative-text="Refresh"   class="slds-m-right_x-small refreshMargin" title="Refresh" variant="border-filled" onclick={getData}></lightning-button-icon>
+                    </template>
+                    <template if:true={dateFilter}>
+                        <div class="date-filter-box" style="position: absolute;display: inline-block;margin-left: -100px;top: 1px;">
+                            <p style="font-size: 10px;text-align: left;text-transform: uppercase">{dateFilterLabel}</p>
+                            <lightning-button-stateful label-when-off={labelOnHover} selected={dateFilterApplied} label-when-on={clearDateFilter} label-when-hover={labelOnHover} onclick={openDateFilter} class="slds-float_left"></lightning-button-stateful>
+    
+                            <section aria-label={dateFilterLabel} aria-describedby="date-filter" class="slds-hide slds-popover slds-nubbin_top-none" role="dialog" style="top: 48px;position: absolute;margin-left: -113px;">
+                                <button class="slds-button slds-button_icon slds-button_icon slds-button_icon-small slds-float_right slds-popover__close" title="Close dialog" onclick={closeDateFilter}>
+                                    <lightning-icon icon-name="utility:close" size="xx-small"></lightning-icon>
+                                    <span class="slds-assistive-text">Close Filter</span>
+                                </button>
+                                <div id="date-filter" class="slds-popover__body" style="text-align: left">
+                                    <div class="slds-p-around_small">
+                                        <lightning-input type="date" label="Start Date" class="startdate" onchange={handleDateFieldChange}></lightning-input>
+                                        <br/>
+                                        <lightning-input type="date" label="End Date" class="enddate"></lightning-input>
+                                        <br/>
+                                        <template if:true={isShowClear}>
+                                            <a href="javascript:void(0)" onclick={clearDateFilterAction}>Clear</a>
+                                        </template>
+                                    </div>
+                                    <footer class="slds-popover__footer">
+                                        <div class="slds-grid slds-grid_vertical-align-center">
+                                            <lightning-button label="Close" onclick={closeDateFilter}></lightning-button>&nbsp;&nbsp;
+                                            <lightning-button label="Apply" variant="brand" onclick={applyDateFilter}></lightning-button> &nbsp;
+                                        </div>
+                                      </footer>
+                                </div>
+                            </section>
+                        </div>
+                    </template>
+                    <template if:true={filterField3}>&nbsp;&nbsp;
+                        <template if:true={isMultiPicklistFilter3}>
+                            <c-multipicklist placeholder={filter3Label} options={filterField3Options} selected-options={filterField3Value} onmultipicklistselect={handleMultipicklistChange} filter-name="3"></c-multipicklist>
+                        </template>
+                        <template if:false={isMultiPicklistFilter3}>
+                            <lightning-combobox options={filterField3Options} class="filter3" value={filterField3Value} label="filter-1" variant="label-hidden" onchange={handleFilterChange}></lightning-combobox>
+                        </template>     
+                    </template>
+                
+                    <template if:true={filterField2}>&nbsp;&nbsp;
+                        <template if:true={isMultiPicklistFilter2}>
+                            <c-multipicklist placeholder={filter2Label} options={filterField2Options} selected-options={filterField2Value} onmultipicklistselect={handleMultipicklistChange} filter-name="2"></c-multipicklist>                            
+                        </template>
+                        <template if:false={isMultiPicklistFilter2}>
+                            <lightning-combobox options={filterField2Options} class="filter2" value={filterField2Value} label="filter-2" variant="label-hidden" onchange={handleFilterChange}></lightning-combobox>
+                        </template>
+                    </template>
+    
+                    <template if:true={filterField1}>&nbsp;&nbsp;
+                        <template if:true={isMultiPicklistFilter1}>
+                            <c-multipicklist placeholder={filter1Label} options={filterField1Options} selected-options={filterField1Value} onmultipicklistselect={handleMultipicklistChange} filter-name="1"></c-multipicklist>                            
+                        </template>
+                        <template if:false={isMultiPicklistFilter1}>
+                            <lightning-combobox options={filterField1Options} class="filter1" value={filterField1Value} label="filter-3" variant="label-hidden" onchange={handleFilterChange}></lightning-combobox>
+                        </template>
+                    </template>    
+    
+                
+                    <template if:true={isFilterByOwner}>&nbsp;&nbsp;
+                        <lightning-combobox options={ownerOptions} class="ownerfilter" value={selectedOwner} label="filter-4" variant="label-hidden" onchange={handleFilterChange}></lightning-combobox>
+                    </template>
+    
+                    <template if:true={toggleFilterLabel}>&nbsp;&nbsp;                    
+                        <lightning-button-stateful
+                            label-when-off={toggleFilterLabel}
+                            label-when-on={toggleFilterLabel}
+                            label-when-hover="Remove Filter"                            
+                            icon-name-when-on="utility:check"
+                            icon-name-when-hover="utility:close"
+                            selected={toggleState}
+                            onclick={handleToggleButtonClick}>
+                        </lightning-button-stateful>
+                    </template>
+                    &nbsp;&nbsp;
+                    <lightning-input lang={lang} dir={dir} type="search" value={searchValue} label="Search" placeholder="Search" variant="label-hidden" class="search-box" onchange={reloadData}></lightning-input>
+                    <button style="display: inline-block;margin-top: -2px;margin-left: -5px;" class="slds-button slds-button_icon slds-button_icon-brand" title="Search" onclick={searchData}>
+                        <lightning-icon icon-name="utility:search" size="xx-small" variant="bare"></lightning-icon>
+                    </button>  
+                </div>                
+            </lightning-layout-item>
+        </lightning-layout>
+            
+    
+        <c-table-placeholder is-show={isShow}></c-table-placeholder>
+        <template if:true={isTrue}>
+            <lightning-spinner variant="brand" size="small" title="Loading..."></lightning-spinner>
+        </template>
+    
+        <template if:true={hideCheckboxColumn}>
+            <lightning-datatable data={tableData} columns={tableColumn} max-row-selection="15" onrowselection={handleRowSelection}
+            onsort={handleSorting} sorted-by={sortByFieldName} onrowaction={handleRowAction} selected-rows={selectedTableRows}
+            sorted-direction={sortType} key-field="Id"></lightning-datatable>
+        </template>
+        
+        <template if:false={hideCheckboxColumn}>
+            <lightning-datatable data={tableData} columns={tableColumn} hide-checkbox-column
+            onsort={handleSorting} sorted-by={sortByFieldName} onrowaction={handleRowAction} 
+            sorted-direction={sortType} key-field="Id"></lightning-datatable>        
+        </template>
+        <template if:true={showMassUpdateConfirmationBar}>
+            <div class="slds-docked-form-footer" style="position:relative">
+                <div class="slds-text-color_error slds-text-heading_small">Do you realy want to update all selected rows?&nbsp;&nbsp;</div>
+                <lightning-button label="No" onclick={noCancelAll}></lightning-button>&nbsp;
+                <lightning-button label="Yes Update All" onclick={yesUpdateAll} variant="brand"></lightning-button>
+            </div>
+        </template>
+    
+        <template if:true={error}>
+            <div class="slds-align_absolute-center">No {objectLabel} to Display</div>
+        </template>
+            
+        <template if:true={pageList}>
+            <lightning-layout multiple-rows="true" class="slds-m-around_small slds-clearfix">
+                <lightning-layout-item size="4" padding="horizontal_small">
+                    <template if:false={hidePerPage}>
+                        <div class="row-per-page">
+                            Show                
+                            <lightning-combobox options={pagesizeList} value={pagesizeToVisible} label="Page Size" variant="label-hidden" placeholder="Page Size" onchange={onPageSizeChange} class="pagesize"></lightning-combobox>
+                            <span lang={lang} dir={dir}>{objectLabel}</span> per page.
+                        </div>
+                    </template>
+                </lightning-layout-item>
+                <lightning-layout-item size="8" class="slds-float_right" padding="horizontal_small">
+                    <div class="slds-float_right">
+                    {showPageView} of &nbsp;
+                    <template if:true={isMoreThan2000}>2000+</template>
+                    <template if:false={isMoreThan2000}><span class="total-rows">{totalRows}</span></template>&nbsp;
+                    <lightning-button-icon class="prev-btn" size="medium" icon-name="utility:chevronleft" onclick={getPrevData} variant="bare"></lightning-button-icon>&nbsp;
+                        <span class="slds-p-horizontal_x-small">
+                            <a href="javascript:void(0);" id="first" onclick={processMe} name="1" class={firstActiveClass}>1</a>
+                        </span>
+                        <span class="slds-p-horizontal_xxx-small">
+                            <a href="javascript:void(0);" id="none1">...</a>
+                        </span>
+                        <template for:each={pageList} for:item="item" for:index="ind">
+                            <span key={item} id={item} class="slds-p-horizontal_x-small">
+                                <a href="javascript:void(0);" id={item} onclick={processMe} name={item} class="">{item}</a>
+                            </span>
+                        </template>
+                        <span class="slds-p-horizontal_xxx-small">
+                            <a href="javascript:void(0);" id="none2">...</a>
+                        </span>
+                        <span key={item} id={item} class="slds-p-horizontal_x-small">
+                            <a href="javascript:void(0);" id="last" onclick={processMe} name={totalPage} class={lastActiveClass}>{totalPage}</a>
+                        </span>
+                    <lightning-button-icon class="next-btn" size="medium" icon-name="utility:chevronright" onclick={getNextData} variant="bare"></lightning-button-icon>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+        
+        
+        <slot name="newRecordModal"></slot>
+        <slot name="editRecordModal"></slot>
+        <slot name="actionRecordModal"></slot>
+        <slot name="massUpdate">
+    
+        </slot>
+    
+        <!-- Single Delete confirmation -->
+        <template if:true={isOpenSingleDeleteModal}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button onclick={noDelete} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                            <lightning-icon icon-name="utility:close" variant="bare" size="small"></lightning-icon>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Confirmation</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <div class="slds-text-color_error slds-text-heading_small"> {delete_confirm_message_2}</div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button onclick={noDelete} label="No" icon-name="utility:close" variant="destructive"></lightning-button>&nbsp;&nbsp;
+                        <lightning-button onclick={yesDeleteSingleRecord} label="Yes" icon-name="utility:check" variant="brand"></lightning-button>
+                    </footer>
+                </div>
+                <template if:true={isTrue}>
+                    <lightning-spinner variant="brand" size="small" title="Loading..."></lightning-spinner>
+                </template>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    
+        <!-- Bulk Delete Alert Modal Start-->
+        <template if:true={isOpenMassDeleteModal}>
+            <section role="dialog" tabindex="-1" aria-labelledby="delete-modal-heading" aria-modal="true" aria-describedby="delete-modal-content" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button onclick={noDelete} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                            <lightning-icon icon-name="utility:close" variant="bare" size="small"></lightning-icon>
+                        </button>
+                        <h2 id="delete-modal-heading" class="slds-text-heading_medium slds-hyphenate">Mass {objectLabel} Deletion</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="delete-modal-content">
+                        <div class="slds-text-color_error slds-text-heading_small"> {delete_confirm_message}</div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button onclick={noDelete} label="No" icon-name="utility:close" variant="destructive"></lightning-button>&nbsp;&nbsp;
+                        <lightning-button onclick={yesDeleteAll} label="Yes" icon-name="utility:check" variant="brand"></lightning-button>
+                    </footer>
+                </div>
+                <template if:true={isTrue}>
+                    <lightning-spinner variant="brand" size="small" title="Loading..."></lightning-spinner>
+                </template>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        <!-- Bulk Delete Alert Modal End-->
+    
+    </template>

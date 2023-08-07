@@ -1,0 +1,262 @@
+.THIS .slds-form-element {
+    margin-bottom: 0px!important;
+}
+
+.THIS .uiLabel,
+.THIS .uiLegend {
+    display: none!important;
+}
+
+.THIS .gkn-radio-field legend {
+    display: none;
+}
+.THIS .top10{margin-top: 20px;}
+.THIS .formbtn{justify-content: end;}
+.THIS .slds-checkbox_toggle .slds-form-element__label {
+    display: none;
+}
+
+.THIS .currency-symbal {
+    z-index: 100;    
+    top: 17px;
+    left: 12px;
+    font-weight: bold
+}
+
+.THIS .currency-val-padd input {
+    padding-left: 22px;
+}
+
+.THIS .currency-val-padd label {
+    display: none!important
+}
+
+.THIS .hidetitle h2,
+.THIS label abbr {
+    display: none!important;
+}
+
+.THIS .select label {
+    display: none!important;
+}
+
+.THIS .get-location {
+    margin-top: 24px
+}
+
+.THIS.border span.slds-text-heading--small {
+    display: none;
+}
+
+.THIS ::-moz-selection {
+    background: token(colorBrand);
+    color: #fff;
+}
+
+.THIS ::selection {
+    background: token(colorBrand);
+    color: #fff;
+}
+
+.THIS .slds-has-error .slds-form-element__label {
+    color: red;
+}
+
+.THIS span.slds-form-element__label.slds-var-m-bottom--none {
+    display: none!important
+}
+
+.THIS .slds-slider-label__range {
+    display: none;
+}
+
+.THIS .slds-slider__value {
+    display: none;
+}
+
+.THIS .sortableArea {
+    overflow: visible;
+}
+
+.THIS .dropSectionHighlight {
+    border: 1px solid rgb(0, 161, 223);
+    border-style: dashed;
+    box-shadow: 0px 0px 8px rgb(0, 161, 223);
+}
+
+.THIS .toggle {
+    display: none;
+}
+
+.THIS .slds-modal {
+    top: 68px;
+}
+
+.THIS .slds-text-heading_small {
+    font-size: 13px;
+}
+
+.THIS #asteric {
+    color: red;
+    font-size: 15px;
+    padding-right: 3px;
+}
+
+.THIS .section-name{
+    background-color: #3c76d3;
+    width: 100%;
+    margin: 0px 11px;
+    padding: 5px 11px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.THIS .marginB5 {
+    margin-bottom: .5rem;
+}
+
+.THIS .slds-form--inline .slds-form-element__control {
+    display: block;
+}
+
+.THIS .slds-form--inline label {
+    display: none;
+}
+
+.THIS .helptextIcon {
+    display: inline-grid;
+    margin-left: 5px;
+    margin-top: -2px;
+}
+
+.THIS .hidehelptextIcon {
+    display: none;
+}
+
+.THIS .checkbx {
+    display: inline-grid;
+    padding-left: 30px;
+}
+
+.THIS .slider-output-value {
+    clear: both;
+    margin-top: 1%;    
+    border: 1px #ccc solid;
+    border-radius: 15px;
+    padding: 5px 15px;
+}
+
+.THIS .publishCntn {
+    font-size: 15px;
+    font-weight: 700;
+    color: black;
+}
+
+.THIS .slds-card__header {
+    width: 100%;
+}
+
+.THIS .slds-panel__section {
+    padding: 5px 0px;
+}
+
+.THIS .currencyIcon {
+    width: 1.875rem;
+}
+
+.THIS.main-content {    
+    margin-top: -40px;
+    padding-bottom: 40px;
+}
+
+.THIS .number-input .currency-symbal {
+    top: 17px;
+}
+
+.THIS .slds-scope .slds-has-error {
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    box-shadow: none;
+}
+
+.THIS::placeholder {    
+    font-size: 20px;
+}
+
+.THIS:-ms-input-placeholder {    
+    font-size: 20px;
+}
+
+.THIS::-ms-input-placeholder {    
+    font-size: 20px;
+}
+
+.THIS .single-col-question-box .slds-form-element.checkbx {
+    width: auto !important;    
+    margin-top: 7px;
+}
+
+.THIS .slds-button[disabled],
+.THIS .slds-button:disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.THIS .qstnBuilderContent {
+    padding: 3px !important;
+    box-shadow: 0px 2px 4px 4px rgba(0,0,0,.16);
+    border-radius: 0.25rem;
+}
+
+.THIS .single-col-question-box {
+    height: 100%;
+}
+
+.THIS .GKM-FB-radioGroup.alpha {
+    list-style-type: upper-alpha;
+}
+.THIS .logout{
+    top:0px;right:0px;padding:2px 6px;margin: 0px 10px;background-color:#16325c;
+    color: #fff;border-bottom-right-radius: 4px;border-bottom-left-radius: 4px;
+}
+.THIS .checkbx{
+    width: fit-content!important;
+    padding-left: 5px!important;
+    float: left!important;
+}
+.THIS .helptextIcon button{
+    padding: 0!important;
+    height: 12px!important;
+    margin-top: -6px!important;
+}
+.THIS .slds-spinner, .THIS .slds-spinner_container {
+    position: fixed!important;
+}
+.THIS .slds-checkbox .slds-required{
+    display: none!important;
+}
+@media (max-width: 1024px) {
+    .THIS .formbtn{justify-content: center;    line-height: 45px;}
+}
+
+@media (max-width: 768px) {
+    .THIS .single-col-question-box {
+        padding-left: 30px;
+        padding-right: 10px;
+    }
+    .THIS .formbtn{justify-content: center;    line-height: 45px;}
+}
+
+@media (max-width: 479px) {
+    .THIS .slds-size--4-of-12,
+    .THIS .slds-size--6-of-12,
+    .THIS .slds-size--3-of-12 {
+        width: 100%;
+    }
+    .THIS {
+        font-size: 0.8125rem;
+    }
+    .THIS .formbtn{justify-content: center;    line-height: 45px;}    
+}

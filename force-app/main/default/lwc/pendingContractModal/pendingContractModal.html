@@ -1,0 +1,124 @@
+<!--
+Created By	 : Girikon(Sachin)(IML2R-742)
+Created On	 : Feb 24, 2020
+@description : This is populating the details of Finance, Contract, Products details.
+
+Modification log:
+Modified By	: 
+-->
+<template>
+        <template if:true={isOpenActionModal}>
+            <section role="dialog" tabindex="-1" aria-labelledby="edit-form-heading" aria-modal="true" aria-describedby="modal-content-edit-form" class="slds-modal slds-fade-in-open slds-modal_large">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button type="button" onclick={closeModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                            <lightning-icon icon-name="utility:close" variant="bare" size="small"></lightning-icon>
+                        </button>
+                        <h2 id="edit-form-heading" class="slds-text-heading_medium slds-hyphenate">Viewing Opportunity: {oppName}</h2>
+                    </header>
+                    
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-edit-form">
+                        <div class="all-tabs" style="min-height: 350px; max-height:800px">
+                            <lightning-tabset>
+                                <template if:false={isSSCBrazilUser}>
+                                    <lightning-tab label="Finance">
+                                        <c-pending-contract-finance-tab onafterformsubmission={handleAfterFormSubmission} record-id={recordId} object-name={objectName}></c-pending-contract-finance-tab>
+                                    </lightning-tab>
+                                </template>
+                                <!-- Removed Under IOM-775  -->
+                               <!-- <lightning-tab label="Contract">                                
+                                    <c-pending-contract-contact-tab record-id={recordId}></c-pending-contract-contact-tab>
+                                </lightning-tab> -->
+                                
+                                <template if:false={isSSCBrazilUser}>
+                                    <lightning-tab label="Products">                                    
+                                        <c-pending-contract-product-tab record-id={recordId}></c-pending-contract-product-tab>
+                                    </lightning-tab>
+                                </template>
+                            </lightning-tabset>
+                            
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button onclick={closeModal} label="Close"></lightning-button>&nbsp;&nbsp;
+                        <template if:true={showApproveReject}>
+                            <lightning-button icon-name="utility:check" variant="success" onclick={openApproveConfirmationModal} label="Approve"></lightning-button>&nbsp;&nbsp;
+                            <lightning-button icon-name="utility:error" variant="destructive" onclick={openRejectConfirmationModal} label="Reject"></lightning-button>  
+                        </template>                  
+                    </footer>
+                        
+                    </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    
+    
+        <!-- Approve Modal-->
+        <template if:true={openApprovModal}>
+            <section role="dialog" tabindex="-1" aria-labelledby="approve-modal" aria-modal="true" aria-describedby="modal-content-approve-modal" class="slds-modal slds-fade-in-open" style="z-index: 99999;">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button type="button" onclick={closeApproveModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                            <lightning-icon icon-name="utility:close" variant="bare" size="small"></lightning-icon>
+                        </button>
+                        <h2 id="approve-modal-heading" class="slds-text-heading_medium slds-hyphenate">Viewing Opportunity: {oppName}</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="approve-modal">
+                        <template if:true={spinner}>
+                            <lightning-spinner variant="brand" size="small"></lightning-spinner>
+                        </template>
+                        <div class="slds-text-heading_medium"><strong>Do you want to approve this contract?</strong></div>
+                        <ul style="list-style: disc;padding: 15px 30px;">
+                            <li style="padding: 3px 0px;font-size: 17px;">Contract has been signed</li>                        
+                            <li style="padding: 3px 0px;font-size: 17px;">All products are correct</li>
+                            <li style="padding: 3px 0px;font-size: 17px;">Quantities match the contract</li>
+                            <li style="padding: 3px 0px;font-size: 17px;">Correct account/contact information</li>
+                        </ul>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button onclick={closeApproveModal} label="Cancel"></lightning-button>&nbsp;&nbsp;
+                        <lightning-button icon-name="utility:check" variant="success" onclick={yesApprove} label="Approve"></lightning-button>&nbsp;&nbsp;
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" style="z-index: 9999;"></div>
+        </template>
+    
+        <!-- Reject Modal-->
+        <template if:true={openRejectModal}>
+            <lightning-record-edit-form class="reject-form" object-api-name="Opportunity" record-id={recordId} onsuccess={handleSuccess} onsubmit={handleSubmit} onerror={handleError}>
+                <section role="dialog" tabindex="-1" aria-labelledby="approv-modal" aria-modal="true" aria-describedby="modal-content-approv-modal" class="slds-modal slds-fade-in-open" style="z-index: 99999;">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <button type="button" onclick={closeRejectModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                                <lightning-icon icon-name="utility:close" variant="bare" size="small"></lightning-icon>
+                            </button>
+                            <h2 id="approv-modal-heading" class="slds-text-heading_medium slds-hyphenate">Viewing Opportunity: {oppName}</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="approv-modal" style="height:320px">
+                            <template if:true={spinner}>
+                                <lightning-spinner variant="brand" size="small"></lightning-spinner>
+                            </template>
+                            <lightning-combobox options={rejectionOptions} class="Rejection_Responses" value={rejectionResponses} label="Rejection Reason" onchange={handleRejectionResponse}></lightning-combobox>
+                            
+                            <div class="slds-p-top_small ssc-note-box slds-hide">
+                                <div class="ssc_note_1 slds-hide">
+                                    <lightning-textarea class="ssc-notes-field" name="input1" required value="" placeholder="*Please enter some value" label="Rejection Notes" maxlength="131072" message-when-too-long="A maximum of 131072 characters are allowed in a Rejection Note." message-when-value-missing="Rejection Note field must not empty"></lightning-textarea>
+                                </div>
+                                <div class="ssc_note_2">
+                                    <label>Rejection Note</label>
+                                    <lightning-input-field field-name="Rejection_Notes__c" variant="label-hidden"></lightning-input-field>
+                                </div>
+                            </div>
+                        
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning-button onclick={closeRejectModal} label="Cancel"></lightning-button>&nbsp;&nbsp;
+                            <lightning-button variant="brand" type="submit" label="Save"></lightning-button>&nbsp;&nbsp;
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open" style="z-index: 9999;"></div>
+            </lightning-record-edit-form>
+        </template>
+    </template>

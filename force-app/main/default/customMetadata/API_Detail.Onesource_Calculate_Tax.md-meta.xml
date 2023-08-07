@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Onesource Calculate Tax</label>
+    <protected>false</protected>
+    <values>
+        <field>API_3rd_Party_Name__c</field>
+        <value xsi:type="xsd:string">Onesource</value>
+    </values>
+    <values>
+        <field>API_End_Point__c</field>
+        <value xsi:type="xsd:string">/api/v1.0/calculate-tax?client_id=a502f90975bc48d3ac813afa26d11a46&amp;client_secret=a15A5CFC34214c72826e267B43cEd176</value>
+    </values>
+    <values>
+        <field>API_Method__c</field>
+        <value xsi:type="xsd:string">POST</value>
+    </values>
+    <values>
+        <field>Headers__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

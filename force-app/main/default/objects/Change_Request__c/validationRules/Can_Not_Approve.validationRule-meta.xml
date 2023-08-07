@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Can_Not_Approve</fullName>
+    <active>true</active>
+    <description>Can Not Approve till Amended Opportunity is Closed won</description>
+    <errorConditionFormula>AND( ISPICKVAL(Change_Request_Status__c, &apos;Approval Required&apos;) ,NOT(ISBLANK(Amended_Opportunity__c)), NOT(ISPICKVAL(Amended_Opportunity__r.StageName, &apos;Closed Won&apos;)))</errorConditionFormula>
+    <errorMessage>Amended Opportunity is not Closed won</errorMessage>
+</ValidationRule>

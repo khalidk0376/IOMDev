@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Amendments_not_Completed</fullName>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>Requested_By__c</columns>
+    <columns>Edition__c</columns>
+    <columns>Change_Request_Status__c</columns>
+    <columns>Amendment_Type__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Change_Request_Status__c</field>
+        <operation>notEqual</operation>
+        <value>Completed</value>
+    </filters>
+    <label>Amendments not Completed</label>
+</ListView>

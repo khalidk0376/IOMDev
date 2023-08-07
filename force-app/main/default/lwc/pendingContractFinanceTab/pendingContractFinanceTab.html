@@ -1,0 +1,585 @@
+<!--
+Created By	 : Girikon(Sachin)(IML2R-742)
+Created On	 : Feb 24, 2020
+@description : This is finance tab form component that shown after user click on row of pending contract tab
+
+Modification log:
+Modified By	: 
+-->
+<template>
+        <c-forms-placeholder is-show={isShow}></c-forms-placeholder>                    
+        <div class={className}>
+            <template if:true={spinner}>
+                <lightning-spinner size="small" variant="brand"></lightning-spinner>
+            </template>
+            <div class={isViewForm}>
+                <lightning-record-view-form object-api-name={objectName} record-id={recordId}>
+                    <!--First section to view form-->
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="4" padding="horizontal-small">                        
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Bill To Account</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <lightning-output-field field-name="Bill_To_Account__c" variant="label-hidden"></lightning-output-field>
+                                            <lightning-button-icon icon-name="utility:edit" class="edit" icon-class="slds-button__icon_hint" variant="bare" alternative-text="Edit Record" onclick={editRecord}></lightning-button-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Ship To Account</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <lightning-output-field field-name="Ship_To_Account__c" variant="label-hidden"></lightning-output-field>
+                                            <lightning-button-icon icon-name="utility:edit" class="edit" icon-class="slds-button__icon_hint" variant="bare" alternative-text="Edit Record" onclick={editRecord}></lightning-button-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">{BILLINGINVOICECONTACT}</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <lightning-output-field field-name="Billing_Contact__c" variant="label-hidden"></lightning-output-field>
+                                            <lightning-button-icon icon-name="utility:edit" class="edit" icon-class="slds-button__icon_hint" variant="bare" alternative-text="Edit Record" onclick={editRecord}></lightning-button-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Legal Entity</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.SBQQ__PrimaryQuote__r}>
+                                                    {oppObj.Legal_Entity__r.Name}
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Default Edition</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.SBQQ__PrimaryQuote__r}>
+                                                    {oppObj.Default_Edition__r.Name}
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="4" padding="horizontal-small">
+                            <div class="slds-text-heading_medium" style="padding-left: .75rem;padding-right: .75rem;"><strong>Billing Address</strong></div>
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Billing Address Line 1</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.Bill_To_Account__r}>
+                                                    {oppObj.Bill_To_Account__r.BillingStreet}
+                                                        <!-- {oppObj.Billing_Contact__r.Account.BillingStreet} -->
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">{BILLINGAddLINE2}</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.Bill_To_Account__r}>
+                                                    {oppObj.Bill_To_Account__r.Billing_Address_Line_2__c}
+                                                </template>
+                                            </template>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">{BILLINGCITY}</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.Bill_To_Account__r}>
+                                                    {oppObj.Bill_To_Account__r.BillingCity}
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Billing State</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.Bill_To_Account__r}>
+                                                    {oppObj.Bill_To_Account__r.BillingState}</template>
+                                                
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Billing Country</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.Bill_To_Account__r}>
+                                                    {oppObj.Bill_To_Account__r.BillingCountryCode}
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">{BILLINGPOSTALCODE}</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.Bill_To_Account__r}>
+                                                    {oppObj.Bill_To_Account__r.BillingPostalCode}
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="4" padding="horizontal-small">
+                            <div class="slds-text-heading_medium" style="padding-left: .75rem;padding-right: .75rem;"><strong>Shipping Address</strong></div>
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Shipping Address Line 1</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.Ship_To_Account__r}>
+                                                    {oppObj.Ship_To_Account__r.BillingStreet}
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">{SHIPPINGCITY}</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.Ship_To_Account__r}>
+                                                    {oppObj.Ship_To_Account__r.BillingCity}
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Shipping State</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.Ship_To_Account__r}>
+                                                    {oppObj.Ship_To_Account__r.BillingState}
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                      
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Shipping Country</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.Ship_To_Account__r}>
+                                                    {oppObj.Ship_To_Account__r.BillingCountryCode}
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">{SHIPPINGPOSTALCODE}</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.Ship_To_Account__r}>
+                                                    {oppObj.Ship_To_Account__r.BillingPostalCode}               
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>        
+                        </lightning-layout-item>                    
+                    </lightning-layout>
+                    <!--Second section to view form-->
+                    <lightning-layout multiple-rows="true" class="slds-p-top_xx-small">
+                        <lightning-layout-item size="4" padding="horizontal-small">
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Is Custom Billing Required</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.SBQQ__PrimaryQuote__r}>
+                                                    {oppObj.Is_Custom_Billing_Required__c}
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Custom Billing Instructions</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.SBQQ__PrimaryQuote__r}>
+                                                    {oppObj.Custom_Billing_Instructions__c}
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Contract Currency</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.SBQQ__PrimaryQuote__r}>
+                                                    {oppObj.SBQQ__PrimaryQuote__r.CurrencyIsoCode}
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        
+                        <lightning-layout-item size="4" padding="horizontal-small">
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Tax ID</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={acctaxObj}>
+                                                    {acctaxObj.Tax_ID__c}
+                                           </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Billing Account Tax ID</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.Billing_Contact__r}>
+                                                    <template if:true={oppObj.Billing_Contact__r.Account}>
+                                                    {oppObj.Billing_Contact__r.Account.Tax_Id__c}
+                                                    </template>
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Customer Purchase Order</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.Account}>
+                                                    {oppObj.PO_Number__c}
+                                                </template>
+                                            </template>
+                                            <!--<lightning-output-field field-name="Customer_Purchase_Order__c" variant="label-hidden"></lightning-output-field>
+                                            <lightning-button-icon icon-name="utility:edit" class="edit" icon-class="slds-button__icon_hint" variant="bare" alternative-text="Edit Record" onclick={editRecord}></lightning-button-icon>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>                
+                </lightning-record-view-form>
+            </div>
+            <div class={isEditForm}>
+                <lightning-record-edit-form class="edit_single_record" onload={handleLoad} record-id={recordId} object-api-name={objectName} onsubmit={handleSubmit} onsuccess={handleSucess} onerror={handleError}>
+                    <!--First Section to edit form-->
+                    <lightning-layout multiple-rows="true">
+                        
+                        <lightning-layout-item size="4" padding="horizontal-small">
+                            <!-- <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Account</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <lightning-input-field field-name="AccountId" variant="label-hidden"></lightning-input-field>
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div> -->
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Bill To Account</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <lightning-input-field field-name="Bill_To_Account__c" variant="label-hidden"></lightning-input-field>
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Ship To Account</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <lightning-input-field field-name="Ship_To_Account__c" variant="label-hidden"></lightning-input-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_stacked slds-hint-parent">
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <lightning-input-field field-name="Billing_Contact__c"></lightning-input-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                        
+                        </lightning-layout-item>
+                        <lightning-layout-item size="4" padding="horizontal-small">
+                            <div class="slds-text-heading_medium" style="padding-left: .75rem;padding-right: .75rem;"><strong>Billing Address</strong></div>
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Billing Address Line 1</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.Bill_To_Account__c}>
+                                                    {oppObj.Bill_To_Account__r.BillingStreet}
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">{BILLINGAddLINE2}</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                    <template if:true={oppObj.Bill_To_Account__c}>{oppObj.Bill_To_Account__r.Billing_Address_Line_2__c}</template>
+                                                </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">{BILLINGCITY}</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                    <template if:true={oppObj.Bill_To_Account__c}>{oppObj.Bill_To_Account__r.BillingCity}</template>
+\                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Billing State</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                    <template if:true={oppObj.Bill_To_Account__c}>
+                                                    {oppObj.Bill_To_Account__r.BillingState}
+                                                    </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Billing Country</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                    <template if:true={oppObj.Bill_To_Account__c}>
+                                                        {oppObj.Bill_To_Account__r.BillingCountryCode}
+                                                    </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">{BILLINGPOSTALCODE}</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                    <template if:true={oppObj.Bill_To_Account__c}>
+                                                        {oppObj.Bill_To_Account__r.BillingPostalCode}
+                                                    </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="4" padding="horizontal-small">
+                            <div class="slds-text-heading_medium" style="padding-left: .75rem;padding-right: .75rem;"><strong>Shipping Address</strong></div>
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Shipping Address Line 1</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.Bill_To_Account__c}>{oppObj.Bill_To_Account__r.ShippingStreet}</template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">{SHIPPINGCITY}</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                    <template if:true={oppObj.Bill_To_Account__c}>{oppObj.Bill_To_Account__r.ShippingCity}</template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Shipping State</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                    <template if:true={oppObj.Bill_To_Account__c}>{oppObj.Bill_To_Account__r.ShippingState}</template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                      
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Shipping Country</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+\                                                    <template if:true={oppObj.Bill_To_Account__c}>{oppObj.Bill_To_Account__r.ShippingCountryCode}</template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">{SHIPPINGPOSTALCODE}</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                    <template if:true={oppObj.Bill_To_Account__c}>{oppObj.Bill_To_Account__r.ShippingPostalCode}</template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>        
+                        </lightning-layout-item>
+                    </lightning-layout>
+                    
+                    <!--Second section to edit form-->
+                    <lightning-layout multiple-rows="true" class="slds-p-top_xx-small">
+                        <lightning-layout-item size="4" padding="horizontal-small">
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <span class="slds-form-element__label">Contract Currency</span>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={oppObj}>
+                                                <template if:true={oppObj.SBQQ__PrimaryQuote__r}>
+                                                    {oppObj.SBQQ__PrimaryQuote__r.CurrencyIsoCode}
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!--<div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-form-element_stacked slds-hint-parent">
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <lightning-input-field field-name="Customer_Purchase_Order__c"></lightning-input-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
+                        </lightning-layout-item>                       
+                        <!--Cancel Button-->
+                        <lightning-layout-item size="12" padding="horizontal-small">
+                            <div class="slds-clearfix">
+                                <div class="slds-float_right">
+                                    <lightning-button type="submit" class="save-button" variant="brand" icon-name="utility:check" label="Update"></lightning-button>&nbsp;&nbsp;
+                                    <lightning-button label="Cancel" variant="destructive" icon-name="utility:close" onclick={viewForm}></lightning-button>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>  
+                </lightning-record-edit-form>
+            </div>
+        </div>
+    </template>

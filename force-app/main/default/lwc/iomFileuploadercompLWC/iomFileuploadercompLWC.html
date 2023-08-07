@@ -1,0 +1,126 @@
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner variant="brand" size="medium" title="Loading..."></lightning-spinner>
+    </template>
+    <article class="slds-card">
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <lightning-icon icon-name="doctype:image" alternative-text="Image file" title="Image" size="large"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__title slds-truncate" title="ffgf">
+                                            Custom Metadata Type Records Create/Update
+                                        </span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <template if:true={showFileUpload}>
+        <article class="slds-card slds-m-top_small mainSec">
+            <div class="slds-m-around_small">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-size_4-of-12">
+                    </div>
+                    <div class="slds-size_4-of-12">
+                        <lightning-input type="file" label="Select File" onchange={excelFileToJson} disabled={disableButton} accept="xlsx" variant="label-inline" multiple="false"></lightning-input>
+                    </div>
+                    <div class="slds-size_4-of-12">
+                    </div>
+                    <div class="slds-size_5-of-12 slds-m-top_small">
+                    </div>
+                    <div class="slds-size_2-of-12 slds-m-top_small">
+                        <!--<lightning-button label="Next" variant="brand" onclick={showMetaDataScreen}></lightning-button>-->
+                    </div>
+                    <div class="slds-size_5-of-12 slds-m-top_small">
+                    </div>
+                </div>
+            </div>
+        </article>
+    </template>
+    <template if:true={showMetataSelection}>
+        <article class="slds-card slds-m-top_small mainSec">
+            <div class="slds-m-around_small">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-size_4-of-12">
+                    </div>
+                    <div class="slds-size_4-of-12">
+                        <lightning-combobox
+                        name="custommetadatas"
+                        label="Custom Metadata"
+                        placeholder="Select Custom Metadata"
+                        options={customMetaDataList}
+                        variant="label-inline"
+                        onchange={handleChangeMetaData} ></lightning-combobox> 
+                    </div>
+                    <div class="slds-size_4-of-12">
+                    </div>
+                    <div class="slds-size_5-of-12 slds-m-top_small">
+                    </div>
+                    <div class="slds-size_2-of-12 slds-m-top_small">
+                        <lightning-button label="Next" variant="brand" onclick={showMappingScreen}></lightning-button>
+                    </div>
+                    <div class="slds-size_5-of-12 slds-m-top_small">
+                    </div>
+                </div>
+            </div>
+        </article>
+    </template>
+    <template if:true={showMapping}>
+        <article class="slds-card slds-m-top_small mainSec">
+            <div class="slds-m-around_small">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-size_4-of-12">
+                        <b>File Column Name</b>
+                    </div>
+                    <div class="slds-size_4-of-12">
+                        
+                    </div>
+                    <div class="slds-size_4-of-12">
+                        <b>Custom Metadata Field</b>
+                    </div>
+                    <div class="slds-size_12-of-12">
+                        &nbsp;
+                    </div>
+                    <template for:each={columnsList} for:item="col">
+                        <div key={col.index} class="slds-size_4-of-12">
+                            {col.name}
+                        </div>
+                        <div key={col.index} class="slds-size_4-of-12">
+                        </div>
+                        <div key={col.index} class="slds-size_4-of-12">
+                            <lightning-combobox
+                            name="custommetadatafields"
+                            label="Custom Metadata Field"
+                            placeholder="Select Custom Metadata Field"
+                            options={fieldsList}
+                            variant="label-hidden" 
+                            onchange={handleChangeFields}
+                            data-index={col.index}></lightning-combobox> 
+                        </div>
+                        <div key={col.index} class="slds-size_12-of-12">
+                            &nbsp;
+                        </div>
+                    </template>
+                    <div class="slds-size_5-of-12 slds-m-top_small">
+                    </div>
+                    <div class="slds-size_2-of-12 slds-m-top_small">
+                        <lightning-button label="Save" variant="brand" onclick={saveData}></lightning-button>
+                    </div>
+                    <div class="slds-size_5-of-12 slds-m-top_small">
+                    </div>
+                </div>
+            </div>
+        </article>
+    </template>
+</template>

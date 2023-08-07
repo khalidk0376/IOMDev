@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Show_Due_Date__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>It holds the visiblity of Edition.Due_Date__c on Customer Portal</description>
+    <externalId>false</externalId>
+    <label>Show Due Date</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

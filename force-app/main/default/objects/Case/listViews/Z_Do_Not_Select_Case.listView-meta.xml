@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Z_Do_Not_Select_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Z Do Not Select</label>
+    <queue>Z_Do_Not_Select</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Contain &quot;Report Type&quot; permission. Added to the users present in DevOps queue.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Devops Permission Set</label>
+    <license>Salesforce</license>
+</PermissionSet>

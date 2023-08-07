@@ -1,0 +1,91 @@
+<!--
+ * File:        ValidateBlngContactAccntBlngAdd [IML2R-132]
+ * Date:        7 jan 2020
+ * Created By : Girikon(Ashish)  
+ * *************************************************************************
+ * Description: This Vf page validate account and related account
+ * *************************************************************************
+ * History: 
+ -->
+
+<apex:page standardController="Opportunity" extensions="AccountRelatedAccountValidationCtrl" applyHtmlTag="true" showHeader="false" applyBodyTag="true" standardStylesheets="false" docType="html-5.0">
+ <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <apex:slds />    
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function( ){
+                	startPoller( );
+            	});
+                function closeWindow( ){
+                    var sts = document.getElementById('j_id0:j_id4:sts').value;
+                    var msg = document.getElementById('j_id0:j_id4:errMsg').value;
+                    var url = document.getElementById('j_id0:j_id4:redirectUrl').value;
+                    if( sts != 'start' && msg == '' ) 
+                    {                        
+                        window.top.location.href='/lightning/r/opportunity/{!opportunityId}/view';                        
+                    }
+                }
+            </script>
+        </head>
+     	<body class="slds-scope">
+            <apex:form >
+                <apex:outputPanel id="btchPrgsBr" >
+                  	
+                    <apex:inputHidden id="sts" value="{!batchStatus}"/>
+                    <apex:inputHidden id="errMsg" value="{!error}" />
+                    <apex:inputHidden id="redirectUrl" value="{!redirectUrl}" />
+                    <!-- <b>here: </b> -->
+                    <!-- <apex:outputText value="{!error}" escape="false" /> -->
+                    <apex:outputPanel rendered="{!IF(AND(batchStatus == 'stop', error != '' ), TRUE, FALSE ) }" >
+                        <div class="demo-only" style="height: 24rem;">
+                            <section role="alertdialog" tabindex="-1" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true">
+                                <div class="slds-modal__container">
+                                    <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
+                                        <h2 class="slds-text-heading_medium" id="prompt-heading-id">Something went wrong</h2>
+                                    </header>
+                                    <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper">
+									    <b><apex:outputText value="{!error}" escape="false" /></b>
+                                    </div>
+									<footer class="slds-modal__footer slds-theme_default">
+                                        <apex:commandButton action="{!back2opportunity}" value="Back to opportunity" Styleclass="slds-button slds-button--neutral" />
+									</footer>
+                                </div>
+                            </section>
+                            <div class="slds-backdrop slds-backdrop_open"></div>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!IF( AND( batchProcessEnabled == TRUE, error == '' ), TRUE, FALSE ) }"> 
+                        <div class="demo-only" style="height: 24rem;">
+                            <section role="dialog" tabindex="-1" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true">
+                                <div class="slds-modal__container">
+                                    <header class="slds-modal__header slds-theme_success slds-theme_alert-texture">
+                                        <h2 class="slds-text-heading_medium" id="prompt-heading-id">Processing ...</h2>
+                                    </header>
+                                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1"  style="box-shadow:none"> 
+                                        <div class="slds-text-align_center">{!batchProgress}%</div> <br/>    
+                                        <div class="slds-progress-bar slds-progress-bar_large" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" role="progressbar">
+                                            <span class="slds-progress-bar__value" style="width: {!batchProgress}%;">
+                                                <span class="slds-assistive-text">Progress: {!batchProgress}%</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <div class="slds-backdrop slds-backdrop_open"></div>
+                        </div>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            	<apex:actionFunction name="startPoller" reRender="btchPrgsBr,startBatch" action="{!validateAccountBillingAddress}"/>
+                <apex:outputPanel id="startBatch">
+                    <apex:outputPanel rendered="{! IF(batchStatus == 'start', true, false ) }">
+                        <apex:actionPoller action="{!batchProcess}" interval="5" enabled="{!batchProcessEnabled}" reRender="btchPrgsBr" oncomplete="closeWindow();" />
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </apex:form>
+     	</body>
+ </html>
+</apex:page>

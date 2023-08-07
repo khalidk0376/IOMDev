@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>URL__c</fullName>
+    <description>Link to announcement if any show that user can open the announcement and read in.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Link to announcement if any show that user can open the announcement and read in.</inlineHelpText>
+    <label>External Link</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Url</type>
+</CustomField>

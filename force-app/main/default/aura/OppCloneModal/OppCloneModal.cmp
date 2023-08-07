@@ -1,0 +1,78 @@
+<aura:component controller="OppActionButtonController" implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
+    <ltng:require scripts="{!$Resource.LtngUtility}"/>
+    
+    <aura:attribute name="isOpenModal" default="false" type="Boolean" access="public"/>	
+    <aura:attribute name="oppObj" type="Object" access="public"/>
+    <aura:attribute name="spinner" default="false" type="Boolean" access="private"/>		
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:if isTrue="{!v.isOpenModal}">
+        <lightning:recordEditForm aura:id="editForm2" objectApiName="Opportunity" onsubmit="{!c.handleSubmit}" onsuccess="{!c.handleSuccess}" onerror="{!c.handleError}">
+            <lightning:messages />
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+                <aura:if isTrue="{!v.spinner}">
+                    <lightning:spinner size="small" variant="brand"/>
+                </aura:if>
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button type="button" onclick="{!c.closeModal}" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                            <lightning:icon iconName="utility:close" size="small" variant="bare"/>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{!v.oppObj.Name}</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <lightning:layout multipleRows="true">	        		
+                            <lightning:layoutItem size="12" class="slds-p-around_small">
+                                <h2 class="slds-text-heading_medium"><strong>Create New Opportunity</strong></h2>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="6" class="slds-p-around_small">	        			
+                                <lightning:inputField fieldName="EventEdition__c" value="{!v.oppObj.EventEdition__c}"/>
+                                <div class="slds-p-top_x-small"></div>
+                                <lightning:inputField fieldName="Name" value="{!v.oppObj.Name}"/>
+                                <div class="slds-p-top_x-small"></div>
+                                
+                                <!--<lightning:inputField fieldName="Opportunity_Contact__c" value="{!v.oppObj.Opportunity_Contact__c}" class="slds-hide"/>-->
+                                <c:ExtendLookup helpText="Individual you are working with on this opportunity" objectName="contact" label="Opportunity Contact" nameFieldApi="Name" selectedItemId="{!v.oppObj.Opportunity_Contact__c}"  accountId="{!v.oppObj.AccountId}" parterAccId="{!v.oppObj.PartnerAccountId}"/>
+                                <div class="slds-p-top_x-small"></div>
+                                
+                                <!--<lightning:inputField fieldName="Billing_Contact__c" value="{!v.oppObj.Billing_Contact__c}"  class="slds-hide"/>-->
+                                <c:ExtendLookup helpText="Contact for invoicing" objectName="contact" label="Billing/Invoice Contact" nameFieldApi="Name" selectedItemId="{!v.oppObj.Billing_Contact__c}" accountId="{!v.oppObj.AccountId}" parterAccId="{!v.oppObj.PartnerAccountId}" isBilling="true"/>
+                                <div class="slds-p-top_x-small"></div>
+                                
+                                <lightning:inputField fieldName="Do_not_activate_Billing__c" value="{!v.oppObj.Do_not_activate_Billing__c}"/>
+                                <div class="slds-p-top_x-small"></div>
+                                <lightning:inputField fieldName="Copy_Notes_Attachment_Activities__c" value="{!v.oppObj.Copy_Notes_Attachment_Activities__c}"/>
+                                
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="6" class="slds-p-around_small">		        			
+                                
+                                <lightning:inputField fieldName="AccountId" value="{!v.oppObj.AccountId}" disabled="true"/>
+                                <div class="slds-p-top_x-small"></div>
+                                <lightning:inputField fieldName="CloseDate" value="{!v.oppObj.CloseDate}"/>
+                                <div class="slds-p-top_x-small slds-hide"></div>
+                                <lightning:inputField fieldName="StageName" value="{!v.oppObj.StageName}" class="slds-hide"/>
+                                <div class="slds-p-top_x-small"></div>
+                                <lightning:inputField fieldName="Revenue_Estimate__c" value="{!v.oppObj.Revenue_Estimate__c}"/>
+                                <div class="slds-p-top_x-small"></div>
+                                <lightning:inputField fieldName="Exhibitor_Paid_By__c" value="{!v.oppObj.Exhibitor_Paid_By__c}"/>
+                                <div class="slds-p-top_x-small"></div>
+                                <aura:if isTrue="{!or(v.oppObj.Exhibitor_Paid_By__c=='SubAgent Paid By Subagent',v.oppObj.Exhibitor_Paid_By__c=='Individual Contract',v.oppObj.Exhibitor_Paid_By__c=='SubAgent Paid By Exhibitor')}">
+                                    <lightning:inputField fieldName="Agent_s_Opportunity__c" value="{!v.oppObj.Agent_s_Opportunity__c}"/>
+                                    <div class="slds-p-top_x-small"></div>
+                                </aura:if>
+                                <lightning:inputField fieldName="Tax_Scenario__c" value="{!v.oppObj.Tax_Scenario__c}"/>
+                            </lightning:layoutItem>		        		
+                        </lightning:layout>	        	
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning:button type="button" label="Cancel" onclick="{!c.closeModal}" iconName="utility:close" iconPosition="left" variant="destructive"/>
+                        <lightning:button label="Save" type="submit" iconName="utility:check" iconPosition="left" variant="brand"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </lightning:recordEditForm>
+    </aura:if>
+</aura:component>

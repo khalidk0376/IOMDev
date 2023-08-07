@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Show_Hours__c</fullName>
+    <description>Using on customer portal footer to display show timing.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Using on customer portal footer to display show timing.</inlineHelpText>
+    <label>Show Hours</label>
+    <length>32768</length>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Html</type>
+    <visibleLines>10</visibleLines>
+</CustomField>

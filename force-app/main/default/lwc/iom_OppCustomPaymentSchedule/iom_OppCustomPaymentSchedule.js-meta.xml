@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <objects>
+                <object>Opportunity</object>
+            </objects>
+
+            <property name="editionField1API" type="String" placeholder="Edition__r.Start_Data__c / YYYY-MM-DD" label="Edition Start Date field APIName/value" />
+            <property placeholder="Edition__r.Payment_Term__c / 30 " name="editionField2API" type="String" label="Invoice to be issues before days field APIName/value"/>
+            <property name="isDynamic" type="Boolean" default="true" label="Is Invoice to be issues before days/Edition Start Date are dynamic?"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

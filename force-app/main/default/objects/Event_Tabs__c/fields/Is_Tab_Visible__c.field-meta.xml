@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Tab_Visible__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Makes the Tab Visible on the Customer Center</description>
+    <externalId>false</externalId>
+    <label>Is Tab Visible</label>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

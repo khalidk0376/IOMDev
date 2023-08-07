@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Action_Team__c</fullName>
+    <description>Action team relation field to which action team member belongs.</description>
+    <externalId>false</externalId>
+    <label>Action Team</label>
+    <referenceTo>Action_Team__c</referenceTo>
+    <relationshipLabel>Action Team Members</relationshipLabel>
+    <relationshipName>SSC_Team_Members</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

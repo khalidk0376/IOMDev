@@ -1,0 +1,390 @@
+<template>
+    <template if:true={isShowForm}>
+        <div class={containerClass}>
+            <template if:false={isEditMode}>
+                <div class="c-container slds-card">
+                    <lightning-record-view-form record-id={recordId} object-api-name={sObjectname}>
+                        <lightning-accordion class="custom-accordion" allow-multiple-sections-open
+                            active-section-name={activeSections}>
+                            <lightning-accordion-section name="A" label="Address Information">
+                                <template if:true={isAllowEdit}>
+                                    <lightning-layout multiple-rows="true">
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <div class="slds-border_bottom">
+                                                <lightning-output-field class="longtext" ondblclick={editRecord}
+                                                    field-name="BillingStreet">
+                                                    <lightning-button-icon icon-name="utility:edit" onclick={editRecord}
+                                                        icon-class="slds-button__icon_hint" variant="bare"
+                                                        alternative-text="Edit" class="edit" title="Edit">
+                                                    </lightning-button-icon>
+                                                </lightning-output-field>
+                                            </div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <div class="slds-border_bottom">
+                                                <lightning-output-field class="longtext" ondblclick={editRecord}
+                                                    field-name="Billing_Address_Line_2__c">
+                                                    <lightning-button-icon icon-name="utility:edit" onclick={editRecord}
+                                                        icon-class="slds-button__icon_hint" variant="bare"
+                                                        alternative-text="Edit" class="edit" title="Edit">
+                                                    </lightning-button-icon>
+                                                </lightning-output-field>
+                                            </div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <div class="slds-border_bottom">
+                                                <lightning-output-field class="longtext" ondblclick={editRecord}
+                                                    field-name="Billing_Address_Line_3__c">
+                                                    <lightning-button-icon icon-name="utility:edit" onclick={editRecord}
+                                                        icon-class="slds-button__icon_hint" variant="bare"
+                                                        alternative-text="Edit" class="edit" title="Edit">
+                                                    </lightning-button-icon>
+                                                </lightning-output-field>
+                                            </div>
+                                        </lightning-layout-item>
+
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <div class="slds-border_bottom">
+                                                <lightning-output-field class="longtext" ondblclick={editRecord}
+                                                    field-name="BillingCountry">
+                                                    <lightning-button-icon icon-name="utility:edit" onclick={editRecord}
+                                                        icon-class="slds-button__icon_hint" variant="bare"
+                                                        alternative-text="Edit" class="edit" title="Edit">
+                                                    </lightning-button-icon>
+                                                </lightning-output-field>
+                                            </div>
+                                        </lightning-layout-item>
+
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <div class="slds-border_bottom">
+                                                <lightning-output-field class="longtext" ondblclick={editRecord}
+                                                    field-name="BillingCity">
+                                                    <lightning-button-icon icon-name="utility:edit" onclick={editRecord}
+                                                        icon-class="slds-button__icon_hint" variant="bare"
+                                                        alternative-text="Edit" class="edit" title="Edit">
+                                                    </lightning-button-icon>
+                                                </lightning-output-field>
+                                            </div>
+                                        </lightning-layout-item>
+
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <div class="slds-border_bottom">
+                                                <lightning-output-field class="longtext" ondblclick={editRecord}
+                                                    field-name="BillingState">
+                                                    <lightning-button-icon icon-name="utility:edit" onclick={editRecord}
+                                                        icon-class="slds-button__icon_hint" variant="bare"
+                                                        alternative-text="Edit" class="edit" title="Edit">
+                                                    </lightning-button-icon>
+                                                </lightning-output-field>
+                                            </div>
+                                        </lightning-layout-item>
+
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <div class="slds-border_bottom">
+                                                <lightning-output-field class="longtext" ondblclick={editRecord}
+                                                    field-name="BillingPostalCode">
+                                                    <lightning-button-icon icon-name="utility:edit" onclick={editRecord}
+                                                        icon-class="slds-button__icon_hint" variant="bare"
+                                                        alternative-text="Edit" class="edit" title="Edit">
+                                                    </lightning-button-icon>
+                                                </lightning-output-field>
+                                            </div>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </template>
+                                <template if:false={isAllowEdit}>
+                                    <lightning-layout multiple-rows="true">
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <div class="slds-border_bottom">
+                                                <lightning-output-field class="longtext" field-name="BillingStreet">
+                                                </lightning-output-field>
+                                            </div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <div class="slds-border_bottom">
+                                                <lightning-output-field class="longtext" field-name="Billing_Address_Line_2__c">
+                                                </lightning-output-field>
+                                            </div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <div class="slds-border_bottom">
+                                                <lightning-output-field class="longtext" field-name="Billing_Address_Line_3__c">
+                                                </lightning-output-field>
+                                            </div>
+                                        </lightning-layout-item>
+
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <div class="slds-border_bottom">
+                                                <lightning-output-field class="longtext" field-name="BillingCountry">
+                                                </lightning-output-field>
+                                            </div>
+                                        </lightning-layout-item>
+
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <div class="slds-border_bottom">
+                                                <lightning-output-field class="longtext" field-name="BillingCity">
+                                                </lightning-output-field>
+                                            </div>
+                                        </lightning-layout-item>
+
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <div class="slds-border_bottom">
+                                                <lightning-output-field class="longtext" field-name="BillingState">
+                                                </lightning-output-field>
+                                            </div>
+                                        </lightning-layout-item>
+
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <div class="slds-border_bottom">
+                                                <lightning-output-field class="longtext" field-name="BillingPostalCode">
+                                                </lightning-output-field>
+                                            </div>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </template>
+                            </lightning-accordion-section>
+                            <lightning-accordion-section name="B" label="System Information">
+                                <lightning-layout>
+                                    <lightning-layout-item class="slds-p-right_small" size="6">
+                                        <template if:true={account}>
+                                            <div class="slds-form-element slds-form-element_horizontal slds-border_bottom">
+                                                <label class="slds-form-element__label" for="CreatedBy">Created By</label>
+                                                <div class="slds-form-element__control">
+                                                    <div class="SysInfo">
+                                                        <a data-id={account.fields.CreatedById.value} onclick={handleLinkClick}>
+                                                            {account.fields.CreatedBy.displayValue}
+                                                        </a>
+                                                        , 
+                                                        {account.fields.CreatedDate.displayValue}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </lightning-layout-item>
+                                
+                                    <lightning-layout-item class="slds-p-right_small" size="6">
+                                        <template if:true={account}>
+                                            <div class="slds-form-element slds-form-element_horizontal slds-border_bottom">
+                                                <label class="slds-form-element__label" for="LastModifiedBy">Last Modified By</label>
+                                                <div class="slds-form-element__control">
+                                                    <div class="SysInfo">
+                                                        <a data-id={account.fields.LastModifiedById.value} onclick={handleLinkClick}>
+                                                            {account.fields.LastModifiedBy.displayValue}
+                                                        </a>
+                                                        , 
+                                                        {account.fields.LastModifiedDate.displayValue}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-accordion-section>
+                        </lightning-accordion>
+                    </lightning-record-view-form>
+                </div>
+            </template>
+
+            <template if:true={isEditMode}>
+                <template if:true={isSaving}>
+                    <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+                </template>
+                <div class="c-container slds-card">
+                    <lightning-record-edit-form record-id={recordId} object-api-name="Account" onsubmit={handleSubmit}>
+                        <lightning-accordion class="custom-accordion" allow-multiple-sections-open
+                        active-section-name={activeSections}>
+                            <lightning-accordion-section name="A" label="Address Information">
+                                <template if:true={isAllowEdit}>
+                                    <lightning-layout multiple-rows="true">
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <label
+                                                class="slds-form-element__label slds-no-flex slds-size_1-of-3">Billing
+                                                Street</label>
+                                            <div class={listClass} aria-expanded="false" aria-haspopup="listbox"
+                                                role="combobox" id="searchLookup">
+                                                <lightning-input type="search" variant="label-hidden"
+                                                    label="Billing Street" onchange={handleKeyUp}
+                                                    value={account.fields.BillingStreet.value} onblur={handleBlur}
+                                                    onfocus={handleKeyUp}>
+                                                </lightning-input>
+                                                <template if:true={isShowDrp}>
+                                                    <div id="listbox-unique-id" role="listbox" class="listboxDiv">
+                                                        <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid"
+                                                            role="presentation" style="max-width:99.9%">
+                                                            <template if:true={isShow}>
+                                                                <li role="presentation" class="slds-listbox__item">
+                                                                    <span id="listbox-option-unique-id-01"
+                                                                        class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                                        role="option">
+                                                                        <span class="slds-media__body">
+                                                                            <span
+                                                                                class="slds-listbox__option-text slds-listbox__option-text_entity">
+                                                                                Loading...</span>
+                                                                        </span>
+                                                                    </span>
+                                                                </li>
+                                                            </template>
+                                                            <template if:true={isShowData}>
+                                                                <template for:each={filteredOptions} for:item="option">
+                                                                    <li key={option.PlaceId} role="presentation"
+                                                                        class="slds-listbox__item"
+                                                                        onclick={handleSelect} data-value={option.value}
+                                                                        data-record={option.label}
+                                                                        data-locaval={option.locaval}
+                                                                        data-placeid={option.PlaceId}>
+                                                                        <span
+                                                                            class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                                            role="option">
+                                                                            <span class="slds-media__body">
+                                                                                <span
+                                                                                    class="slds-listbox__option-text slds-listbox__option-text_entity"
+                                                                                    style="white-space:normal;">
+                                                                                    {option.label}
+                                                                                </span>
+                                                                            </span>
+                                                                        </span>
+                                                                    </li>
+                                                                </template>
+                                                            </template>
+                                                        </ul>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <lightning-input type="text" variant="label-inline"
+                                                label="Billing Address Line 2"
+                                                value={account.fields.Billing_Address_Line_2__c.value}
+                                                onblur={handleBlurLine1} onfocus={handleFocus}></lightning-input>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <lightning-input type="text" variant="label-inline"
+                                                label="Billing Address Line 3"
+                                                value={account.fields.Billing_Address_Line_3__c.value}
+                                                onblur={handleBlurLine2} onfocus={handleFocus}></lightning-input>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <lightning-combobox name="billingcountry" variant="label-inline"
+                                                label="Billing Country" value={account.fields.BillingCountryCode.value}
+                                                options={countryOptions} onchange={handleChangeCountry}
+                                                onfocus={handleFocus}></lightning-combobox>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <lightning-input type="text" variant="label-inline" label="Billing City"
+                                                value={account.fields.BillingCity.value} onblur={handleBlurCity}
+                                                onfocus={handleFocus}></lightning-input>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <lightning-combobox name="billingstate" variant="label-inline"
+                                                label="Billing State/Province"
+                                                value={account.fields.BillingStateCode.value} options={stateOptions}
+                                                onchange={handleChangeState} onfocus={handleFocus}></lightning-combobox>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item class="slds-p-right_small" size="6">
+                                            <lightning-input type="text" variant="label-inline"
+                                                label="Billing Zip/Postal Code"
+                                                value={account.fields.BillingPostalCode.value} onblur={handleBlurPostal}
+                                                onfocus={handleFocus}></lightning-input>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </template>
+                                <template if:false={isAllowEdit}>
+                                    <lightning-record-view-form record-id={recordId} object-api-name={sObjectname}>
+                                        <lightning-layout multiple-rows="true">
+                                            <lightning-layout-item class="slds-p-right_small" size="6">
+                                                <div class="slds-border_bottom">
+                                                    <lightning-output-field field-name="BillingStreet">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item class="slds-p-right_small" size="6">
+                                                <div class="slds-border_bottom">
+                                                    <lightning-output-field field-name="Billing_Address_Line_2__c">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item class="slds-p-right_small" size="6">
+                                                <div class="slds-border_bottom">
+                                                    <lightning-output-field field-name="Billing_Address_Line_3__c">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </lightning-layout-item>
+
+                                            <lightning-layout-item class="slds-p-right_small" size="6">
+                                                <div class="slds-border_bottom">
+                                                    <lightning-output-field field-name="BillingCountry">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </lightning-layout-item>
+
+                                            <lightning-layout-item class="slds-p-right_small" size="6">
+                                                <div class="slds-border_bottom">
+                                                    <lightning-output-field class="longtext" field-name="BillingCity">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </lightning-layout-item>
+
+                                            <lightning-layout-item class="slds-p-right_small" size="6">
+                                                <div class="slds-border_bottom">
+                                                    <lightning-output-field class="longtext" field-name="BillingState">
+                                                    </lightning-output-field>
+                                                </div>
+                                            </lightning-layout-item>
+
+                                            <lightning-layout-item class="slds-p-right_small" size="6">
+                                                <div class="slds-border_bottom">
+                                                    <lightning-output-field class="longtext"
+                                                        field-name="BillingPostalCode"></lightning-output-field>
+                                                </div>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-record-view-form>
+                                </template>
+                            </lightning-accordion-section>
+                            <lightning-accordion-section name="B" label="System Information">
+                                <lightning-layout>
+                                    <lightning-layout-item class="slds-p-right_small" size="6">
+                                        <template if:true={account}>
+                                            <div class="slds-form-element slds-form-element_horizontal">
+                                                <label class="slds-form-element__label" for="CreatedBy">Created By</label>
+                                                <div class="slds-form-element__control">
+                                                    <div class="SysInfo">
+                                                        {account.fields.CreatedBy.displayValue}
+                                                        , 
+                                                        {account.fields.CreatedDate.displayValue}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </lightning-layout-item>
+                                
+                                    <lightning-layout-item class="slds-p-right_small" size="6">
+                                        <template if:true={account}>
+                                            <div class="slds-form-element slds-form-element_horizontal">
+                                                <label class="slds-form-element__label" for="LastModifiedBy">Last Modified By</label>
+                                                <div class="slds-form-element__control">
+                                                    <div class="SysInfo">
+                                                        {account.fields.LastModifiedBy.displayValue}
+                                                        , 
+                                                        {account.fields.LastModifiedDate.displayValue}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-accordion-section>
+                        </lightning-accordion>
+                        <footer class="slds-modal__footer">
+                            <div class="slds-align_absolute-center">
+                            <button type="button" class="slds-button slds-button_neutral"
+                                onclick={handleCancel}>Cancel</button>
+                            <button type="submit" class="slds-button slds-button_brand">Save</button>
+                        </div>
+                        </footer>
+                    </lightning-record-edit-form>
+                </div>
+            </template>
+        </div>
+    </template>
+</template>

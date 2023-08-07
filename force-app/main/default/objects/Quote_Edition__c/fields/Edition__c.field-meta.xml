@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Edition__c</fullName>
+    <description>Master is Edition</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Master is Edition</inlineHelpText>
+    <label>Edition</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Edition__c.Edition_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Cancelled, Inactive</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Edition__c</referenceTo>
+    <relationshipLabel>Quote Editions</relationshipLabel>
+    <relationshipName>Quote_Editions</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Subsequent_Email_Template__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Conga Email Template For Invoice PDF.</description>
+    <externalId>false</externalId>
+    <label>Subsequent Email Template</label>
+    <referenceTo>APXTConga4__Conga_Email_Template__c</referenceTo>
+    <relationshipName>Event_Edition1</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

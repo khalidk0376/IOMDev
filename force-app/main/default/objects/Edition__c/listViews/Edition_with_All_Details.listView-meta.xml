@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Edition_with_All_Details</fullName>
+    <columns>NAME</columns>
+    <columns>Edition_Website__c</columns>
+    <columns>Edition_Image_URL__c</columns>
+    <columns>Edition_Status__c</columns>
+    <columns>Support_Email__c</columns>
+    <columns>Customer_Support_Team__c</columns>
+    <columns>CS_Parm_1__c</columns>
+    <columns>CS_Parm_2__c</columns>
+    <columns>CS_Parm_3__c</columns>
+    <columns>CS_Parm_4__c</columns>
+    <columns>Edition_Code__c</columns>
+    <columns>Informa_Logo__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Edition with All Details</label>
+</ListView>

@@ -1,0 +1,52 @@
+<template>
+    <h2 class="tab-heading slds-p-horizontal_small">Step 6: Onsite Team Management</h2>
+    <lightning-spinner if:true={spinner} variant="brand" size="small" title="Loading..."></lightning-spinner>
+
+    <div class="manuals slds-m-around_small">
+        <div class="tab-sub-heading">
+            <span>Build</span>
+        </div>
+        <div class="slds-box s-1of3">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6" padding="horizontal-small">                    
+                    <lightning-input if:true={isShowQ1} disabled={isInReview} onchange={handleChange} name="arrival_time1" value={standDetail.Build_Crew_Onsite_Arrival_Time__c} type="datetime" label="Crew Onsite Arrival Time" variant="label-inline" required></lightning-input>                    
+                    <lightning-combobox if:true={isShowQ3} disabled={isInReview} onchange={handleChange} name="size_of_crew1"  value={standDetail.Build_Size_of_Crew__c} options={crewOpt} label="Size of Crew" class="slds-m-top_x-small" variant="label-inline" required></lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6" padding="horizontal-small">
+                    <lightning-combobox if:true={isShowQ2} disabled={isInReview} onchange={handleChange} name="const_time1" value={standDetail.Build_Construction_Time__c} options={hoursOpt} label="Construction Time (Hours)" class="slds-m-top_x-small" variant="label-inline" required></lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item size="8" small-device-size="12" medium-device-size="12" large-device-size="8" padding="horizontal-small">
+                    <lightning-radio-group if:true={isShowQ4} disabled={isInReview} onchange={handleChange} name="other_stand1"  value={standDetail.Build_crew_working_on_other_stands__c} label="Are the crew working on other stands?" required  message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" options={yesNoOption}></lightning-radio-group>
+                </lightning-layout-item>
+                <lightning-layout-item if:true={workingOtherStand1} size="8" small-device-size="12" medium-device-size="12" large-device-size="8" padding="horizontal-small">
+                    <lightning-input if:true={isShowQ5} disabled={isInReview} onchange={handleChange} name="stand_number1" value={standDetail.Build_list_Stands_Numbers__c} type="text" label="Please list the Stands Numbers" variant="label-inline" required></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+
+    <div class="manuals slds-m-around_small">
+        <div class="tab-sub-heading">
+            <span>Breakdown</span>
+        </div>
+        <div class="slds-box s-1of3">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6" padding="horizontal-small">                    
+                    <lightning-input if:true={isShowQ1} disabled={isInReview} onchange={handleChange} name="arrival_time2" value={standDetail.Breakdown_Crew_Onsite_Arrival_Time__c} type="datetime" label="Crew Onsite Arrival Time" variant="label-inline" required></lightning-input>
+                    <lightning-combobox if:true={isShowQ3} disabled={isInReview} onchange={handleChange} name="size_of_crew2"  value={standDetail.Breakdown_Size_of_Crew__c} options={crewOpt} label="Size of Crew" class="slds-m-top_x-small" variant="label-inline" required></lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6" padding="horizontal-small">
+                    <lightning-combobox if:true={isShowQ2} disabled={isInReview} onchange={handleChange} name="const_time2" value={standDetail.Breakdown_Construction_Time__c} options={hoursOpt} label="Construction Time (Hours)" class="slds-m-top_x-small" variant="label-inline" required></lightning-combobox>                          
+                </lightning-layout-item>
+                <lightning-layout-item size="8" small-device-size="12" medium-device-size="12" large-device-size="8" padding="horizontal-small">
+                    <lightning-radio-group if:true={isShowQ4} disabled={isInReview} onchange={handleChange} name="other_stand2" value={standDetail.Breakdown_crew_working_on_other_stands__c} label="Are the crew working on other stands?" required  message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" options={yesNoOption}></lightning-radio-group>
+                </lightning-layout-item>
+                <lightning-layout-item if:true={workingOtherStand2} size="8" small-device-size="12" medium-device-size="12" large-device-size="8" padding="horizontal-small">
+                    <lightning-input if:true={isShowQ5} disabled={isInReview} onchange={handleChange} name="stand_number2" value={standDetail.Breakdown_Please_list_the_Stands_Numbers__c} type="text" label="Please list the Stands Numbers" placeholder="Stands No." variant="label-inline" required></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout> 
+        </div>
+    </div>
+</template>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Floorplan_Type__c</fullName>
+    <description>Floorplan Type Picklist, which is required if Standard tab type is Floorplan</description>
+    <externalId>false</externalId>
+    <label>Floorplan Type</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Standard_Tab_Type__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Interactive</fullName>
+                <default>false</default>
+                <label>Interactive</label>
+            </value>
+            <value>
+                <fullName>Manual</fullName>
+                <default>false</default>
+                <label>Manual</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Floorplan</controllingFieldValue>
+            <valueName>Interactive</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Floorplan</controllingFieldValue>
+            <valueName>Manual</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

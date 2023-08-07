@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mark_This_Task_Helptext__c</fullName>
+    <description>Mark This Task Checkbox help text.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Mark This Task Checkbox help text.</inlineHelpText>
+    <label>Mark This Task Helptext</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

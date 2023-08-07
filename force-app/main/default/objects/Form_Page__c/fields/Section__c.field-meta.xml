@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Section__c</fullName>
+    <defaultValue>&quot;&quot;</defaultValue>
+    <description>List of section Id comma separated</description>
+    <externalId>false</externalId>
+    <inlineHelpText>List of section Id comma separated</inlineHelpText>
+    <label>Section</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

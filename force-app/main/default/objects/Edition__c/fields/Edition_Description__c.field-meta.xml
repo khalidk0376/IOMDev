@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Edition_Description__c</fullName>
+    <description>Used to display content in footer at customer portal.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Define the content in footer at customer portal.</inlineHelpText>
+    <label>Edition Description</label>
+    <length>32768</length>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Html</type>
+    <visibleLines>25</visibleLines>
+</CustomField>

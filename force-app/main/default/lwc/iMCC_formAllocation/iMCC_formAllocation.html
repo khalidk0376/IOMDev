@@ -1,0 +1,23 @@
+<!-- Created By		: Girikon(Keertiraj[IMCC-141])
+Created On		: Nov 03 2021
+@description 	: This LWC is used for viewing list of form submissions
+-->
+
+<template>
+    <lightning-quick-action-panel header="List of Form Submissions">
+        <div class="slds-var-p-around_medium slds-float_right topButtons">
+            <input type="button" class="button1">
+        </div><br/>
+        <div>
+            <lightning-datatable 
+            key-field="Id"
+            data={tableData} 
+            hide-checkbox-column
+            columns={columns} ></lightning-datatable>
+        </div>
+
+        <div slot="footer">
+            <lightning-button variant="brand" label="Close" onclick={closeAction}></lightning-button>&nbsp;&nbsp;
+        </div>
+    </lightning-quick-action-panel> 
+</template>

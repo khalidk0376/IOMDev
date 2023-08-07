@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Series__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Lookup of Series Object</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Related Event Series</inlineHelpText>
+    <label>Series</label>
+    <referenceTo>Series__c</referenceTo>
+    <relationshipLabel>Cases</relationshipLabel>
+    <relationshipName>Cases_with_Series</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

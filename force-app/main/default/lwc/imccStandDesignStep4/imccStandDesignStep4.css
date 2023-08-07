@@ -1,0 +1,20 @@
+.file{    
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 4px;
+}
+.file div:nth-child(2){
+    justify-content: start;
+    text-align: left;
+    width: 51%;
+    white-space: normal;
+}
+.file div:first-child{
+    justify-content: start;
+    text-align: left;
+    width: 2%;
+}
+.file lightning-icon:hover{    
+    cursor: pointer;
+}

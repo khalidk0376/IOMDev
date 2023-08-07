@@ -1,0 +1,22 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" controller = "ImportCampaignMembersCtrl" >
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="message" type="String" />
+
+    <aura:attribute name="dupMemMsg" type="String" />
+    <aura:attribute name="memNotFoundMsg" type="String" />
+    <div aura:id="toastId" class="slds-notify slds-notify_toast">
+        <p>{!v.message}</p>
+    </div>
+    <aura:if isTrue="{!v.dupMemMsg}">
+        <div class="slds-notify slds-notify_toast slds-theme_error">
+        <p>{!v.dupMemMsg}</p>
+    </div>
+    </aura:if>
+    <aura:if isTrue="{!v.memNotFoundMsg}">
+    <div class="slds-notify slds-notify_toast slds-theme_error">
+        <p>{!v.memNotFoundMsg}</p>
+    </div>
+    </aura:if>
+
+</aura:component>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AMS_CS_Queue_Delete_Request</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>Edition__c</columns>
+    <columns>Brand__c</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>Approved_for_Deletion__c</columns>
+    <columns>Delete_Request_Reason__c</columns>
+    <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+    <columns>CASES.LAST_UPDATE_DATE_ONLY</columns>
+    <columns>CASES.EMAIL</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>Closed</value>
+    </filters>
+    <filters>
+        <field>Delete_Request_Reason__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <filters>
+        <field>Customer_Services_Team__c</field>
+        <operation>equals</operation>
+        <value>AMS CS Team</value>
+    </filters>
+    <label>Delete Request - AMS CS Queue</label>
+</ListView>

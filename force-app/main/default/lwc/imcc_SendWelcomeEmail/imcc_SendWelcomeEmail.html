@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="" style="height:10rem;">
+        <lightning-spinner if:true={spinner} size="small" variant="brand"></lightning-spinner>
+
+        <!--This label is used to show Confirm Message after clicking the Send Welcome Email button on Contact Edition Mapping-->
+        <div style="justify-content: center;align-items: center;text-align: center;font-size: 15px;" if:true={recordId}>
+            <strong style="color: red;">{label.sendEmailConfirmMsg} </strong>
+         </div>
+        <br/> 
+        <div style="justify-content: center;align-items: center;text-align: center;height:5rem;" if:true={recordId}>
+            <lightning-button variant="brand" label="Proceed" onclick={sendWelcomeEmail} class="slds-m-left_x-small" ></lightning-button>
+            <lightning-button variant="brand" label="Cancel" onclick={cancel} class="slds-m-left_x-small" ></lightning-button>
+        </div>
+    </lightning-card>
+</template>

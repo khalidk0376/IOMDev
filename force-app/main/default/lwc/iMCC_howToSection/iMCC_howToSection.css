@@ -1,0 +1,10 @@
+.cardCss{
+    width: 154px;
+    position: absolute;
+    right: 10px;
+    height: 290px;
+    overflow-y: auto;
+}
+.textCss{
+    padding-left: 10px;padding-right: 10px;overflow-wrap: break-word;
+}

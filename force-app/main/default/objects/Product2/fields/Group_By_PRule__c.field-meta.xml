@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Group_By_PRule__c</fullName>
+    <description>Used for Price / Product Rules, to define certain groups of products.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Used for Price / Product Rules, to define certain groups of products.</inlineHelpText>
+    <label>Group By PRule</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>PRule001</fullName>
+                <default>false</default>
+                <label>PRule001</label>
+            </value>
+            <value>
+                <fullName>PRule002</fullName>
+                <default>false</default>
+                <label>PRule002</label>
+            </value>
+            <value>
+                <fullName>PRule003</fullName>
+                <default>false</default>
+                <label>PRule003</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

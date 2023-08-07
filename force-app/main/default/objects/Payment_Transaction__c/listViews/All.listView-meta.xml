@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Payment_Type__c</columns>
+    <columns>Payment_Method__c</columns>
+    <columns>Payment_Status__c</columns>
+    <columns>Amount__c</columns>
+    <columns>Authorization_Date__c</columns>
+    <columns>Card_Type__c</columns>
+    <columns>ERP_Reference__c</columns>
+    <columns>ERP_Sync_Status__c</columns>
+    <columns>Order__c</columns>
+    <columns>Invoice__c</columns>
+    <columns>Gateway_ID__c</columns>
+    <columns>Gateway_Reference_ID__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

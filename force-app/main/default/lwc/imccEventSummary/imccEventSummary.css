@@ -1,0 +1,46 @@
+.placeholder .flex-v-center {
+    align-items: center;
+    align-items: center;
+}
+.rect{border: 2px solid #f7f7f7;border-radius: 4px;width: 100%;}
+.box{background-color: #ecebea;height: 30px;width: 30px;border-radius: 4px;margin-right: 10px;margin-top: -5px;}
+.placeholder .flex-grid {
+    display: flex;
+}
+.bottom1{border-bottom:0px!important;margin-bottom: -10px;}
+.placeholder .body, .placeholder .card, .placeholder .anchor {
+    background-color: rgb(255, 255, 255);
+}
+.placeholder .body {
+    padding: .7rem;
+}
+
+.placeholder.related_record .text-body {
+    width: 90%;
+}
+
+.placeholder .text-body {
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    border-bottom: 1px solid #ecebea!important;
+}
+.placeholder .text-{
+    background-color: rgb(243, 242, 242);
+}
+.placeholder .text-medium {
+    width: 30%;
+}
+.placeholder .text-long {
+    width: 60%;
+}
+.placeholder .text {
+    border-radius: 15rem;
+    display: block;
+    margin-bottom: .75rem;
+    background-color: rgb(236, 235, 234);
+    height: .5rem;
+}
+.opacity30 {
+    opacity: 0.4;
+}

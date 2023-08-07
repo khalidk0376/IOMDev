@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_a_Local_Company__c</fullName>
+    <description>If Account&apos;s Billing country and Series&apos;s Local country is same then it will be true.</description>
+    <externalId>false</externalId>
+    <formula>AND(IF( LOWER(Account.BillingCountry)  =  LOWER(TEXT(Series__r.Local_Country__c)) , true, false),  Series__r.Not_By_pass_Local_Template__c  )</formula>
+    <label>Is a Local Company</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

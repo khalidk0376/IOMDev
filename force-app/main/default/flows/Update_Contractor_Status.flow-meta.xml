@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <decisions>
+        <name>Update_pick_list</name>
+        <label>Update pick list</label>
+        <locationX>659</locationX>
+        <locationY>130</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Update_Status_picklist</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Stand_Detail_Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Not started</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Stand_Detail_Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Contractor_Status_Picklist</targetReference>
+            </connector>
+            <label>Update Status picklist</label>
+        </rules>
+    </decisions>
+    <interviewLabel>Update {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Update Contractor Status</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_Contractor_Status_Picklist</name>
+        <label>Update Contractor Status Picklist</label>
+        <locationX>640</locationX>
+        <locationY>361</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Contractor_Mapping__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Contractor_Status__c</field>
+            <value>
+                <elementReference>$Record.Stand_Detail_Status__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Contractor_Mapping__c</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>40</locationY>
+        <connector>
+            <targetReference>Update_pick_list</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Stand_Detail_Status__c</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Not started</stringValue>
+            </value>
+        </filters>
+        <object>Stand_Detail__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>

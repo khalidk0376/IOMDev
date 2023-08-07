@@ -1,0 +1,187 @@
+<aura:component controller="InformationInputCtr">
+    <!-- Start attribute -->
+    <aura:attribute name="QnaireId" type="String" />
+    <aura:attribute name="QnaireName" type="String" />
+    <aura:attribute name="QuestnQnaireId" type="String" />
+    <aura:attribute name="QuestnGroupId" type="String" />
+    <aura:attribute name="Questntype" type="String" />
+    <aura:attribute name="isEditQue" type="Boolean" />
+    <aura:attribute name="modalHeader" type="String" />
+    <aura:attribute name="fieldType" type="String" />
+    <aura:attribute name="dropColNumber" type="String" />
+    <aura:attribute name="questOrderNum" type="String" default="0" />
+    <aura:attribute name="isShowHelpText" type="Boolean" default="false" />
+    <aura:attribute name="isShowCurrency" type="Boolean" default="false" />
+    <aura:attribute name="lstQuesCategory" type="List" default="[]" />
+    <aura:attribute name="objCrteQues" type="Question__c" default="{ 'sobjectType': 'Question__c'}" />
+    <aura:attribute name="description" type="String" default=" " />
+    <aura:attribute name="objeditQues" type="Question__c" default="{ 'sobjectType': 'Question__c'}" />
+    <aura:attribute name="lstQuesCurrenctSymbol" type="List" default="[]" />
+    <aura:attribute name="isShowAttachmentandCommentCheckBox" type="Boolean" default="false" />
+    <!-- End attribute-->
+    <!-- event handlers -->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"></aura:handler>
+    <!-- event handlers -->
+    {!v.body}
+    <!--Start body-->
+    <div class="slds-col slds-grid_vertical">
+        <div class="slds-grid slds-no-flex panelHeader">
+            <h2>Question Editor: {!v.modalHeader}</h2>
+            <a href="#">
+                <lightning:buttonIcon iconName="utility:forward" onclick="{!c.hideModal}" variant="bare" />
+            </a>
+        </div>
+    </div>
+    <div class="slds-col slds-scrollable_y">
+        <div class="panelBody">
+            <aura:if isTrue="{!v.isEditQue==false}">
+                <div class="slds-form-element ">
+                    <lightning:inputRichText formats="['bold', 'italic', 'underline','list', 'align']" label="Question Text" onblur="{!c.checkTextLenght}" messageWhenBadInput="write your question" aura:id="qustNameRich" placeholder="Compose text..." value="{!v.objCrteQues.Label__c}" />
+                </div>
+                <div class="slds-form-element slds-var-m-top_small">
+                    <aura:if isTrue="{!v.fieldType!='Information'}">
+                        <div class="slds-form-element">
+                            <lightning:input type="checkbox" label="Help Text" name="helptext" checked="{!v.objCrteQues.Help_Text_Required__c}" />
+                        </div>
+                        <aura:if isTrue="{!v.objCrteQues.Help_Text_Required__c==true}">
+                            <div class="slds-form-element slds-var-m-bottom_x-small slds-var-m-top_x-small">
+                                <lightning:input aura:id="helpTextInp" label="Help Text" placeholder="Help Text" name="Help Text" value="{!v.objCrteQues.Help_Text__c}" maxlength="255" minlength="0" variant="label-hidden" />
+                            </div>
+                        </aura:if>
+                    </aura:if>
+                </div>
+
+                <div class="slds-grid slds-var-m-bottom_small">
+                    <div class="slds-col">
+                        <div class="slds-form-element slds-var-m-top_x-small">
+                            <lightning:input type="checkbox" label="Required" name="reimbursed" checked="{!v.objCrteQues.Required__c}" />
+                        </div>
+                    </div>
+                    <aura:if isTrue="{!v.isShowAttachmentandCommentCheckBox}">
+                        <div class="slds-col">
+                            <div class="slds-form-element slds-var-m-top_x-small slds-var-m-left_small">
+                                <lightning:input type="checkbox" label="Allow Comment" name="Comment" checked="{!v.objCrteQues.Allow_Comment__c}" />
+                            </div>
+                        </div>
+                    </aura:if>
+                </div>
+                <div class="slds-grid slds-var-m-bottom_small">
+                    <aura:if isTrue="{!v.isShowAttachmentandCommentCheckBox}">
+                        <div class="slds-col">
+                            <div class="slds-form-element">
+                                <lightning:input type="checkbox" label="Allow Attachments" name="Upload file" checked="{!v.objCrteQues.Allow_Attachments__c}" />
+                            </div>
+                        </div>
+                    </aura:if>
+                    <div class="slds-col">
+                        <div class="slds-form-element">
+                            <lightning:input aura:id="currencyCheckbox" type="checkbox" label="Currency" onchange="{!c.showCurrency}" name="currencyCheckbox" checked="{!v.objCrteQues.Allow_Currency__c}" />
+                        </div>
+                    </div>
+                    <div class="slds-col">
+                        <aura:if isTrue="{!v.objCrteQues.Allow_Currency__c==true}">
+                            <div>
+                                <lightning:select aura:id="CurrencyId" name="selectcurrency" value="{!v.objCrteQues.Currency_Symbol__c}" label="Currency" variant="label-hidden">
+                                    <option value="">select currency</option>
+                                    <aura:iteration items="{!v.lstQuesCurrenctSymbol}" var="symbol">
+                                        <option value="{!symbol}" selected="{!symbol==v.objCrteQues.Currency_Symbol__c? true :false}">{!symbol}</option>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+                        </aura:if>
+                    </div>
+                </div>
+                <div class="slds-grid slds-var-m-top_x-small">
+                    <div class="slds-col">
+                        <div class="slds-form-element">
+                            <lightning:select name="selectDecimalPoint" label="Allow Decimal Point" value="{!v.objCrteQues.Decimal_value__c}">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </lightning:select>
+                        </div>
+                    </div>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.isEditQue==true}">
+                <div class="slds-form-element">
+                    <lightning:inputRichText formats="['bold', 'italic', 'underline','list', 'align']" label="Question Text" onblur="{!c.checkTextLenght}" disabledCategories="" aura:id="qustNameRich2" placeholder="Compose text..." value="{!v.description}" />
+                </div>
+                <div class="slds-form-element slds-var-m-top_small">
+                    <div class="slds-form-element">
+                        <lightning:input type="checkbox" label="Help Text" name="helptext" checked="{!v.objeditQues.Help_Text_Required__c}" />
+                    </div>
+                    <aura:if isTrue="{!v.objeditQues.Help_Text_Required__c==true}">
+                        <div class="slds-form-element slds-var-m-bottom_x-small slds-var-m-top_x-small qf-remove-label ">
+                            <lightning:input aura:id="helpTextInp" label="Help Text" placeholder="Help Text" name="Help Text" value="{!v.objeditQues.Help_Text__c}" maxlength="255" minlength="0" />
+                        </div>
+                    </aura:if>
+                </div>
+                <div class="slds-grid slds-var-m-bottom_small">
+                    <div class="slds-col">
+                        <div class="slds-form-element">
+                            <lightning:input type="checkbox" label="Required" name="reimbursed" checked="{!v.objeditQues.Required__c}" />
+                        </div>
+                    </div>
+                    <aura:if isTrue="{!v.isShowAttachmentandCommentCheckBox}">
+                        <div class="slds-col">
+                            <div class="slds-form-element slds-var-m-left_small">
+                                <lightning:input type="checkbox" label="Allow Comment" name="Comment" checked="{!v.objeditQues.Allow_Comment__c}" />
+                            </div>
+                        </div>
+                    </aura:if>
+                </div>
+                <div class="slds-grid slds-var-m-bottom_small">
+                    <aura:if isTrue="{!v.isShowAttachmentandCommentCheckBox}">
+                        <div class="slds-col">
+                            <div class="slds-form-element">
+                                <lightning:input type="checkbox" label="Allow Attachments" name="Upload file" checked="{!v.objeditQues.Allow_Attachments__c}" />
+                            </div>
+                        </div>
+                    </aura:if>
+                    <div class="slds-col">
+                        <div class="slds-form-element">
+                            <lightning:input aura:id="currencyCheckbox" type="checkbox" label="Currency" onchange="{!c.showCurrency}" name="currencyCheckbox" checked="{!v.objeditQues.Allow_Currency__c}" />
+                        </div>
+                    </div>
+                    <div class="slds-col">
+                        <aura:if isTrue="{!v.objeditQues.Allow_Currency__c==true}">
+                            <lightning:select aura:id="CurrencyId" name="selectcurrency" value="{!v.objeditQues.Currency_Symbol__c}" label="Currency" variant="label-hidden">
+                                <option value="">select currency</option>
+                                <aura:iteration items="{!v.lstQuesCurrenctSymbol}" var="symbol">
+                                    <option value="{!symbol}" selected="{!symbol==v.objeditQues.Currency_Symbol__c? true :false}">{!symbol}</option>
+                                </aura:iteration>
+                            </lightning:select>
+                        </aura:if>
+                    </div>
+                </div>
+                <div class="slds-grid slds-var-m-top_x-small">
+                    <div class="slds-col">
+                        <div class="slds-form-element">
+                            <lightning:select name="selectDecimalPoint" label="Allow Decimal Point" value="{!v.objeditQues.Decimal_value__c}">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </lightning:select>
+                        </div>
+                    </div>
+                </div>
+            </aura:if>
+            <br/>
+            <lightning:button label="Cancel" onclick="{!c.hideModal}" />
+            <aura:if isTrue="{!v.isEditQue==false}">
+                <lightning:button variant="brand" label="Save" onclick="{!c.saveQues}" />
+            </aura:if>
+            <aura:if isTrue="{!v.isEditQue==true}">
+                <lightning:button variant="brand" label="Save" onclick="{!c.saveEditQuesrecord}" />
+            </aura:if>
+        </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+
+
+</aura:component>

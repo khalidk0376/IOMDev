@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Invoice_To_Customer__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Sending Invoice to this Customer for this Edition is Automated. If unchecked, a User with the correct permission set will have access to execute this Action</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Sending Invoice to this Customer for this Edition is Automated. If unchecked, a User with the correct permission set will have access to execute this Action</inlineHelpText>
+    <label>Invoice To Customer</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

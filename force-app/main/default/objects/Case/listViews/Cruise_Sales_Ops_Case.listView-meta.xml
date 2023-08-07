@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cruise_Sales_Ops_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Cruise SalesOps Queue</label>
+    <queue>Cruise_SalesOps_Queue</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

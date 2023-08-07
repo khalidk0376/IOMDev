@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Send_Copy__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>For check, questionnaire copy sent or not by mail.</description>
+    <externalId>false</externalId>
+    <label>Send Copy</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

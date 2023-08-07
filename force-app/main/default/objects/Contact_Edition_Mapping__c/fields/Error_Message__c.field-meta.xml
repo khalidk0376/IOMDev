@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Error_Message__c</fullName>
+    <description>This field is used to capture the error message if any while sending welcome email</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This will capture details of error during email send functionality.</inlineHelpText>
+    <label>Welcome Email Error</label>
+    <length>5000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

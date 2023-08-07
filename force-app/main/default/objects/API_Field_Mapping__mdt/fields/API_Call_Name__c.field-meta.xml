@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>API_Call_Name__c</fullName>
+    <description>API Callout Name.</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>API Call Name</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Order Tax</fullName>
+                <default>false</default>
+                <label>Order Tax</label>
+            </value>
+            <value>
+                <fullName>Invoice Tax</fullName>
+                <default>false</default>
+                <label>Invoice Tax</label>
+            </value>
+            <value>
+                <fullName>Post Invoice</fullName>
+                <default>false</default>
+                <label>Post Invoice</label>
+            </value>
+            <value>
+                <fullName>Post Credit Note</fullName>
+                <default>false</default>
+                <label>Post Credit Note</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

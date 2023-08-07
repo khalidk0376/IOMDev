@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Currency_Symbol__c</fullName>
+    <description>Admin can set currency on Question</description>
+    <externalId>false</externalId>
+    <label>Currency Symbol</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Currency_Code</valueSetName>
+    </valueSet>
+</CustomField>

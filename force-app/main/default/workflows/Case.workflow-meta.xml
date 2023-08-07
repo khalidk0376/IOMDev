@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Case_is_Escalated</fullName>
+        <description>Case is Escalated</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactId</field>
+            <type>contactLookup</type>
+        </recipients>
+        <recipients>
+            <field>SuppliedEmail</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>noreplyinformacs@informa.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Services/Support_Escalation_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Missed_Chat_Email_Alert</fullName>
+        <description>Missed Chat Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>SuppliedEmail</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>noreplyinformacs@informa.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Services/Welcome_Email_Missed_Chat_Temp</template>
+    </alerts>
+    <alerts>
+        <fullName>Welcome_Email</fullName>
+        <description>Welcome Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>SuppliedEmail</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>noreplyinformacs@informa.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Services/Welcome_Email_Temp</template>
+    </alerts>
+    <alerts>
+        <fullName>Welcome_Email_SalesOps</fullName>
+        <description>Welcome Email SalesOps</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>SuppliedEmail</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>noreplyinformasalesops@informa.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Services/Sales_Ops_Welcome_Email</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Case_Owner</fullName>
+        <field>OwnerId</field>
+        <lookupValue>imsalesdevops@informa.com.im</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Case Owner</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Close_the_Case</fullName>
+        <field>Status</field>
+        <literalValue>Closed</literalValue>
+        <name>Close the Case</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Close_the_Case_Staus</fullName>
+        <field>Status</field>
+        <literalValue>Closed</literalValue>
+        <name>Close the Case Staus</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Closed_Submission_Date</fullName>
+        <field>Closure_Confirmation__c</field>
+        <formula>Today()</formula>
+        <name>Closed Submission Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Escalated</fullName>
+        <description>Escalated</description>
+        <field>IsEscalated</field>
+        <literalValue>1</literalValue>
+        <name>Escalated</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Is_Escalated_Cairo</fullName>
+        <field>IsEscalated</field>
+        <literalValue>1</literalValue>
+        <name>Is Escalated Cairo</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Not_Escalate_when_Case_is_Closed</fullName>
+        <description>If case is closed, then make escalation false</description>
+        <field>IsEscalated</field>
+        <literalValue>0</literalValue>
+        <name>Not Escalate when Case is Closed</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Close the Case After 7 days</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Closure Confirmation</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Close_the_Case</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Case.Closure_Confirmation__c</offsetFromField>
+            <timeLength>7</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>IMSC_Closure Confirmation</fullName>
+        <actions>
+            <name>Closed_Submission_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Closure Confirmation</value>
+        </criteriaItems>
+        <description>This workflow is used for capturing the date when case status is changed to Closure confirmation .</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>IMSC_Missed Chat Notification</fullName>
+        <actions>
+            <name>Missed_Chat_Email_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>This workflow is used for sending welcome email to customer whenever a chat is missed and a new case is created for it.</description>
+        <formula>Not(isblank( Brand__c )) &amp;&amp; Not(isblank( Edition__c )) &amp;&amp;  (ISPICKVAL(Origin , &apos;Missed Chat&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>IMSC_Not Escalated when Case is Closed</fullName>
+        <actions>
+            <name>Not_Escalate_when_Case_is_Closed</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Closed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.IsEscalated</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>If case is closed, then make escalation false</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>IMSC_Send Welcome Email</fullName>
+        <actions>
+            <name>Welcome_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <description>This workflow is used for sending welcome email to customer  whenever a new case is created for Customer Service team</description>
+        <formula>Not(isblank(  Brand__c  )) &amp;&amp; Not(isblank(  Edition__c  )) &amp;&amp;  (ISPICKVAL(Origin , &apos;Phone&apos;) ||ISPICKVAL(Origin , &apos;Email&apos;) ||  (ISPICKVAL(Origin , &apos;Web&apos;) &amp;&amp;  NOt(isblank(Edition_Code__c)) )) &amp;&amp; NOT(BEGINS( Subject , &apos;ESOP&apos;)) &amp;&amp; NOT( ISPICKVAL( Support_Type__c , &apos;SalesOps Support&apos;) )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>IMSC_Send Welcome Email Sales Ops</fullName>
+        <actions>
+            <name>Welcome_Email_SalesOps</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Support_Type__c</field>
+            <operation>equals</operation>
+            <value>SalesOps Support</value>
+        </criteriaItems>
+        <description>This workflow is used for sending welcome email to customer whenever a new case is created for SalesOps team</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>IMSC_Spam Case</fullName>
+        <actions>
+            <name>Close_the_Case</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Delete_Request_Reason__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>This workflow is used for Closing the cases which are created by spam mails or for testing or agreed by business to close.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

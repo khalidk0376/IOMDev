@@ -1,0 +1,45 @@
+.placeholder .flex-v-center {
+    align-items: center;
+    align-items: center;
+}
+
+.placeholder .flex-grid {
+    display: flex;
+}
+.placeholder .body, .placeholder .card, .placeholder .anchor {
+    background-color: rgb(255, 255, 255);
+}
+.placeholder .body {
+    padding: .7rem;
+}
+
+.placeholder.related_record .text-body {
+    width: 90%;
+}
+
+.placeholder .text-body {
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    border-bottom: 1px solid #ecebea!important;
+}
+
+.placeholder .text {
+    border-radius: 15rem;
+    display: block;
+    margin-bottom: .75rem;
+    background-color: rgb(236, 235, 234);
+    height: .5rem;
+}
+.placeholder .text-{
+    background-color: rgb(243, 242, 242);
+}
+.placeholder .text-medium {
+    width: 30%;
+}
+.placeholder .text-long {
+    width: 60%;
+}
+.opacity30 {
+    opacity: 0.4;
+}

@@ -1,0 +1,49 @@
+<!-- *
+* Project      	:   Order & Billing Plateform [IOM-519]
+* Created By	: 	Ashish (Girikon)
+* Created Date	: 	18 JAN 2022
+* ***************************************************************************
+* @description : to Show Collection Notes Data from IOM to CRM Orgs
+* -->
+<apex:page controller="IOM_ConnectionCallbackCtrl" sidebar="false" standardStylesheets="false" readonly="false" doctype="html-5.0" action="{!initAction}">
+
+    <apex:includeLightning />
+    <apex:slds />
+
+    <apex:form >
+        <!-- Define the JavaScript function sayHello-->
+        <apex:actionFunction name="logout" action="{!revokeToken}" rerender="" />
+    </apex:form>
+    
+    <apex:pageBlock rendered="{!showError}" >
+
+    </apex:pageBlock>
+    <!-- -->
+    <apex:pageBlock rendered="{!showCmp}" >
+        <div id="lightningOutDiv" />
+
+        <script>
+            var sId = '{!sessionId}';
+            var iomrecordNo = '{!iomrecordNo}';
+            var compCode = '{!compCode}';
+            var redURL = '{!iomRedirectURL}';
+            console.log(iomrecordNo+compCode+'Loading IOM Component ......... '+redURL+' & '+sId);
+            $Lightning.use("c:callbackLightningOutApp", 
+                                function() {
+                           $Lightning.createComponent("c:callbackLightningOutC", 
+                                                      {"iomRecordNumber":iomrecordNo,"componentCode":compCode}, 
+                                                      "lightningOutDiv",
+                                                      function() {
+                                                          setTimeout(function(){
+                                                              console.log("logout");
+                                                              logout();
+                                                          },5000);
+                                                      }); 
+                       }
+                       ,redURL,sId
+                      );
+        
+        </script>
+    </apex:pageBlock>
+
+</apex:page>

@@ -1,0 +1,36 @@
+<template>
+    <lightning-card title="">
+        <lightning-spinner if:true={spinner} size="small" variant="brand"></lightning-spinner>
+        <div class="slds-p-around_large" if:true={recordId}>
+            <b>{label.ReplaceUserMsg}</b>
+            <br/> 
+            <lightning-input type="search" onchange={handleSearch} label="Search Contact"></lightning-input>
+            <div class="slds-scrollable_y" style="height:15rem;">
+                <lightning-radio-group label="Select Contact" variant="label-hidden"
+                    name="radioButtonGroup" 
+                    onchange={handleChange} 
+                    options={radioOpt}
+                    value={selectedValue}
+                    type="radio"></lightning-radio-group>
+            </div>
+                              
+        </div>
+        
+        <lightning-layout>
+            <lightning-layout-item>
+                <div>
+                    <lightning-button disabled={isButtonDisabled} variant="brand" label="Replace User" class="slds-m-left_x-small" onclick={replaceUser}></lightning-button>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item>
+                <div class="slds-col_padded-around">
+                    <lightning-input type="checkbox" label={label.inactiveCheckbox} name="active" onchange={handleActiveChange}></lightning-input>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <div class="slds-m-around--x-small">
+            <b>{label.cemNote}</b>
+        </div>
+    </lightning-card>
+</template>

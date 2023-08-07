@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERP_Ref_Numbers__c</fullName>
+    <defaultValue>&apos;&apos;</defaultValue>
+    <description>ERP Reference Numbers of Invoices &amp; Credit Notes which will be reprinted in case of RICD</description>
+    <externalId>false</externalId>
+    <inlineHelpText>ERP Reference Numbers of Invoice &amp; Credit Notes which will be reprinted in case of RICD</inlineHelpText>
+    <label>ERP Ref Numbers</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Records</fullName>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>Contact__c</columns>
+    <columns>Translated_Account_Name__c</columns>
+    <columns>Translated_Billing_Address_Line_1__c</columns>
+    <columns>Translated_Billing_Address_Line_2__c</columns>
+    <columns>Translated_Billing_Address_Line_3__c</columns>
+    <filterScope>Mine</filterScope>
+    <label>All Records</label>
+</ListView>

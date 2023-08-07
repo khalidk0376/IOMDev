@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AllCS</fullName>
+    <columns>NAME</columns>
+    <columns>Level__c</columns>
+    <columns>Parent_Category__c</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OWNER.FIRST_NAME</field>
+        <operation>contains</operation>
+        <value>Keith</value>
+    </filters>
+    <filters>
+        <field>Level__c</field>
+        <operation>equals</operation>
+        <value>L2</value>
+    </filters>
+    <label>All - CustomerServices</label>
+</ListView>

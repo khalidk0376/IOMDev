@@ -1,0 +1,11 @@
+.slds-table td, .slds-table th {
+    padding: .25rem .5rem;
+    white-space: nowrap;
+    position: relative;
+}
+thead th {
+    background-color: #fafaf9;
+    color: #514f4d;
+    font-weight: 700;
+    line-height: normal;
+}

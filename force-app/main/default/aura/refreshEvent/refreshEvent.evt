@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" description="Event template">
+    <aura:attribute name="isEditMode" type="boolean" />
+    <aura:attribute name="isUAE" type="boolean" />
+    <aura:attribute name="response" type="string" default="false"/>
+</aura:event>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>API_Synchronization_Item__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>API Synchronization Item for which error received during API callout.</description>
+    <externalId>false</externalId>
+    <label>API Synchronization Item</label>
+    <referenceTo>API_Synchronization_Item__c</referenceTo>
+    <relationshipLabel>Interface Error Lines</relationshipLabel>
+    <relationshipName>Interface_Error_Lines</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

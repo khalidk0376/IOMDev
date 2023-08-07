@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DM_Invoice_Scheduler_Group__c</fullName>
+    <description>DM Invoice Scheduler Group to which temp records belongs.</description>
+    <externalId>false</externalId>
+    <label>DM Invoice Scheduler Group</label>
+    <referenceTo>DM_Invoice_Scheduler_Group__c</referenceTo>
+    <relationshipLabel>DM Temp Invoice Schedulers</relationshipLabel>
+    <relationshipName>DM_Temp_Invoice_Schedulers</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,108 @@
+<template>
+    <div if:true={isShowAnnouncement} class="announcement">
+        <span class="heading heading-d-small heading-m-small">Announcements</span>
+        <div class="slds-grid slds-wrap announcement-container">
+            <template if:true={only4} for:each={only4} for:item="item" for:index="index">
+                <div key={item.Id} onclick={openDetail} data-index={index} class={item.class} title="Open Detail">
+                    <div class="announcement-details">
+                        <div class="announcement-inner-heading">
+                            <div class="announcement-top">
+                                <span class="heading heading-d-eyebrow heading-m-eyebrow">ANNOUNCEMENT</span>
+                            </div>
+                            <div class="announcement-date">
+                                <span class="para paragraph-d-tiny paragraph-m-tiny">{item.Announcement_Date__c}</span>
+                            </div>
+                        </div>
+                        <div class="announcement-content-heading">
+                            <span class="title heading heading-d-small heading-m-small">
+                                {item.Title}
+                            </span>
+                        </div>
+                        <div class="announcement-content">
+                            <span class="para paragraph-d-small paragraph-m-small"><lightning-formatted-rich-text value={item.shortDescription}></lightning-formatted-rich-text></span>
+                        </div>
+                    </div>
+                </div>
+            </template>                        
+        </div>
+        <div if:true={isLoadMore} class="task-load">
+            <lightning-button onclick={loadMore} label="Load more" title="Looks like a link" class="link link-d-small-medium"></lightning-button>
+        </div>
+    </div>
+
+    <!--Announcement detail modal Start-->
+    <template if:true={isOpenDetailModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" 
+            class="slds-modal slds-modal_medium slds-fade-in-open announcement">
+            <div class="slds-modal__container">                
+                <div class="slds-modal__header">
+                    <button onclick={closeModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <img src="/sfsites/c/resource/IMCC2/icons/Cross-light-blue-7.svg" class="icon-32" alt="close" />
+                    </button>
+                    <div class="work-header heading heading-d-large heading-m-large heading-m-small">{activeAnnouncement.Title__c}</div>
+                    <div class="work-content para paragraph-m-standard paragraph-m-small">{activeAnnouncement.Sub_Header_Text__c}</div>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-formatted-rich-text value={activeAnnouncement.Description__c}></lightning-formatted-rich-text>
+                    <div class="ex-link" if:true={isInternalPageButton}>
+                        <div class=""><a href="javascript:void(0);" onclick={openInernalPage} class="link link-d-small-medium">{activeAnnouncement.URL_Label__c}
+                            <lightning-icon icon-name="utility:forward" size="xx-small"></lightning-icon>
+                        </a></div>
+                    </div>
+                    <div class="ex-link" if:true={isExternalPageButton}>
+                        <div class=""><a href="javascript:void(0);" onclick={handleButtonClick} class="link link-d-small-medium">{activeAnnouncement.URL_Label__c} 
+                            <lightning-icon icon-name="utility:forward" size="xx-small"></lightning-icon>
+                        </a></div>
+                    </div>
+                </div>
+                <div class="slds-modal__footer modal-button">
+                    <lightning-button onclick={closeModal} label="Close" class="lg"></lightning-button>
+                </div>
+            </div>            
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+    <!--Announcement detail modal End-->
+
+    <!--Load More Announcements modal Start-->
+    <template if:true={isOpenMoreModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" 
+            class="slds-modal slds-modal_medium slds-fade-in-open">
+            <div class="slds-modal__container">                
+                <div class="slds-modal__header">
+                    <button onclick={closeModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <img src="/sfsites/c/resource/IMCC2/icons/Cross-light-blue-7.svg" class="icon-32" alt="close" />
+                    </button>                    
+                    <h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate">Announcement List</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Publish Date</th>                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template if:true={announcements} for:each={announcements} for:item="item" for:index="index">
+                                <tr key={item.Id}>
+                                    <td>
+                                        <div class="slds-truncate">
+                                            <a class="link" data-index={index} onclick={openDetail} href="javascript:void(0)">{item.Title__c}</a>
+                                        </div>
+                                    </td>
+                                    <td>{item.Announcement_Date__c}</td>
+                                </tr>
+                            </template>                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="slds-modal__footer modal-button">
+                    <lightning-button onclick={closeModal} label="Close" class="lg"></lightning-button>
+                </div>
+            </div>            
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+    <!--Load More Announcements modal End-->
+</template>

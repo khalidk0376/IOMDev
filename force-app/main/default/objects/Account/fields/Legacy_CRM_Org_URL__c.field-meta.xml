@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Legacy_CRM_Org_URL__c</fullName>
+    <description>Hidden field which will be used by Formula field Account Detail</description>
+    <externalId>false</externalId>
+    <label>Legacy CRM Org URL</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>https://informage.lightning.force.com/</fullName>
+                <default>false</default>
+                <label>https://informage.lightning.force.com/</label>
+            </value>
+            <value>
+                <fullName>https://ubm1.my.salesforce.com/</fullName>
+                <default>false</default>
+                <label>https://ubm1.my.salesforce.com/</label>
+            </value>
+            <value>
+                <fullName>https://informage--uat.lightning.force.com/</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>https://informage--uat.lightning.force.com/</label>
+            </value>
+            <value>
+                <fullName>https://ubm1--full.my.salesforce.com/</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>https://ubm1--full.my.salesforce.com/</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

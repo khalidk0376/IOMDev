@@ -1,0 +1,890 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,force:hasRecordId" 
+                access="global" controller = "PaymentSchedule_Cls" >
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="DataListopp" type="Opportunity"  />
+    <aura:attribute name="EditOppPayment" type="Opportunity" />
+    <ltng:require scripts="{!$Resource.LtngUtility}"
+                  afterScriptsLoaded="{!c.doInit}"/>
+    
+    <!--Start All Attribute List -->
+    <aura:attribute name="CurrencyCode" type = "string" default=""/>
+    <aura:attribute name="PaymentSchedule" type="boolean" default="false" />
+    <aura:attribute name="DefaultPaymentSchedule" type="string" />
+    <aura:attribute name="DefaultPaymentSchedule25" type="boolean" default="false" /><!--For the third Cut offDate-->
+    <aura:attribute name="PaymentSchedule2" type="boolean" default="false" />
+    <aura:attribute name="CustomPayment" type="boolean" default="false" />
+    <aura:attribute name="isOneInvPerContract" type="boolean" default="false" />
+    
+    <!--start Condition Check Box -->
+    <aura:attribute name="OnCustomCheckCheckBox" type="boolean" default="true" />
+    <aura:attribute name="PaymentScheduleCheckBox" type="boolean" default="false" />
+    <aura:attribute name="PaymentSchedule2CheckBox" type="boolean" default="false" />
+    <aura:attribute name="CustomPaymentCheckBox" type="boolean" default="false" />
+    <!--End Condition Check Box -->
+    
+    <!--start Cut Off Date  -->
+    <aura:attribute name="QuotedPaymentSchedule" type="string"/>
+    <aura:attribute name="EventCutoffDate" type="string"/>
+    <aura:attribute name="EventCutoffDate1" type="string"/>
+    <aura:attribute name="EventCutoffDate2" type="string"/>
+    <aura:attribute name="EventCutoffDate3" type="string"/>
+    <!--End Cut Off Date -->
+    
+    <!--start Custom Payment Date  -->
+    <aura:attribute name="CustomDueDate" type="string"/>
+    <aura:attribute name="TotalNoofPayment" type="integer"  />
+    <!--End Custom Payment Date  -->
+    
+    <!--start Custom Payment Field Date  -->
+    <aura:attribute name="NoofPayment1" type="boolean" default="false" />
+    <aura:attribute name="NoofPayment2" type="boolean" default="false" />
+    <aura:attribute name="NoofPayment3" type="boolean" default="false" />
+    <aura:attribute name="NoofPayment4" type="boolean" default="false" />
+    <aura:attribute name="NoofPayment5" type="boolean" default="false" />
+    <aura:attribute name="NoofPayment6" type="boolean" default="false" />
+    <aura:attribute name="NoofPayment7" type="boolean" default="false" />
+    <aura:attribute name="NoofPayment8" type="boolean" default="false" />
+    <aura:attribute name="NoofPayment9" type="boolean" default="false" />
+    <aura:attribute name="NoofPayment10" type="boolean" default="false" />
+    <aura:attribute name="NoofPayment11" type="boolean" default="false" />
+    <aura:attribute name="NoofPayment12" type="boolean" default="false" />
+    <aura:attribute name="NotVisible" type="boolean" default="false" />
+    <!--End Custom Payment Date  -->
+    
+    <!--start Custom Payment Due Date  -->
+    <aura:attribute name="DueDate1" type="string" />
+    <aura:attribute name="DueDate2" type="string"  />
+    <aura:attribute name="DueDate3" type="string" />
+    <aura:attribute name="DueDate4" type="string" />
+    <aura:attribute name="DueDate5" type="string"  />
+    <aura:attribute name="DueDate6" type="string" />
+    <aura:attribute name="DueDate7" type="string" />
+    <aura:attribute name="DueDate8" type="string"  />
+    <aura:attribute name="DueDate9" type="string" />
+    <aura:attribute name="DueDate10" type="string" />
+    <aura:attribute name="DueDate11" type="string"  />
+    <aura:attribute name="DueDate12" type="string" />
+    <!--End Custom Payment Due Date   -->
+    
+    <!--start Custom Payment Field Amount  -->
+    <aura:attribute name="AmountDue1" type="integer"/>
+    <aura:attribute name="AmountDue2" type="integer" />
+    <aura:attribute name="AmountDue3" type="integer" />
+    <aura:attribute name="AmountDue4" type="integer" />
+    <aura:attribute name="AmountDue5" type="integer" />
+    <aura:attribute name="AmountDue6" type="integer" />
+    <aura:attribute name="AmountDue7" type="integer" />
+    <aura:attribute name="AmountDue8" type="integer" />
+    <aura:attribute name="AmountDue9" type="integer" />
+    <aura:attribute name="AmountDue10" type="integer" />
+    <aura:attribute name="AmountDue11" type="integer" />
+    <aura:attribute name="AmountDue12" type="integer" />
+    <aura:attribute name="PaymentValue" type="String"/>
+    <aura:attribute name="PaymentValues" type="List" default="Custom"/>
+    <!--End Custom Payment Date  -->
+    
+    <!--Start Final Total Amount -->
+    <aura:attribute name="TotalAmount" type="integer" default="00.00"/>
+    <!--End Final Total Amount   -->
+    
+    <!--Start Currency Iso Code Amount -->
+    <aura:attribute name="labelCurrencyIsoCode" type="string" />
+    <!--End Currency Iso Code Amount -->
+    
+    <!--End All Attribute List -->
+    
+    <div class="slds-text-body_regular" style = "sans-serif  !important;">
+        <!-- <div style = "text-align:right; padding-bottom:15px;">
+            <lightning:button variant="brand" label="Save" title="Save" onclick="{!c.saveJS}" disabled="{!v.isOneInvPerContract}"/>
+            <lightning:button variant="brand" label="Cancel" title="Cancel" onclick="{!c.cancelRec}" disabled="{!v.isOneInvPerContract}"/>
+        </div> -->
+        <lightning:layout multipleRows="true">
+            <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="3">
+                <aura:if isTrue="{!v.NotVisible}">
+                    <div  class="slds-clearfix checkBoxStyle">
+                        <div class="slds-float_left">
+                            Payment Schedule
+                        </div>
+                    </div>
+                    <div  class="slds-clearfix checkBoxStyle">
+                        <div class="slds-float_left">
+                            Payment Schedule 2
+                        </div>
+                    </div>
+                    <div class="slds-clearfix checkBoxStyle">
+                        <div class="slds-float_left">
+                            Custom Payment
+                        </div>
+                    </div>
+                </aura:if>
+                <div class="slds-clearfix checkBoxStyle">
+                    <div class="slds-float_left">
+                        Payment Schedule
+                    </div>
+                </div>
+            </lightning:layoutItem>
+            <lightning:select name="select" value="{!v.PaymentValue}" onchange="{!c.Paymentjs}"  readonly="true" disabled="{!v.isOneInvPerContract}">
+                <option value="None" label="--None--">--None--</option> 
+                <aura:iteration items="{!v.PaymentValues}" var="payment">
+                    <option value="{!payment}" selected="{!payment == v.PaymentValue}">{!payment}</option>
+                </aura:iteration>
+            </lightning:select>
+            <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="3">
+                <aura:if isTrue="{!v.NotVisible}">
+                    <div style="font-family: 'Salesforce Sans',Arial,sans-serif;margin-top:5px;" class="slds-clearfix">
+                        <div class="slds-float_left checkBoxStyle">
+                            <lightning:input type="checkbox" label="" variant="label-hidden" aura:id="PaymentSchedule" name="PaymentSchedule" checked="{!v.PaymentSchedule}" onchange="{!c.PaymentSchedulejs}"/>
+                        </div>
+                    </div>
+                    <div style="font-family: 'Salesforce Sans',Arial,sans-serif;margin-top:5px;" class="slds-clearfix">
+                        <div class="slds-float_left checkBoxStyle">
+                            <lightning:input type="checkbox" label="" variant="label-hidden" aura:id="PaymentSchedule2" name="PaymentSchedule2" checked="{!v.PaymentSchedule2}" onchange="{!c.PaymentSchedule2js}"/>
+                        </div>
+                    </div>
+                    
+                    <div style="font-family: 'Salesforce Sans',Arial,sans-serif;margin-top:5px;" class="slds-clearfix">
+                        <div class="slds-float_left checkBoxStyle">
+                            <lightning:input type="checkbox" label="" variant="label-hidden" aura:id="CustomPayment" name="CustomPayment" checked="{!v.CustomPayment}" onchange="{!c.CustomPaymentjs}" />
+                        </div>
+                    </div>
+                </aura:if>
+            </lightning:layoutItem>
+            <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                <!--<aura:if isTrue="{!v.OnCustomCheckCheckBox}">-->
+                <aura:if isTrue="{!v.NotVisible}">
+                    <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small">
+                        <div style="margin-top:5px;" class="slds-col">
+                            <lightning:input type="string" label="Default Payment Schedule" name="DefaultPaymentSchedule" value="{!v.DefaultPaymentSchedule}" disabled = "true" />
+                        </div>
+                        <div style="margin-top:5px;" class="slds-col">
+                            <label class="slds-form-element__label" style="margin-right: 0.5rem;">Quoted Payment Schedule</label>
+                            <lightning:helptext content="This field defines the merged payment schedule value." class="customIcon"/>
+                            <lightning:input label="" variant="label-hidden" name="QuotedPaymentSchedule" value="{!v.QuotedPaymentSchedule}" disabled = "true"/>
+                        </div>
+                        <aura:if isTrue="{!and(or(v.PaymentScheduleCheckBox ,v.PaymentSchedule2CheckBox) , v.EventCutoffDate == null , v.DefaultPaymentSchedule != null)}">
+                            <div style="margin-top:5px;" class="slds-col">
+                                <lightning:input type="string" label="Event Cutoff Date 1" name="EventCutoffDate" value="Immediate Payment" disabled = "true"/>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{!and(or(v.PaymentScheduleCheckBox ,v.PaymentSchedule2CheckBox), v.EventCutoffDate != null)}">
+                            <div style="margin-top:5px;" class="slds-col">
+                                <lightning:input type="date" label="Event Cutoff Date 1" name="EventCutoffDate" value="{!v.EventCutoffDate}" disabled = "true"/>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue= "{!and(v.DefaultPaymentSchedule !='100', v.CustomPayment == false)}">
+                            <div style="margin-top:5px;" class="slds-col">
+                                <lightning:input type="date" label="Event Cutoff Date 2" name="EventCutoffDate1" value="{!v.EventCutoffDate1}" disabled = "true"/>
+                            </div>
+                            
+                            <aura:if isTrue= "{!and(v.DefaultPaymentSchedule !='50-50' , v.DefaultPaymentSchedule !='25-75' , v.DefaultPaymentSchedule !='75-25' , v.CustomPayment == false)}">
+                                <div style="margin-top:5px;" class="slds-col">
+                                    <lightning:input type="date" label="Event Cutoff Date 3" name="EventCutoffDate2" value="{!v.EventCutoffDate2}" disabled = "true"/>
+                                </div>
+                                
+                            </aura:if>
+                            <aura:if isTrue= "{!and(v.DefaultPaymentSchedule =='25-25-25-25', v.CustomPayment == false)}">
+                                <div style="margin-top:5px;" class="slds-col">
+                                    <lightning:input type="date" label="Event Cutoff Date 4" name="EventCutoffDate3" value="{!v.EventCutoffDate3}" disabled = "true"/>
+                                </div>
+                            </aura:if>
+                        </aura:if>
+                        
+                    </lightning:layoutItem>
+                </aura:if>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <aura:if isTrue="{!v.CustomPaymentCheckBox}">
+            <lightning:layout multipleRows="true"> 
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <!-- <label class="slds-form-element__label " style="margin-right: 0.5rem;">Due Date</label>
+                        <lightning:helptext content="First Due Date." class="customIcon"/>
+                        <lightning:input type="date" label="" variant="label-hidden" name="CustomDueDate" value="{!v.CustomDueDate}" /> -->
+                    </div>
+                    <br></br>
+                    <br></br>
+                </lightning:layoutItem>  
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input aura:id="tpaymnt" label="Total No of Payment" name="TotalNoofPayment" value = "{!v.TotalNoofPayment}" onchange="{!c.TotalNoofPaymentjs}"/>
+                    </div>
+                    <br></br>
+                    <br></br>
+                </lightning:layoutItem> 
+            </lightning:layout>
+        </aura:if>
+        <aura:if isTrue="{!v.NoofPayment1}">
+            <lightning:layout multipleRows="true"> 
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount" >Start Date</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 1" name="DueDate1" value="{!v.DueDate1}"/>
+                    </div>
+                </lightning:layoutItem>  
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount">Amount Due</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 1" name="AmountDue1" value="{!v.AmountDue1}" disabled = "true"/>
+                    </div>
+                    <div class="slds-text-heading_small slds-m-top_medium">
+                        <p><b style = "color: #16325C;">Total Amount: </b><lightning:formattedNumber title="Total Amount" value="{!v.TotalAmount}" style="currency" currencyCode="{!v.CurrencyCode}" currencyDisplayAs="code"/></p>
+                    </div>
+                </lightning:layoutItem> 
+            </lightning:layout>
+        </aura:if>
+        <aura:if isTrue="{!v.NoofPayment2}">
+            <lightning:layout multipleRows="true"> 
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount" >Start Date</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 1" name="DueDate1" value="{!v.DueDate1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 2" name="DueDate2" value="{!v.DueDate2}"/>
+                    </div>
+                </lightning:layoutItem>  
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount">Amount Due</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 1" name="AmountDue1" value="{!v.AmountDue1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 2" name="AmountDue2" value="{!v.AmountDue2}" disabled = "true"/>
+                    </div>
+                    <div class="slds-text-heading_small slds-m-top_medium">
+                        <p><b style = "color: #16325C;">Total Amount: </b><lightning:formattedNumber title="Total Amount" value="{!v.TotalAmount}" style="currency" currencyCode="{!v.CurrencyCode}" currencyDisplayAs="code"/></p>
+                    </div>
+                </lightning:layoutItem> 
+            </lightning:layout>
+        </aura:if>
+        <aura:if isTrue="{!v.NoofPayment3}">
+            <lightning:layout multipleRows="true"> 
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount" >Start Date</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 1" name="DueDate1" value="{!v.DueDate1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 2" name="DueDate2" value="{!v.DueDate2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 3" name="DueDate3" value="{!v.DueDate3}"/>
+                    </div>
+                </lightning:layoutItem>  
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount"><b>Amount Due</b></span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 1" name="AmountDue1" value="{!v.AmountDue1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 2" name="AmountDue2" value="{!v.AmountDue2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 3" name="AmountDue3" value="{!v.AmountDue3}" disabled = "true"/>
+                    </div>
+                    <div class="slds-text-heading_small slds-m-top_medium">
+                        <p><b style = "color: #16325C;">Total Amount: </b><lightning:formattedNumber title="Total Amount" value="{!v.TotalAmount}" style="currency" currencyCode="{!v.CurrencyCode}" currencyDisplayAs="code"/></p>
+                    </div>
+                </lightning:layoutItem> 
+            </lightning:layout>
+        </aura:if>
+        <aura:if isTrue="{!v.NoofPayment4}">
+            <lightning:layout multipleRows="true"> 
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount" >Start Date</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 1" name="DueDate1" value="{!v.DueDate1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 2" name="DueDate2" value="{!v.DueDate2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 3" name="DueDate3" value="{!v.DueDate3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 4" name="DueDate4" value="{!v.DueDate4}"/>
+                    </div>
+                </lightning:layoutItem>  
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount">Amount Due</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 1" name="AmountDue1" value="{!v.AmountDue1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 2" name="AmountDue2" value="{!v.AmountDue2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 3" name="AmountDue3" value="{!v.AmountDue3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 4" name="AmountDue4" value="{!v.AmountDue4}" disabled = "true"/>
+                    </div>
+                    <div class="slds-text-heading_small slds-m-top_medium">
+                        <p><b style = "color: #16325C;">Total Amount: </b><lightning:formattedNumber title="Total Amount" value="{!v.TotalAmount}" style="currency" currencyCode="{!v.CurrencyCode}" currencyDisplayAs="code"/></p>
+                    </div>
+                </lightning:layoutItem> 
+            </lightning:layout>
+        </aura:if>
+        <aura:if isTrue="{!v.NoofPayment5}">
+            <lightning:layout multipleRows="true"> 
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount" >Start Date</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 1" name="DueDate1" value="{!v.DueDate1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 2" name="DueDate2" value="{!v.DueDate2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 3" name="DueDate3" value="{!v.DueDate3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 4" name="DueDate4" value="{!v.DueDate4}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 5" name="DueDate5" value="{!v.DueDate5}"/>
+                    </div>
+                </lightning:layoutItem>  
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount">Amount Due</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 1" name="AmountDue1" value="{!v.AmountDue1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 2" name="AmountDue2" value="{!v.AmountDue2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 3" name="AmountDue3" value="{!v.AmountDue3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 4" name="AmountDue4" value="{!v.AmountDue4}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 5" name="AmountDue5" value="{!v.AmountDue5}" disabled = "true"/>
+                    </div>
+                    <div class="slds-text-heading_small slds-m-top_medium">
+                        <p><b style = "color: #16325C;">Total Amount: </b><lightning:formattedNumber title="Total Amount" value="{!v.TotalAmount}" style="currency" currencyCode="{!v.CurrencyCode}" currencyDisplayAs="code"/></p>
+                    </div>
+                </lightning:layoutItem> 
+            </lightning:layout>
+        </aura:if>
+        <aura:if isTrue="{!v.NoofPayment6}">
+            <lightning:layout multipleRows="true"> 
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount" >Start Date</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 1" name="DueDate1" value="{!v.DueDate1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 2" name="DueDate2" value="{!v.DueDate2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 3" name="DueDate3" value="{!v.DueDate3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 4" name="DueDate4" value="{!v.DueDate4}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 5" name="DueDate5" value="{!v.DueDate5}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 6" name="DueDate6" value="{!v.DueDate6}"/>
+                    </div>
+                </lightning:layoutItem>  
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount">Amount Due</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 1" name="AmountDue1" value="{!v.AmountDue1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 2" name="AmountDue2" value="{!v.AmountDue2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 3" name="AmountDue3" value="{!v.AmountDue3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 4" name="AmountDue4" value="{!v.AmountDue4}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 5" name="AmountDue5" value="{!v.AmountDue5}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 6" name="AmountDue6" value="{!v.AmountDue6}" disabled = "true"/>
+                    </div>
+                    <div class="slds-text-heading_small slds-m-top_medium">
+                        <p><b style = "color: #16325C;">Total Amount: </b><lightning:formattedNumber title="Total Amount" value="{!v.TotalAmount}" style="currency" currencyCode="{!v.CurrencyCode}" currencyDisplayAs="code"/></p>
+                    </div>
+                </lightning:layoutItem> 
+            </lightning:layout>
+        </aura:if>
+        <aura:if isTrue="{!v.NoofPayment7}">
+            <lightning:layout multipleRows="true"> 
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount" >Start Date</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 1" name="DueDate1" value="{!v.DueDate1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 2" name="DueDate2" value="{!v.DueDate2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 3" name="DueDate3" value="{!v.DueDate3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 4" name="DueDate4" value="{!v.DueDate4}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 5" name="DueDate5" value="{!v.DueDate5}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 6" name="DueDate6" value="{!v.DueDate6}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 7" name="DueDate7" value="{!v.DueDate7}" disabled = "true"/>
+                    </div>
+                </lightning:layoutItem>  
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount">Amount Due</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 1" name="AmountDue1" value="{!v.AmountDue1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 2" name="AmountDue2" value="{!v.AmountDue2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 3" name="AmountDue3" value="{!v.AmountDue3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 4" name="AmountDue4" value="{!v.AmountDue4}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 5" name="AmountDue5" value="{!v.AmountDue5}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 6" name="AmountDue6" value="{!v.AmountDue6}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 7" name="AmountDue7" value="{!v.AmountDue7}"/>
+                    </div>
+                    <div class="slds-text-heading_small slds-m-top_medium">
+                        <p><b style = "color: #16325C;">Total Amount: </b><lightning:formattedNumber title="Total Amount" value="{!v.TotalAmount}" style="currency" currencyCode="{!v.CurrencyCode}" currencyDisplayAs="code"/></p>
+                    </div>
+                </lightning:layoutItem> 
+            </lightning:layout>
+        </aura:if>
+        <aura:if isTrue="{!v.NoofPayment8}">
+            <lightning:layout multipleRows="true"> 
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount" >Start Date</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 1" name="DueDate1" value="{!v.DueDate1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 2" name="DueDate2" value="{!v.DueDate2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 3" name="DueDate3" value="{!v.DueDate3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 4" name="DueDate4" value="{!v.DueDate4}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 5" name="DueDate5" value="{!v.DueDate5}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 6" name="DueDate6" value="{!v.DueDate6}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 7" name="DueDate7" value="{!v.DueDate7}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 8" name="DueDate8" value="{!v.DueDate8}"/>
+                    </div>
+                </lightning:layoutItem>  
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount">Amount Due</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 1" name="AmountDue1" value="{!v.AmountDue1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 2" name="AmountDue2" value="{!v.AmountDue2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 3" name="AmountDue3" value="{!v.AmountDue3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 4" name="AmountDue4" value="{!v.AmountDue4}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 5" name="AmountDue5" value="{!v.AmountDue5}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 6" name="AmountDue6" value="{!v.AmountDue6}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 7" name="AmountDue7" value="{!v.AmountDue7}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 8" name="AmountDue8" value="{!v.AmountDue8}" disabled = "true"/>
+                    </div>
+                    <div class="slds-text-heading_small slds-m-top_medium">
+                        <p><b style = "color: #16325C;">Total Amount: </b><lightning:formattedNumber title="Total Amount" value="{!v.TotalAmount}" style="currency" currencyCode="{!v.CurrencyCode}" currencyDisplayAs="code"/></p>
+                    </div>
+                </lightning:layoutItem> 
+            </lightning:layout>
+        </aura:if>
+        <aura:if isTrue="{!v.NoofPayment9}">
+            <lightning:layout multipleRows="true"> 
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount" >Start Date</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 1" name="DueDate1" value="{!v.DueDate1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 2" name="DueDate2" value="{!v.DueDate2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 3" name="DueDate3" value="{!v.DueDate3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 4" name="DueDate4" value="{!v.DueDate4}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 5" name="DueDate5" value="{!v.DueDate5}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 6" name="DueDate6" value="{!v.DueDate6}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 7" name="DueDate7" value="{!v.DueDate7}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 8" name="DueDate8" value="{!v.DueDate8}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 9" name="DueDate9" value="{!v.DueDate9}"/>
+                    </div>
+                </lightning:layoutItem>  
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount">Amount Due</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 1" name="AmountDue1" value="{!v.AmountDue1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 2" name="AmountDue2" value="{!v.AmountDue2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 3" name="AmountDue3" value="{!v.AmountDue3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 4" name="AmountDue4" value="{!v.AmountDue4}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 5" name="AmountDue5" value="{!v.AmountDue5}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 6" name="AmountDue6" value="{!v.AmountDue6}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 7" name="AmountDue7" value="{!v.AmountDue7}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 8" name="AmountDue8" value="{!v.AmountDue8}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 9" name="AmountDue9" value="{!v.AmountDue9}" disabled = "true"/>
+                    </div>
+                    <div class="slds-text-heading_small slds-m-top_medium">
+                        <p><b style = "color: #16325C;">Total Amount: </b><lightning:formattedNumber title="Total Amount" value="{!v.TotalAmount}" style="currency" currencyCode="{!v.CurrencyCode}" currencyDisplayAs="code"/></p>
+                    </div>
+                </lightning:layoutItem> 
+            </lightning:layout>
+        </aura:if>
+        <aura:if isTrue="{!v.NoofPayment10}">
+            <lightning:layout multipleRows="true"> 
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount" >Start Date</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 1" name="DueDate1" value="{!v.DueDate1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 2" name="DueDate2" value="{!v.DueDate2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 3" name="DueDate3" value="{!v.DueDate3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 4" name="DueDate4" value="{!v.DueDate4}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 5" name="DueDate5" value="{!v.DueDate5}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 6" name="DueDate6" value="{!v.DueDate6}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 7" name="DueDate7" value="{!v.DueDate7}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 8" name="DueDate8" value="{!v.DueDate8}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 9" name="DueDate9" value="{!v.DueDate9}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 10" name="DueDate10" value="{!v.DueDate10}"/>
+                    </div>
+                </lightning:layoutItem>  
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount">Amount Due</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 1" name="AmountDue1" value="{!v.AmountDue1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 2" name="AmountDue2" value="{!v.AmountDue2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 3" name="AmountDue3" value="{!v.AmountDue3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 4" name="AmountDue4" value="{!v.AmountDue4}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 5" name="AmountDue5" value="{!v.AmountDue5}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 6" name="AmountDue6" value="{!v.AmountDue6}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 7" name="AmountDue7" value="{!v.AmountDue7}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 8" name="AmountDue8" value="{!v.AmountDue8}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 9" name="AmountDue9" value="{!v.AmountDue9}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 10" name="AmountDue10" value="{!v.AmountDue10}" disabled = "true"/>
+                    </div>
+                    <div class="slds-text-heading_small slds-m-top_medium">
+                        <p><b style = "color: #16325C;">Total Amount: </b><lightning:formattedNumber title="Total Amount" value="{!v.TotalAmount}" style="currency" currencyCode="{!v.CurrencyCode}" currencyDisplayAs="code"/></p>
+                    </div>
+                </lightning:layoutItem> 
+            </lightning:layout>
+        </aura:if>
+        <aura:if isTrue="{!v.NoofPayment11}">
+            <lightning:layout multipleRows="true"> 
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount" >Start Date</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 1" name="DueDate1" value="{!v.DueDate1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 2" name="DueDate2" value="{!v.DueDate2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 3" name="DueDate3" value="{!v.DueDate3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 4" name="DueDate4" value="{!v.DueDate4}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 5" name="DueDate5" value="{!v.DueDate5}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 6" name="DueDate6" value="{!v.DueDate6}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 7" name="DueDate7" value="{!v.DueDate7}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 8" name="DueDate8" value="{!v.DueDate8}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 9" name="DueDate9" value="{!v.DueDate9}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 10" name="DueDate10" value="{!v.DueDate10}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 11" name="DueDate11" value="{!v.DueDate11}"/>
+                    </div>
+                </lightning:layoutItem>  
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount">Amount Due</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 1" name="AmountDue1" value="{!v.AmountDue1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 2" name="AmountDue2" value="{!v.AmountDue2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 3" name="AmountDue3" value="{!v.AmountDue3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 4" name="AmountDue4" value="{!v.AmountDue4}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 5" name="AmountDue5" value="{!v.AmountDue5}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 6" name="AmountDue6" value="{!v.AmountDue6}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 7" name="AmountDue7" value="{!v.AmountDue7}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 8" name="AmountDue8" value="{!v.AmountDue8}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 9" name="AmountDue9" value="{!v.AmountDue9}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 10" name="AmountDue10" value="{!v.AmountDue10}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 11" name="AmountDue11" value="{!v.AmountDue11}" disabled = "true"/>
+                    </div>
+                    <div class="slds-text-heading_small slds-m-top_medium">
+                        <p><b style = "color: #16325C;">Total Amount: </b><lightning:formattedNumber title="Total Amount" value="{!v.TotalAmount}" style="currency" currencyCode="{!v.CurrencyCode}" currencyDisplayAs="code"/></p>
+                    </div>
+                </lightning:layoutItem> 
+            </lightning:layout>
+        </aura:if>
+        <aura:if isTrue="{!v.NoofPayment12}">
+            <lightning:layout multipleRows="true"> 
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount" >Start Date</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 1" name="DueDate1" value="{!v.DueDate1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 2" name="DueDate2" value="{!v.DueDate2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 3" name="DueDate3" value="{!v.DueDate3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 4" name="DueDate4" value="{!v.DueDate4}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 5" name="DueDate5" value="{!v.DueDate5}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 6" name="DueDate6" value="{!v.DueDate6}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 7" name="DueDate7" value="{!v.DueDate7}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 8" name="DueDate8" value="{!v.DueDate8}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 9" name="DueDate9" value="{!v.DueDate9}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 10" name="DueDate10" value="{!v.DueDate10}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 11" name="DueDate11" value="{!v.DueDate11}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input type="date" label="Date 12" name="DueDate12" value="{!v.DueDate12}"/>
+                    </div>
+                </lightning:layoutItem>  
+                <lightning:layoutItem class="slds-p-horizontal_small slds-m-vertical_xx-small" size="6">
+                    <div style="margin-top:5px;color: #16325C;font-size: 1rem;line-height: 1.25;box-sizing: border-box;" class="slds-clearfix">
+                        <span class = "dueDateAndAmount">Amount Due</span>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 1" name="AmountDue1" value="{!v.AmountDue1}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 2" name="AmountDue2" value="{!v.AmountDue2}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 3" name="AmountDue3" value="{!v.AmountDue3}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 4" name="AmountDue4" value="{!v.AmountDue4}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 5" name="AmountDue5" value="{!v.AmountDue5}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 6" name="AmountDue6" value="{!v.AmountDue6}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 7" name="AmountDue7" value="{!v.AmountDue7}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 8" name="AmountDue8" value="{!v.AmountDue8}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 9" name="AmountDue9" value="{!v.AmountDue9}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 10" name="AmountDue10" value="{!v.AmountDue10}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 11" name="AmountDue11" value="{!v.AmountDue11}"/>
+                    </div>
+                    <div style="margin-top:5px;" class="slds-clearfix">
+                        <lightning:input label="Amount 12" name="AmountDue12" value="{!v.AmountDue12}" disabled = "true"/>
+                    </div>
+                    <div class="slds-text-heading_small slds-m-top_medium">
+                        <p><b style = "color: #16325C;">Total Amount: </b><lightning:formattedNumber title="Total Amount" value="{!v.TotalAmount}" style="currency" currencyCode="{!v.CurrencyCode}" currencyDisplayAs="code"/></p>
+                    </div>
+                </lightning:layoutItem> 
+            </lightning:layout>
+        </aura:if>  
+    </div>
+</aura:component>

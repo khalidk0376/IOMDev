@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>PDF form Instructions</label>
+    <protected>false</protected>
+    <values>
+        <field>Description__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Value__c</field>
+        <value xsi:type="xsd:string">1. Click “Download empty form” to save the form to your computer
+
+2. Complete the downloaded form and save it to your files
+
+3. Select “Upload Files” to re-upload the completed form
+
+4. Once uploaded, you can view or delete the form using the buttons that appear on the right-hand side
+
+5. If you are happy, click “Submit” to submit your form to the organisers</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Form_Deadline__c</fullName>
+    <description>It will show the Submission Deadline of Form Allocation.</description>
+    <externalId>false</externalId>
+    <formula>Form_Data__r.Forms_Permission__r.Form_Allocation__r.Submission_Deadline__c</formula>
+    <label>Form Deadline</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

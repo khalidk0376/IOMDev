@@ -1,0 +1,1082 @@
+<aura:component controller="FormPreviewController"
+    implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global">
+    <!-- Start attribute -->
+    <ltng:require styles="{!$Resource.FormBuilder+'/style.css'}" />
+    <aura:attribute name="firstTime" type="Boolean" default="true" />
+
+    <c:imcc_lwcUtility aura:id="imcc_lwcUtility" /> 
+    <aura:attribute name="compName" type="String" default="FormPreview" />
+
+    <aura:attribute name="isClearFormConfirm" type="Boolean" default="false" />
+    <aura:attribute name="clearPageType" type="String" default="single" />
+    <aura:attribute name="clearOptions" type="List" default="[
+    {'label': 'Clear the current page form data.', 'value': 'single'},
+    {'label': 'Clear the all pages form data.', 'value': 'all'}]" />
+
+    <aura:attribute name="isNewEntry" type="Boolean" default="false" />
+    <aura:attribute name="isErrorinSave" type="Boolean" default="false" />
+    <aura:attribute name="formResponseEntry" type="Object" default="{ 'sobjectType': 'Form_Response_Entry__c'}" />
+    <aura:attribute name="formResponseEntryId" type="String" default="" />
+    <aura:attribute name="formResponseEntryVerson" type="String" default="" />
+    <aura:attribute name="sendResponseToCustomer" type="Boolean" default="false" />
+    <aura:attribute name="recieveCopyToCustomer" type="Boolean" default="false" />
+    <aura:attribute name="fREAdditionalEmailAddress" type="String" default="" />
+    <aura:attribute name="isPreview" type="Boolean" default="false" />
+    <aura:attribute name="hideSaveAndClearButtons" type="Boolean" default="true" />
+    <aura:attribute name="ShowClearAllButton" type="Boolean" default="true" />
+    <aura:attribute name="reOpenEditMode" type="Boolean" default="false" />
+    <aura:attribute name="richTextCharLimit" type="Integer" default="0" />
+    <aura:attribute name="recordId" type="String" default="" access="global" />
+    <aura:attribute name="boothId" type="String" default="" />
+    <aura:attribute name="conEdMapId" type="String" default="" access="global" />
+    <aura:attribute name="thankyou_page" type="String" default="" access="global" description="Thankyou page URI" />
+    <aura:attribute name="thankyouMessage" type="String" default="Thankyou for submit." access="global" description="Thankyou page URI" />
+    <aura:attribute name="QnaireId" type="String" />
+    <aura:attribute name="QnaireName" type="String" />
+    <aura:attribute name="QuestionQuestionnairesId" type="String" />
+    <aura:attribute name="objQnaire" type="Object" default="{ 'sobjectType': 'Questionnaire__c'}" />
+
+    <aura:attribute name="lstQQuesnnaire" type="FBPreviewWrapper" />
+    <aura:attribute name="isShowSignatureModal" type="Boolean" default="false" />
+    <aura:attribute name="showSign" type="Boolean" default="false" />
+    <aura:attribute name="signHelpText" type="String" default="" />
+    <aura:attribute name="lstQDynLogicMain" type="Questionnaire_Dynamic_Logic__c[]" />
+
+    <aura:attribute name="Obj_Question_Questionnaires" type="Question_Questionnaire__c" default="{ 'sobjectType': 'Question_Questionnaire__c'}" />
+
+    <aura:attribute name="responseList" type="list" default="[]" description="Response list of object{qid,resid,restext,isComment}" />
+
+    <aura:attribute name="questionId" type="String" default="" description="used for save signaure" />
+    <aura:attribute name="isLookupFiledValid" type="Boolean" default="true" description="Use for store lookupfiled validation info" />
+    <aura:attribute name="lookupValues" type="list" default="[]" />
+    <aura:attribute name="isShowMainTitle" type="boolean" default="false" />
+
+    <aura:attribute name="activeSectionId" type="String" />
+    <aura:attribute name="spinner" type="boolean" default="true" />
+
+    <!-- button attributes-->
+    <aura:attribute name="buttonSubmitLabel" type="string" default="Submit Answer" />
+    <aura:attribute name="buttonNextLabel" type="string" default="Next Page" />
+    <aura:attribute name="buttonPrevLabel" type="string" default="Previous Page" />
+    <!-- Next and previous question steps end-->
+
+    <aura:attribute name="isLastPage" type="Boolean" default="false" />
+    <aura:attribute name="currentPage" type="Object" default="{'Id':'1'}" />
+    <aura:attribute name="currentPageNo" type="Integer" default="0" />
+    <aura:attribute name="pages" type="Form_Pagination__c" default="{'sobjectType':'Form_Pagination__c',Form_Pages__r:[{'Id':'1','Page_Name__c':'Page 1'}]}" />
+    <aura:attribute name="showPrevBtn" type="boolean" default="false" />
+    <aura:attribute name="showNextBtn" type="boolean" default="false" />
+    <aura:attribute name="userProfile" type="String" default="" />
+    <aura:attribute name="showText" type="Boolean" default="false"/> 
+    
+    <aura:attribute name="cemList" type="List" default="[]" />
+    <aura:attribute name="eventTabList" type="List" default="[]" />
+
+    <!-- event handlers -->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler event="c:FBCloseEvent" action="{!c.handleCloseModelEvent}" />
+    <aura:handler event="c:LookupValueEvent" action="{!c.handleLookupValueEvent}" />
+    <aura:handler event="c:getValidationInfoEvt" action="{!c.handleLookupValidationInfoEvent}" />
+    <!-- event handlers -->
+
+    <lightning:navigation aura:id="navigationService" />
+
+    {!v.body}
+    
+    <c:FormPlaceholder isShow="{!v.firstTime}" />
+
+    <div aura:id="girikon-form-container" class="main-content">
+
+        <aura:if isTrue="{!and(v.spinner,v.firstTime==false)}">
+            <lightning:spinner size="medium" variant="brand" aura:id="spinnerId" />
+        </aura:if>
+
+        <lightning:card aura:id="templateHeader" class="{!v.firstTime || !v.isShowMainTitle ?'slds-hide slds-size_12-of-12 slds-align_absolute-center':'slds-show slds-size_12-of-12 slds-align_absolute-center'}">
+            <aura:set attribute="title">
+                <div class="slds-media slds-no-space slds-grow">
+                    <div class="slds-media__figure">
+                        <aura:if isTrue="{!v.firstTime==false}">
+                            <lightning:icon iconName="doctype:gform" title="{!v.QnaireName}" />
+                        </aura:if>
+                    </div>
+                    <div class="slds-media__body">
+                        <h1 class="slds-page-header__title slds-var-p-right_x-small">
+                            <span class="slds-grid slds-has-flexi-truncate slds-grid_vertical-align-center">
+                                <span class="slds-truncate" title="{!v.QnaireName}">{!v.QnaireName}</span>
+                            </span>
+                        </h1>
+                        <nav class="slds-text-heading_small">
+                            <lightning:formattedRichText value="{!v.objQnaire.Description__c}" />
+                        </nav>
+                    </div>
+                </div>
+            </aura:set>
+        </lightning:card>
+
+        <aura:if isTrue="{!v.firstTime==false}">
+            <lightning:layout>
+                <lightning:layoutItem size="12">
+                    <div class="slds-col slds-float_right slds-var-p-bottom_x-small">
+                        <button class="slds-button slds-button_brand" onclick="{!c.goBack}">Back To Forms</button>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </aura:if>
+
+        <!--Start Template Content-->
+        <article class="{!v.firstTime==false?'slds-card qstnBuilderContent slds-size_12-of-12':'slds-hide'}">
+            <div class="slds-card__body slds-size_12-of-12 slds-var-p-top_x-small">
+                <aura:iteration items="{!v.lstQQuesnnaire.sectionList}" var="section" indexVar="sectionIndex">
+                    <div class="slds-grid slds-wrap girikon-layout" aura:id="layoutrow">
+                        <!--Show section name-->
+                        <aura:if isTrue="{!section.isShow==true}">
+                            <div class="slds-p-horizontal_x-small section-name">{!section.sectionName}</div>
+                        </aura:if>
+                        <aura:iteration items="{!section.colList}" var="columnVar" indexVar="columnIndex">
+                            <div class="{!section.mainDivCssClass}">
+                                <aura:iteration items="{!columnVar.lstQuestn}" var="Question" indexVar="QuesIndex">
+                                    <aura:iteration items="{!Question.Question_Questionnaires__r}" var="QuestionQuestnnaire" indexVar="QuestionQuestnnaireIndex">
+                                        <aura:if isTrue="{!QuestionQuestnnaire.isShowInColumn}">
+                                            <div class="slds-var-m-top_xx-small">
+                                                <div class="slds-form slds-form_stacked slds-grow">
+                                                    <div class="{!Question.Type__c=='Information' || Question.Type__c=='Header/Footer'?'slds-panel__section':'slds-panel__section slds-p-bottom_none'}"
+                                                        style="{!Question.Type__c=='Information'?'background:'+Question.background_Color__c+';border-radius:0xp;':'border-radius:0xp;'}">
+                                                        <div class="slds-media__body">
+                                                            <div class="slds-grid">
+                                                                <div class="slds-col">
+                                                                    <div class="slds-form-element">
+                                                                        <div class="slds-form-element__control">
+                                                                            <h2>
+                                                                                <span class="slds-is-relative">
+                                                                                    <div class="slds-grid slds-wrap"
+                                                                                        data-questionid="{!Question.Id}"
+                                                                                        aura:id="is_required"
+                                                                                        data-question_type="{!Question.Type__c}"
+                                                                                        data-is_required="{!QuestionQuestnnaire.Required__c==true}"
+                                                                                        data-max_length="{!QuestionQuestnnaire.Max_Char_Length__c}">
+
+                                                                                        <div class="{!Question.Type__c=='Information' || Question.Type__c=='Header/Footer'?'slds-size_3-of-3':'slds-col'}">
+                                                                                            <aura:if isTrue="{!Question.Type__c=='Checkbox'}">
+                                                                                                <div class="slds-form-element checkbx slds-float_left">
+                                                                                                    <aura:if isTrue="{!QuestionQuestnnaire.responseValue1=='true'}">
+                                                                                                        <lightning:input 
+                                                                                                            type="checkbox" 
+                                                                                                            aura:id="inputFields"
+                                                                                                            required="{!QuestionQuestnnaire.Required__c}" 
+                                                                                                            checked="true"
+                                                                                                            value="{!QuestionQuestnnaire.responseValue1}"
+                                                                                                            onchange="{!c.checkboxOption}" 
+                                                                                                            variant="label-hidden"
+                                                                                                            label="{!QuestionQuestnnaire.labelBranchingChk}"
+                                                                                                            disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                                        <aura:set attribute="else">
+                                                                                                            <lightning:input 
+                                                                                                                type="checkbox" 
+                                                                                                                aura:id="inputFields"
+                                                                                                                required="{!QuestionQuestnnaire.Required__c}"
+                                                                                                                value="{!QuestionQuestnnaire.responseValue1}"
+                                                                                                                onchange="{!c.checkboxOption}" 
+                                                                                                                variant="label-hidden"
+                                                                                                                label="{!QuestionQuestnnaire.labelBranchingChk}"
+                                                                                                                disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                                        </aura:set>
+                                                                                                    </aura:if>
+                                                                                                </div>
+                                                                                            </aura:if>
+                                                                                            <div class="question-text slds-float_left">
+                                                                                                <lightning:formattedRichText 
+                                                                                                    value="{!QuestionQuestnnaire.Question__r.Label__c}" 
+                                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                            </div>
+                                                                                            <div class="question-text slds-float_left">
+                                                                                                <aura:if isTrue="{!QuestionQuestnnaire.Required__c==true}">
+                                                                                                    <span id="asteric">&#42;</span>
+                                                                                                </aura:if>
+                                                                                                <lightning:helptext 
+                                                                                                    iconName="utility:info" 
+                                                                                                    content="{!QuestionQuestnnaire.Help_Text__c}"
+                                                                                                    class="{!QuestionQuestnnaire.Help_Text_Required__c==false?'hidehelptextIcon':'helptextIcon'}" />
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </span>
+                                                                            </h2>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <aura:if isTrue="{!QuestionQuestnnaire.Question__r.Type__c !='Information' &amp;&amp; QuestionQuestnnaire.Question__r.Type__c !='Header/Footer'}">
+                                                        <div class="slds-panel__section">
+                                                            <div class="slds-grow questionBuilder slds-is-relative">
+                                                                <fieldset class="slds-form-element">
+                                                                    <div class="slds-form-element__control slds-clearfix">
+                                                                        <aura:if isTrue="{!Question.Type__c=='Time'}">
+                                                                            <lightning:input 
+                                                                                type="time"
+                                                                                aura:id="inputFields"
+                                                                                variant="label-hidden"
+                                                                                required="{!QuestionQuestnnaire.Required__c}"
+                                                                                value="{!QuestionQuestnnaire.responseValue1}"
+                                                                                label="label"
+                                                                                disabled="{!v.hideSaveAndClearButtons}" />
+                                                                        </aura:if>
+                                                                        <aura:if isTrue="{!Question.Type__c=='TextPlain'}">
+                                                                            <lightning:input 
+                                                                                type="text"
+                                                                                aura:id="inputFields"
+                                                                                maxlength="{!QuestionQuestnnaire.Max_Char_Length__c}"
+                                                                                minlength="0" 
+                                                                                variant="label-hidden"
+                                                                                required="{!QuestionQuestnnaire.Required__c}"
+                                                                                label="label"
+                                                                                value="{!QuestionQuestnnaire.responseValue1}"
+                                                                                disabled="{!v.hideSaveAndClearButtons}" />
+                                                                        </aura:if>
+                                                                        <aura:if isTrue="{!Question.Type__c=='Email'}">
+                                                                            <lightning:input 
+                                                                                type="email"
+                                                                                aura:id="inputFields"
+                                                                                variant="label-hidden" 
+                                                                                pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+                                                                                messageWhenPatternMismatch="Enter valid email address format."
+                                                                                maxlength="255" 
+                                                                                minlength="0"
+                                                                                required="{!QuestionQuestnnaire.Required__c}"
+                                                                                value="{!QuestionQuestnnaire.responseValue1}"
+                                                                                label="label"
+                                                                                disabled="{!v.hideSaveAndClearButtons}" />
+                                                                        </aura:if>
+                                                                        <aura:if isTrue="{!Question.Type__c=='Address'}">
+                                                                            <lightning:textarea 
+                                                                                aura:id="inputFields"
+                                                                                placeholder="" 
+                                                                                label="label"
+                                                                                maxlength="300" 
+                                                                                variant="label-hidden"
+                                                                                required="{!QuestionQuestnnaire.Required__c}"
+                                                                                value="{!QuestionQuestnnaire.responseValue1}"
+                                                                                disabled="{!v.hideSaveAndClearButtons}" />
+                                                                        </aura:if>
+                                                                        <aura:if isTrue="{!Question.Type__c=='Phone'}">
+                                                                            <lightning:input 
+                                                                                aura:id="inputFields"
+                                                                                type="tel" 
+                                                                                label="label"
+                                                                                maxlength="40" 
+                                                                                variant="label-hidden"
+                                                                                required="{!QuestionQuestnnaire.Required__c}"
+                                                                                value="{!QuestionQuestnnaire.responseValue1}"
+                                                                                onblur="{!c.formatPhone}"
+                                                                                disabled="{!v.hideSaveAndClearButtons}" />
+                                                                        </aura:if>
+                                                                        <aura:if isTrue="{!Question.Type__c=='Date'}">
+                                                                            <lightning:input
+                                                                                type="date"
+                                                                                aura:id="inputFields"
+                                                                                label="label"
+                                                                                required="{!QuestionQuestnnaire.Required__c}"
+                                                                                class="{!'name_'+Question.Id}"
+                                                                                value="{!QuestionQuestnnaire.responseValue1}"
+                                                                                variant="label-hidden"
+                                                                                disabled="{!v.hideSaveAndClearButtons}" />
+                                                                        </aura:if>
+                                                                        <aura:if isTrue="{!Question.Type__c=='DateTime'}">
+                                                                            <lightning:input
+                                                                                type="datetime" 
+                                                                                timezone="GMT" 
+                                                                                aura:id="inputFields"
+                                                                                label="label"
+                                                                                required="{!QuestionQuestnnaire.Required__c}"
+                                                                                class="{!'name_'+Question.Id}"
+                                                                                value="{!QuestionQuestnnaire.responseValue1}"
+                                                                                variant="label-hidden"
+                                                                                disabled="{!v.hideSaveAndClearButtons}" />
+                                                                        </aura:if>
+                                                                        <aura:if isTrue="{!Question.Type__c=='RichText'}">
+                                                                            <div data-value="{!QuestionQuestnnaire.Max_Char_Length__c}" onclick="{!c.getCharLimit}">
+                                                                                <lightning:textarea
+                                                                                    aura:id="inputFields"
+                                                                                    maxlength="{!Question.Max_Char_Length__c}"
+                                                                                    required="{!QuestionQuestnnaire.Required__c}"
+                                                                                    class="{!'inputRichText '+Question.Id}"
+                                                                                    value="{!QuestionQuestnnaire.responseValue1}"
+                                                                                    label="label"
+                                                                                    variant="label-hidden"
+                                                                                    title="{!'title_'+Question.Id}"
+                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                            </div>
+                                                                        </aura:if>
+                                                                        <aura:if isTrue="{!Question.Type__c=='URL'}">
+                                                                            <lightning:input
+                                                                                type="url"
+                                                                                aura:id="inputFields"
+                                                                                onblur="{!c.checkURL}" 
+                                                                                label="label"
+                                                                                variant="label-hidden"
+                                                                                required="{!QuestionQuestnnaire.Required__c}"
+                                                                                value="{!QuestionQuestnnaire.responseValue1}" 
+                                                                                disabled="{!v.hideSaveAndClearButtons}" />
+                                                                        </aura:if>
+                                                                        <aura:if isTrue="{!Question.Type__c=='Number'}">
+                                                                            <div class="{!Question.Allow_Currency__c==true?'slds-form-element__control slds-input-has-icon slds-input-has-icon_left marginB5 number-input':'slds-form-element__control marginB5 number-input'}">
+                                                                                <aura:if isTrue="{!Question.Allow_Currency__c==true}">
+                                                                                    <span class="slds-is-absolute currency-symbal slds-icon slds-input__icon slds-input__icon_left slds-icon-text-default">
+                                                                                        {!Question.Currency_Symbol__c}
+                                                                                    </span>
+                                                                                </aura:if>
+                                                                                <lightning:input
+                                                                                    aura:id="inputFields"
+                                                                                    label="label"
+                                                                                    maxlength="18" 
+                                                                                    min="0"
+                                                                                    messageWhenBadInput="Please enter valid format value"
+                                                                                    messageWhenPatternMismatch="{!QuestionQuestnnaire.messages}"
+                                                                                    messageWhenValueMissing="Please enter the currency"
+                                                                                    messageWhenTooLong="18 char limit"
+                                                                                    messageWhenRangeOverflow="18 char limit"
+                                                                                    variant="label-hidden"
+                                                                                    required="{!QuestionQuestnnaire.Required__c}"
+                                                                                    pattern="{!QuestionQuestnnaire.patterns}"
+                                                                                    value="{!QuestionQuestnnaire.responseValue1}"
+                                                                                    class="currency-val-padd"
+                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                            </div>
+                                                                        </aura:if>
+                                                                        <aura:if isTrue="{!Question.Type__c=='Picklist'}">
+                                                                            <lightning:select
+                                                                                aura:id="inputFields"
+                                                                                label="{!QuestionQuestnnaire.labelBranchingPick}"
+                                                                                required="{!QuestionQuestnnaire.Required__c}"
+                                                                                onchange="{!c.setPicklistScore}"
+                                                                                variant="label-hidden"
+                                                                                value="{!QuestionQuestnnaire.responseValue1}"
+                                                                                class="select"
+                                                                                disabled="{!v.hideSaveAndClearButtons}">
+                                                                                <option value="">choose one...</option>
+                                                                                <aura:iteration items="{!Question.Question_Options__r}"
+                                                                                    var="QustnOptionsSelect" indexVar="index">
+                                                                                    <option value="{!QustnOptionsSelect.Id}">
+                                                                                        {!QustnOptionsSelect.Name_Long__c}
+                                                                                    </option>
+                                                                                </aura:iteration>
+                                                                            </lightning:select>
+                                                                        </aura:if>
+                                                                        <aura:if isTrue="{!Question.Type__c=='Slider'}">
+                                                                            <lightning:slider
+                                                                                aura:id="sliderfield"
+                                                                                max="{!QuestionQuestnnaire.Maximum_value__c}"
+                                                                                min="{!QuestionQuestnnaire.Minimum_Value__c}"
+                                                                                step="{!QuestionQuestnnaire.Step_Size__c}"
+                                                                                value="{!QuestionQuestnnaire.responseValue1}"
+                                                                                label="label"
+                                                                                variant="label-hidden"
+                                                                                title="{!QuestionQuestnnaire.responseValue1}"
+                                                                                disabled="{!v.hideSaveAndClearButtons}" />
+                                                                            <lightning:layout>
+                                                                                <lightning:layoutItem size="4">
+                                                                                    <span>MIN: {!QuestionQuestnnaire.Minimum_Value__c}</span>
+                                                                                </lightning:layoutItem>
+                                                                                <lightning:layoutItem size="4">
+                                                                                    <div class="slds-align_absolute-center">
+                                                                                        <span>Selected: {!QuestionQuestnnaire.responseValue1}</span>
+                                                                                    </div>
+                                                                                </lightning:layoutItem>
+                                                                                <lightning:layoutItem size="4">
+                                                                                    <div class="slds-float_right">
+                                                                                        <span>MAX: {!QuestionQuestnnaire.Maximum_value__c}</span>
+                                                                                    </div>
+                                                                                </lightning:layoutItem>
+                                                                            </lightning:layout>
+                                                                        </aura:if>
+                                                                        <aura:if isTrue="{!Question.Type__c=='Radio'}">
+                                                                            <aura:if isTrue="{!Question.Is_MultiSelect__c}">
+                                                                                <div class="selection_isrequired GKM-FB-radioGroup alpha" data-required_property="{!QuestionQuestnnaire.Required__c}">
+                                                                                    <lightning:checkboxGroup
+                                                                                        aura:id="inputRadioFields"
+                                                                                        name="{!Question.Id}"
+                                                                                        label="label"
+                                                                                        options="{!Question.Question_Options__r}"
+                                                                                        value="{!QuestionQuestnnaire.responseValue1}"
+                                                                                        required="{!QuestionQuestnnaire.Required__c}"
+                                                                                        class="gkn-radio-field"
+                                                                                        messageWhenValueMissing="Please select options"
+                                                                                        variant="label-hidden"
+                                                                                        disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                </div>
+                                                                                <aura:set attribute="else">
+                                                                                    <div class="selection_isrequired GKM-FB-radioGroup alpha" data-required_property="{!QuestionQuestnnaire.Required__c}">
+                                                                                        <lightning:radioGroup
+                                                                                            aura:id="inputRadioFields"
+                                                                                            name="{!Question.Id}"
+                                                                                            onchange="{!c.radioBranching}"
+                                                                                            label="{!QuestionQuestnnaire.labelBranchingRadio}"
+                                                                                            options="{!Question.Question_Options__r}"
+                                                                                            value="{!QuestionQuestnnaire.responseValue1}"
+                                                                                            required="{!QuestionQuestnnaire.Required__c}"
+                                                                                            class="gkn-radio-field"
+                                                                                            messageWhenValueMissing="Please select options"
+                                                                                            variant="label-hidden"
+                                                                                            disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                    </div>
+                                                                                </aura:set>
+                                                                            </aura:if>
+                                                                        </aura:if>
+                                                                        <aura:if isTrue="{!QuestionQuestnnaire.Question__r.Type__c=='GPS Location'}">
+                                                                            <div class="slds-wrap slds-grid">
+                                                                                <div class="slds-p-right_small slds-size--4-of-12 slds-small-size--12-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12">
+                                                                                    <lightning:input
+                                                                                        aura:id="inputFields"
+                                                                                        label="latitude"
+                                                                                        pattern="^(\+|-)?(?:90(?:(?:\.0{1,18})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,18})?))$"
+                                                                                        messageWhenPatternMismatch="Latitude should be a decimal number in a range [-90, 90]"
+                                                                                        messageWhenValueMissing="Coordinate is required"
+                                                                                        required="{!QuestionQuestnnaire.Required__c}"
+                                                                                        value="{!QuestionQuestnnaire.responseValue1}"
+                                                                                        disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                </div>
+                                                                                <div class="slds-p-right_small slds-size--4-of-12 slds-small-size--12-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12">
+                                                                                    <lightning:input
+                                                                                        aura:id="inputFields"
+                                                                                        label="longitude"
+                                                                                        pattern="^(\+|-)?(?:180(?:(?:\.0{1,18})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,18})?))$"
+                                                                                        messageWhenPatternMismatch="Longitude should be a decimal number in a range [-180, 180]"
+                                                                                        messageWhenValueMissing="Coordinate is required"
+                                                                                        required="{!QuestionQuestnnaire.Required__c}"
+                                                                                        value="{!QuestionQuestnnaire.responseValue2}"
+                                                                                        disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                </div>
+                                                                                <div class="slds-p-right_small slds-size--4-of-12 slds-small-size--12-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12">
+                                                                                    <lightning:button
+                                                                                        variant="brand"
+                                                                                        iconName="utility:location"
+                                                                                        label="Get Location"
+                                                                                        class="get-location"
+                                                                                        name="{!QuestionQuestnnaire.GeoBtnName}"
+                                                                                        onclick="{!c.getCurrentLocation}"
+                                                                                        value="{!Question.Id}"
+                                                                                        disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </aura:if>
+                                                                        <aura:if isTrue="{!Question.Type__c=='Switch'}">
+                                                                            <div class="gkn-toggle">
+                                                                                <aura:if isTrue="{!QuestionQuestnnaire.responseValue1=='true'}">
+                                                                                    <lightning:input
+                                                                                        type="toggle"
+                                                                                        aura:id="inputFields"
+                                                                                        label="{!QuestionQuestnnaire.labelBranchingChk}"
+                                                                                        messageToggleActive="{!Question.Question_Options__r[0].Name_Long__c}"
+                                                                                        messageToggleInactive="{!Question.Question_Options__r[1].Name_Long__c}"
+                                                                                        checked="true"
+                                                                                        onchange="{!c.checkboxOption}"
+                                                                                        disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                    <aura:set attribute="else">
+                                                                                        <lightning:input
+                                                                                            type="toggle"
+                                                                                            aura:id="inputFields"
+                                                                                            label="{!QuestionQuestnnaire.labelBranchingChk}"
+                                                                                            messageToggleActive="{!Question.Question_Options__r[0].Name_Long__c}"
+                                                                                            messageToggleInactive="{!Question.Question_Options__r[1].Name_Long__c}"
+                                                                                            checked="false"
+                                                                                            onchange="{!c.checkboxOption}"
+                                                                                            disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                    </aura:set>
+                                                                                </aura:if>
+                                                                            </div>
+                                                                        </aura:if>
+                                                                        <!-- Working to get value of following type of fields -->
+                                                                        <aura:if isTrue="{!Question.Type__c=='Signature'}">
+                                                                            <div class="slds-clearfix slds-var-m-top_small">
+                                                                                <lightning:button
+                                                                                    label="Sign"
+                                                                                    title="{!QuestionQuestnnaire.Help_Text__c}"
+                                                                                    value="{!Question.Id+'_'+QuestionQuestnnaire.Id}"
+                                                                                    onclick="{!c.showSignModel}"
+                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                <div id="{!'sig_'+Question.Id}">
+                                                                                    <aura:if isTrue="{!QuestionQuestnnaire.responseValue1!=''}">
+                                                                                        <img src="{!QuestionQuestnnaire.responseValue1}" width="200" />
+                                                                                    </aura:if>
+                                                                                </div>
+                                                                            </div>
+                                                                        </aura:if>
+                                                                        <aura:if isTrue="{!Question.Type__c=='Lookup'}">
+                                                                            <div class="lookup-field">
+                                                                                <c:LookupComp
+                                                                                    selrecord="{!QuestionQuestnnaire.responseValue1}"
+                                                                                    response="{!QuestionQuestnnaire.responseValue1}"
+                                                                                    questionId="{!Question.Id}"
+                                                                                    isRequired="{!QuestionQuestnnaire.Required__c}"
+                                                                                    sobjectName="{!QuestionQuestnnaire.lookup_Object_API_Name__c}"
+                                                                                    field_API_Name="{!QuestionQuestnnaire.lookup_Object_Field_Name__c}"
+                                                                                    field_ID="Id"
+                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                            </div>
+                                                                        </aura:if>
+                                                                        <aura:if isTrue="{!QuestionQuestnnaire.Question__r.Type__c=='Media'}">
+                                                                            <c:FileUploader
+                                                                                entryId="{!v.formResponseEntryId}"
+                                                                                questionQuestionnairesId="{!QuestionQuestnnaire.Id}"
+                                                                                fileName="{!QuestionQuestnnaire.attachment}"
+                                                                                questionId="{!Question.Id}"
+                                                                                questionerId="{!v.recordId}"
+                                                                                version="{!v.formResponseEntryVerson}"
+                                                                                isAllowMultiple="{!Question.Allow_Multiple_Files__c}"
+                                                                                disabled="{!v.hideSaveAndClearButtons}" />
+                                                                        </aura:if>
+                                                                        <!-- Common Input Fields(Comment and Media Upload) for all questions-->
+                                                                        <aura:if isTrue="{!QuestionQuestnnaire.Allow_Comment__c==true}">
+                                                                            <div class="comment-box">
+                                                                                <lightning:input
+                                                                                    aura:id="inputFields"
+                                                                                    label="Comment" 
+                                                                                    class=""
+                                                                                    maxlength="255" 
+                                                                                    minlength="0"
+                                                                                    value="{!QuestionQuestnnaire.comment}"
+                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                            </div>
+                                                                        </aura:if>
+                                                                        <aura:if isTrue="{!QuestionQuestnnaire.Allow_Attachments__c==true}">
+                                                                            <div class="slds-file-selector slds-file-selector_files slds-clearfix slds-var-m-top_small">
+                                                                                <div class="slds-file-selector__dropzone">
+                                                                                    <c:FileUploader
+                                                                                        entryId="{!v.formResponseEntryId}"
+                                                                                        questionQuestionnairesId="{!QuestionQuestnnaire.Id}"
+                                                                                        fileName="{!QuestionQuestnnaire.attachment}"
+                                                                                        questionId="{!Question.Id}"
+                                                                                        questionerId="{!v.recordId}" 
+                                                                                        version="{!v.formResponseEntryVerson}"
+                                                                                        disabled="{!v.hideSaveAndClearButtons}"/>
+                                                                                </div>
+                                                                            </div>
+                                                                        </aura:if>
+                                                                    </div>
+                                                                </fieldset>
+                                                            </div>
+                                                        </div>
+                                                    </aura:if>
+                                                </div>
+                                            </div>
+                                        </aura:if>
+                                        <!--Start branching section-->
+                                        <aura:iteration items="{!Question.Question_Questionnaires__r[0].branchingQuestnQuetnnaire}" var="branchingRecord" indexVar="branchingIndex">
+                                            <aura:if isTrue="{!branchingRecord.isShowQuestion==true}">
+                                                <div class="slds-var-m-top_xx-small">
+                                                    <div class="slds-form slds-form_stacked slds-grow">
+                                                        <div class="{!branchingRecord.Question__r.Type__c=='Information'?'slds-panel__section':'slds-panel__section slds-p-bottom_none'}" 
+                                                        style="{!branchingRecord.Question__r.Type__c=='Information'?'background:'+branchingRecord.Question__r.background_Color__c+'; border-radius: 5xp;':'border-radius:0xp;'}">
+                                                            <div class="slds-media__body">
+                                                                <div class="slds-grid">
+                                                                    <div class="slds-col">
+                                                                        <div class="slds-form-element">
+                                                                            <div class="slds-form-element__control">
+                                                                                <h2>
+                                                                                    <span class="slds-is-relative">
+                                                                                        <div class="slds-grid slds-wrap">
+                                                                                            <div class="slds-col">
+                                                                                                <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='Checkbox'}">
+                                                                                                    <div class="slds-form-element checkbx slds-float_right">
+                                                                                                        <aura:if isTrue="{!branchingRecord.responseValue1=='true'}">
+                                                                                                            <lightning:input 
+                                                                                                                type="checkbox" 
+                                                                                                                aura:id="inputFields"
+                                                                                                                required="{!branchingRecord.Required__c}" 
+                                                                                                                checked="true"
+                                                                                                                value="{!branchingRecord.responseValue1}" 
+                                                                                                                onchange="{!c.checkboxOption}" 
+                                                                                                                variant="label-hidden"
+                                                                                                                label="{!branchingRecord.labelBranchingChk}"
+                                                                                                                disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                                            <aura:set attribute="else">
+                                                                                                                <lightning:input 
+                                                                                                                    type="checkbox" 
+                                                                                                                    aura:id="inputFields"
+                                                                                                                    required="{!branchingRecord.Required__c}"
+                                                                                                                    value="{!branchingRecord.responseValue1}" 
+                                                                                                                    onchange="{!c.checkboxOption}" 
+                                                                                                                    variant="label-hidden"
+                                                                                                                    label="{!branchingRecord.labelBranchingChk}"
+                                                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                                            </aura:set>
+                                                                                                        </aura:if>
+                                                                                                    </div>
+                                                                                                </aura:if>
+                                                                                                <div class="question-text slds-float_left">
+                                                                                                    <lightning:formattedRichText 
+                                                                                                        value="{!branchingRecord.Question__r.Label__c}" 
+                                                                                                        disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                                </div>
+                                                                                                <div class="question-text slds-float_left">
+                                                                                                    <aura:if isTrue="{!branchingRecord.Required__c==true}">
+                                                                                                        <span id="asteric">&#42;</span>
+                                                                                                    </aura:if>
+                                                                                                    <lightning:helptext 
+                                                                                                        iconName="utility:info" 
+                                                                                                        content="{!branchingRecord.Help_Text__c}"
+                                                                                                        class="{!branchingRecord.Help_Text_Required__c==false?'hidehelptextIcon':'helptextIcon'}" />
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </span>
+                                                                                </h2>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <aura:if isTrue="{!branchingRecord.Question__r.Type__c !='Information'}">
+                                                            <div class="slds-panel__section">
+                                                                <div class="slds-grow questionBuilder slds-is-relative">
+                                                                    <fieldset class="slds-form-element">
+                                                                        <div class="slds-form-element__control slds-clearfix">
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='Time'}">
+                                                                                <lightning:input 
+                                                                                    type="time"
+                                                                                    aura:id="inputFields"
+                                                                                    variant="label-hidden"
+                                                                                    required="{!branchingRecord.Required__c}"
+                                                                                    value="{!branchingRecord.responseValue1}"
+                                                                                    label="label"
+                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='TextPlain'}">
+                                                                                <lightning:input 
+                                                                                    type="text"
+                                                                                    aura:id="inputFields"
+                                                                                    maxlength="{!branchingRecord.Max_Char_Length__c}"
+                                                                                    minlength="0" 
+                                                                                    variant="label-hidden"
+                                                                                    required="{!branchingRecord.Required__c}"
+                                                                                    label="label"
+                                                                                    value="{!branchingRecord.responseValue1}"
+                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='Email'}">
+                                                                                <lightning:input 
+                                                                                    type="email"
+                                                                                    aura:id="inputFields"
+                                                                                    variant="label-hidden" 
+                                                                                    pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+                                                                                    messageWhenPatternMismatch="Enter valid email address format."
+                                                                                    maxlength="255" 
+                                                                                    minlength="0"
+                                                                                    required="{!branchingRecord.Required__c}"
+                                                                                    value="{!branchingRecord.responseValue1}"
+                                                                                    label="label"
+                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='Address'}">
+                                                                                <lightning:textarea 
+                                                                                    aura:id="inputFields"
+                                                                                    placeholder="" 
+                                                                                    label="label"
+                                                                                    maxlength="300" 
+                                                                                    variant="label-hidden"
+                                                                                    required="{!branchingRecord.Required__c}"
+                                                                                    value="{!branchingRecord.responseValue1}"
+                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='Phone'}">
+                                                                                <lightning:input 
+                                                                                    aura:id="inputFields"
+                                                                                    type="tel" 
+                                                                                    label="label"
+                                                                                    maxlength="40" 
+                                                                                    variant="label-hidden"
+                                                                                    required="{!branchingRecord.Required__c}"
+                                                                                    value="{!branchingRecord.responseValue1}"
+                                                                                    onblur="{!c.formatPhone}"
+                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='Date'}">
+                                                                                <lightning:input
+                                                                                    type="date"
+                                                                                    aura:id="inputFields"
+                                                                                    label="label"
+                                                                                    required="{!branchingRecord.Required__c}"
+                                                                                    class="{!'name_'+Question.Id}"
+                                                                                    value="{!branchingRecord.responseValue1}"
+                                                                                    variant="label-hidden"
+                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='DateTime'}">
+                                                                                <lightning:input
+                                                                                    type="datetime" 
+                                                                                    timezone="GMT" 
+                                                                                    aura:id="inputFields"
+                                                                                    label="label"
+                                                                                    required="{!branchingRecord.Required__c}"
+                                                                                    class="{!'name_'+Question.Id}"
+                                                                                    value="{!branchingRecord.responseValue1}"
+                                                                                    variant="label-hidden"
+                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='RichText'}">
+                                                                                <div data-value="{!branchingRecord.Max_Char_Length__c}" onclick="{!c.getCharLimit}">
+                                                                                    <lightning:textarea
+                                                                                        aura:id="inputFields"
+                                                                                        maxlength="{!branchingRecord.Max_Char_Length__c}"
+                                                                                        required="{!branchingRecord.Required__c}"
+                                                                                        class="{!'inputRichText '+Question.Id}"
+                                                                                        value="{!branchingRecord.responseValue1}"
+                                                                                        label="label"
+                                                                                        variant="label-hidden"
+                                                                                        title="{!'title_'+Question.Id}"
+                                                                                        disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                </div>
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='URL'}">
+                                                                                <lightning:input
+                                                                                    type="url"
+                                                                                    aura:id="inputFields"
+                                                                                    onblur="{!c.checkURL}" 
+                                                                                    label="label"
+                                                                                    variant="label-hidden"
+                                                                                    required="{!branchingRecord.Required__c}"
+                                                                                    value="{!branchingRecord.responseValue1}" 
+                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='Number'}">
+                                                                                <div class="{!branchingRecord.Question__r.Allow_Currency__c==true?'slds-form-element__control slds-input-has-icon slds-input-has-icon_left marginB5':'slds-form-element__control marginB5'}">
+                                                                                    <aura:if isTrue="{!branchingRecord.Question__r.Allow_Currency__c==true}">
+                                                                                        <span class="currency-symbal slds-icon slds-input__icon slds-input__icon_left slds-icon-text-default currencyIcon">
+                                                                                            {!branchingRecord.Question__r.Currency_Symbol__c}
+                                                                                        </span>
+                                                                                    </aura:if>
+                                                                                    <lightning:input
+                                                                                        aura:id="inputFields"
+                                                                                        label="label"
+                                                                                        maxlength="18" 
+                                                                                        min="0"
+                                                                                        messageWhenBadInput="Please enter valid format value"
+                                                                                        messageWhenPatternMismatch="{!branchingRecord.messages}"
+                                                                                        messageWhenValueMissing="Please enter the currency"
+                                                                                        messageWhenTooLong="18 char limit"
+                                                                                        messageWhenRangeOverflow="18 char limit"
+                                                                                        variant="label-hidden"
+                                                                                        required="{!branchingRecord.Required__c}"
+                                                                                        pattern="{!branchingRecord.patterns}"
+                                                                                        value="{!branchingRecord.responseValue1}"
+                                                                                        class="currency-val-padd"
+                                                                                        disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                </div>
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='Picklist'}">
+                                                                                <lightning:select
+                                                                                    aura:id="inputFields"
+                                                                                    label="label"
+                                                                                    required="{!branchingRecord.Required__c}"
+                                                                                    variant="label-hidden"
+                                                                                    value="{!branchingRecord.responseValue1}"
+                                                                                    class="select"
+                                                                                    disabled="{!v.hideSaveAndClearButtons}">
+                                                                                    <option value="">choose one...</option>
+                                                                                    <aura:iteration items="{!branchingRecord.QuestionOptions}"
+                                                                                        var="BranchingQustnOptionsSelect" indexVar="index">
+                                                                                        <option value="{!BranchingQustnOptionsSelect.Name_Long__c}">
+                                                                                            {!BranchingQustnOptionsSelect.Name_Long__c}
+                                                                                        </option>
+                                                                                    </aura:iteration>
+                                                                                </lightning:select>
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='Slider'}">
+                                                                                <lightning:slider
+                                                                                    aura:id="sliderfield"
+                                                                                    max="{!branchingRecord.Maximum_value__c}"
+                                                                                    min="{!branchingRecord.Minimum_Value__c}"
+                                                                                    step="{!branchingRecord.Step_Size__c}"
+                                                                                    value="{!branchingRecord.responseValue1}"
+                                                                                    label="label"
+                                                                                    variant="label-hidden"
+                                                                                    title="{!branchingRecord.responseValue1}"
+                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                <lightning:layout>
+                                                                                    <lightning:layoutItem size="4">
+                                                                                        <span>MIN: {!branchingRecord.Minimum_Value__c}</span>
+                                                                                    </lightning:layoutItem>
+                                                                                    <lightning:layoutItem size="4">
+                                                                                        <div class="slds-align_absolute-center">
+                                                                                            <span>Selected: {!branchingRecord.responseValue1}</span>
+                                                                                        </div>
+                                                                                    </lightning:layoutItem>
+                                                                                    <lightning:layoutItem size="4" class="slds-float_right">
+                                                                                        <div class="slds-float_right">
+                                                                                            <span>MAX: {!branchingRecord.Maximum_value__c}</span>
+                                                                                        </div>
+                                                                                    </lightning:layoutItem>
+                                                                                </lightning:layout>
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='Radio'}">
+                                                                                <aura:if isTrue="{!branchingRecord.Question__r.Is_MultiSelect__c}">
+                                                                                    <div class="selection_isrequired" data-required_property="{!QuestionQuestnnaire.Required__c}">
+                                                                                        <lightning:checkboxGroup
+                                                                                            aura:id="inputRadioFields"
+                                                                                            name="{!branchingRecord.Id}"
+                                                                                            label="label"
+                                                                                            options="{!branchingRecord.QuestionOptions}"
+                                                                                            value="{!branchingRecord.responseValue1}"
+                                                                                            required="{!branchingRecord.Required__c}"
+                                                                                            class="gkn-radio-field"
+                                                                                            messageWhenValueMissing="Please select options"
+                                                                                            variant="label-hidden"
+                                                                                            disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                    </div>
+                                                                                    <aura:set attribute="else">
+                                                                                        <div class="selection_isrequired" data-required_property="{!QuestionQuestnnaire.Required__c}">
+                                                                                            <lightning:radioGroup
+                                                                                                aura:id="inputRadioFields"
+                                                                                                name="{!branchingRecord.Id}"
+                                                                                                label="label"
+                                                                                                options="{!branchingRecord.QuestionOptions}"
+                                                                                                value="{!branchingRecord.responseValue1}"
+                                                                                                required="{!branchingRecord.Required__c}"
+                                                                                                class="gkn-radio-field"
+                                                                                                messageWhenValueMissing="Please select options"
+                                                                                                variant="label-hidden"
+                                                                                                disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                        </div>
+                                                                                    </aura:set>
+                                                                                </aura:if>
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='GPS Location'}">
+                                                                                <div class="slds-wrap slds-grid">
+                                                                                    <div class="slds-p-right_small slds-size--4-of-12 slds-small-size--12-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12">
+                                                                                        <lightning:input
+                                                                                            aura:id="inputFields"
+                                                                                            label="latitude"
+                                                                                            pattern="^(\+|-)?(?:90(?:(?:\.0{1,18})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,18})?))$"
+                                                                                            messageWhenPatternMismatch="Latitude should be a decimal number in a range [-90, 90]"
+                                                                                            messageWhenValueMissing="Coordinate is required"
+                                                                                            required="{!branchingRecord.Required__c}"
+                                                                                            value="{!branchingRecord.responseValue1}"
+                                                                                            disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                    </div>
+                                                                                    <div class="slds-p-right_small slds-size--4-of-12 slds-small-size--12-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12">
+                                                                                        <lightning:input
+                                                                                            aura:id="inputFields"
+                                                                                            label="longitude"
+                                                                                            pattern="^(\+|-)?(?:180(?:(?:\.0{1,18})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,18})?))$"
+                                                                                            messageWhenPatternMismatch="Longitude should be a decimal number in a range [-180, 180]"
+                                                                                            messageWhenValueMissing="Coordinate is required"
+                                                                                            required="{!branchingRecord.Required__c}"
+                                                                                            value="{!branchingRecord.responseValue2}"
+                                                                                            disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                    </div>
+                                                                                    <div class="slds-p-right_small slds-size--4-of-12 slds-small-size--12-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12">
+                                                                                        <lightning:button
+                                                                                            variant="brand"
+                                                                                            iconName="utility:location"
+                                                                                            label="Get Location"
+                                                                                            class="get-location"
+                                                                                            name="{!branchingRecord.GeoBtnName}"
+                                                                                            onclick="{!c.getCurrentLocation}"
+                                                                                            value="{!Question.Id}"
+                                                                                            disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='Switch'}">
+                                                                                <div class="gkn-toggle">
+                                                                                    <aura:if isTrue="{!branchingRecord.responseValue1=='true'}">
+                                                                                        <lightning:input
+                                                                                            type="toggle"
+                                                                                            aura:id="inputFields"
+                                                                                            label="{!branchingRecord.labelBranchingChk}"
+                                                                                            messageToggleActive="{!Question.Question_Options__r[0].Name_Long__c}"
+                                                                                            messageToggleInactive="{!Question.Question_Options__r[1].Name_Long__c}"
+                                                                                            checked="true"
+                                                                                            onchange="{!c.checkboxOption}"
+                                                                                            disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                        <aura:set attribute="else">
+                                                                                            <lightning:input
+                                                                                                type="toggle"
+                                                                                                aura:id="inputFields"
+                                                                                                label="{!branchingRecord.labelBranchingChk}"
+                                                                                                messageToggleActive="{!Question.Question_Options__r[0].Name_Long__c}"
+                                                                                                messageToggleInactive="{!Question.Question_Options__r[1].Name_Long__c}"
+                                                                                                checked="false"
+                                                                                                onchange="{!c.checkboxOption}"
+                                                                                                disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                        </aura:set>
+                                                                                    </aura:if>
+                                                                                </div>
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='Signature'}">
+                                                                                <div class="slds-clearfix slds-var-m-top_small">
+                                                                                    <lightning:button
+                                                                                        label="Sign"
+                                                                                        title="{!branchingRecord.Help_Text__c}"
+                                                                                        value="{!branchingRecord.Question__c+'_'+branchingRecord.Id}"
+                                                                                        onclick="{!c.showSignModel}"
+                                                                                        disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                    <div id="{!'sig_'+branchingRecord.Question__c}">
+                                                                                        <aura:if isTrue="{!branchingRecord.responseValue1!=''}">
+                                                                                            <img src="{!branchingRecord.responseValue1}" width="200" />
+                                                                                        </aura:if>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='Lookup'}">
+                                                                                <c:LookupComp
+                                                                                    selrecord="{!branchingRecord.responseValue1}"
+                                                                                    response="{!branchingRecord.responseValue1}"
+                                                                                    questionId="{!branchingRecord.Question__c}"
+                                                                                    isRequired="{!branchingRecord.Required__c}"
+                                                                                    sobjectName="{!branchingRecord.lookup_Object_API_Name__c}"
+                                                                                    field_API_Name="{!branchingRecord.lookup_Object_Field_Name__c}"
+                                                                                    field_ID="Id"
+                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Question__r.Type__c=='Media'}">
+                                                                                <c:FileUploader
+                                                                                    entryId="{!v.formResponseEntryId}"
+                                                                                    questionQuestionnairesId="{!branchingRecord.Id}"
+                                                                                    fileName="{!branchingRecord.attachment}"
+                                                                                    questionId="{!branchingRecord.Question__c}"
+                                                                                    questionerId="{!v.recordId}"
+                                                                                    version="{!v.formResponseEntryVerson}"
+                                                                                    isAllowMultiple="{!branchingRecord.Question__r.Allow_Multiple_Files__c}"
+                                                                                    disabled="{!v.hideSaveAndClearButtons}" />
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Allow_Comment__c==true}">
+                                                                                <div class="comment-box">
+                                                                                    <lightning:input
+                                                                                        aura:id="inputFields"
+                                                                                        label="Comment" 
+                                                                                        class=""
+                                                                                        maxlength="255" 
+                                                                                        minlength="0"
+                                                                                        value="{!branchingRecord.comment}"
+                                                                                        disabled="{!v.hideSaveAndClearButtons}" />
+                                                                                </div>
+                                                                            </aura:if>
+                                                                            <aura:if isTrue="{!branchingRecord.Allow_Attachments__c==true}">
+                                                                                <c:FileUploader
+                                                                                    entryId="{!v.formResponseEntryId}"
+                                                                                    questionQuestionnairesId="{!branchingRecord.Id}"
+                                                                                    fileName="{!branchingRecord.attachment}"
+                                                                                    questionId="{!branchingRecord.Question__c}"
+                                                                                    questionerId="{!v.recordId}" 
+                                                                                    version="{!v.formResponseEntryVerson}"
+                                                                                    disabled="{!v.hideSaveAndClearButtons}"/>
+                                                                            </aura:if>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                        </aura:if>
+                                                    </div>
+                                                </div>
+                                            </aura:if>
+                                            <!--end branching section-->
+                                        </aura:iteration>
+                                    </aura:iteration>
+                                </aura:iteration>
+                            </div>
+                        </aura:iteration>
+                    </div>
+                </aura:iteration>
+                <aura:if isTrue="{!and(!v.hideSaveAndClearButtons,!v.showNextBtn)}">
+                    <aura:if isTrue="{!v.sendResponseToCustomer}">
+                        <div class="slds-form-element girikon-layout slds-col slds-var-m-top_x-small slds-var-p-left_x-small">
+                            <div class="slds-form-element__control">
+                                <div class="slds-checkbox">
+                                    <lightning:input type="checkbox" label="Send me a copy of my responses" name="options" aura:id="checkboxOfSendResponse" value="checkboxOfSendResponse" onchange="{!c.disableFields}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <aura:if isTrue="{!v.showText}"> 
+                            <div class="slds-form-element slds-col slds-var-m-top_x-small slds-var-m-bottom_x-large slds-var-p-left_x-small slds-var-p-right_x-small">
+                                <lightning:input name="Email Address" label="Email Address" value="{!v.fREAdditionalEmailAddress}"/>
+                            </div>
+                        </aura:if>
+                    </aura:if> 
+                </aura:if> 
+            </div>
+        </article>
+        <!--End container section -->
+
+        <div class="{!!v.firstTime?'slds-card bd-footer':'slds-hide'}">
+            <lightning:layout multipleRows="true">
+                <lightning:layoutItem size="4" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="4" class="top10">
+                    <div id="progress-step">
+                        <aura:if isTrue="{!v.pages.Form_Pages__r.length>0}">
+                            <lightning:progressIndicator currentStep="{!v.currentPage.Id}" type="base" hasError="false" variant="base">
+                                <aura:iteration items="{!v.pages.Form_Pages__r}" var="step">
+                                    <lightning:progressStep label="{!step.Page_Name__c}" value="{!step.Id}" />
+                                </aura:iteration>
+                            </lightning:progressIndicator>
+                        </aura:if>
+                    </div>
+                </lightning:layoutItem>
+                <lightning:layoutItem size="8" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="8">
+                    <div class="slds-grid slds-wrap  slds-var-p-around_small formbtn"> 
+                        <aura:if isTrue="{!v.ShowClearAllButton}">
+                            <div class="slds-float_right slds-p-right_small">
+                                <lightning:button variant="destructive" onclick="{!c.openClearFormConfirmation}"
+                                    disabled="{!v.hideSaveAndClearButtons}" iconName="utility:delete" label="ClearAll Responses" />
+                            </div>
+                        </aura:if>
+                        <div class="slds-float_right slds-p-right_small">
+                            <lightning:button variant="brand-outline" onclick="{!c.saveAsDraft}"
+                                disabled="{!v.hideSaveAndClearButtons}" iconName="utility:save" label="Save as draft" />
+                        </div>
+
+                        <div class="{!v.showPrevBtn ? 'slds-float_right slds-p-right_small':'slds-col slds-hide'}">
+                            <button class="slds-button slds-button_outline-brand" onclick="{!c.previousSection}" disabled="{!!v.showPrevBtn}">
+                                <lightning:icon iconName="utility:chevronleft" size="xx-small" /> {!v.buttonPrevLabel}
+                            </button>
+                        </div>
+                        <div class="{!v.showNextBtn? 'slds-float_right':'slds-col slds-hide'}">
+                            <div>
+                                <button class="slds-button slds-button_outline-brand" onclick="{!c.nextSection}" disabled="{!!v.showNextBtn}">
+                                    {!v.buttonNextLabel}
+                                    <lightning:icon iconName="utility:chevronright" size="xx-small" />
+                                </button>
+                            </div>
+                        </div>
+                        <div class="{!!v.showNextBtn ? 'slds-float_right':'slds-hide'}">
+                            <button class="slds-button slds-button_brand" onclick="{!c.saveResponseClick}" disabled="{!or(v.showNextBtn,v.hideSaveAndClearButtons)}">
+                                <lightning:icon iconName="utility:save" size="xx-small" variant="bare" />
+                                &nbsp;{!v.buttonSubmitLabel}
+                            </button>
+                        </div>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+    </div>
+
+    <aura:if isTrue="{!v.showSign==true}">
+        <c:SignatureUIComp isNewEntry="{!v.isNewEntry}" formResponseEntryId="{!v.formResponseEntryId}" helpText="{!v.signHelpText}" questionQuestionnairesId="{!v.QuestionQuestionnairesId}" questionerId="{!v.recordId}" questionId="{!v.questionId}" version="{!v.formResponseEntryVerson}"/>
+    </aura:if>
+
+    <aura:if isTrue="{!v.isClearFormConfirm}">
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small" aria-labelledby="modal-heading-03" aria-modal="true">
+            <div class="slds-modal__container">
+                <button onclick="{!c.closeClearFormConfirmation}"
+                    class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                    <lightning:icon iconName="utility:close" size="small" variant="bare" />
+                </button>
+                <div class="slds-modal__header">
+                    <h1 id="modal-heading-03" class="slds-modal__title slds-hyphenate">Confirmation</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+                    <div class="slds-p-around_medium">
+                        <lightning:radioGroup name="radioGroup" label="Radio Group" variant="label-hidden" options="{! v.clearOptions }" value="{! v.clearPageType }" type="radio" />
+                    </div>
+                </div>
+                <div class="slds-modal__footer">
+                    <button onclick="{!c.closeClearFormConfirmation}" class="slds-button slds-button_neutral" aria-label="Cancel and close">Cancel</button>
+                    <button onclick="{!c.clearAll}" class="slds-button slds-button_brand">Yes Clear Form</button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </aura:if>
+</aura:component>

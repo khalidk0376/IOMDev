@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Set_Override_Billing_Date_to_OrderDate__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If true the FI order should be produced at the same date as the order date.-[IE-192]</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Set Override Billing Date to OrderDate</label>
+    <type>Checkbox</type>
+</CustomField>

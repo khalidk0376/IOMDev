@@ -1,0 +1,20 @@
+.fixedColumnWidth{
+    width: 35%;
+}
+.cancle-label{
+    font-weight: 600;
+    margin-right: 5px;
+}
+.fixedColumnWidth-1-4{
+    width: 25%;
+}
+.fixedColumnWidth-1-5{
+    width: 20%;
+}
+.read-only-table tr td:nth-child(3),.read-only-table tr th:nth-child(3)
+{
+    display: none;
+}
+.read-only-table tr td,.read-only-table tr th{
+    width: 50%;
+}

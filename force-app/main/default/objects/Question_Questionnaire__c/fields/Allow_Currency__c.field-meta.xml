@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allow_Currency__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Admin can define whether its number or a currency, in case of currency, user should be able to choose the currency symbol.</description>
+    <externalId>false</externalId>
+    <label>Allow Currency</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

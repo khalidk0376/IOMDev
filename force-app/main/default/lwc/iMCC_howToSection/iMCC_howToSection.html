@@ -1,0 +1,13 @@
+<template>
+    <template if:true={howToLst}>
+        <div class="cardCss"> 
+            <lightning-card  title="Links" class="slds-size_1-of-12">
+                <template for:each={howToLst} for:item="item">
+                    <p key={item.Id} class="textCss">
+                        <a href="javascript:void(0)" onclick={openHowToSection} data-id={item.Id}>{item.Label__c} </a><br/><br/>
+                    </p>
+                </template>
+            </lightning-card>
+        </div>
+    </template>
+</template>

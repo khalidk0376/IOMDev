@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Form_Category__c</fullName>
+    <description>Define the form category belongs to</description>
+    <externalId>false</externalId>
+    <label>Form Category</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Feature_Category__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>3rd Party form</fullName>
+                <default>false</default>
+                <label>3rd Party form</label>
+            </value>
+            <value>
+                <fullName>Marketing Form</fullName>
+                <default>false</default>
+                <label>Marketing Form</label>
+            </value>
+            <value>
+                <fullName>Operational Form</fullName>
+                <default>false</default>
+                <label>Operational Form</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Form</controllingFieldValue>
+            <controllingFieldValue>Manual</controllingFieldValue>
+            <valueName>3rd Party form</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Form</controllingFieldValue>
+            <controllingFieldValue>Manual</controllingFieldValue>
+            <valueName>Marketing Form</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Form</controllingFieldValue>
+            <controllingFieldValue>Manual</controllingFieldValue>
+            <valueName>Operational Form</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Order_Translation_Status_override__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Order Translation Status override to set Competed by default</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Order Translation Status override</label>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Grand_Parent_Purchase_Data__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>This field refers to Grand Parent Purchase Data in case of Reseller</description>
+    <externalId>false</externalId>
+    <label>Grand Parent Purchase Data</label>
+    <referenceTo>Purchase_Data__c</referenceTo>
+    <relationshipLabel>Purchase Data (Grand Parent Purchase Data)</relationshipLabel>
+    <relationshipName>Purchase_Data1</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

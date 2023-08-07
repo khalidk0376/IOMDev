@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Late__c</fullName>
+    <description>If checked apply late price based on standard cutoff date, otherwise take standard price</description>
+    <externalId>false</externalId>
+    <formula>Event_Edition__r.Late__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>If checked apply late price based on standard cutoff date, otherwise take standard price</inlineHelpText>
+    <label>Late</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Error_Lines__c</fullName>
+    <description>Number of error line for log.</description>
+    <externalId>false</externalId>
+    <label>Error Lines</label>
+    <summaryForeignKey>Interface_Error_Line__c.Interface_Log__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

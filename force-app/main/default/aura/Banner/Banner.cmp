@@ -1,0 +1,29 @@
+<aura:component  Controller="BannerCtrl" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="isSAPBanner" type="Boolean" default="false"/>
+    <aura:attribute name="isCreditBanner" type="Boolean" default="false"/>
+    <aura:attribute name="SAPBannerMsg" type="String" />
+    <aura:attribute name="CreditBannerMsg" type="String" />
+    <aura:attribute name="BannerAddressValid" type="String" default="{!$Label.c.Banner_Address_Valid}"/>
+    <aura:attribute name="BannerAddressNotValid" type="String" default="{!$Label.c.Banner_Address_Invalid}"/>
+    <aura:attribute name="BannerAddressError" type="String" default="{!$Label.c.Banner_Address_Error}"/>
+    <aura:attribute name="BannerCreditHold" type="String" default="{!$Label.c.Banner_Account_Credit_Status_Hold}"/>
+    <aura:attribute name="BannerCreditWarning" type="String" default="{!$Label.c.Banner_Account_Credit_Status_Warning}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:if aura:id="SAPBanner" isTrue="{!v.isSAPBanner}">
+        <lightning:card>
+            <p class="slds-p-horizontal_small">
+                <center style="font-size: medium;">{!v.SAPBannerMsg}</center>
+            </p>
+        </lightning:card>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.isCreditBanner}">
+        <lightning:card >
+            <p class="slds-p-horizontal_small">
+                <center style="font-size: medium;">{!v.CreditBannerMsg}</center>
+            </p>
+        </lightning:card>
+    </aura:if>
+</aura:component>

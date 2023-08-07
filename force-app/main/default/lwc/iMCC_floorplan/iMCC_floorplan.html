@@ -1,0 +1,309 @@
+<template>
+    <div class="forms-and-manuals fnm">
+        <lightning-layout-item size="12">
+            <c-imcc-page-header></c-imcc-page-header>
+        </lightning-layout-item>
+        <div class="required-form">
+            <h3 class="heading heading-d-large heading-m-large heading-m-medium">Floor Plans</h3>
+        </div>
+        <!--<div if:true={boothDtls} class="form-count">
+            <span class="para paragraph-d-small paragraph-m-small">Showing 6 forms</span>
+            <div class="line"></div>
+            <a href="javascript:void(0)">
+                <img src="/sfsites/c/resource/IMCC2/icons/share-blue.svg" class="icon-16"/>
+                <span class="count-share para paragraph-d-small-medium">share</span>
+            </a>
+            <a href="javascript:void(0)">
+                <img src="/sfsites/c/resource/IMCC2/icons/delete-blue.svg" class="icon-16"/>
+                <span class="count-share-1 para paragraph-d-small-medium">Delete</span>
+            </a>
+        </div>-->
+
+        <template if:true={showBoothDtls}>
+            <lightning-card class="form-card">
+                <!--<div slot="title" class="form-search">
+                    <lightning-input type="search" placeholder="Search" variant="label-hidden" label="search"></lightning-input>
+                    <div class="m-filter" onclick={openMobileMenu}>
+                        <img src="/sfsites/c/resource/IMCC2/icons/filter.svg" class="icon-24"/>
+                    </div>
+                </div>
+                <div slot="actions">
+                    <div class="action-filters">
+                        <div class="exhibitors">
+                            <div class="slds-checkbox chkbox">
+                                <lightning-input class="para paragraph-d-small paragraph-m-small" type="checkbox" label="New Exhibitors"></lightning-input>
+                            </div>
+                        </div>
+                        <div class="activity action-btn">
+                            <button class="filter-btn slds-button slds-button_neutral">
+                                <span class="para paragraph-d-small paragraph-m-small">Stand design</span> 
+                                <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small"></lightning-icon>
+                            </button>
+                        </div>
+                        <div class="customer action-btn">
+                            <button class="filter-btn slds-button slds-button_neutral">
+                                <span class="para paragraph-d-small paragraph-m-small">Stand design</span> 
+                                <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small"></lightning-icon>
+                            </button>
+                        </div>
+                        <div class="stand action-btn">
+                            <button class="filter-btn slds-button slds-button_neutral">
+                                <span class="para paragraph-d-small paragraph-m-small">Stand design</span> 
+                                <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small"></lightning-icon>
+                            </button>
+                            <div class="button-menu">
+                                <div class="item">
+                                    <div class="slds-checkbox item-checkbox">
+                                        <lightning-input class="para paragraph-d-small paragraph-m-small" type="checkbox" label="Small"></lightning-input>
+                                    </div>          
+                                </div>
+                                <div class="item">
+                                    <div class="slds-checkbox item-checkbox">
+                                        <lightning-input class="para paragraph-d-small paragraph-m-small" type="checkbox" label="Medium"></lightning-input>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="slds-checkbox item-checkbox">
+                                        <lightning-input class="para paragraph-d-small paragraph-m-small" type="checkbox" label="Large"></lightning-input>
+                                    </div>
+                                </div>
+                            </div>                
+                        </div>
+                        <div class="clear-filter action-btn">
+                            <button class="filter-btn slds-button">
+                                <span class="para paragraph-d-small paragraph-m-small">Clear filters</span>
+                            </button>  
+                        </div>
+                        <div class="badge-pill"></div>
+                    </div>            
+                </div>-->
+                <div class="slds-scrollable_x scrollable_x">
+                    <table class="slds-table slds-table_bordered slds-table_cell-buffer " role="grid">
+                        <thead>
+                            <tr class="slds-line-height_reset table-height">
+                                <!--<th aria-label="Sequence (#)" aria-sort="none" class="table-check" scope="col">
+                                <div class="table-main">
+                                    <div class="" title="Sequence">
+                                        <span class="para paragraph-d-small paragraph-m-small">Sequence</span></div>
+                                    <lightning-icon class="action-icon" icon-name="utility:down" size="xx-small"></lightning-icon>
+                                </div>
+                            </th>-->
+                                <th aria-label="Booth Number" class="" scope="col">
+                                    <div class="table-main">
+                                        <div class="" title="Booth Number">
+                                            <span class="para paragraph-d-small paragraph-m-small">Booth Number</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th aria-label="Booth Type" class="" scope="col">
+                                    <div class="table-main">
+                                        <div class="" title="Booth Type">
+                                            <span class="para paragraph-d-small paragraph-m-small">Booth Type</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th aria-label="Stand Size" class="" scope="col">
+                                    <div class="table-main">
+                                        <div class="" title="Stand Size">
+                                            <span class="para paragraph-d-small paragraph-m-small">Stand Size</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th aria-label="View Booth" class="" scope="col">
+                                    <div class="table-main">
+                                        <div class="" title="View Booth">
+                                            <span class="para paragraph-d-small paragraph-m-small">View Booth</span>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={boothDtls} for:item="item" for:index="ind">
+                                <tr key={item.Id}>
+                                    <!--<td tabindex="0" class="table-check">
+                                    <div class="">
+                                        <span class="slds-row-number para paragraph-d-small paragraph-m-small"></span>
+                                    </div>
+                                </td>-->
+                                    <td tabindex="0" style="padding-left:20px">
+                                        <div class="para paragraph-d-small paragraph-m-small" title={item.BoothNumber}>
+                                            {item.BoothNumber}
+                                        </div>
+                                    </td>
+                                    <td tabindex="0">
+                                        <div class="para paragraph-d-small paragraph-m-small" title={item.BoothType}>
+                                            {item.BoothType}
+                                        </div>
+                                    </td>
+                                    <td tabindex="0">
+                                        <div class="para paragraph-d-small paragraph-m-small" title={item.BoothSize}>
+                                            {item.BoothSize}&nbsp;<template if:true={item.UnitMeasurement}>{item.UnitMeasurement}<sup>2</sup></template>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-content" title="Release liability form">
+                                            <a href={item.ViewBoothLink}
+                                                class="para paragraph-d-small paragraph-m-small" tabindex="-1"
+                                                target="_blank">Map It</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </lightning-card>
+        </template>
+
+        <template if:true={showfloorplanMsg}>
+            <lightning-formatted-rich-text value={floorplanMsg}></lightning-formatted-rich-text>
+        </template>
+
+        <template if:true={showPdfloorplan}>
+            <!--<lightning-formatted-rich-text value={tabHeader}></lightning-formatted-rich-text>-->
+            <template for:each={wrapLstPdf} for:item="item" for:index="ind">
+                <p key={item.Id}>
+                    <lightning-accordion class="example-accordion" allow-multiple-sections-open>
+                        <lightning-accordion-section name="A" label={item.pdfType}>
+                            <template for:each={item.pdfFloorplan} for:item="item1" for:index="ind">
+                                <p key={item1.Id}>
+                                    <a href='#' onclick={ViewedPdf} data-id={item1.Id}>{item1.PDF_Name__c}
+                                    </a>
+                                    <br /><br />
+                                </p>
+                            </template>
+                        </lightning-accordion-section>
+                    </lightning-accordion>
+                </p>
+            </template>
+        </template>
+    </div>
+
+    <template if:true={downloadModal}>
+        <div class="demo-only modalCss">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-slide-up-saving slds-modal_large">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <lightning-icon class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            icon-name="utility-close" variant="bare" onclick={ClosePopup}
+                            alternative-text="Close window."></lightning-icon>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                        <iframe src={showPdf} style="width:100%; min-height:600px;padding-bottom:50px;"></iframe>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <a href={showPdf} download="MyFile">
+                            <i class="fa fa-download"></i>&nbsp;Download &nbsp;
+                        </a>&nbsp;
+                        <lightning-button variant="brand" label="Close" title="Close" onclick={ClosePopup}
+                            class="slds-m-left_x-small"></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+
+    <!--Table filter for mobie device start-->
+    <div class="mobile-menu form-mobile"
+        style="display:none;transform-style: preserve-3d;-webkit-transform:translate3d(480px, 0, 0px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(480px, 0, 0px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(480px, 0, 0px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(480px, 0, 0px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);">
+        <div class="mobile-menu-header">
+            <h1 class="heading filter-heading heading-d-small">Filters</h1>
+            <div class="clear-filter"><a class="para paragraph-d-standard" href="javascript:void(0)"
+                    onclick={closeMobileMenu}>Clear filters</a></div>
+        </div>
+
+        <div class="mobile-menu-body">
+            <div class="filter-items">
+                <div class="filter-item">
+                    <div class="filter-item-left">
+                        <div class="heading heading-m-eyebrow">Activity</div>
+                    </div>
+                    <div class="filter-item-right">
+                        <a href="javascript:void(0)"><img src="/sfsites/c/resource/IMCC2/icons/chevron-down-indigo.svg"
+                                alt="" class="icon-16" /></a>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-items">
+                <div class="filter-item">
+                    <div class="filter-item-left">
+                        <div class="heading heading-m-eyebrow">Customer Type</div>
+                    </div>
+                    <div class="filter-item-right">
+                        <a href="javascript:void(0)"><img src="/sfsites/c/resource/IMCC2/icons/chevron-down-indigo.svg"
+                                alt="" class="icon-16" /></a>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-items">
+                <div class="filter-item">
+                    <div class="filter-item-left">
+                        <div class="heading heading-m-eyebrow">Stand Design</div>
+                    </div>
+                    <div class="filter-item-right">
+                        <div class="badge-main">
+                            <div class="badge-pill"></div>
+                            <a href="javascript:void(0)"><img
+                                    src="/sfsites/c/resource/IMCC2/icons/chevron-down-indigo.svg" alt=""
+                                    class="icon-16" /></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-dropdown">
+                    <div class="filter-drop">
+                        <div class="dropdown-content">
+                            <span class="para paragraph-m-standard">Small</span>
+                        </div>
+                        <div class="drop-check">
+                            <lightning-input type="checkbox" variant="label-hidden" label="Small"></lightning-input>
+                        </div>
+                    </div>
+                    <div class="filter-drop">
+                        <div class="dropdown-content">
+                            <span class="para paragraph-m-standard">Medium</span>
+                        </div>
+                        <div class="drop-check">
+                            <lightning-input type="checkbox" variant="label-hidden" label="Medium"></lightning-input>
+                        </div>
+                    </div>
+                    <div class="filter-drop">
+                        <div class="dropdown-content">
+                            <span class="para paragraph-m-standard">Large</span>
+                        </div>
+                        <div class="drop-check">
+                            <lightning-input type="checkbox" variant="label-hidden" label="Large"></lightning-input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-items">
+                <div class="filter-item">
+                    <div class="filter-item-left">
+                        <div class="heading heading-m-eyebrow">New Exhibitors</div>
+                    </div>
+                    <div class="filter-item-right">
+                        <lightning-input type="checkbox" variant="label-hidden" label="Exhibitors"></lightning-input>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-form-footer">
+            <div class="filter-footer">
+                <div onclick={gotoDashboard} class="link link-d-standard filter-cancel">
+                    <lightning-button onclick={closeMobileMenu} class="btn-lg" variant="inverse" label="Cancel"
+                        title="Looks like a link"></lightning-button>
+                </div>
+                <div class="apply-filters">
+                    <lightning-button class="btn-lg" variant="brand" label="Apply Filters" title="Looks like a link">
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay"></div>
+    <!--Table filter for mobie device end-->
+
+</template>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Fields</fullName>
+    <fields>Name</fields>
+    <fields>User__c</fields>
+    <fields>Operations_Team__c</fields>
+    <fields>Team_Roles__c</fields>
+    <label>All Fields</label>
+</CompactLayout>

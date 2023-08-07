@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hide_Stand_Design_Questions__c</fullName>
+    <description>Hide Stand Design Questions, Please don&apos;t change API Name of options.</description>
+    <externalId>false</externalId>
+    <label>Hide Stand Design Questions</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Exhibitor Name</fullName>
+                <default>false</default>
+                <label>Step 1:- Exhibitor Name</label>
+            </value>
+            <value>
+                <fullName>Stand No.</fullName>
+                <default>false</default>
+                <label>Step 1:- Stand No.</label>
+            </value>
+            <value>
+                <fullName>Hall</fullName>
+                <default>false</default>
+                <label>Step 1:- Hall</label>
+            </value>
+            <value>
+                <fullName>Dimension</fullName>
+                <default>false</default>
+                <label>Step 1:- Dimension</label>
+            </value>
+            <value>
+                <fullName>Area</fullName>
+                <default>false</default>
+                <label>Step 1:- Area</label>
+            </value>
+            <value>
+                <fullName>Contractor Company</fullName>
+                <default>false</default>
+                <label>Step 1:- Contractor Company</label>
+            </value>
+            <value>
+                <fullName>Contractor Country</fullName>
+                <default>false</default>
+                <label>Step 1:- Contractor Country</label>
+            </value>
+            <value>
+                <fullName>Contractor Contact Name</fullName>
+                <default>false</default>
+                <label>Step 1:- Contractor Contact Name</label>
+            </value>
+            <value>
+                <fullName>Contractor Contact Email</fullName>
+                <default>false</default>
+                <label>Step 1:- Contractor Contact Email</label>
+            </value>
+            <value>
+                <fullName>Contractor Contact Number</fullName>
+                <default>false</default>
+                <label>Step 1:- Contractor Contact Number</label>
+            </value>
+            <value>
+                <fullName>Are you going to use Subcontractor?</fullName>
+                <default>false</default>
+                <label>Step 1:- Are you going to use Subcontractor?</label>
+            </value>
+            <value>
+                <fullName>Subcontractor Company</fullName>
+                <default>false</default>
+                <label>Step 1:- Subcontractor Company</label>
+            </value>
+            <value>
+                <fullName>Subcontractor Country</fullName>
+                <default>false</default>
+                <label>Step 1:- Subcontractor Country</label>
+            </value>
+            <value>
+                <fullName>Subcontractor Contact Name</fullName>
+                <default>false</default>
+                <label>Step 1:- Subcontractor Contact Name</label>
+            </value>
+            <value>
+                <fullName>Subcontractor Contact Email</fullName>
+                <default>false</default>
+                <label>Step 1:- Subcontractor Contact Email</label>
+            </value>
+            <value>
+                <fullName>Subcontractor Contact Number</fullName>
+                <default>false</default>
+                <label>Step 1:- Subcontractor Contact Number</label>
+            </value>
+            <value>
+                <fullName>Task/Activity</fullName>
+                <default>false</default>
+                <label>Step 1:- Task/Activity</label>
+            </value>
+            <value>
+                <fullName>Onsite Health and Safety Contact Name</fullName>
+                <default>false</default>
+                <label>Step 1:- Onsite Health and Safety Contact Name</label>
+            </value>
+            <value>
+                <fullName>Onsite Health and Safety Contact Number</fullName>
+                <default>false</default>
+                <label>Step 1:- Onsite Health and Safety Contact Number</label>
+            </value>
+            <value>
+                <fullName>Onsite Health and Safety Contact Email</fullName>
+                <default>false</default>
+                <label>Step 1:- Onsite Health and Safety Contact Email</label>
+            </value>
+            <value>
+                <fullName>Hold Public liability insurance</fullName>
+                <default>false</default>
+                <label>Step 1:- Hold Public liability insurance</label>
+            </value>
+            <value>
+                <fullName>Onsite welfare facilities awareness</fullName>
+                <default>false</default>
+                <label>Step 1:- Onsite welfare facilities awareness</label>
+            </value>
+            <value>
+                <fullName>Contractor Travel less than 80km</fullName>
+                <default>false</default>
+                <label>Step 1:- Contractor Travel less than 80km</label>
+            </value>
+            <value>
+                <fullName>Stand Number</fullName>
+                <default>false</default>
+                <label>Step 3:- Stand Number</label>
+            </value>
+            <value>
+                <fullName>Step 3 - Dimensions</fullName>
+                <default>false</default>
+                <label>Step 3:- Dimensions</label>
+            </value>
+            <value>
+                <fullName>Step 3 - Area</fullName>
+                <default>false</default>
+                <label>Step 3:- Area</label>
+            </value>
+            <value>
+                <fullName>Number of open sides?</fullName>
+                <default>false</default>
+                <label>Step 3:- Number of open sides?</label>
+            </value>
+            <value>
+                <fullName>Sustainable Stand</fullName>
+                <default>false</default>
+                <label>Step 3:- Sustainable Stand</label>
+            </value>
+            <value>
+                <fullName>Double Decker Stand</fullName>
+                <default>false</default>
+                <label>Step 3:- Double Decker Stand</label>
+            </value>
+            <value>
+                <fullName>Include rigging in the design</fullName>
+                <default>false</default>
+                <label>Step 3:- Include rigging in the design</label>
+            </value>
+            <value>
+                <fullName>Type of rigging</fullName>
+                <default>false</default>
+                <label>Step 3:- Type of rigging</label>
+            </value>
+            <value>
+                <fullName>Other Hanging Structure</fullName>
+                <default>false</default>
+                <label>Step 3:- Other Hanging Structure</label>
+            </value>
+            <value>
+                <fullName>Stand Height?</fullName>
+                <default>false</default>
+                <label>Step 3:- Stand Height?</label>
+            </value>
+            <value>
+                <fullName>Water Feature</fullName>
+                <default>false</default>
+                <label>Step 3:- Water Feature</label>
+            </value>
+            <value>
+                <fullName>Food preparation area</fullName>
+                <default>false</default>
+                <label>Step 3:- Food preparation area</label>
+            </value>
+            <value>
+                <fullName>Glass walls</fullName>
+                <default>false</default>
+                <label>Step 3:- Glass walls</label>
+            </value>
+            <value>
+                <fullName>Platform over 600mm</fullName>
+                <default>false</default>
+                <label>Step 3:- Platform over 600mm</label>
+            </value>
+            <value>
+                <fullName>Staircases</fullName>
+                <default>false</default>
+                <label>Step 3:- Staircases</label>
+            </value>
+            <value>
+                <fullName>High value product storage</fullName>
+                <default>false</default>
+                <label>Step 3:- High value product storage</label>
+            </value>
+            <value>
+                <fullName>MDF Panels or similar?</fullName>
+                <default>false</default>
+                <label>Step 3:- MDF Panels or similar?</label>
+            </value>
+            <value>
+                <fullName>Raw Materials (others)</fullName>
+                <default>false</default>
+                <label>Step 3:- Raw Materials (others)</label>
+            </value>
+            <value>
+                <fullName>Reusable Materials?</fullName>
+                <default>false</default>
+                <label>Step 3:- Reusable Materials?</label>
+            </value>
+            <value>
+                <fullName>Prefabricated (Offsite)</fullName>
+                <default>false</default>
+                <label>Step 3:- Prefabricated (Offsite)</label>
+            </value>
+            <value>
+                <fullName>LED Lighting?</fullName>
+                <default>false</default>
+                <label>Step 3:- LED Lighting?</label>
+            </value>
+            <value>
+                <fullName>Flame retarded material</fullName>
+                <default>false</default>
+                <label>Step 3:- Flame retarded material</label>
+            </value>
+            <value>
+                <fullName>Heavy machinery/equipment lift required</fullName>
+                <default>false</default>
+                <label>Step 3:- Heavy machinery/equipment lift required</label>
+            </value>
+            <value>
+                <fullName>Include Large machinery/equipment</fullName>
+                <default>false</default>
+                <label>Step 3:- Include Large machinery/equipment</label>
+            </value>
+            <value>
+                <fullName>Include Display vehicles/Craft</fullName>
+                <default>false</default>
+                <label>Step 3:- Include Display vehicles/Craft</label>
+            </value>
+            <value>
+                <fullName>MWEP</fullName>
+                <default>false</default>
+                <label>Step 5:- MWEP</label>
+            </value>
+            <value>
+                <fullName>Crane</fullName>
+                <default>false</default>
+                <label>Step 5:- Crane</label>
+            </value>
+            <value>
+                <fullName>Ladders</fullName>
+                <default>false</default>
+                <label>Step 5:- Ladders</label>
+            </value>
+            <value>
+                <fullName>Forklift</fullName>
+                <default>false</default>
+                <label>Step 5:- Forklift</label>
+            </value>
+            <value>
+                <fullName>Compressor</fullName>
+                <default>false</default>
+                <label>Step 5:- Compressor</label>
+            </value>
+            <value>
+                <fullName>Hand Tools</fullName>
+                <default>false</default>
+                <label>Step 5:- Hand Tools</label>
+            </value>
+            <value>
+                <fullName>Scaffolding</fullName>
+                <default>false</default>
+                <label>Step 5:- Scaffolding</label>
+            </value>
+            <value>
+                <fullName>Power Tools</fullName>
+                <default>false</default>
+                <label>Step 5:- Power Tools</label>
+            </value>
+            <value>
+                <fullName>Genie Manual Lift</fullName>
+                <default>false</default>
+                <label>Step 5:- Genie Manual Lift</label>
+            </value>
+            <value>
+                <fullName>Crew Onsite Arrival Time</fullName>
+                <default>false</default>
+                <label>Step 6:- Crew Onsite Arrival Time</label>
+            </value>
+            <value>
+                <fullName>Construction Time (Hours)</fullName>
+                <default>false</default>
+                <label>Step 6:- Construction Time (Hours)</label>
+            </value>
+            <value>
+                <fullName>Size of Crew</fullName>
+                <default>false</default>
+                <label>Step 6:- Size of Crew</label>
+            </value>
+            <value>
+                <fullName>Contractor working on other stands</fullName>
+                <default>false</default>
+                <label>Step 6:- Contractor working on other stands</label>
+            </value>
+            <value>
+                <fullName>Please list the Stands Numbers</fullName>
+                <default>false</default>
+                <label>Step 6:- Please list the Stands Numbers</label>
+            </value>
+            <value>
+                <fullName>Step7 - Print Name</fullName>
+                <default>false</default>
+                <label>Step 7:- Print Name</label>
+            </value>
+            <value>
+                <fullName>Step7 - Job Title</fullName>
+                <default>false</default>
+                <label>Step 7:- Job Title</label>
+            </value>
+            <value>
+                <fullName>Step7 - Date</fullName>
+                <default>false</default>
+                <label>Step 7:- Date</label>
+            </value>
+            <value>
+                <fullName>Step7 - Signature</fullName>
+                <default>false</default>
+                <label>Step 7:- Signature</label>
+            </value>
+            <value>
+                <fullName>Customized Text</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Customized Text</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Edition_Cut_Off_days__c</fullName>
+    <description>Edition Cut-off Days : ( number of days beyond which  the payment schedule will be just 1 billing Transaction - for e.g. if order is placed within 60 days of Event Edition Start date then its just 1 Billing Transaction with a Billing Target date of today(). If the difference between today and Event Start date is  &gt; “Edition Cut-off Days“ then move to the next level.</description>
+    <externalId>false</externalId>
+    <label>Edition Cut-off Days</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

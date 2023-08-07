@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allow_Attachments__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>For check, Allow for Attachments</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For check, Allow for Attachments</inlineHelpText>
+    <label>Allow_Attachments</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,99 @@
+.popupHeight {
+    height: 640px;
+}
+.purchase-icon{cursor: pointer;}
+.home-ps{
+    min-height: 315px;
+}
+.media-container{
+    height: 300px;
+    /* margin: 24px 80px; */
+    /* padding: 28px 69px 27px 68px; */
+    border-radius: 4px;
+    background-color: var(--jade-1);
+}
+.sub-heading{
+    margin-top: var(--space-5);
+}
+.sub-heading span{
+    color: var(--indigo-10);
+}
+
+.sub-note{
+    margin-top: var(--space-2);
+}
+.sub-note span{
+    color: var(--light-blue-7);
+}
+
+video{
+    background-color: #000;
+    border-radius: 5px;
+}
+.ex-link{
+    margin:var(--space-5) 0px;
+    padding:var(--space-4) 0px;
+    border-top:1px solid #e1e1e1;
+    border-bottom:1px solid #e1e1e1;
+}
+.ex-link a{
+    color: var(--indigo-7);
+}
+
+@media only screen and (min-width: 1px) and (max-width:480px)
+{    
+    .slds-modal__container{
+        padding: 1rem 0 1rem 0;
+    }
+    .home-ps{
+        min-height: 200px;
+    }
+}
+.profile {
+    padding: var(--space-5);
+    background-color: var(--light-blue-1);
+    border-radius: 4px;
+    margin-bottom: var(--space-4);
+}
+.profile:last-child {
+    padding: var(--space-5);
+    background-color: var(--light-blue-1);
+    border-radius: 4px;
+    margin-bottom: 0;
+}
+.profile .strand-heading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.profile .line {
+    height: 1px;
+    background-color: var(--indigo-10-transparency-20);
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-4);
+}
+.profile .strand-subhead {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+.profile .strand-subhead .strand-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-right: var(--space-5);
+}
+.profile .strand-subhead .strand-content:last-child {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-right: 0;
+}
+.profile .strand-subhead .strand-content .head {
+    color: var(--light-blue-7);
+}
+.profile .strand-subhead .strand-content .content {
+    color: var(--indigo-10);
+}

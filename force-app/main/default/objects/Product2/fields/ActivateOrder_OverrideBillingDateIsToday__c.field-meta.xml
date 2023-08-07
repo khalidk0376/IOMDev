@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ActivateOrder_OverrideBillingDateIsToday__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Activate the order when the Override Next Billing Date is equal to Today</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Activate the order when the Override Next Billing Date is equal to Today</inlineHelpText>
+    <label>ActivateOrder OverrideBillingDateIsToday</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

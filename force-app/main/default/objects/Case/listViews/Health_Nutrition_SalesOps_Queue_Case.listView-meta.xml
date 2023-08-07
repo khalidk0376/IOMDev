@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Health_Nutrition_SalesOps_Queue_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Health &amp; Nutrition SalesOps Queue</label>
+    <queue>Health_Nutrition_SalesOps_Queue</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

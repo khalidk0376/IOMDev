@@ -1,0 +1,25 @@
+.event-count-icon{margin-left: var(--space-1);}
+.event-count-icon svg{
+    fill: var(--light-blue-4);
+    cursor: pointer;
+}
+.event-count-icon svg:hover{
+    fill: var(--light-blue-10);
+    cursor: pointer;
+}
+.THIS.minHeight{
+    position: fixed; 
+    bottom: 0; 
+    height: 50px; 
+    right: 0; 
+    width: 320px;
+ } 
+ 
+ .THIS.maxHeight{
+    position: fixed; 
+    bottom: 0; 
+    right: -7px;  
+    height: 50px;  
+    width: 200px;
+    z-index: 9; 
+ }

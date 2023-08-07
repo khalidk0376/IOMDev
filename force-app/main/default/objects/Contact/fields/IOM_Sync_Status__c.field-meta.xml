@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IOM_Sync_Status__c</fullName>
+    <description>Sync Status of Account while sending Contact to IOM From CRM.</description>
+    <externalId>false</externalId>
+    <label>IOM Sync Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>IOM_Sync_Status</valueSetName>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IOM_Opportunity__c</fullName>
+    <externalId>false</externalId>
+    <formula>HYPERLINK( $CustomMetadata.IOM_Global_Configuration_Data__mdt.IOM_Lightning_Redirect_URL.IOM_Value__c+&apos;/apex/&apos;+$CustomMetadata.IOM_Global_Configuration_Data__mdt.IOM_View_Opportunity_VF.IOM_Value__c+&apos;?iomoppno=&apos;+ IOM_Opportunity_No__c   , IOM_Opportunity_No__c,&apos;_blank&apos;)</formula>
+    <inlineHelpText>Click on the hyperlink to navigate to the Opportunity Record</inlineHelpText>
+    <label>IOM Opportunity</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,1294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Accepted_Logged_in</fullName>
+        <categories>IMCC Add Team Member</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Accepted/Logged in</shortDescription>
+        <value>Accepted/Logged in</value>
+    </labels>
+    <labels>
+        <fullName>Account_Hold_Message_Label</fullName>
+        <categories>Send DocuSign and Manually_Upload_Salesforce_Contract</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account Hold Message Label</shortDescription>
+        <value>Account is on Hold, You can not create a Contract.</value>
+    </labels>
+    <labels>
+        <fullName>Adding_Team_Member_Text</fullName>
+        <categories>IM Customer Center</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Adding Team Member Text</shortDescription>
+        <value>Adding your team members allows you to work collaboratively.</value>
+    </labels>
+    <labels>
+        <fullName>Agree_As_Follow_1</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Agree As Follow-1</shortDescription>
+        <value>Contractor represents and warrants that it has full capacity and authority to enter into and to perform this Agreement and ac knowledges that IM reserves
+the right to refuse Contractor Contractor’s personnel access to the Event venue unless and until this Agreement has been signed by an authorised representative of
+Cont ractor.</value>
+    </labels>
+    <labels>
+        <fullName>Agree_As_Follow_2</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Agree_As_Follow_2</shortDescription>
+        <value>Contractor undertakes that it shall:</value>
+    </labels>
+    <labels>
+        <fullName>Agree_As_Follow_2_a</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Agree_As_Follow_2_a</shortDescription>
+        <value>ensure that each of its personnel involved in the provision of the Services for the Event has the relevant skills, knowled ge, training and experience, as well
+as appropriate supervision, information and instructions from relevant management of Contractor, to carry out the specific ta sks that they are
+performing;</value>
+    </labels>
+    <labels>
+        <fullName>Agree_As_Follow_2_b</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Agree_As_Follow_2_b</shortDescription>
+        <value>comply with all applicable laws, regulations, instructions and requirements relevant to the Event, including but not limit ed to those related to health,
+safety and security. Without limitation to the foregoing, Contractor shall familiarise itself with, and adhere at all times to, all health, safety and security
+regulations pertaining to the Event venue and all health, safety and security instructions and requirements as set out in IM IM’s exhibitor manual and/or as
+otherwise communicated by IM from time to time;</value>
+    </labels>
+    <labels>
+        <fullName>Agree_As_Follow_2_c</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Agree_As_Follow_2_c</shortDescription>
+        <value>ensure that where build up and/or break down are part of the Services for the Event, such Services shall be completed within the official build up and
+break down timings as set out in IM IM’s exhibitor manual and/or as otherwise communicated by IM from time to time. Where Contractor fails to adhere
+to such official build up and/or break down timings it shall incur late working fines, and Contractor shall be further responsible for any additional costs
+incurred by IM on account of Contractor Contractor’s failure to comply with such timings;</value>
+    </labels>
+    <labels>
+        <fullName>Agree_As_Follow_2_d</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Agree_As_Follow_2_d</shortDescription>
+        <value>promptly notify IM of any health and safety accidents/incidents or dangerous occurrences that may exist or arise during th e performance of the Services
+for the Event and instruct its personnel to adopt any necessary associated measures in order to manage/mitigate such safety r isks and lessen their
+effect;</value>
+    </labels>
+    <labels>
+        <fullName>Agree_As_Follow_2_e</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Agree_As_Follow_2_e</shortDescription>
+        <value>comply with all requests by Exhibitor and/or IM to use reusable or recycled material in the design and build of any exhibi tion stand(s). Contractor accepts
+that failure to adhere to any design and/or sustainability regulations outlined in IM IM’s exhibitor manual may lead to the issuing of a fine as referenced in
+Clause 3 below and/or formal written warnings. IM may notify Exhibitor if Contractor is subject to any such disciplinary action;</value>
+    </labels>
+    <labels>
+        <fullName>Agree_As_Follow_2_f</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Agree_As_Follow_2_f</shortDescription>
+        <value>take out and maintain at all times both public liability insurance and employee liability insurance with a recognised insu rer against personal injury, death
+and damage to and/or loss of property for not less than US$2,000,000 per occurrence or claim. IM shall be entitled to inspec t Contractor Contractor’s insurance
+policies and receipt(s) for payment of premium on request;</value>
+    </labels>
+    <labels>
+        <fullName>Agree_As_Follow_2_g</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Agree_As_Follow_2_g</shortDescription>
+        <value>not do or omit to do anything that may cause IM to lose any licence, authority, consent or permission on which it relies f or the purposes of organising and
+operating the Event.</value>
+    </labels>
+    <labels>
+        <fullName>Agree_As_Follow_3</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Agree_As_Follow_3</shortDescription>
+        <value>Contractor acknowledges that if it is in violation of any applicable laws, regulations, instructions and/or requirements as r eferenced in Clause 2(b) above
+and/or if Contractor fails to adhere to any design and/or sustainability regulations outlined in IM IM’s exhibitor manual as referenced in Clause 2(e) above, IM
+shall be entitled to give Contractor a verbal warning specifying Contractor Contractor’s default and requiring Contractor to undertake corrective action within a certain
+timeframe. In the event that Contractor does not undertake such corrective action within the relevant timeframe, IM shall be entitled to require Contractor
+to cease performance of the Services for the Event with immediate effect and/or issue Contractor with a fine, which shall be immediately payable in full by
+Contractor to IM. The amount of such fine shall be determined by IM in its sole discretion having regard to the nature of Co ntractorntractor’s violation(s).</value>
+    </labels>
+    <labels>
+        <fullName>Agree_As_Follow_4</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Agree_As_Follow_4</shortDescription>
+        <value>To the extent that Contractor wishes to appoint any sub contractor(s) to carry out all or any part of the Services, Contractor shall procure that each such
+sub contractor shall comply with the terms of this Agreement in the same way and to the same extent that Contractor is obliged to comply with them.
+Contractor shall be liable to IM for the acts or omissions of each such sub contractor, as if such acts or omissions were Contractor&apos;s own acts or omissions.</value>
+    </labels>
+    <labels>
+        <fullName>Agree_As_Follow_5</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Agree_As_Follow_5</shortDescription>
+        <value>Contractor shall indemnify and keep indemnified IM from and against any loss, damage, cost, claim or expense suffered or incu rred by IM arising out of or
+in connection with any: (i) act or omission of Contractor and/or any of its personnel and/or any of its sub contractors in respect of the performance of the
+Services for the Event, including, without limitation, any loss of or damage to any property or injury/illness to or death of any person resulting therefrom,
+and (ii) any breach by Contractor and/or any of its personnel and/or any of its sub contractors of any warranty, representation and/or undertaking set out
+in this Agreement.</value>
+    </labels>
+    <labels>
+        <fullName>Agree_As_Follow_6</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Agree_As_Follow_6</shortDescription>
+        <value>This Agreement and any dispute or claim arising out of or in connection with it or its subject matter or formation shall be g overned by and construed in
+accordance with laws of IM IM’s country of incorporation. Each party irrevocably agrees that the courts of IM IM’s country of incorporation shall have exclusive
+jurisdiction to settle any dispute or claim arising out of or in connection with this Agreement or its subject matter or form ation.</value>
+    </labels>
+    <labels>
+        <fullName>Alert_Primary_CEM</fullName>
+        <categories>IMCC Add Team Member</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Alert Primary CEM</shortDescription>
+        <value>Disabling a primary user’s access will move all the data from this user to your user.</value>
+    </labels>
+    <labels>
+        <fullName>Badge_registration_and_Lead_Retrieval</fullName>
+        <categories>IM Customer Center</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Badge registration and Lead Retrieval</shortDescription>
+        <value>Badge registration &amp; Lead Retrieval</value>
+    </labels>
+    <labels>
+        <fullName>Banner_Account_Credit_Status_Hold</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner Account Credit Status Hold</shortDescription>
+        <value>Account Credit Status is On Hold</value>
+    </labels>
+    <labels>
+        <fullName>Banner_Account_Credit_Status_Warning</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner Account Credit Status Warning</shortDescription>
+        <value>Account Credit Status is Warning</value>
+    </labels>
+    <labels>
+        <fullName>Banner_Address_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner Address Error</shortDescription>
+        <value>Account Address Error</value>
+    </labels>
+    <labels>
+        <fullName>Banner_Address_Invalid</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner Address Invalid</shortDescription>
+        <value>Account Address Not Valid</value>
+    </labels>
+    <labels>
+        <fullName>Banner_Address_Valid</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner Address Valid</shortDescription>
+        <value>Account Address Valid</value>
+    </labels>
+    <labels>
+        <fullName>Basic</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Basic</shortDescription>
+        <value>Basic</value>
+    </labels>
+    <labels>
+        <fullName>Billing_Address_Line_2</fullName>
+        <categories>Pierrepoint</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Billing Address Line 2</shortDescription>
+        <value>Billing Address Line 2</value>
+    </labels>
+    <labels>
+        <fullName>Billing_City</fullName>
+        <categories>Pierrepoint</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Billing City</shortDescription>
+        <value>Billing City</value>
+    </labels>
+    <labels>
+        <fullName>Billing_Invoice_Contact</fullName>
+        <categories>Pierrepoint</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Billing/Invoice Contact</shortDescription>
+        <value>Billing/Invoice Contact</value>
+    </labels>
+    <labels>
+        <fullName>Billing_Postal_Code</fullName>
+        <categories>Pierrepoint</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Billing Postal Code</shortDescription>
+        <value>Billing Postal Code</value>
+    </labels>
+    <labels>
+        <fullName>BusinessPhoneMessage</fullName>
+        <categories>Account, Contact and opportunity Create Skuid Layout Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BusinessPhoneMessage</shortDescription>
+        <value>Business number should contain more than 7 digit and only Numbers, Space and Special Characters - ( ) # +.</value>
+    </labels>
+    <labels>
+        <fullName>Cancel</fullName>
+        <categories>IMCC Button Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>Cancel_Invite</fullName>
+        <categories>IMCC Add Team Member</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cancel_Invite</shortDescription>
+        <value>Are you sure, you want to cancel the invite of selected contact</value>
+    </labels>
+    <labels>
+        <fullName>Case_Categories</fullName>
+        <categories>LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Case Categories</shortDescription>
+        <value>Case Categories</value>
+    </labels>
+    <labels>
+        <fullName>Category1</fullName>
+        <categories>LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Category 1</shortDescription>
+        <value>Category 1</value>
+    </labels>
+    <labels>
+        <fullName>Category_2</fullName>
+        <categories>LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Category 2</shortDescription>
+        <value>Category 2</value>
+    </labels>
+    <labels>
+        <fullName>Category_3</fullName>
+        <categories>LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Category 3</shortDescription>
+        <value>Category 3</value>
+    </labels>
+    <labels>
+        <fullName>CommunityURL</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC CommunityURL</shortDescription>
+        <value>https://globalexhibitions.force.com</value>
+    </labels>
+    <labels>
+        <fullName>Complex_Stand_Heading</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Complex Stand Heading</shortDescription>
+        <value>COMPLEX STAND – STAND HEIGHT HIGHER THAN 4M/DOUBLE DECKER STAND/COMPLEX RIGGING - SUBJECT TO ADDITIONAL COST FOR UPPER LEVEL</value>
+    </labels>
+    <labels>
+        <fullName>Confluence_Page_URL_For_Test_Data</fullName>
+        <categories>IM Customer Center</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Confluence Page URL For Test Data</shortDescription>
+        <value>https://informa-ge.atlassian.net/wiki/spaces/SEE/pages/3864690723/IMCC+-+Customer+Test+Accounts</value>
+    </labels>
+    <labels>
+        <fullName>Contractor</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Contractor</shortDescription>
+        <value>Contractor</value>
+    </labels>
+    <labels>
+        <fullName>Contractors_Space_Only_Regulations_Manual</fullName>
+        <categories>IMCC Manuals</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contractors Space Only Regulations Manual</shortDescription>
+        <value>I have read and shared with my appointed contractors</value>
+    </labels>
+    <labels>
+        <fullName>Custom_Payment_Validation_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Custom Payment Validation Message</shortDescription>
+        <value>Amount should be less than or equal to</value>
+    </labels>
+    <labels>
+        <fullName>Custom_Payment_Validation_Message1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Custom_Payment_Validation_Message1</shortDescription>
+        <value>Please enter due date for customer payment.</value>
+    </labels>
+    <labels>
+        <fullName>Default_EditionCode_LiveChat</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Default_EditionCode_LiveChat</shortDescription>
+        <value>CPWW22</value>
+    </labels>
+    <labels>
+        <fullName>Delete_Validation_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete Validation Message</shortDescription>
+        <value>You do not have access to delete this record.</value>
+    </labels>
+    <labels>
+        <fullName>Document_URL</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Document URL</shortDescription>
+        <value>https://informaim--c.documentforce.com</value>
+    </labels>
+    <labels>
+        <fullName>Duplicate_Credit_Note_Error_Msg</fullName>
+        <categories>IOM OrderHub</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate Credit Note Error Msg</shortDescription>
+        <value>Duplicate Credit Note on same Invoice found</value>
+    </labels>
+    <labels>
+        <fullName>Duplicate_Tab_Sequence_number_error_message</fullName>
+        <categories>IMCC_Event Tabs</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Duplicate Tab Sequence number error message</shortDescription>
+        <value>You cannot put the same sequence number present in same event tab. Please choose a different sequence number.</value>
+    </labels>
+    <labels>
+        <fullName>ES_Country_not_valid</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ES Country not valid</shortDescription>
+        <value>Event Series Country Not Found In The Country Picklist . Please Give a Valid Country Name.</value>
+    </labels>
+    <labels>
+        <fullName>Egypt_SalesOps_Mail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Egypt SalesOps Mail</shortDescription>
+        <value>surbhi.jain@informa.com</value>
+    </labels>
+    <labels>
+        <fullName>Error_Message_For_Feathr_Link</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Error Message For Feathr Link</shortDescription>
+        <value>We apologize for the inconvenience, but for operational reasons, personalized dashboard links are made available on a weekly basis, typically on Wednesdays. Please return to this page next week to access yours and start taking advantage of the ready-to-use marketing collateral!</value>
+    </labels>
+    <labels>
+        <fullName>Event</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Event</shortDescription>
+        <value>Event</value>
+    </labels>
+    <labels>
+        <fullName>Event_Details</fullName>
+        <categories>Case Record Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Event Details</shortDescription>
+        <value>Event Details</value>
+    </labels>
+    <labels>
+        <fullName>Event_Series_Country_can_not_be_blank</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Event Series Country can not be blank.</shortDescription>
+        <value>Event Series Country is Blank.Please Put a Valid Country Name , To Format The Date And Currency On Generated Documents</value>
+    </labels>
+    <labels>
+        <fullName>Event_Summary</fullName>
+        <categories>IMCC Home</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Event Summary</shortDescription>
+        <value>Progress overview</value>
+    </labels>
+    <labels>
+        <fullName>Event_Tab_Other_Than_Event_Setting_Edition_Error_Message</fullName>
+        <categories>IMCC Announcement</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Event Tab Other Than Event Setting Edition Error Message</shortDescription>
+        <value>Invalid Event Tab. Select an Event Tab which is enabled for selected Edition.</value>
+    </labels>
+    <labels>
+        <fullName>Exhibitor_Code_of_Conduct_Manual</fullName>
+        <categories>IMCC Manuals</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Exhibitor Code of Conduct Manual</shortDescription>
+        <value>I have read and agree to the content, and shared with my onsite team</value>
+    </labels>
+    <labels>
+        <fullName>ExistingEmailIdUser</fullName>
+        <categories>IM Customer Center</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ExistingEmailIdUser</shortDescription>
+        <value>User exist with this EmailId in the Active member list.</value>
+    </labels>
+    <labels>
+        <fullName>Expocad_Base_Url</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Expocad Base Url</shortDescription>
+        <value>https://www.expocad.com/host/fx/informa/</value>
+    </labels>
+    <labels>
+        <fullName>File_Download_URL</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC File Download URL</shortDescription>
+        <value>/IMCC/sfc/servlet.shepherd/version/download/</value>
+    </labels>
+    <labels>
+        <fullName>File_Download_URL_For_OPS_USER</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC File Download URL For OPS USER</shortDescription>
+        <value>https://informaim.my.salesforce.com/sfc/servlet.shepherd/version/download/</value>
+    </labels>
+    <labels>
+        <fullName>FirstNameCharacterMessage</fullName>
+        <categories>Account, Contact and opportunity Create Skuid Layout Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FirstNameCharacterMessage</shortDescription>
+        <value>FirstName: data value too large: (max length=40)</value>
+    </labels>
+    <labels>
+        <fullName>FirstNameMessage</fullName>
+        <categories>Account, Contact and opportunity Create Skuid Layout Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FirstNameMessage</shortDescription>
+        <value>First Name is missing.</value>
+    </labels>
+    <labels>
+        <fullName>Form_Status_Reset</fullName>
+        <categories>IMCC Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Form Status Reset</shortDescription>
+        <value>This will Reset All the Form Data Status you selected to &apos;Not Started&apos;</value>
+    </labels>
+    <labels>
+        <fullName>GE_System_Administrator_Profile_Name</fullName>
+        <categories>SSCTeamMemberValidation_Trig class</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>GE System Administrator Profile Name</shortDescription>
+        <value>GE System Administrator</value>
+    </labels>
+    <labels>
+        <fullName>General</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC General</shortDescription>
+        <value>General</value>
+    </labels>
+    <labels>
+        <fullName>Go_to_Step</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Go to Step</shortDescription>
+        <value>Go to Step</value>
+    </labels>
+    <labels>
+        <fullName>Google_Api_Key</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Google Search Address Api Key</shortDescription>
+        <value>AIzaSyBnTT6oWLPsLZAQE81qNTIAN3jG_TwFFhs</value>
+    </labels>
+    <labels>
+        <fullName>Greeting_Popup_Footer</fullName>
+        <categories>IMCC_Greeting Popup</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Greeting Popup Footer</shortDescription>
+        <value>If you mark as read pop will be disabled until updated by Informa, and then option to continue or cancel.</value>
+    </labels>
+    <labels>
+        <fullName>Health_Safety_Contact</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Health &amp; Safety Contact</shortDescription>
+        <value>Health &amp; Safety Contact:</value>
+    </labels>
+    <labels>
+        <fullName>IMCCNoAccountAccess</fullName>
+        <categories>IM Customer Center</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC NoAccountAccess</shortDescription>
+        <value>System unable to find your company in the list of confirmed exhibitors for any of the Informa current event, if you find this information incorrect, please contact our customer Service team to assist you</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_BulkWelcomeEmail</fullName>
+        <categories>IM Customer Center, Welcome Email</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC BulkWelcomeEmail</shortDescription>
+        <value>Please check Send Welcome Email Checkbox.</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_CEM_Inactive_Note</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC CEM Inactive Note</shortDescription>
+        <value>NOTE : By Checking above it will make current main Contact Inactive. If not checked, It will remain active and become an additional Contact.</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Community_User_Profile</fullName>
+        <categories>Customer Center, User Profile</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC This profile should be used whenever new community user is created.</shortDescription>
+        <value>IM Customer Community Login User</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Confirm_Msg_Send_Welcome_Email</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Confirm Msg Send Welcome Email</shortDescription>
+        <value>Are you sure you want to send the Welcome email? If yes, Click on Proceed..</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Custom_UI_Error_Message</fullName>
+        <categories>IMCC UI Error Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Custom UI Error Message</shortDescription>
+        <value>System has encountered an issue. If you are having some issues, please reach out to Customer Services team using the chat box below.</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Facebook</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Facebook</shortDescription>
+        <value>http://www.facebook.com/pages/Informa-PLC/12602585785</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Form_Report_Download_Note</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Form Report Download Note</shortDescription>
+        <value>Notes: If Form has multiple questions, Report may take more than expected time to download..</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_IIRIS_Auth_Provider</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC IIRIS Auth. Provider</shortDescription>
+        <value>IIRIS_Auth_Provider</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Instagram</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Instagram</shortDescription>
+        <value>https://www.instagram.com/</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Label_Replace_User_Checkbox</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Label for the Replace User Checkbox for making Contact Inactive</shortDescription>
+        <value>Make Current Contact Inactive</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Linkin</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Linkedin</shortDescription>
+        <value>https://www.linkedin.com/company/informamarkets</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Load_Pendo</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Load Pendo</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Send_WelcomeEmail_Alert</fullName>
+        <categories>IMCC Welcome Email</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Send WelcomeEmail Alert</shortDescription>
+        <value>Customer center status is not active. So you cannot use this feature.</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Send_Welcome_Email_Error_Message</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC_Send Welcome Email Error Message</shortDescription>
+        <value>Please refer the Welcome Email Error report in the event dashboard to track the errors.</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Show_FBReport_With_View_Button</fullName>
+        <categories>IMCC FBReport</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Show FBReport With View Button</shortDescription>
+        <value>false</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Twitter</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Twitter</shortDescription>
+        <value>http://twitter.com/informaplc</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Welcome_Email_Error_Msg1</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Welcome Email Error Msg1</shortDescription>
+        <value>Email is missing on Contact.</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Welcome_Email_Error_Msg2</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Welcome Email Error Msg2</shortDescription>
+        <value>Contact is not associated with any Account.</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Welcome_Email_Error_Msg3</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Welcome Email Error Msg3</shortDescription>
+        <value>Community user is inactive.</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Welcome_Email_Error_Msg4</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Welcome Email Error Msg4</shortDescription>
+        <value>Welcome email template not found on edition.</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Welcome_Email_Error_Msg5</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Welcome Email Error Msg5</shortDescription>
+        <value>Access Type is blank.</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Welcome_Email_Error_Msg6</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Welcome Email Error Msg6</shortDescription>
+        <value>CEM is not active</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Welcome_email_subject</fullName>
+        <categories>Customer Center</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Welcome email subject</shortDescription>
+        <value>- Welcome to Customer Centre for</value>
+    </labels>
+    <labels>
+        <fullName>IMCC_Youtube</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Youtube</shortDescription>
+        <value>https://www.youtube.com/channel/UC8blFUBP_cKuC93IqMNBWXg</value>
+    </labels>
+    <labels>
+        <fullName>IMSC_Closure_Days</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMSC_Closure Days</shortDescription>
+        <value>7</value>
+    </labels>
+    <labels>
+        <fullName>IMSC_Non_Informa_Company_Edition</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMSC_Non_Informa_Company_Edition</shortDescription>
+        <value>cityscapecs@informa.com</value>
+    </labels>
+    <labels>
+        <fullName>IMSC_SalesOps_Egypt_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMSC SalesOps Egypt Email</shortDescription>
+        <value>salesopsegypt@informa.com</value>
+    </labels>
+    <labels>
+        <fullName>IT_IS_AGREED_AS_FOLLOWS</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC IT IS AGREED AS FOLLOW</shortDescription>
+        <value>IT IS AGREED AS FOLLOWS:</value>
+    </labels>
+    <labels>
+        <fullName>Information</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Information</shortDescription>
+        <value>Information</value>
+    </labels>
+    <labels>
+        <fullName>Instance_Documentforce_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Instance Documentforce URL</shortDescription>
+        <value>https://informaim--c.documentforce.com</value>
+    </labels>
+    <labels>
+        <fullName>Invite_Team_Member_Success_Message</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invite Team Member Success Message</shortDescription>
+        <value>Contact has been invited successfully!</value>
+    </labels>
+    <labels>
+        <fullName>Label_Amend_Contract</fullName>
+        <categories>AmendContractModel Component</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Amend Contract</shortDescription>
+        <value>By continuing, you acknowledge that you are amending an existing opportunity and it cannot be undone once started.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Billing_Contact_Missing</fullName>
+        <categories>Used in Manually_Upload_Salesforce_Contract, cls_quoteLineAttachmentsConga</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Billing Contact Missing</shortDescription>
+        <value>Please assign the Billing/Invoice contact on the opportunity in order to proceed.</value>
+    </labels>
+    <labels>
+        <fullName>Label_Declaration_Doc</fullName>
+        <categories>Upload Declaration Document Button on OpportunityDetailModel Skuid Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label Declaration Doc</shortDescription>
+        <value>By uploading this document, you are submitting this order for UAE VAT refund. This will only be applicable to future invoices that are yet to be posted.</value>
+    </labels>
+    <labels>
+        <fullName>LastNameMessage</fullName>
+        <categories>Account, Contact and opportunity Create Skuid Layout Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LastNameMessage</shortDescription>
+        <value>Last Name is missing.</value>
+    </labels>
+    <labels>
+        <fullName>Login_Redirect_Message</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Login Redirect Message</shortDescription>
+        <value>Redirecting to login page.</value>
+    </labels>
+    <labels>
+        <fullName>MailingCityMessage</fullName>
+        <categories>Account, Contact and opportunity Create Skuid Layout Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MailingCityMessage</shortDescription>
+        <value>Mailing City is missing.</value>
+    </labels>
+    <labels>
+        <fullName>MailingStreetMessage</fullName>
+        <categories>Account, Contact and opportunity Create Skuid Layout Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MailingStreetMessage</shortDescription>
+        <value>Mailing Street is missing.</value>
+    </labels>
+    <labels>
+        <fullName>Mark_as_read</fullName>
+        <categories>IMCC_Greeting Popup Button</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Mark as read</shortDescription>
+        <value>Mark as read</value>
+    </labels>
+    <labels>
+        <fullName>MobilePhoneMessage</fullName>
+        <categories>Account, Contact and opportunity Create Skuid Layout Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MobilePhoneMessage</shortDescription>
+        <value>Mobile Phone should contain more than 7 digit and only Numbers, Space and Special Characters - ( ) # +.</value>
+    </labels>
+    <labels>
+        <fullName>Non_Complex_Stand_Heading</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Non Complex Stand Heading</shortDescription>
+        <value>Non Complex Stand – STAND HEIGHT 4M &amp; BELOW/NON DOUBLE DECKER COMPLEX</value>
+    </labels>
+    <labels>
+        <fullName>Non_Primary_Quote</fullName>
+        <categories>Manually Generate Contract Alert Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Non Primary Quote</shortDescription>
+        <value>The selected Quote is Non Primary, do you wish to proceed?</value>
+    </labels>
+    <labels>
+        <fullName>NoteOnAfterSelectionTestData</fullName>
+        <categories>IM Customer Center</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NoteOnAfterSelectionTestData</shortDescription>
+        <value>Note: Once platform coordinator logs in for the test user and completes the validation, they can come back to the screen and change Access/Booth Type and continue the testing</value>
+    </labels>
+    <labels>
+        <fullName>NoteOnBoothTypeOnlySelectionTestData</fullName>
+        <categories>IM Customer Center</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NoteOnBoothTypeOnlySelectionTestData</shortDescription>
+        <value>Note: Click on Create Purchase Data and user will be redirected to login screen for that particular contact Access Type and Booth Type</value>
+    </labels>
+    <labels>
+        <fullName>NoteOnProductTypeSelectionOnAssignVisibility</fullName>
+        <categories>Imcc_AssignTabVisibility</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC NoteOnProductTypeSelectionOnAssignVisibility</shortDescription>
+        <value>NOTE: If your component is independent of Booth/Product Type, leave this
+blank and just click on “Save Selected”</value>
+    </labels>
+    <labels>
+        <fullName>NoteOnUserTypeOnlySelectionOnAssignVisibility</fullName>
+        <categories>Imcc_AssignTabVisibility</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC NoteOnUserTypeOnlySelectionOnAssignVisibility</shortDescription>
+        <value>NOTE: If you do not select any option, and click on “Save Selected” it
+will not show to anyone. Please click on “Select All and Save” to show it to all existing User
+Types.</value>
+    </labels>
+    <labels>
+        <fullName>NoteOnUserTypeOnlySelectionTestData</fullName>
+        <categories>IM Customer Center</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NoteOnUserTypeOnlySelectionTestData</shortDescription>
+        <value>Note: Selecting the Access Type in this step will look for related Test Data Contacts ex: Frank The Exhibitor, Frank The Agent and create related Contact Edition Mapping for the related Active Event Edition</value>
+    </labels>
+    <labels>
+        <fullName>NoteOnUserTypeWithProdTypeSelectionOnAssignVisibility</fullName>
+        <categories>Imcc_AssignTabVisibility</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC NoteOnUserTypeWithProdTypeSelectionOnAssignVisibility</shortDescription>
+        <value>NOTE: If you do not select any option, and click on “Save Selected and
+Next” it will not show to anyone. Please click on “Select All and Next” to show it to all
+existing User Types.</value>
+    </labels>
+    <labels>
+        <fullName>OperationsTeamMemberDelete</fullName>
+        <categories>Only System Admin, GE Admin and Team owner should be able to add or remove the team member.</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OperationsTeamMemberDelete</shortDescription>
+        <value>User and Owner profiles are Not Same.</value>
+    </labels>
+    <labels>
+        <fullName>OperationsTeamMemberUpsert</fullName>
+        <categories>Only System Admin, GE Admin and Team owner should be able to add or remove the team member.</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OperationsTeamMemberUpsert</shortDescription>
+        <value>User and owner profiles should be same.</value>
+    </labels>
+    <labels>
+        <fullName>Org_Base_Url</fullName>
+        <categories>IMCC Org Url</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Org Base Url</shortDescription>
+        <value>https://informaim.my.salesforce.com</value>
+    </labels>
+    <labels>
+        <fullName>Phone_Icon_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Phone Icon URL</shortDescription>
+        <value>https://informaim--servuat.sandbox.file.force.com/servlet/servlet.ImageServer?id=0158F000000GZaD&amp;oid=00D8F0000008aJn</value>
+    </labels>
+    <labels>
+        <fullName>PriceBookDefault_ID</fullName>
+        <categories>Process</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PriceBookDefault ID</shortDescription>
+        <value>01s4P000003RsETQA0</value>
+    </labels>
+    <labels>
+        <fullName>Privacy_Policy_Link</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Privacy Policy Link</shortDescription>
+        <value>https://www.informa.com/privacy-policy/</value>
+    </labels>
+    <labels>
+        <fullName>Privacy_Policy_Text</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Privacy Policy Text</shortDescription>
+        <value>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ex nunc, ultrices vel ipsum eu, dictum dictum diam. Vestibulum eget nisl sed augue pharetra lobortis eu eget diam. Quisque quis quam quam. Etiam nulla nisl, vehicula in nisl vel, aliquet eleifend dolor. Suspendisse laoreet vel tellus sit amet placerat. Mauris tincidunt, dui et ornare cursus, nisi metus congue nunc, sit amet suscipit arcu mi a nisl. Nulla orci massa, egestas quis fermentum at, elementum eu erat. Curabitur ut massa lacus. Praesent pretium volutpat augue, eu efficitur odio egestas quis. Integer nec lectus nec nunc facilisis porttitor</value>
+    </labels>
+    <labels>
+        <fullName>Purchase_Summary</fullName>
+        <categories>IMCC Home</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Purchase Summary</shortDescription>
+        <value>My Event Package</value>
+    </labels>
+    <labels>
+        <fullName>QuoteStatusManualContract</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>QuoteStatusManualContract</shortDescription>
+        <value>Contract Approved</value>
+    </labels>
+    <labels>
+        <fullName>Read_and_agree_to_the_manual_guide</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Read and agree to the manual guide</shortDescription>
+        <value>Read and agree to the manual guide</value>
+    </labels>
+    <labels>
+        <fullName>Rejected_note_on_Pending_Tasks</fullName>
+        <categories>IM Customer Center</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Rejected note on Pending Tasks</shortDescription>
+        <value>Rejected, Please read the rejection note and resubmit the form</value>
+    </labels>
+    <labels>
+        <fullName>Replace_User_Dup_Msg</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Replace User Dup Msg</shortDescription>
+        <value>Mapping already exist.</value>
+    </labels>
+    <labels>
+        <fullName>Replace_User_Success_Msg</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Replace User Success Msg</shortDescription>
+        <value>Customer has been replaced successfully!</value>
+    </labels>
+    <labels>
+        <fullName>Replace_user_Screen_Message</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Replace user Screen Message</shortDescription>
+        <value>User can either select existing CEM from the below list of account/event or Select a new contact by searching the list of available contacts.</value>
+    </labels>
+    <labels>
+        <fullName>SSC_Finance_Accounting_Profile_Name</fullName>
+        <categories>SSCTeamMemberValidation_Trig class</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SSC Finance-Accounting Profile Name</shortDescription>
+        <value>SSC Finance-Accounting</value>
+    </labels>
+    <labels>
+        <fullName>Sales_User_Alert2</fullName>
+        <categories>Manually Generate Contract Alert Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sales User Alert2</shortDescription>
+        <value>Sales User do not have the permission to edit the opportunity when opportunity stage is</value>
+    </labels>
+    <labels>
+        <fullName>Shipping_City</fullName>
+        <categories>Pierrepoint</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Shipping City</shortDescription>
+        <value>Shipping City</value>
+    </labels>
+    <labels>
+        <fullName>Shipping_Postal_Code</fullName>
+        <categories>Pierrepoint</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Shipping Postal Code</shortDescription>
+        <value>Shipping Postal Code</value>
+    </labels>
+    <labels>
+        <fullName>Stand</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Stand</shortDescription>
+        <value>Stand</value>
+    </labels>
+    <labels>
+        <fullName>Stand_Summary_Quick_Info</fullName>
+        <categories>IMCC Home Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Stand Summary-Quick Info</shortDescription>
+        <value>Your stands summary</value>
+    </labels>
+    <labels>
+        <fullName>Step</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Step</shortDescription>
+        <value>Step</value>
+    </labels>
+    <labels>
+        <fullName>Step7_Top_Header</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Step7 Top Header</shortDescription>
+        <value>[INFORMA MARKETS LEGAL ENTITY NAME] (“IM”)</value>
+    </labels>
+    <labels>
+        <fullName>Step7_Top_Header2</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Step7 Top Header2</shortDescription>
+        <value>[CONTRACTOR LEGAL ENTITY NAME] (“Contractor”)</value>
+    </labels>
+    <labels>
+        <fullName>Step7_Top_Header_and</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Step7 Top Header_and</shortDescription>
+        <value>and</value>
+    </labels>
+    <labels>
+        <fullName>Step_7_1</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Step 7-1</shortDescription>
+        <value>A   Contractor has been engaged by [EXHIBITOR LEGAL ENTITY NAME] (“Exhibitor”) to carry out certain services (“Services”) in respect of Exhibitor Exhibitor’s
+participation in [NAME OF EVENT] (“Event”), which is an exhibition that is organised and operated by IM.
+IM requires Contractor to agree to certain undertakings as set out in this Agreement in respect of the performance of the Ser vices for the Event.</value>
+    </labels>
+    <labels>
+        <fullName>Subcontractor</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Subcontractor</shortDescription>
+        <value>Subcontractor</value>
+    </labels>
+    <labels>
+        <fullName>System_Administrator_Profile_Name</fullName>
+        <categories>SSCTeamMemberValidation_Trig class</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>System Administrator Profile Name</shortDescription>
+        <value>System Administrator</value>
+    </labels>
+    <labels>
+        <fullName>Text_for_the_team</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC Text for the team</shortDescription>
+        <value>Free Text for the team to customize based on show requirement</value>
+    </labels>
+    <labels>
+        <fullName>This_Agreement_is_accepted</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC This Agreement is accepted</shortDescription>
+        <value>This Agreement is accepted and agreed on behalf of contractor.</value>
+    </labels>
+    <labels>
+        <fullName>UAE_VAT_Refund_Delete_Doc_Msg</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UAE VAT Refund Delete Doc Msg</shortDescription>
+        <value>You can not delete the file as Tax Status is Approved</value>
+    </labels>
+    <labels>
+        <fullName>UAE_VAT_Refund_Success_Msg</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UAE VAT Refund Success Msg</shortDescription>
+        <value>Your Documents Uploaded Successfully.</value>
+    </labels>
+    <labels>
+        <fullName>UK_VAT_Exhibition_Services</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UK VAT Exhibition Services</shortDescription>
+        <value>a3B55000000FOFC</value>
+    </labels>
+    <labels>
+        <fullName>Venue_Technical_Guidelines_Manual</fullName>
+        <categories>IMCC Manuals</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Venue Technical Guidelines Manual</shortDescription>
+        <value>I have read and agree to the content, and shared with my appointed contractors</value>
+    </labels>
+    <labels>
+        <fullName>View_Document_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>View Document Error</shortDescription>
+        <value>The PDF document is unavailable at this time!</value>
+    </labels>
+    <labels>
+        <fullName>Whatsapp_Icon_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Whatsapp Icon URL</shortDescription>
+        <value>https://informaim--servuat.sandbox.file.force.com/servlet/servlet.ImageServer?id=0158F000000GZa8&amp;oid=00D8F0000008aJn</value>
+    </labels>
+    <labels>
+        <fullName>Zero_total_number_of_payment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Zero total number of payment</shortDescription>
+        <value>Minimum Payment Number should be 1.</value>
+    </labels>
+    <labels>
+        <fullName>conga_Additional_Params</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>conga Additional Params</shortDescription>
+        <value>&amp;DS7=17&amp;DocuSignEndPoint=Prod&amp;AWD=2</value>
+    </labels>
+    <labels>
+        <fullName>conga_queries</fullName>
+        <categories>conga queries for quote and contract templates</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>conga queries</shortDescription>
+        <value>[QLQ]a3305000000Rhsd,[AltAmnt]a3305000000Rhsa,[CstmPymtQry]a3305000000RhsZ,[SerigrafiaInfo]a3305000000Rhsf,[Actualpayment]a3305000000RhsV,[mandatoryprod]a3305000000RhsW,[QLQSerigrafia]a3305000000Rhsh,[AgreementContact]a3305000000Rhsc,[OppAllContacts]a3305000000Rhsg,[localRepresttive]a3305000000RhsY,[legalRepresentative]a3305000000Rhsb,[OppFields]a3305000000RhsS,[informaLogo]a3305000000RhsX,[QLQGROUP]a3305000000RhsT,[QuotePaymentTerm]a3305000000Rhsu,[QLOmnia]a3305000000Rhse</value>
+    </labels>
+    <labels>
+        <fullName>congratulation</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC congratulation message</shortDescription>
+        <value>Congratulations! You’ve completed all your tasks.</value>
+    </labels>
+    <labels>
+        <fullName>delete_confirm_message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>delete confirm message</shortDescription>
+        <value>Do you really want to delete all selected records?</value>
+    </labels>
+    <labels>
+        <fullName>delete_confirm_message_2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>delete confirm message-2</shortDescription>
+        <value>Do you really want to delete record?</value>
+    </labels>
+    <labels>
+        <fullName>manuals</fullName>
+        <categories>IMCC Stand Design</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC manuals</shortDescription>
+        <value>Manuals</value>
+    </labels>
+    <labels>
+        <fullName>send_form_report_file_size_exceeded</fullName>
+        <categories>IMCC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IMCC send form report file size exceeded</shortDescription>
+        <value>Report size is too large to send email.</value>
+    </labels>
+</CustomLabels>

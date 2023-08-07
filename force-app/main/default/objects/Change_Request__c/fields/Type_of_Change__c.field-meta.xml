@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type_of_Change__c</fullName>
+    <description>Type of Amendment.</description>
+    <externalId>false</externalId>
+    <label>ZZ_Type of Change</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bill To Account Change</fullName>
+                <default>false</default>
+                <label>Account - Bill To Account Change To Different Account</label>
+            </value>
+            <value>
+                <fullName>Billing Address Change</fullName>
+                <default>false</default>
+                <label>Account - Bill To Address Update Same Account</label>
+            </value>
+            <value>
+                <fullName>Account Name Change</fullName>
+                <default>false</default>
+                <label>Account - Name Update</label>
+            </value>
+            <value>
+                <fullName>Ship To Account Change</fullName>
+                <default>false</default>
+                <label>Account - Ship To Account Change To Different Account</label>
+            </value>
+            <value>
+                <fullName>Shipping Address Change</fullName>
+                <default>false</default>
+                <label>Account - Ship To Address Update Same Account</label>
+            </value>
+            <value>
+                <fullName>Billing Schedule Change</fullName>
+                <default>false</default>
+                <label>Billing Options Update</label>
+            </value>
+            <value>
+                <fullName>Campaign Run Dates Change</fullName>
+                <default>false</default>
+                <label>Campaign Run Dates Update</label>
+            </value>
+            <value>
+                <fullName>Cancellation</fullName>
+                <default>false</default>
+                <label>Cancellation</label>
+            </value>
+            <value>
+                <fullName>Update Bill To Contact</fullName>
+                <default>false</default>
+                <label>Contact - Bill To Contact Change To Different Contact</label>
+            </value>
+            <value>
+                <fullName>Bill to Contact Details Change</fullName>
+                <default>false</default>
+                <label>Contact - Bill To Contact Update Same Contact</label>
+            </value>
+            <value>
+                <fullName>Number of Impressions Amendment</fullName>
+                <default>false</default>
+                <label>Number of Impressions Amendment</label>
+            </value>
+            <value>
+                <fullName>PO number change</fullName>
+                <default>false</default>
+                <label>PO Number Update</label>
+            </value>
+            <value>
+                <fullName>Tax Exempt Rebill</fullName>
+                <default>false</default>
+                <label>Tax Exempt Rebill</label>
+            </value>
+            <value>
+                <fullName>VAT Registration Number Change</fullName>
+                <default>false</default>
+                <label>VAT Registration Number Update</label>
+            </value>
+            <value>
+                <fullName>Account Address</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Account Address</label>
+            </value>
+            <value>
+                <fullName>Account Name</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Account Name</label>
+            </value>
+            <value>
+                <fullName>Billing Account</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Billing Account</label>
+            </value>
+            <value>
+                <fullName>Billing Address</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Billing Address</label>
+            </value>
+            <value>
+                <fullName>Billing Contact</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Billing Contact</label>
+            </value>
+            <value>
+                <fullName>Billing Terms</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Billing Terms</label>
+            </value>
+            <value>
+                <fullName>Booth Change</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Booth Change</label>
+            </value>
+            <value>
+                <fullName>Change Sales Rep</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Change Sales Rep</label>
+            </value>
+            <value>
+                <fullName>Content</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Content</label>
+            </value>
+            <value>
+                <fullName>Currency</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Currency</label>
+            </value>
+            <value>
+                <fullName>Date Change</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Date Change</label>
+            </value>
+            <value>
+                <fullName>Downgrade</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Downgrade</label>
+            </value>
+            <value>
+                <fullName>Incorrect Account details with Tax impact Amendment</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Incorrect Account details with Tax impact Amendment</label>
+            </value>
+            <value>
+                <fullName>Incorrect Product Tax amendment</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Incorrect Product Tax amendment</label>
+            </value>
+            <value>
+                <fullName>Ordered Products</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Ordered Products</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Owner Change</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Owner Change</label>
+            </value>
+            <value>
+                <fullName>Payment Schedule</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Payment Schedule</label>
+            </value>
+            <value>
+                <fullName>Payment Terms</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Payment Terms</label>
+            </value>
+            <value>
+                <fullName>Print Ad Size Change</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Print Ad Size Change</label>
+            </value>
+            <value>
+                <fullName>Product Downgrade</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Product Downgrade</label>
+            </value>
+            <value>
+                <fullName>Product Upgrade</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Product Upgrade</label>
+            </value>
+            <value>
+                <fullName>Purchase Order</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Purchase Order</label>
+            </value>
+            <value>
+                <fullName>Quantity Change</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Quantity Change</label>
+            </value>
+            <value>
+                <fullName>Rate Change</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Rate Change</label>
+            </value>
+            <value>
+                <fullName>Replace</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Replace</label>
+            </value>
+            <value>
+                <fullName>Sales Rep</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Sales Rep</label>
+            </value>
+            <value>
+                <fullName>Updated VAT number Amendment</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Updated VAT number Amendment</label>
+            </value>
+            <value>
+                <fullName>Upgrade or Addition</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Upgrade or Addition</label>
+            </value>
+            <value>
+                <fullName>VAT Change</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VAT Change</label>
+            </value>
+            <value>
+                <fullName>VAT Number</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VAT Number</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

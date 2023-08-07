@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>IM Customer Center - This is used in IM Customer Center too. This is use for Edition logo to display on edition layout for ops user.</description>
+    <enableFeeds>false</enableFeeds>
+    <label>Logo URL Prefix</label>
+    <visibility>Protected</visibility>
+</CustomObject>

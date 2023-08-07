@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reset_Pop_up_Preferences__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>To reset the pop up preferences set by a user when there are any changes done in popup by operations admin.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>To reset the pop up preferences set by a user when there are any changes done in popup by operations admin.</inlineHelpText>
+    <label>Reset Pop up Preferences</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

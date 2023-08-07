@@ -1,0 +1,136 @@
+<template>
+    <lightning-card icon-name="standard:report" title="Report by Edition and Form">
+        <div slot="actions" style="width:830px">
+            <lightning-layout multiple-rows="true">
+                <template if:true={isWithViewButton}>
+                    <lightning-layout-item size="3">
+                        <lightning-combobox options={editionsList} onchange={handleEditionChange} value={eId}></lightning-combobox>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="4" padding="horizontal-small">
+                        <lightning-combobox options={myoptions} onchange={handleSTChange} value={st}></lightning-combobox>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="5" style="margin-top: 17px;">
+                        <lightning-button variant="brand" disabled={isBtnDisable} onclick={getReportData} label="View" icon-name="utility:preview"></lightning-button>&nbsp;
+                        <lightning-button variant="brand" disabled={isBtnDisable} onclick={openDownloadModal} label="Download" icon-name="utility:download"></lightning-button>&nbsp;
+                        <lightning-button variant="brand" disabled={isBtnDisable} onclick={openSendReportModal} label="Send Report" icon-name="utility:email"></lightning-button>
+                    </lightning-layout-item>
+                </template>
+                <template if:false={isWithViewButton}>
+                    <lightning-layout-item size="4">
+                        <lightning-combobox options={editionsList} onchange={handleEditionChange} value={eId}></lightning-combobox>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="4" padding="horizontal-small">
+                        <lightning-combobox options={myoptions} onchange={handleSTChange} value={st}></lightning-combobox>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="4" style="margin-top: 17px;">
+                        <lightning-button variant="brand" disabled={isBtnDisable} onclick={openDownloadModal} label="Download" icon-name="utility:download"></lightning-button>&nbsp;
+                        <lightning-button variant="brand" disabled={isBtnDisable} onclick={openSendReportModal} label="Send Report" icon-name="utility:email"></lightning-button>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </div>
+        <div class="fbreportdiv" style="width:100%;overflow:auto;">
+            <template if:true={showData}>
+                <table class="form-response-table slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                    <thead>
+                        <tr>    
+                            <template if:true={columns} for:each={columns} for:item="col" for:index="index">              
+                                <th key={col.index}>{col.label}</th>
+                            </template>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template if:true={questAnsList} for:each={questAnsList} for:item="ans" for:index="index">
+                            <tr key={ans.key}>
+                                <template if:true={ans.value} for:each={ans.value} for:item="ansItem" for:index="index">
+                                    <td key={ans.cellkey}>
+                                        <lightning-formatted-rich-text value={ansItem}></lightning-formatted-rich-text>
+                                    </td>
+                                </template>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </template>
+
+            <template if:false={showData}>
+                <table class="form-response-table slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th>Account Name</th>     
+                            <th>Community User Name</th>                   
+                            <th>Community Email</th>
+                        </tr>
+                    </thead>
+                </table>
+            </template>
+            <lightning-spinner size="small" variant="brand" if:true={spinner}></lightning-spinner>
+        </div>   
+    </lightning-card>
+
+    <!--Download modal-->
+    <template if:true={isOpenDownloadModal}>
+        <div class="modal-container">
+            <section role="dialog" id="text-plain-popup4" tabindex="-1" aria-labelledby="modal-heading-04" 
+                aria-modal="true" aria-describedby="modal-content-id-4" class="slds-modal slds-modal_medium slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h3 id="modal-heading-04" class="slds-text-heading_medium slds-hyphenate">
+                            <strong>Download Form Report</strong>
+                        </h3>
+                        <button onclick={closeDownloadModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                            <lightning-icon icon-name="utility:close" size="small" variant="bare"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </header>
+                    <div class="slds-modal__content slds-var-p-around_small" id="modal-content-id-4">                    
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_12-of-12">
+                                <div class="slds-section slds-is-open">
+                                    <h3 class="slds-section__title slds-theme_shade">
+                                        <span class="slds-truncate slds-p-horizontal_small" title="Select questions">
+                                            If you want to get all questions in report, then don't need to select.</span>
+                                    </h3>
+                                    <div class="slds-p-around_small">
+                                        <lightning-spinner size="small" variant="brand" if:true={spinner}></lightning-spinner>
+                                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+                                            <thead>
+                                                <tr class="slds-line-height_reset">
+                                                    <th scope="col" width="50">#</th>
+                                                    <th scope="col">Questions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template for:each={questList} for:item="item" for:index="ind">
+                                                    <tr key={item.Question__c} class="slds-hint-parent">
+                                                        <td>
+                                                            <lightning-input type="checkbox" checked={item.checked} data-index={ind} onchange={handleCheckboxChange} label="checkbox" variant="label-hidden"></lightning-input>
+                                                        </td>
+                                                        <td data-index={ind}>
+                                                            <lightning-formatted-rich-text value={item.Question__r.Label__c}></lightning-formatted-rich-text>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                    <footer class="slds-modal__footer">
+												<strong style="color:red;padding-right: 10%;">{label.FormReportDownloadNote}</strong>
+                        <lightning-button label="Close" onclick={closeDownloadModal}></lightning-button>&nbsp;&nbsp;
+                        <lightning-button icon-name="utility:download" variant="brand" label="Download" onclick={getDataToDownload}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+
+    <!--Send Report-->
+    <template if:true={isOpenSendReportModal}>
+        <c-send-form-report-popup onclosemodal={hideSendReportModal} purchased-data-map={purchasedDataMap} qid={st} edition-id={eId}></c-send-form-report-popup>
+    </template>
+</template>

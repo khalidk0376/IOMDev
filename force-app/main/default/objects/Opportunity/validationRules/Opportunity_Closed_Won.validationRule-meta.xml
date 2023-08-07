@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Opportunity_Closed_Won</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+	ISCHANGED(StageName), 
+	IF(Probability &gt;= 0.7, true, false),
+	OR(
+		(ISBLANK(Bill_To_Account__c)),
+		(ISBLANK(Billing_Contact__c)),
+		(ISBLANK(Ship_To_Account__c))
+	), 
+	$Setup.Application_Bypass__c.Bypass_Validation_Rules__c = False
+)</errorConditionFormula>
+    <errorMessage>Bill To Account / Billing Contact and Ship To Account is mandatory for Opportunity Stage Contract Sent / Closed Won.</errorMessage>
+</ValidationRule>

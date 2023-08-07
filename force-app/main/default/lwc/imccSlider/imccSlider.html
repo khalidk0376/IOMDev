@@ -1,0 +1,52 @@
+<template>
+    <lightning-layout multiple-rows="true">
+        <lightning-layout-item size="12" class="recommended-events">
+            <div class="event-dot-icon">
+                <img src="/sfsites/c/resource/IMCC2/icons/Ellipses.svg" class="icon-16 icon-inverse"/>
+            </div>
+            <div class="recommended-event-icon">
+                <div class="event-content">
+                    <span class="heading heading-d-medium">Recommended events</span>
+                </div>
+                <div class="event-icon">
+                    <lightning-icon class="icon-fade" onclick={back} icon-name="action:back" alternative-text="Approved" size="x-small" title="Approved"></lightning-icon>
+                    <lightning-icon class="icon-notfade" onclick={next} icon-name="action:back" alternative-text="Approved" size="x-small" title="Approved"></lightning-icon>
+                </div>
+            </div>
+            <!--
+            <div class="slds-grid event-image-box">
+                <div class="slds-col">
+                    <img src="/sfsites/c/resource/IMCC2/icons/event-1.jpg" alt="Event 1">
+                </div>
+                <div class="slds-col event-images">
+                    <img src="/sfsites/c/resource/IMCC2/icons/event-2.jpg" alt="Event 2">
+                </div>
+                <div class="slds-col event-images">
+                    <img src="/sfsites/c/resource/IMCC2/icons/event-3.jpg" alt="Event 3">
+                </div>
+            </div>
+            -->
+            <div class="carousel">
+                <div class="slides">
+                    <div class="slide">
+                        <div class="event-slide">
+                            <div class="event-image-box">
+                                <div class="image-box-heading">
+                                    <span class="heading heading-d-large">World of concrete</span>
+                                </div>
+                                <div class="image-box-content">
+                                    <span>The Only event dedicated to the commercial concrete and masonry construction</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="/sfsites/c/resource/IMCC2/icons/event-1.jpg" alt="slide image" class="slide">
+                    <img src="/sfsites/c/resource/IMCC2/icons/event-2.jpg" alt="slide image" class="slide">
+                    <img src="/sfsites/c/resource/IMCC2/icons/event-1.jpg" alt="slide image" class="slide">
+                    <img src="/sfsites/c/resource/IMCC2/icons/event-3.jpg" alt="slide image" class="slide">
+                    <img src="/sfsites/c/resource/IMCC2/icons/event-1.jpg" alt="slide image" class="slide">                    
+                </div>                
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

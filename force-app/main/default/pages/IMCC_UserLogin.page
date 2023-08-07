@@ -1,0 +1,154 @@
+<apex:page controller="IMCC_UserLoginCtrl" showHeader="false" sidebar="false" lightningStylesheets="true" standardStylesheets="false" cache="false">
+<apex:slds />  
+<html >
+    <head>
+      <meta charset="UTF-8" />
+      <title>Login | Informa Market</title>   
+      <!--
+        **   ****     **   ********     *******     *******     ****     ****       **    
+        /**  /**/**   /**  /**/////     **/////**   /**////**   /**/**   **/**      ****   
+        /**  /**//**  /**  /**         **     //**  /**   /**   /**//** ** /**     **//**  
+        /**  /** //** /**  /*******   /**      /**  /*******    /** //***  /**    **  //** 
+        /**  /**  //**/**  /**////    /**      /**  /**///**    /**  //*   /**   **********
+        /**  /**   //****  /**        //**     **   /**  //**   /**   /    /**  /**//////**
+        /**  /**    //***  /**         //*******    /**   //**  /**        /**  /**     /**
+        //   //      ///   //           ///////     //     //   //         //   //      // 
+      tst
+      -->   
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+      <meta name="theme-color" content="#0d263f"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <link rel="shortcut icon" href="/sfsites/c/resource/IMCC/icons/favicon.png?v=1" type="image/x-icon"/>
+      <style>        
+        @font-face {
+            font-family: Aleo;
+            src: local(Aleo-Regular),url("/sfsites/c/resource/IMCC/fonts/Aleo-Regular.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+        }
+    
+        @font-face {
+            font-family: NotoSans;
+            src: local(NotoSans-Regular),  
+                url("/sfsites/c/resource/IMCC/fonts/NotoSans-Regular.ttf") format("truetype");	
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+        }
+        @font-face {
+            font-family: NotoSans;
+            src: local(NotoSans-Medium),
+                url("/sfsites/c/resource/IMCC/fonts/NotoSans-Medium.ttf") format("truetype");
+            font-weight: 500;
+            font-style: normal;
+            font-stretch: normal;
+        }
+        @font-face {
+            font-family: NotoSans;
+            src: local(NotoSans-SemiBold),
+                url("/sfsites/c/resource/IMCC/fonts/NotoSans-SemiBold.ttf") format("truetype");
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+        }
+    
+        @font-face {
+            font-family: NotoSans;
+            src: local(NotoSans-Bold),
+                url("/sfsites/c/resource/IMCC/fonts/NotoSans-Bold.ttf") format("truetype");
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+        }                        
+      </style>
+      <link rel="stylesheet" href="/sfsites/c/resource/IMCC/style.css?v=128.19"/>
+      <link rel="stylesheet" href="/sfsites/c/resource/IMCC/global.css?v=128.19"/>
+      <link rel="stylesheet" href="/sfsites/c/resource/IMCC2/style-two.css?v=128.19"/>      
+    </head>
+    <body class="loginBody">
+      <!--<div class="section-header">
+        <div class="container-standard dashboard-h">
+          <div class="slds-grid">
+            <div class="left-box" style="display: flex;align-items: center;gap: 30px;">                    
+              <div class="informa-logo">
+                <a href="javascript:void(0);">
+                  <img alt="Informa Logo" src="/sfsites/c/resource/IMCC/icons/informa-logo-2.png?v=1"/>
+                </a>
+              </div>
+              <div class="customer-center hide-in-only-small">
+                <span class="link link-d-small">Customer Center</span>
+              </div>
+            </div>
+          </div>              
+        </div>
+      </div>-->
+
+      <apex:form id="fm">
+        <div class="body-container">
+          <div class="container-standard body-content" style="padding-top: var(--space-8); padding-bottom:var(--space-8);">              
+            <div class="account-selection-name-list">                
+              
+                <div class="account-select-heading heading heading-d-small heading-m-small">
+                  {!$Label.Login_Redirect_Message}
+                </div> <!--
+                <div class="slds-grid slds-wrap" style="margin-top:48px;gap:32px">
+                  <div class="slds-col slds-size_1-of-1">
+                    <div class="slds-form-element">
+                      <label class="slds-form-element__label" style="font-size: 14px;font-weight: 500;font-stretch: normal;font-style: normal;line-height: 1.71;letter-spacing: normal;text-align: left;color: var(--indigo-10);" for="username">Username</label>
+                      <div class="slds-form-element__control">
+                        <apex:inputText value="{!username}" styleClass="slds-input" html-placeholder="Username" style="padding: 5px 10px;color: var(--indigo-10);"/>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                  <div class="slds-col slds-size_1-of-1">
+                    <div class="slds-form-element">
+                      <label class="slds-form-element__label" style="font-size: 14px;font-weight: 500;font-stretch: normal;font-style: normal;line-height: 1.71;letter-spacing: normal;text-align: left;color: var(--indigo-10);" for="username">Password</label>
+                      <div class="slds-form-element__control">
+                        <apex:inputSecret value="{!password}" id="pwd" label="Password" styleClass="slds-input" html-placeholder="Password" style="padding: 5px 10px;color: var(--indigo-10);"/>
+                        <div style="border-left:1px solid var(--indigo-10-transparency-20);position: absolute;margin-top: -30px;margin-left: 86%;padding-left: 16px;"><a id="showhide" href="javascript:void(0);" onclick="togglePass();" class="para paragraph-d-tiny">Show</a></div>
+                      </div>
+                    </div>
+                    <apex:outputText styleClass="slds-text-color_error" rendered="{!IF(AND(len(errMsg)>0, errMsg!= null), true, false)}" value="{!errMsg}" style="margin-top:10px"/>                    
+                  </div>
+                  
+                  <div class="slds-col slds-size_1-of-1" style="text-align: right;">
+                    <apex:commandLink action="{!forgotPassword}" value="Forgot Password" styleClass="anchorLink"></apex:commandLink>
+                  </div>
+                  <div class="slds-col slds-size_1-of-1" style="margin-top:-20px">    
+                    <apex:commandButton action="{!login}" value="Sign In" style="width:100%;padding: 8px 24px;font-size: 15px;line-height: 24px;color: var(--indigo-10);box-shadow: 0 0 4px 0 rgb(0 0 0 / 20%);border: solid 1px rgba(0, 0, 0, 0.1);background-color: var(--jade-6);" styleClass="btn-lg slds-button slds-button_brand"></apex:commandButton>                    
+                  </div>
+                  <div class="slds-col slds-size_1-of-1" style="text-align:center;">    
+                    OR                    
+                  </div>
+                  <div class="slds-col slds-size_1-of-1">    
+                    <apex:commandButton action="{!iirislogin}" value="Sign In Using IIRIS" style="width:100%;padding: 8px 24px;font-size: 15px;line-height: 24px;color: var(--indigo-10);box-shadow: 0 0 4px 0 rgb(0 0 0 / 20%);border: solid 1px rgba(0, 0, 0, 0.1);background-color: var(--jade-6);" styleClass="btn-lg slds-button slds-button_brand"></apex:commandButton>                    
+                  </div>
+                </div> -->                                                                       
+            </div>
+          </div>
+        </div>
+        <apex:actionFunction name="iirislogin" action="{!iirislogin}" />
+      </apex:form>
+      <script>
+        iirislogin();
+        let isShow = false;
+        function togglePass(){
+          if(isShow){
+            document.getElementById("{!$Component.fm.pwd}").setAttribute("type","password");
+            document.getElementById("showhide").innerText = "Show";
+            isShow = false;
+          }
+          else{
+            document.getElementById("{!$Component.fm.pwd}").setAttribute("type","text");
+            document.getElementById("showhide").innerText = "Hide";
+            isShow = true;
+          }
+        }
+      </script>
+    
+    </body>
+  </html>
+</apex:page>

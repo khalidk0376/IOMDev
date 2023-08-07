@@ -1,0 +1,5 @@
+<apex:page title="Form Builder Admin" sidebar="false" showHeader="false">
+    <!--<c:theme />-->
+    
+    <c:FBAdminComp />
+</apex:page>

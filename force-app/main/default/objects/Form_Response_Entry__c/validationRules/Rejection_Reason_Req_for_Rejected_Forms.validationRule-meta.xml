@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rejection_Reason_Req_for_Rejected_Forms</fullName>
+    <active>true</active>
+    <description>When any form is rejected, then rejection reason become mandatory as it helps the user to know the reason.</description>
+    <errorConditionFormula>AND(ISPICKVAL( Approval_Status__c , &apos;Rejected&apos;) ,  ISBLANK( Rejection_Reason__c ) )</errorConditionFormula>
+    <errorDisplayField>Rejection_Reason__c</errorDisplayField>
+    <errorMessage>Please enter the rejection reason for rejecting the form.</errorMessage>
+</ValidationRule>

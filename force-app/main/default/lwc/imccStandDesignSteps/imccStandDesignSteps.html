@@ -1,0 +1,68 @@
+<!--
+  @description       : 
+  @author            : mukesh.gupta@girikon.com
+  @group             : 
+  @last modified on  : 02-10-2022
+  @last modified by  : mukesh.gupta@girikon.com
+-->
+<template>
+    <div class="slds-text-align_left slds-m-bottom_small">
+        <lightning-button if:true={byOpsUser} label="Back" variant="base" class="slds-m-left_small" onclick={backToStandSubmissionPage}></lightning-button>
+    </div>
+    <div class="forms-and-manuals fnm">
+        <lightning-progress-indicator current-step={currentStep} type="path" variant="base">
+            <template for:each={steps} for:item="step">
+                <lightning-progress-step onclick={handleStepChange} label={step.label} value={step.value} key={step.value}></lightning-progress-step>
+            </template>
+        </lightning-progress-indicator>
+
+        <div class="steps slds-p-vertical_small">
+            <div class="slds-card slds-p-around_small">
+                <c-imcc-stand-design-step1 onaftersave={gotoNextStep} stand-details={standDetail} detail-obj={exhDetail} type={type} if:true={isStep1}></c-imcc-stand-design-step1>
+                <c-imcc-stand-design-step2 onaftersave={gotoNextStep} stand-details={standDetail} detail-obj={exhDetail} type={type} edition-code={editionCode} account-id={accountId} if:true={isStep2}></c-imcc-stand-design-step2>
+                <c-imcc-stand-design-step3 onaftersave={gotoNextStep} stand-details={standDetail} detail-obj={exhDetail} type={type} if:true={isStep3}></c-imcc-stand-design-step3>
+                <c-imcc-stand-design-step4 onaftersave={gotoNextStep} stand-details={standDetail} cm={exhDetail} type={type} if:true={isStep4}></c-imcc-stand-design-step4>
+                <c-imcc-stand-design-step5 onaftersave={gotoNextStep} stand-details={standDetail} cm={exhDetail} type={type} if:true={isStep5}></c-imcc-stand-design-step5>
+                <c-imcc-stand-design-step6 onaftersave={gotoNextStep} stand-details={standDetail} cm={exhDetail} type={type} if:true={isStep6}></c-imcc-stand-design-step6>
+                <c-imcc-stand-design-step7 onaftersave={gotoNextStep} stand-details={standDetail} cm={exhDetail} type={type} if:true={isStep7}></c-imcc-stand-design-step7>
+            </div>
+        </div>
+
+        <div class="slds-p-vertical_small slds-text-align_right">
+            <!--<lightning-button if:false={isStep1} disabled={isNextBtnDisabled} label="Back" onclick={backStep}></lightning-button>-->
+            <lightning-button if:false={isInReview} label={currentButtonLabel} disabled={isNextBtnDisabled} variant="brand" class="slds-m-left_x-small" onclick={saveCurrentStepData}></lightning-button>
+            <lightning-button if:true={isTentativeApproval} label={currentButtonLabel} disabled={isNextBtnDisabled} variant="brand" class="slds-m-left_x-small" onclick={saveCurrentStepData}></lightning-button>
+        </div>
+    </div>
+
+    <!--Approval confirmation-->
+    <template if:true={confirmModal}>        
+        <section role="dialog" tabindex="-1" aria-labelledby="md1" aria-modal="true" aria-describedby="linkformagreementContent" class="slds-modal slds-fade-in-open modalpopup">
+              <div class="slds-modal__container">
+                 <!-- Modal/Popup Box LWC header here -->
+                 <header class="slds-modal__header">
+                    <button onclick={closeConfirmModal} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                          <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small" ></lightning-icon>
+                          <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="md1" class="slds-text-heading_medium slds-hyphenate">Confirmation</h2>
+                 </header>
+                 <!-- Modal/Popup Box LWC body starts here -->
+                 <div class="slds-modal__content slds-p-around_medium" id="linkformagreementContent">
+                    <p class="para paragraph-d-standard">
+                       Do you really want to submit for approval?
+                    </p>
+                    <p class="slds-m-top_small para paragraph-d-standard">
+                        Submitting the form for approval will lock the stand design submission for any further edits.
+                    </p>
+                 </div>
+                 <!-- Modal/Popup Box LWC footer starts here -->
+                 <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeConfirmModal} title="Cancel">Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={submitForApproval} title="Submit">Yes, Submit</button>
+                 </footer>
+              </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

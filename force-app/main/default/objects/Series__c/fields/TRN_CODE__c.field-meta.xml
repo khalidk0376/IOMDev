@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TRN_CODE__c</fullName>
+    <description>For Dubai TRN Logic</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For Dubai Events</inlineHelpText>
+    <label>TRN CODE</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>TRN-India</fullName>
+                <default>false</default>
+                <label>TRN-India</label>
+            </value>
+            <value>
+                <fullName>TRN-Nigeria</fullName>
+                <default>false</default>
+                <label>TRN-Nigeria</label>
+            </value>
+            <value>
+                <fullName>TRN-UAE</fullName>
+                <default>false</default>
+                <label>TRN-UAE</label>
+            </value>
+            <value>
+                <fullName>TRN-UK</fullName>
+                <default>false</default>
+                <label>TRN-UK</label>
+            </value>
+            <value>
+                <fullName>TRN-Singapore</fullName>
+                <default>false</default>
+                <label>TRN-Singapore</label>
+            </value>
+            <value>
+                <fullName>TRN-Egypt005</fullName>
+                <default>false</default>
+                <label>TRN-Egypt005</label>
+            </value>
+            <value>
+                <fullName>TRN-Egypt003/4/6</fullName>
+                <default>false</default>
+                <label>TRN-Egypt003/4/6</label>
+            </value>
+            <value>
+                <fullName>TRN-SouthAfrica</fullName>
+                <default>false</default>
+                <label>TRN-SouthAfrica</label>
+            </value>
+            <value>
+                <fullName>TRN-Saudi Arabia</fullName>
+                <default>false</default>
+                <label>TRN-Saudi Arabia</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

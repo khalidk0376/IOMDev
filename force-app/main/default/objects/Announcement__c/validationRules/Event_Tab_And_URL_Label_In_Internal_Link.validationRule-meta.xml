@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Event_Tab_And_URL_Label_In_Internal_Link</fullName>
+    <active>true</active>
+    <description>Internal Tab and Internal/External Link Label are mandatory when the Link Type is Internal</description>
+    <errorConditionFormula>AND( ISPICKVAL(Link_Type__c, &apos;Internal&apos;), OR(ISBLANK( Event_Tab__c ),ISBLANK(URL_Label__c)))</errorConditionFormula>
+    <errorMessage>Internal Tab and Internal/External Link Label are mandatory when the Link Type is Internal</errorMessage>
+</ValidationRule>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Processing_Step__c</fullName>
+    <defaultValue>&quot;Step 0&quot;</defaultValue>
+    <description>Shows the current processing amendment Step, where 0 is default and Step 1 means for new Amentmnt Opportunity or Invoice canceled &amp; Step 2 refers to Order Re-Queue according to the type of change</description>
+    <externalId>false</externalId>
+    <label>Current Processing Step</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Step 0</fullName>
+                <default>true</default>
+                <label>Step 0</label>
+            </value>
+            <value>
+                <fullName>Step 1</fullName>
+                <default>false</default>
+                <label>Step 1</label>
+            </value>
+            <value>
+                <fullName>Step 2</fullName>
+                <default>false</default>
+                <label>Step 2</label>
+            </value>
+            <value>
+                <fullName>Step 3</fullName>
+                <default>false</default>
+                <label>Step 3</label>
+            </value>
+            <value>
+                <fullName>Step 4</fullName>
+                <default>false</default>
+                <label>Step 4</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

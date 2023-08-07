@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Non_Exhibitor_Price__c</fullName>
+    <description>Non Exhibitor Price for the product. Used by Price Rules.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Non Exhibitor Price for the product. Used by Price Rules.</inlineHelpText>
+    <label>Non Exhibitor Price</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Select_Contact_whose_Account_is_choosen</fullName>
+    <active>false</active>
+    <errorConditionFormula>(AccountId  &lt;&gt; &apos;&apos; &amp;&amp; ContactId  &lt;&gt; &apos;&apos; ) &amp;&amp; (Contact.AccountId  &lt;&gt;  AccountId)</errorConditionFormula>
+    <errorDisplayField>ContactId</errorDisplayField>
+    <errorMessage>Please Choose Contact belongs to Account you have chosen</errorMessage>
+</ValidationRule>

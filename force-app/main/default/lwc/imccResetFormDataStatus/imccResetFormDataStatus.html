@@ -1,0 +1,100 @@
+<!-- sldsValidatorIgnore -->
+<!-- sldsValidatorIgnore -->
+<template>
+    <lightning-quick-action-panel header="List of Form Data">
+        <lightning-spinner if:true={showSpinner} variant="brand" size="small" title="Loading..." class="loaderCss">
+        </lightning-spinner>
+        <div class="slds-clearfix slds-p-bottom_small">
+            <div class="slds-float_left">
+                <lightning-input 
+                type="search" 
+                onchange={handleKeyChange}           
+                value={searchKey} variant="label-hidden">
+             </lightning-input>
+            </div>
+        </div>
+
+        <div class="slds-m-bottom_small">
+            <lightning-datatable 
+            data-id="table"
+            key-field="Id"
+            data={tableData} 
+            columns={columns} 
+            sorted-by={sortedBy}
+            sorted-direction={sortedDirection}
+            onrowselection ={onRowSelection} 
+            selected-rows={selectedRows}           
+            onsort={sortColumns}>
+            </lightning-datatable>
+        </div>
+
+        <lightning-layout horizontal-align="space">
+            <lightning-layout-item flexibility="auto">
+                <lightning-button 
+                    label="Previous"
+                    disabled={isPrev}
+                    icon-name="utility:chevronleft" 
+                    onclick={previousHandler}>
+                </lightning-button>
+            </lightning-layout-item>
+            <lightning-layout-item flexibility="auto">
+                Total Records : {totalRecountCount} ,
+                Page : ({page} of {totalPage})
+            </lightning-layout-item>
+            <lightning-layout-item flexibility="auto">
+                <lightning-button 
+                    label="Next" 
+                    disabled={isNext}
+                    icon-name="utility:chevronright" 
+                    icon-position="right"
+                    onclick={nextHandler}>
+                </lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+     
+        <div slot="footer">
+            <lightning-button variant="brand" label="Cancel" onclick={closeAction}></lightning-button>&nbsp;&nbsp;
+            <lightning-button variant="brand" label="Reset Form Status" onclick={handleShowModal} disabled={isDisable}></lightning-button> 
+        </div>
+     
+    </lightning-quick-action-panel>
+
+    <template if:true={showModal}>
+        <section
+            role="dialog"
+            tabindex="-1"
+            aria-labelledby="modal-heading-01"
+            aria-modal="true"
+            aria-describedby="modal-content-id-1"
+            class="slds-modal slds-fade-in-open"
+        >
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon
+                    class="slds-modal__close"
+                    title="Close"
+                    icon-name="utility:close"
+                    icon-class="slds-button_icon-inverse"
+                    onclick={handleDialogClose}
+                    ></lightning-button-icon>
+
+                    <h3 class="slds-text-heading_medium slds-hyphenate header-string">
+                        {label.formResetAlertMsg}
+                    </h3>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <slot>
+                        <div class="slds-float_right">
+                        <lightning-button variant="neutral" label="Cancel" onclick={handleDialogClose}></lightning-button>&nbsp;&nbsp;
+                        <lightning-button variant="brand" label="Proceed" onclick={handleResetStatus}></lightning-button>
+                        </div>
+                    </slot>
+                </div>
+
+            </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+    </template> 
+
+</template>

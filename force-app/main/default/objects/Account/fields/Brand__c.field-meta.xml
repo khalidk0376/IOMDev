@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Brand__c</fullName>
+    <description>Field to identify Branch</description>
+    <externalId>false</externalId>
+    <label>Brand (s)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Africa Health</fullName>
+                <default>false</default>
+                <label>Africa Health</label>
+            </value>
+            <value>
+                <fullName>Arab Health</fullName>
+                <default>false</default>
+                <label>Arab Health</label>
+            </value>
+            <value>
+                <fullName>Channel Partners</fullName>
+                <default>false</default>
+                <label>Channel Partners</label>
+            </value>
+            <value>
+                <fullName>Channel Partners Cloud Insights</fullName>
+                <default>false</default>
+                <label>Channel Partners Cloud Insights</label>
+            </value>
+            <value>
+                <fullName>Channel Partners Conference &amp; Expo</fullName>
+                <default>false</default>
+                <label>Channel Partners Conference &amp; Expo</label>
+            </value>
+            <value>
+                <fullName>Channel Partners Evolution</fullName>
+                <default>false</default>
+                <label>Channel Partners Evolution</label>
+            </value>
+            <value>
+                <fullName>Channel Partners Store</fullName>
+                <default>false</default>
+                <label>Channel Partners Store</label>
+            </value>
+            <value>
+                <fullName>China Beauty Expo</fullName>
+                <default>false</default>
+                <label>China Beauty Expo</label>
+            </value>
+            <value>
+                <fullName>EndoNurse Institute</fullName>
+                <default>false</default>
+                <label>EndoNurse Institute</label>
+            </value>
+            <value>
+                <fullName>Fispal Cafe</fullName>
+                <default>false</default>
+                <label>Fispal Cafe</label>
+            </value>
+            <value>
+                <fullName>Fispal Tecnologia Expo</fullName>
+                <default>false</default>
+                <label>Fispal Tecnologia Expo</label>
+            </value>
+            <value>
+                <fullName>Greenbuild Int&apos;l Conf &amp; Expo</fullName>
+                <default>false</default>
+                <label>Greenbuild Int&apos;l Conf &amp; Expo</label>
+            </value>
+            <value>
+                <fullName>Infection Control Today</fullName>
+                <default>false</default>
+                <label>Infection Control Today</label>
+            </value>
+            <value>
+                <fullName>Ingredient Marketplace Global Expo&amp;Conf</fullName>
+                <default>false</default>
+                <label>Ingredient Marketplace Global Expo&amp;Conf</label>
+            </value>
+            <value>
+                <fullName>Inside Self-Storage</fullName>
+                <default>false</default>
+                <label>Inside Self-Storage</label>
+            </value>
+            <value>
+                <fullName>Inside Self-Storage Developers Conf</fullName>
+                <default>false</default>
+                <label>Inside Self-Storage Developers Conf</label>
+            </value>
+            <value>
+                <fullName>Inside Self-Storage Executive Symposium</fullName>
+                <default>false</default>
+                <label>Inside Self-Storage Executive Symposium</label>
+            </value>
+            <value>
+                <fullName>Inside Self-Storage Store</fullName>
+                <default>false</default>
+                <label>Inside Self-Storage Store</label>
+            </value>
+            <value>
+                <fullName>Inside Self-Storage World Expo</fullName>
+                <default>false</default>
+                <label>Inside Self-Storage World Expo</label>
+            </value>
+            <value>
+                <fullName>Interior Design Show</fullName>
+                <default>false</default>
+                <label>Interior Design Show</label>
+            </value>
+            <value>
+                <fullName>National Tanning Training Institute</fullName>
+                <default>false</default>
+                <label>National Tanning Training Institute</label>
+            </value>
+            <value>
+                <fullName>Natural Products INSIDER</fullName>
+                <default>false</default>
+                <label>Natural Products INSIDER</label>
+            </value>
+            <value>
+                <fullName>Petfood 2.0 Conference &amp; Expo</fullName>
+                <default>false</default>
+                <label>Petfood 2.0 Conference &amp; Expo</label>
+            </value>
+            <value>
+                <fullName>Self-Storage Talk</fullName>
+                <default>false</default>
+                <label>Self-Storage Talk</label>
+            </value>
+            <value>
+                <fullName>Self-Storage Training Institute</fullName>
+                <default>false</default>
+                <label>Self-Storage Training Institute</label>
+            </value>
+            <value>
+                <fullName>SupplySide</fullName>
+                <default>false</default>
+                <label>SupplySide</label>
+            </value>
+            <value>
+                <fullName>SupplySide Animal Nutrition Insights</fullName>
+                <default>false</default>
+                <label>SupplySide Animal Nutrition Insights</label>
+            </value>
+            <value>
+                <fullName>SupplySide Beverage Insights</fullName>
+                <default>false</default>
+                <label>SupplySide Beverage Insights</label>
+            </value>
+            <value>
+                <fullName>SupplySide Fispal Brazil Expo</fullName>
+                <default>false</default>
+                <label>SupplySide Fispal Brazil Expo</label>
+            </value>
+            <value>
+                <fullName>SupplySide Health Technology Insights</fullName>
+                <default>false</default>
+                <label>SupplySide Health Technology Insights</label>
+            </value>
+            <value>
+                <fullName>SupplySide Omega-3 Insights</fullName>
+                <default>false</default>
+                <label>SupplySide Omega-3 Insights</label>
+            </value>
+            <value>
+                <fullName>SupplySide R&amp;D Insights</fullName>
+                <default>false</default>
+                <label>SupplySide R&amp;D Insights</label>
+            </value>
+            <value>
+                <fullName>SupplySide Store</fullName>
+                <default>false</default>
+                <label>SupplySide Store</label>
+            </value>
+            <value>
+                <fullName>SupplySide Vitamin Angels</fullName>
+                <default>false</default>
+                <label>SupplySide Vitamin Angels</label>
+            </value>
+            <value>
+                <fullName>SupplySide West Global Expo &amp; Conference</fullName>
+                <default>false</default>
+                <label>SupplySide West Global Expo &amp; Conference</label>
+            </value>
+            <value>
+                <fullName>Vitafoods Expo</fullName>
+                <default>false</default>
+                <label>Vitafoods Expo</label>
+            </value>
+            <value>
+                <fullName>World of Concrete</fullName>
+                <default>false</default>
+                <label>World of Concrete</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>5</visibleLines>
+</CustomField>

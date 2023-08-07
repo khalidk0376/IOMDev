@@ -1,0 +1,155 @@
+<!--
+* Created By   :   Girikon(Ashish) : 
+* Created On   :   19 Feb 2020
+* *********************************************************************************
+* @description  : Set Of Buttons to perform Actions
+* controller    : BoothSelectionCtrl
+* *********************************************************************************
+* Modification log : Girikon(Prashant) [IML2R-1799] 24th March 2020
+* 
+-->
+<aura:component controller="AmendmentUtils" implements="flexipage:availableForAllPageTypes,force:hasRecordId"
+    access="global">
+    <!--handler -->
+    <aura:handler name="init" value="{!this}" action="{!c.onLoad}" />
+    <aura:handler event="force:refreshView" action="{!c.forceRefreshViewHandler}" />
+
+    <!--attribute --> 
+    <aura:attribute name="showInvoiceSelectionModal" type="Boolean" default="false" access="private" />
+    <aura:attribute name="invCrcolumns" type="Object" access="private" /> 
+    <aura:attribute name="invData" type="Object" access="private" />
+    <aura:attribute name="showRequiredInvMessage" type="Boolean" default="false" access="private" />
+    <aura:attribute name="isNextDisabled" type="Boolean" default="true" access="private" />
+    <aura:attribute name="reqErrorMessage" type="string" access="private" />
+    <aura:attribute name="selectedInvIds" type="List" access="private" />
+    <aura:attribute name="noInvMessage" type="string" access="private" default=""/>
+
+    <aura:attribute name="spinner" type="Boolean"  />
+    <aura:attribute name="disableExecute" type="Boolean" default="false" access="public" />
+    <aura:attribute name="changeRequestObject" type="Object" access="public" />
+    <aura:attribute name="changeRequestNewObject" type="Object" access="public" />
+    <aura:attribute name="buttonAccessObject" type="Object" access="public"
+        default="{fcr:true, rqo:true,updAdd:true,cAopp:true,fcrpc:true,pCAI:true,set1:true,set2:false}" />
+
+    <!-- spinner -->
+    <aura:if isTrue="{!v.spinner}">
+        <lightning:spinner variant="brand" size="small" />
+    </aura:if>
+
+    <div
+        style="height: 42px;left: 0;right: 0;padding-left: 15px;padding-right: 15px;border-radius: 0;transform: translate3d(0px, -13px, 0px);position: fixed;border-top: none;z-index: 99;margin-top: 1px;background-color:#f3f2f2;border-bottom: 1px solid rgb(221, 219, 218);box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.10);">
+        <!-- old Condition-->
+        <!-- <div class="box">
+        <aura:if isTrue="{!(v.changeRequestObject.Type_of_Change__c!='Update Bill to Contact')}">
+            <lightning:button onclick="{!c.execute4}" variant="brand" label="Create Amendment Opportunity" iconName="utility:change_record_type" iconPosition="left" disabled="{!not(v.changeRequestObject.Change_Request_Status__c=='Approved')}" />
+
+            <lightning:button onclick="{!c.execute5}" variant="brand" label="FCR with price change" iconName="utility:change_record_type" iconPosition="left" disabled="{!not(v.changeRequestObject.Change_Request_Status__c=='Amend Data Complete')}" />
+
+            <lightning:button onclick="{!c.execute6}" variant="brand" label="Additional Invoice" iconName="utility:change_record_type" iconPosition="left" disabled="{!not(v.changeRequestObject.Change_Request_Status__c=='Amend Data Complete')}" />
+
+            <lightning:button onclick="{!c.execute1}" variant="brand" label="Full Cancel Rebill" iconName="utility:change_record_type" iconPosition="left" disabled="{!not(v.changeRequestObject.Change_Request_Status__c=='Approved')}" />
+            
+            <lightning:button onclick="{!c.execute2}" variant="brand" label="Re-Queue Order" iconName="utility:change_record_type" iconPosition="left" disabled="{!not(v.changeRequestObject.Change_Request_Status__c=='Amend Data Complete')}" />
+            
+            <aura:if isTrue="{!(v.changeRequestObject.Type_of_Change__c=='Incorrect Account details with Tax impact Amendment')}">
+                <lightning:button onclick="{!c.execute3}" variant="brand" label="Update Account Address on Order" iconName="utility:change_record_type" iconPosition="left" disabled="{!not(v.changeRequestObject.Change_Request_Status__c=='Approved')}" />
+            </aura:if>
+            <aura:set attribute="else"> 
+                <lightning:button variant="brand" label="Full Cancel Rebill" iconName="utility:change_record_type" iconPosition="left" disabled="true" />
+            
+                <lightning:button variant="brand" label="Re-Queue Order" iconName="utility:change_record_type" iconPosition="left" disabled="true" />
+                
+                <lightning:button variant="brand" label="Update Account Address on Order" iconName="utility:change_record_type" iconPosition="left" disabled="true" />
+            </aura:set>
+        </aura:if>
+    </div> -->
+        <!--End -->
+        <!-- new Condition-->
+        <div class="box">
+            <aura:if isTrue="{!v.buttonAccessObject.set2}">
+                <lightning:button onclick="{!c.execute4}" variant="brand" label="Create Amendment Opportunity"
+                    iconName="utility:change_record_type" iconPosition="left"
+                    disabled="{!v.buttonAccessObject.cAopp}" />
+
+                <!-- <lightning:button onclick="{!c.execute5}" variant="brand" label="Full Cancel and Rebill" iconName="utility:change_record_type" iconPosition="left" disabled="{!v.buttonAccessObject.fcrpc}" /> -->
+
+                <!-- <lightning:button onclick="{!c.execute6}" variant="brand" label="Additional Invoice" iconName="utility:change_record_type" iconPosition="left" disabled="{!v.buttonAccessObject.pCAI}" /> -->
+
+                <lightning:button onclick="{!c.execute6}" variant="brand"
+                    label="{!(if(v.changeRequestObject.Type_of_Change__c=='Cancellation','Full Cancel','Execute Amendment'))}"
+                    iconName="utility:change_record_type" iconPosition="left" disabled="{!v.buttonAccessObject.pCAI}" />
+
+                <!-- <lightning:button onclick="{!c.execute6}" variant="brand" label="{!(if(v.changeRequestObject.Type_of_Change__c=='Cancellation','Cancel','Additional Invoice'))}" iconName="utility:change_record_type" iconPosition="left" disabled="{!v.buttonAccessObject.pCAI}" /> -->
+
+            </aura:if>
+            <aura:if isTrue="{!v.buttonAccessObject.set1}">
+                <lightning:button onclick="{!c.execute1}" variant="brand" label="Full Cancel"
+                    iconName="utility:change_record_type" iconPosition="left" disabled="{!v.buttonAccessObject.fcr}" />
+
+                <lightning:button onclick="{!c.execute2}" variant="brand" label="Re-Queue Order"
+                    iconName="utility:change_record_type" iconPosition="left" disabled="{!v.buttonAccessObject.rqo}" />
+            </aura:if>
+
+            <!-- For Full Cancel Only-->
+            <aura:if isTrue="{!v.buttonAccessObject.set3}">
+                <lightning:button onclick="{!c.execute1}" variant="brand" label="Full Cancel"
+                    iconName="utility:change_record_type" iconPosition="left" disabled="{!v.buttonAccessObject.fcr}" />
+            </aura:if>
+
+            <!-- <aura:if isTrue="{!(v.changeRequestObject.Type_of_Change__c=='Incorrect Account details with Tax impact Amendment')}">
+            <lightning:button onclick="{!c.execute3}" variant="brand" label="Update Account Address on Order" iconName="utility:change_record_type" iconPosition="left" disabled="{!v.buttonAccessObject.updAdd}" />
+        </aura:if>   -->
+        </div>
+        <!--End -->
+    </div>
+
+    <!-- Invoice Modal-->
+    <aura:if isTrue="{!v.showInvoiceSelectionModal}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button type="button" onclick="{!c.closeInvModal}"
+                        class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning:icon iconName="utility:close" size="small" variant="bare" />
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Select Invoice to cancel
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div>
+                        <aura:if isTrue="{!not(empty(v.invData))}">
+                            <div style="height: 300px">                            
+                                <lightning:datatable
+                                    columns="{!v.invCrcolumns}"
+                                    data="{!v.invData}"
+                                    keyField="Id"                            
+                                    onrowselection="{!c.handleInvSelection}"/>
+                            </div>
+                            <!-- ELSE -->
+                            <aura:set attribute="else">
+                                <lightning:datatable
+                                    columns="{!v.invCrcolumns}"
+                                    data="{!v.invData}"
+                                    keyField="Id"/>
+                                    
+                                    <div class="slds-align_absolute-center slds-m-top_x-small slds-text-heading_medium">
+                                        <P>{!v.noInvMessage}</P>
+                                    </div>
+                            </aura:set>
+                        </aura:if>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <aura:if isTrue="{!v.showRequiredInvMessage}">
+                        <div class="slds-align_absolute-center slds-text-heading_medium slds-text-color_error">{!v.reqErrorMessage}</div>
+                    </aura:if>
+                    <button class="slds-button slds-button_neutral" onclick="{!c.closeInvModal}">Cancel</button>
+                    <button class="slds-button slds-button_brand" disabled="{!v.isNextDisabled}" onclick="{!c.invoiceSelectionModalNext}">Next</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+</aura:component>

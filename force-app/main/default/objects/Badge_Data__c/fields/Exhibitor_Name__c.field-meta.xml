@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Exhibitor_Name__c</fullName>
+    <description>Customer provide his name in this field.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Customer provide his name in this field.</inlineHelpText>
+    <label>Company Name on Badge</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

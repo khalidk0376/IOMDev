@@ -1,0 +1,33 @@
+ol{
+    list-style: auto !important;
+    margin: 10px 15px;
+}
+ol > li{
+    padding: 5px 0px;
+}
+ol > li > ol > li {
+    list-style: lower-alpha;
+}
+.sec1,.sec2{
+    margin-top:10px;
+}
+.main-head{
+    margin-top: 15px;
+}
+.imcc-sign{
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.sign-container{
+    margin-top: 10px;
+    margin-left:33.5%;
+}
+
+.slds-modal__content{
+    overflow: hidden;
+}
+
+canvas{border:2px solid var(--indigo-10)}

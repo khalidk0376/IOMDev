@@ -1,0 +1,123 @@
+<aura:component controller="SwitchInputCtrl">
+    <!-- Start attribute -->
+    <aura:attribute name="QnaireId" type="String" />
+    <aura:attribute name="QnaireName" type="String" />
+    <aura:attribute name="QuestnQnaireId" type="String" />
+    <aura:attribute name="QuestnGroupId" type="String" />
+    <aura:attribute name="Questntype" type="String" />
+    <aura:attribute name="modalHeader" type="String" />
+    <aura:attribute name="fieldType" type="String" />
+    <aura:attribute name="dropColNumber" type="String" />
+    <aura:attribute name="questOrderNum" type="String" default="0" />
+    <aura:attribute name="isEditQue" type="Boolean" />
+    <aura:attribute name="isUnderBranching" type="Boolean" default="false" />
+    <aura:attribute name="lstQuesCategory" type="List" default="[]" />
+    <aura:attribute name="objCrteQues" type="Question__c" default="{ 'sobjectType': 'Question__c'}" />
+    <aura:attribute name="isShowbutton" type="Boolean" default="false" />
+    <aura:attribute name="lstSwitchQuestionOptions" type="Question_Option__c[]" />
+    <aura:attribute name="optionFirstName" type="String" default="" />
+    <aura:attribute name="optionSecondName" type="String" default="" />
+    <aura:attribute name="isShowAttachmentandCommentCheckBox" type="Boolean" default="false" />
+
+
+    <!-- End attribute-->
+    <!-- event handlers -->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"></aura:handler>
+    <!-- event handlers -->
+    {!v.body}
+    <!--Start body-->
+    <div class="slds-col slds-grid--vertical">
+        <div class="slds-grid slds-no-flex panelHeader">
+            <h2>Question Editor: {!v.modalHeader}</h2>
+            <a href="#">
+                <lightning:buttonIcon iconName="utility:forward" onclick="{!c.hideModal}" variant="bare" />
+            </a>
+        </div>
+    </div>
+    <div class="slds-col slds-scrollable--y">
+        <div class="panelBody">
+            <div class="slds-form-element ">
+                <lightning:inputRichText formats="['bold', 'italic', 'underline','list', 'align']" onblur="{!c.checkTextLength}" messageWhenBadInput="write your question" aura:id="qustNameRich" label="Question Text" placeholder="Compose text..." value="{!v.objCrteQues.Label__c}" />
+            </div>
+            <div class="slds-form-element slds-var-m-top_small">
+                <aura:if isTrue="{!v.fieldType!='Information'}">
+                    <div class="slds-form-element">
+                        <lightning:input type="checkbox" label="Help Text" name="helptext" checked="{!v.objCrteQues.Help_Text_Required__c}" />
+                    </div>
+                    <aura:if isTrue="{!v.objCrteQues.Help_Text_Required__c==true}">
+                        <div class="slds-form-element slds-var-m-bottom_x-small slds-var-m-top_x-small qf-remove-label ">
+                            <lightning:input aura:id="helpTextInp" label="Help" placeholder="Help Text" name="Help Text" value="{!v.objCrteQues.Help_Text__c}" maxlength="255" minlength="0" variant="label-hidden" />
+                        </div>
+                    </aura:if>
+                </aura:if>
+            </div>
+            <div class="slds-grid slds-var-m-bottom_small">
+                <div class="slds-col ">
+                    <div class="slds-form-element slds-var-m-top_x-small">
+                        <lightning:input type="checkbox" label="Required" name="reimbursed" checked="{!v.objCrteQues.Required__c}" />
+                    </div>
+                </div>
+                <aura:if isTrue="{!v.isShowAttachmentandCommentCheckBox}">
+                    <div class="slds-col ">
+                        <div class="slds-form-element slds-var-m-top_x-small slds-var-m-left_small">
+                            <lightning:input type="checkbox" label="Allow Comment" name="Comment" checked="{!v.objCrteQues.Allow_Comment__c}" />
+                        </div>
+                    </div>
+                    <div class="slds-col">
+                        <div class="slds-form-element slds-var-m-top_x-small">
+                            <lightning:input type="checkbox" label="Allow Attachments" name="Allow Attachments" checked="{!v.objCrteQues.Allow_Attachments__c}" />
+                        </div>
+                    </div>
+                </aura:if>
+            </div>
+            <div class="slds-grid slds-var-m-bottom_small">
+                <div class="slds-col ">
+                    <aura:if isTrue="{!v.isUnderBranching==false}">
+                        <div class="slds-form-element slds-var-m-top_x-small">
+                            <lightning:input type="checkbox" label="Allow Branching" name="Allow Branching" checked="{!v.objCrteQues.Is_Allow_Branching__c}" />
+                        </div>
+                    </aura:if>
+                </div>
+            </div>
+            <div class="slds-panel qf-search-resulte-pannel slds-grid slds-grid_vertical slds-nowrap slds-box slds-var-m-top_x-small slds-clear slds-clearfix">
+                <div class="slds-form slds-form_stacked slds-grow ">
+                    <div class="slds-panel__section slds-border_bottom slds-var-p-top_none slds-var-p-left_none slds-var-p-right_none">
+                        <div class="slds-media">
+                            <div class="slds-media__body">
+                                <h2 class="slds-truncate slds-text-heading_small" title="Questionnaire Template">Question Options</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-panel__section slds-var-p-bottom_none slds-var-p-left_none slds-var-p-right_none">
+                        <table class="slds-table slds-table_bordered slds-border_bottom slds-border_top slds-table_cell-buffer" role="grid">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th class="slds-text-title_caps" aria-label="Name" scope="col">
+                                        Options
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="slds-hint-parent">
+                                    <td>
+                                        <lightning:input label="Option First" value="{!v.optionFirstName}" maxlength="70" required="true" />
+                                    </td>
+                                </tr>
+                                <tr class="slds-hint-parent">
+                                    <td>
+                                        <lightning:input label="Option Second" value="{!v.optionSecondName}" maxlength="70" required="true" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <lightning:button label="Cancel" onclick="{!c.hideModal}" />
+            <lightning:button disabled="{!v.isShowbutton}" label="Save" variant="brand" onclick="{!c.saveQues}" />
+        </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+    <!--end body-->
+</aura:component>

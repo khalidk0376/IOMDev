@@ -1,0 +1,114 @@
+<!--
+Created By	 : Girikon(Sachin)(IML2R-742)
+Created On	 : Feb 24, 2020
+@description : Showing the Opportunity Contract Details.
+
+Modification log:
+Modified By	:  
+-->
+<template>
+        <c-table-placeholder is-show={isShow}></c-table-placeholder>
+        <template if:true={isTrue}>
+            <lightning-spinner variant="brand" size="small" title="Loading..."></lightning-spinner>
+        </template>
+        <lightning-layout multiple-rows="true">
+            <lightning-layout-item size="12">
+                <div class="slds-clearfix">
+                    <div class="slds-float_right">
+                        <lightning-input type="search" value={searchValue} label="Search" placeholder="Search" variant="label-hidden" class="search-box" onchange={reloadData}></lightning-input>
+                        <button style="display: inline-block;margin-top: -2px;margin-left: -5px;" class="slds-button slds-button_icon slds-button_icon-brand" title="Search" onclick={searchData}>
+                            <lightning-icon icon-name="utility:search" size="xx-small" variant="bare"></lightning-icon>
+                        </button>
+                    </div>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+        <table class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols" role="grid">
+            <thead>                
+                <tr class="slds-line-height_reset">
+                    <th class="slds-text-align_right" scope="col" style="width:3.25rem">
+                        <div class="slds-truncate slds-assistive-text" id="column-group-header" title="View invoice PDF"></div>
+                    </th>
+                    <th aria-label="Go To Agreement" aria-sort="none" class="slds-is-resizable" scope="col">
+                        <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">
+                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                <span class="slds-truncate" title="Go To Agreement">Go To Agreement</span>
+                            </div>
+                        </a>
+                    </th>
+                    <th aria-label="Agreement Name" aria-sort="none" class="slds-is-resizable" scope="col">
+                        <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">
+                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                <span class="slds-truncate" title="Agreement Name">Agreement Name</span>
+                            </div>
+                        </a>
+                    </th>
+                    <th aria-label={OPPORTUNITY} aria-sort="none" class="slds-is-resizable" scope="col">
+                        <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">
+                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                <span class="slds-truncate" title={OPPORTUNITY}>Opportunity Name</span>
+                            </div>
+                        </a>
+                    </th>
+                    <th aria-label={LASTMODIFIEDDATE} aria-sort="none" class="slds-is-resizable" scope="col">
+                        <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="-1">
+                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                <span class="slds-truncate" title={LASTMODIFIEDDATE}>Last Modified Date</span>
+                            </div>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template if:false={totalRows}>
+                    <tr class="slds-hint-parent">
+                        <td role="gridcell" colspan="6" align="center" style="text-align: center">No Agreement to display</td>
+                    </tr>
+                </template>
+                <template for:each={agreementData} for:item="item">
+                    <tr key={item.Id} class="slds-hint-parent">
+                        <td role="gridcell">
+                            <div class="slds-truncate" title="View Invoice PDF">
+                                <a href="javascript:void(0);" data-record-id={item.Id} onclick={openAttachment} tabindex="-1">
+                                    <lightning-icon data-record-id={item.Id} icon-name="utility:file" size="xx-small" alternative-text="Vew Invoice PDF"></lightning-icon>
+                                </a>
+                            </div>
+                        </td>
+                        <td role="gridcell">
+                            <div class="slds-truncate">
+                                <a href="javascript:void(0);" data-record-id={item.Id} onclick={openAttachment} tabindex="-1">Click To Open</a>
+                            </div>
+                        </td>
+                        <td role="gridcell">
+                            <div class="slds-truncate" title={item.Name}>
+                                <a href="javascript:void(0);" data-record-id={item.Id} onclick={goToRecord} tabindex="-1">{item.Name}</a>
+                            </div>
+                        </td>
+                        <td role="gridcell">
+                            <div class="slds-truncate" title={item.Opportunity__r.Name}>
+                                <a onclick={goToOpp} data-record-id={item.Opportunity__r.Id} href="javascript:void(0);" tabindex="-1">{item.Opportunity__r.Name}</a>
+                            </div>
+                        </td>                        
+                        <td role="gridcell">
+                            <div class="slds-truncate">
+                                <lightning-formatted-date-time value={item.LastModifiedDate} year="numeric" month="numeric" day="numeric" hour="2-digit" minute="2-digit"></lightning-formatted-date-time>                                    
+                            </div>
+                        </td>                    
+                        <td role="gridcell">
+                            <div class="slds-truncate" title={item.Name}>
+                                <a href="javascript:void(0);" data-record-id={item.Id} onclick={goToSample} tabindex="-1">{item.Name}</a>
+                            </div>   
+                        </td>                 
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <template if:true={totalRows}>
+            <div class="slds-clearfix slds-p-top_small">
+                <div class="slds-float_right">
+                    Showing Rows {totalRows}-{totalRows} of {totalRows}
+                </div>
+            </div>
+        </template>
+        
+    </template>

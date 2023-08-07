@@ -1,0 +1,8 @@
+<template>
+    <template for:each={dynamicContent} for:item="content" if:true={dynamicContent}>
+        <div key={content.Id}>
+         <lightning-formatted-rich-text value={content.Header__c}>
+        </lightning-formatted-rich-text>
+    </div>
+    </template>
+</template>

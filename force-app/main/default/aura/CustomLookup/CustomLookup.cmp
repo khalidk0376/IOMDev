@@ -1,0 +1,124 @@
+<aura:component controller="OpportunityDetailsCtrl">
+    <!-- Standard -->
+    <ltng:require scripts="{!$Resource.LtngUtility}"/>
+    
+    <aura:attribute name="isBilling" type="Boolean" access="public" default="false"/>
+    <aura:attribute name="objectName" type="String" access="public"/>
+    <aura:attribute name="objectLabel" type="String" access="public"/>	
+    <aura:attribute name="nameFieldApi" type="String" access="public"/>
+    <aura:attribute name="selectedItem" type="Object" access="public"/>
+    <aura:attribute name="selectedItemId" type="Object" access="public"/>
+    <aura:attribute name="searchKey" type="String" access="private"/>
+    <aura:attribute name="spinner" type="Boolean" access="private"/>
+    <aura:attribute name="lookupData" type="List" access="private"/>
+    
+    <aura:attribute name="accountId" type="String" default="" access="public"/>
+    <aura:attribute name="parterAccId" type="String" default="" access="public"/>
+    
+    <aura:attribute name="isOpenModal" type="Boolean" access="public" default="false"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="PageNumber" type="integer" default="1"/>
+    <aura:attribute name="TotalPages" type="integer" default="0"/>
+    <aura:attribute name="TotalRecords" type="integer" default="0"/>
+    <aura:attribute name="RecordStart" type="integer" default="0"/>
+    <aura:attribute name="RecordEnd" type="integer" default="0"/>
+    
+    
+    <aura:if isTrue="{!v.isOpenModal}">
+        
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+                <aura:if isTrue="{!v.spinner}">
+                    <lightning:spinner size="small" variant="brand"/>
+                </aura:if>	
+                <header class="slds-modal__header">
+                    <button onclick="{!c.closeModal}" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning:icon iconName="utility:close" size="small" variant="bare"/>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate modal-header">{!'Select '+v.objectName}</h2>
+                </header>
+                <div class="slds-modal__content slds-p-top--x-large slds-p-around--medium" id="modal-content-id-1">
+                    <lightning:layout multipleRows="true">
+                        <lightning:layoutItem size="12" padding="around-small">
+                            <lightning:input type="search" value="{!v.searchKey}" onchange="{!c.searchContact}" placeholder="Search..." variant="label-hidden"/>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="12" padding="around-small">
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Select">Select</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="{!v.objectLabel+' Name'}">{!v.objectLabel+' Name'}</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Contact Type">Contact Type</div>
+                                        </th>				      
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Account Name">Account Name</div>
+                                        </th>	
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="City">City</div>
+                                        </th>	
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Country">Country</div>
+                                        </th>	
+                                    </tr>
+                                </thead>
+                                <tbody>					  		
+                                    <aura:if isTrue="{!v.lookupData.length==0}">
+                                    	<tr class="slds-hint-parent">
+                                            <th colspan="6" data-label="Select" scope="row" style="text-align:center;color:blue">
+                                                 No record found... 
+                                            </th>
+                                        </tr>
+                                        <aura:set attribute="else">
+                                            <aura:iteration items="{!v.lookupData}" var="item" indexVar="ind">					
+                                                <tr class="slds-hint-parent">
+                                                    <th data-label="Select" scope="row">
+                                                        <div class="slds-truncate" title="">
+                                                            <lightning:buttonIcon value="{!item}" iconName="utility:linked" variant="bare" onclick="{!c.selectLookup}" alternativeText="Select" />
+                                                        </div>
+                                                    </th>
+                                                    <td data-label="{!v.objectName+' Name'}">
+                                                        <div class="slds-truncate" title="{!item.Name}">{!item.Name}</div>
+                                                    </td>
+                                                    <td data-label="Contact Type">
+                                                        <div class="slds-truncate contact-type" title="{!item.Contact_Type__c}">{!item.Contact_Type__c}</div>
+                                                    </td>
+                                                    <td data-label="Account Name">
+                                                        <div class="slds-truncate" title="{!item.Account.Name}">{!item.Account.Name}</div>
+                                                    </td>	
+                                                    <td data-label="Account City">
+                                                        <div class="slds-truncate" title="{!item.Account.BillingCity}">{!item.Account.BillingCity}</div>
+                                                    </td>	
+                                                    <td data-label="Account Country">
+                                                        <div class="slds-truncate" title="{!item.Account.BillingCountry}">{!item.Account.BillingCountry}</div>
+                                                    </td>	
+                                                </tr>
+                                            </aura:iteration>
+                                        </aura:set>
+                                    </aura:if>
+                                </tbody>
+                            </table>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+                <footer class="slds-modal__footer slds-modal__footer_directional">
+                    <!--  <button onclick="{!c.closeModal}" class="slds-button slds-button_neutral">Cancel</button> -->
+                    <aura:if isTrue="{!v.TotalRecords > 10}">
+                        <div class="slds-align_absolute-center" >
+                            Showing {!v.RecordStart}-{!v.RecordEnd} of {!v.TotalRecords}  &nbsp;             
+                            <lightning:button variant="brand" iconPosition="left" iconName="utility:chevronleft" onclick="{!c.handlePrev}" label="Previous" disabled="{!v.PageNumber == 1}" />
+                            <lightning:button variant="brand" iconPosition="right" iconName="utility:chevronright" onclick="{!c.handleNext}" label="Next" disabled="{!v.PageNumber == v.TotalPages}"/>
+                        </div>
+                    </aura:if>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+</aura:component>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Do_Not_Use_in_API_Mapping__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Do Not Use in API Mapping</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>InActive</label>
+    <type>Checkbox</type>
+</CustomField>

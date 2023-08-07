@@ -1,0 +1,24 @@
+.headerCss {
+    height : 25px;
+}
+
+.modalCss{
+    height: 640px;
+}
+
+.slds-modal__footer{
+    margin-top:0px;
+}
+
+.slds-modal__footer .a {
+    color:rgb(9, 104, 148);
+}
+.cardCss{
+    width: 154px;
+    float: right;
+    margin-right: -184px;
+    margin-top: -50px;
+}
+.textCss{
+    padding-left: 10px;padding-right: 10px;overflow-wrap: break-word;
+}

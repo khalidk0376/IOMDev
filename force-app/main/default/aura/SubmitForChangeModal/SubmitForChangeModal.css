@@ -1,0 +1,27 @@
+.THIS .customRequired{
+ 	font-weight: 400; 
+} 
+.THIS .customRequired:before{    
+	content: "*";
+	margin: 0 0.125rem 0 0.125rem;
+	color: rgb(194, 57, 52);
+	float: left; 
+	margin-top: 3px;
+} 
+.THIS .none{
+	display:none; 
+}
+
+.THIS lightning-output-field .slds-form-element__control {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(221, 219, 218);
+    border-radius: .25rem;
+    width: 100%;
+    transition: border .1s linear,background-color .1s linear;
+    display: inline-block;
+    padding: 0 1rem 0 .75rem;
+    line-height: 1.875rem;
+    min-height: calc(1.875rem + (1px * 2));
+    background-color: rgb(236, 235, 234);
+    border-color: rgb(201, 199, 197);
+}

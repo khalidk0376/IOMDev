@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IOM_OLI_Number__c</fullName>
+    <description>CRM Opportunity Products  Number</description>
+    <displayFormat>0LI-{00000}</displayFormat>
+    <externalId>false</externalId>
+    <label>OLI Number</label>
+    <type>AutoNumber</type>
+</CustomField>

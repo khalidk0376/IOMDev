@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Do_Not_Use_in_SOQL__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If checked &quot;SObject Field Name&quot; will not be used in SOQL query.</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Do Not Use in SOQL</label>
+    <type>Checkbox</type>
+</CustomField>

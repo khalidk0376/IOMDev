@@ -1,0 +1,19 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="message" type="String" default="Thankyou for submit survey" access="global"/>
+    <aura:attribute name="formId" type="String" default=""/>
+    <aura:attribute name="userData" type="String" default=""/>
+    <aura:attribute name="buttonLabel" type="String" default="Download Response As PDF" access="global"/>
+	<aura:attribute name="site_url" type="String" default="" access="global"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <lightning:card title="Thankyou" iconName="standard:thanks">
+    	<div class="slds-var-p-horizontal_small">
+    		<div class="slds-align_absolute-center big-font">{!v.message}</div><br/>
+    		<div class="slds-align_absolute-center">
+    			<lightning:button variant="brand" iconName="utility:download" iconPosition="left" label="{!v.buttonLabel}" onclick="{!c.downloadResponse}"/>
+                <a aura:id="download-link" class="slds-hide" href="javascript:void(0)" target="_self" download="{!Response}">Download</a>
+    		</div>
+    	</div>
+    </lightning:card>
+</aura:component>

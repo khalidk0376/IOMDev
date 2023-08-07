@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Post_Credit_Note_Request</fullName>
+    <columns>MasterLabel</columns>
+    <columns>API_Node_Name__c</columns>
+    <columns>API_Node_Value__c</columns>
+    <columns>Object_Name__c</columns>
+    <columns>SObject_Field_Name__c</columns>
+    <columns>isLineMapping__c</columns>
+    <columns>Custom_Node__c</columns>
+    <columns>Do_Not_Use_in_SOQL__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>API_3rd_Party_Name__c</field>
+        <operation>equals</operation>
+        <value>Oracle</value>
+    </filters>
+    <filters>
+        <field>JSON_Type__c</field>
+        <operation>equals</operation>
+        <value>Request</value>
+    </filters>
+    <filters>
+        <field>API_Call_Name__c</field>
+        <operation>equals</operation>
+        <value>Post Credit Note</value>
+    </filters>
+    <label>Post Credit Note Request</label>
+</ListView>

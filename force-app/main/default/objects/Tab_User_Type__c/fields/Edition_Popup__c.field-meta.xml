@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Edition_Popup__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Edition Popup objects stores the data of the popup to be shown in Community Portal based on User Type.</description>
+    <externalId>false</externalId>
+    <label>Edition Popup</label>
+    <referenceTo>Edition_Popup__c</referenceTo>
+    <relationshipLabel>Tab User Types</relationshipLabel>
+    <relationshipName>Tab_User_Types</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UAE_VAT_Refund_Eligible__c</fullName>
+    <description>UAE VAT Refund Eligible</description>
+    <externalId>false</externalId>
+    <formula>CASE( TEXT(UAE_VAT_Refund__c) , &apos;Eligible&apos;, IMAGE(&quot;/img/samples/color_green.gif&quot;, &quot;green&quot;, 30, 90),&apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>UAE VAT Refund Eligible</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

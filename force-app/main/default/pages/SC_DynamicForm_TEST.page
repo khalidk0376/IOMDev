@@ -1,0 +1,186 @@
+<apex:page >
+<style type='text/css'>
+    .embeddedServiceHelpButton .helpButton .uiButton {
+        background-color: #002244;
+        font-family: "Arial", sans-serif;
+    }
+    .embeddedServiceHelpButton .helpButton .uiButton:focus {
+        outline: 1px solid #002244;
+    }
+    @font-face {
+        font-family: 'Salesforce Sans';
+        src: url('https://c1.sfdcstatic.com/etc/clientlibs/sfdc-aem-master/clientlibs_base/fonts/SalesforceSans-Regular.woff') format('woff'),
+        url('https://c1.sfdcstatic.com/etc/clientlibs/sfdc-aem-master/clientlibs_base/fonts/SalesforceSans-Regular.ttf') format('truetype');
+    }
+</style>
+
+<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+<script type='text/javascript'>
+    var initESW = function(gslbBaseURL) {
+        embedded_svc.settings.displayHelpButton = true; //Or false
+        embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
+
+        embedded_svc.settings.defaultMinimizedText = 'Hi how can we help?'; //(Defaults to Chat with an Expert)
+        //embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
+
+        //embedded_svc.settings.loadingText = ''; //(Defaults to Loading)
+        //embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
+
+        // Settings for Chat
+        //embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
+            // Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
+            // Returns a valid button ID.
+        //};
+        
+         // Dynamic code starts
+     
+          embedded_svc.settings.prepopulatedPrechatFields = {
+               FirstName: 'Fname',
+               LastName: 'Lname',
+               Email: "Email@domain.com",
+                };
+
+     embedded_svc.settings.extraPrechatFormDetails = 
+            [            
+             {"label":"EventEdition",
+             "value":"",
+             "transcriptFields":["Edition__c"],
+             "displayToAgent":true},
+             
+             {"label":"CS Team",
+             "value":"",
+             "transcriptFields":["CS_Team__c"],
+             "displayToAgent":true}]
+           
+
+embedded_svc.settings.extraPrechatInfo = 
+            [      
+               {"entityName":"Case",
+               "showOnCreate":true,
+                "saveToTranscript":"Case", 
+                "entityFieldMaps":
+                    [
+                    
+                    {"isExactMatch":false,
+                    "fieldName":"Edition__c",
+                    "doCreate":true,
+                    "doFind":false,
+                    "label":"EventEdition"},
+                    {"isExactMatch":false,
+                    "fieldName":"SuppliedEmail",
+                    "doCreate":true,
+                    "doFind":false,
+                    "label":"Email"}
+                    
+                    
+                    ]}]
+                    
+        // Dynamic code ends   
+       
+        //embedded_svc.settings.prepopulatedPrechatFields = {}; //Sets the auto-population of pre-chat form fields
+        //embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
+        //embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Defaults to Contact Us)
+
+        embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+        embedded_svc.settings.entryFeature = 'LiveAgent';
+
+        embedded_svc.init(
+            'https://informaim.my.salesforce.com',
+            'https://globalexhibitions.force.com/CustomerCenter',
+            gslbBaseURL,
+            '00D4P0000010yml',
+            'TEST_Chat_Deployment',
+            {
+                baseLiveAgentContentURL: 'https://c.la3-c1-ph2.salesforceliveagent.com/content',
+                deploymentId: '5724P0000000Udr',
+                buttonId: '5734P0000000Vsl',
+                baseLiveAgentURL: 'https://d.la3-c1-ph2.salesforceliveagent.com/chat',
+                eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I4P000000PDYZUA4_1779b160fed',
+                isOfflineSupportEnabled: true
+            }
+        );
+    };
+
+    if (!window.embedded_svc) {
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://informaim.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+        s.onload = function() {
+            initESW(null);
+        };
+        document.body.appendChild(s);
+    } else {
+        initESW('https://service.force.com');
+    }
+    
+    
+// --------------------Contact Us Form EDITION----------------------
+  
+   !function() {
+        let a = XMLHttpRequest.prototype.open;
+        XMLHttpRequest.prototype.open = function() {
+            this.addEventListener('load', b => {
+                let c = document.querySelector('input#Edition_Code__c');
+                if(c != null) {
+                // UnComment the below to lines to HIDE Event Edition Code Field on the Webchat, comment if you want to SHOW
+                    document.querySelector('label[for="Edition_Code__c"]').style.display = 'none';
+                    c.style.display = 'none';
+                    c.value = '';
+                    c.dispatchEvent(new Event('change',{'bubbles':!0}));
+                }
+                   
+                
+            });
+            a.apply(this,arguments);
+        };
+    }();
+ 
+  
+// --------------------COntact Us Form Ends--------------------  
+// --------------------Contact Us Form NAME----------------------
+  
+   !function() {
+        let a = XMLHttpRequest.prototype.open;
+        XMLHttpRequest.prototype.open = function() {
+            this.addEventListener('load', b => {
+                let c = document.querySelector('input#SuppliedName');
+                if(c != null) {
+                // UnComment the below to lines to HIDE Event Edition Code Field on the Webchat, comment if you want to SHOW
+                 //  document.querySelector('label[for="SuppliedName"]').style.display = 'none';
+                //   c.style.display = 'none';
+                    c.value = 'Name';
+                    c.dispatchEvent(new Event('change',{'bubbles':!0}));
+                }
+                   
+                
+            });
+            a.apply(this,arguments);
+        };
+    }();
+ 
+  
+// --------------------COntact Us Form Ends--------------------
+// --------------------Contact Us Form EMAIL----------------------
+  
+   !function() {
+        let a = XMLHttpRequest.prototype.open;
+        XMLHttpRequest.prototype.open = function() {
+            this.addEventListener('load', b => {
+                let c = document.querySelector('input#SuppliedEmail');
+                if(c != null) {
+                // UnComment the below to lines to HIDE Event Edition Code Field on the Webchat, comment if you want to SHOW
+                 //  document.querySelector('label[for="SuppliedEmail"]').style.display = 'none';
+                //   c.style.display = 'none';
+                    c.value = 'email...';
+                    c.dispatchEvent(new Event('change',{'bubbles':!0}));
+                }
+                   
+                
+            });
+            a.apply(this,arguments);
+        };
+    }();
+ 
+  
+// --------------------COntact Us Form Ends--------------------
+</script>
+</apex:page>

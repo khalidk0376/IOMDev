@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <description>Create the Quote Edition record for the Default edition from the Opportunity, set the Default Edition (Quote Edition) on the Quote and Set the Edition(Event Edition) on the Quote for whom the products will be searched and displayed.  &amp; Copy the legal entity  from the opportunity and paste it to the created quote (new or amendment)</description>
+    <interviewLabel>Create {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Create Quote Edition</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Create the quote edition (junction object) record</description>
+        <name>Create_Quote_edition</name>
+        <label>Create Quote edition</label>
+        <locationX>439</locationX>
+        <locationY>157</locationY>
+        <assignRecordIdToReference>QuoteEditionId</assignRecordIdToReference>
+        <connector>
+            <targetReference>UpdateOpportunity</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Edition__c</field>
+            <value>
+                <elementReference>DefaultEditionId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>QuoteeditionName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Quote__c</field>
+            <value>
+                <elementReference>QuoteId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Quote_Edition__c</object>
+    </recordCreates>
+    <recordUpdates>
+        <description>Set up the default quote edition &amp; edition on the quote record</description>
+        <name>UpdateOpportunity</name>
+        <label>UpdateOpportunity</label>
+        <locationX>756</locationX>
+        <locationY>249</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>QuoteId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Default_Quote_Edition__c</field>
+            <value>
+                <elementReference>QuoteEditionId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Edition__c</field>
+            <value>
+                <elementReference>DefaultEditionId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Legal_Entity__c</field>
+            <value>
+                <elementReference>LegalEntityId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>SBQQ__Quote__c</object>
+    </recordUpdates>
+    <startElementReference>Create_Quote_edition</startElementReference>
+    <status>Active</status>
+    <textTemplates>
+        <name>QuoteeditionName</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>{!DefaultEditionName} - {!QuoteNumber}</text>
+    </textTemplates>
+    <variables>
+        <description>Store the Default Edition ID from the opportunity record</description>
+        <name>DefaultEditionId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue></stringValue>
+        </value>
+    </variables>
+    <variables>
+        <description>Store the default edition Name</description>
+        <name>DefaultEditionName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>{!DefaultEditionId}.Name</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <description>Store the Legal entity of the opportunity</description>
+        <name>LegalEntityId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Store the Id of the quote edition (junction object)</description>
+        <name>QuoteEditionId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue></stringValue>
+        </value>
+    </variables>
+    <variables>
+        <description>Store the Id of the quote record</description>
+        <name>QuoteId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue></stringValue>
+        </value>
+    </variables>
+    <variables>
+        <description>Store the quote number</description>
+        <name>QuoteNumber</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>{!QuoteId}.Name</stringValue>
+        </value>
+    </variables>
+</Flow>

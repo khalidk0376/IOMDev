@@ -1,0 +1,7 @@
+<aura:component controller="IMCC_PendoAgentController" implements="force:appHostable,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="isPendoInitialized" type="Boolean" default="false"></aura:attribute>
+    
+    <!--<aura:handler name="init" action="{!c.afterPendoLoaded}" value="{!this}"></aura:handler>-->
+    
+    <ltng:require scripts="{!$Resource.Pendo}" afterScriptsLoaded="{!c.afterPendoLoaded}"/>
+</aura:component>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IMCC_API_Synchronization_Transaction__c</fullName>
+    <description>IMCC API Synchronization Transaction</description>
+    <externalId>false</externalId>
+    <label>IMCC API Synchronization Transaction</label>
+    <referenceTo>IMCC_API_Synchronization_Transaction__c</referenceTo>
+    <relationshipLabel>IMCC API Synchronization Items</relationshipLabel>
+    <relationshipName>IMCC_API_Synchronization_Items</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

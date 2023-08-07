@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CRM_Opportunity__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Lookup up to Opportunity in the CRM.</description>
+    <externalId>false</externalId>
+    <label>CRM Opportunity</label>
+    <referenceTo>Opportunity</referenceTo>
+    <relationshipLabel>IOM Document Details</relationshipLabel>
+    <relationshipName>IOM_Document_Details</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

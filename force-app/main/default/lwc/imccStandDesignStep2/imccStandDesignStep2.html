@@ -1,0 +1,29 @@
+<template>
+    <h2 class="tab-heading slds-p-horizontal_small">{stepLabel} 2: {headingLabel}</h2>
+    <lightning-spinner if:true={spinner} variant="brand" size="small" title="Loading..."></lightning-spinner>
+    <!--Event Info-->
+    <!--<div if:true={isShowQ1} class="event-info slds-m-around_small">
+        <div class="tab-sub-heading">
+            <span>{freetextLabel}</span>
+        </div>
+        <lightning-textarea disabled={isInReview} onchange={handleChange} value={standDetail.Free_Text_for_the_team_to_customize_base__c} max-length="32000" placeholder={freetextLabel} label="description" class="freetext" variant="label-hidden" required></lightning-textarea>
+    </div>-->
+    
+    <div if:true={detailObj} class="event-info slds-m-around_small">
+        <lightning-formatted-rich-text value={detailObj.Edition__r.Stand_Setting__r.Manual_Instructions__c}></lightning-formatted-rich-text>
+    </div>
+
+    <div if:true={isPermissionFound} class="manuals slds-m-around_small">
+        <div class="tab-sub-heading">
+            <span>{manualsLable}</span>
+        </div>
+        <div class="slds-box">
+            <c-imcc-manuals onagreemanual={getManualStatus}
+               object-name="Form_Data__c" formtype="Mandatory" tabtype="Manuals" 
+               condition={qryConditionMan} disable-link={isInReview}
+               con-ed-map-id={conEdMapId} utype={utype} edition-code={editionCode} 
+               is-in-review={isInReview} acc-id={accountId}           
+               sort-by-name="Forms_Permission__r.Form_Allocation__r.Name" sort-type="asc"></c-imcc-manuals>
+        </div>
+    </div>
+</template>

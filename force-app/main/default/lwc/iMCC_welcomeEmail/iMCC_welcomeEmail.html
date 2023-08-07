@@ -1,0 +1,178 @@
+<!-- sldsValidatorIgnore -->
+<!-- sldsValidatorIgnore -->
+<!-- Created By		: Girikon(Keertiraj[IMCC-121])
+Created On		: Oct 24 2021
+@description 	: This LWC is used for IMCC send welcome email button.
+-->
+
+<template>
+    <lightning-quick-action-panel header="Send Welcome Email" class={cssClass}>
+        <template if:false={isLoaded}>
+           <lightning-spinner alternative-text="Loading" variant="brand" size="medium"></lightning-spinner>
+        </template>
+        <template if:true={isShowTable}>
+            <div class="slds-clearfix slds-p-bottom_small">
+                <div class="slds-float_left filterContainer">
+                    <lightning-input type="search" onchange={handleKeyChange} value={searchKey} label="Search" class="filters filter1"></lightning-input>&nbsp;
+                    <lightning-combobox class="filters filter2"
+                            name="EventLoggers"
+                            label="Event Loggers"
+                            value={valueEL}
+                            placeholder=""
+                            options={eventLoggers}
+                            onchange={handleChangeEventLoggers} >
+                    </lightning-combobox>
+										
+                    <lightning-combobox class="filters filter3"
+                            name="welcomeEmailreceivers"
+                            label="Welcome Email Receivers"
+                            value={valueER}
+                            placeholder=""
+                            options={welcomeEmailreceivers}
+                            onchange={handleChangeWelcomeEmailreceivers} >
+                    </lightning-combobox>
+                </div>
+                <div class="slds-float_right sendButtons">
+                    <lightning-button variant="brand" label="Send Email to All" onclick={handleShowModal}></lightning-button>&nbsp;&nbsp;
+                    <lightning-button variant="brand" label="Send Email to Selected" onclick={handleShowModal2}></lightning-button>    
+                </div>
+            </div>
+
+            <div class="slds-m-bottom_small">
+                <lightning-datatable data-id="table" key-field="Id" data={tableData}
+                columns={columns} sorted-by={sortedBy} sorted-direction={sortedDirection}
+                onrowselection ={onRowSelection} selected-rows={selectedRows} onsort={sortColumns}>
+                </lightning-datatable>
+            </div>
+
+            <lightning-layout horizontal-align="space">
+                <lightning-layout-item flexibility="auto">
+                    <lightning-button label="Previous" disabled={isPrev} icon-name="utility:chevronleft" onclick={previousHandler}></lightning-button>
+                </lightning-layout-item>
+
+                <lightning-layout-item flexibility="auto">
+                    Total Records : {totalRecountCount} ,
+                    Page : ({page} of {totalPage})
+                </lightning-layout-item>
+
+                <lightning-layout-item flexibility="auto">
+                    <lightning-button label="Next" disabled={isNext} icon-name="utility:chevronright" icon-position="right" onclick={nextHandler}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        
+            <div slot="footer">
+                <lightning-button variant="brand" label="Send Email to All" onclick={handleShowModal}></lightning-button>&nbsp;&nbsp;
+                <lightning-button variant="brand" label="Send Email to Selected" onclick={handleShowModal2}></lightning-button> 
+            </div>
+        </template>
+        <template if:true={isShowProgress}>
+            <template if:true={isShowBatchProgress}>
+                <div class="slds-modal__content slds-p-around_medium batchProgress">
+                    <lightning-progress-indicator current-step={batch1Step} type="base" has-error={batch1hasError} variant="base">
+                       <template for:each={batchStatus} for:item="status" for:index="ind">
+                          <lightning-progress-step key={status.step} label={status.label} value={status.step}></lightning-progress-step>
+                       </template>
+                    </lightning-progress-indicator>
+                 </div>
+                 <div class="slds-text-align--center slds-text-heading_small slds-p-bottom_medium">
+                    <template if:true={isB1Success}>
+                       <lightning-icon icon-name="utility:check" alternative-text="success" variant="success" size="x-small" title="success"></lightning-icon>
+                       &nbsp;
+                    </template>
+                    <b>{batch1processStatusMain}</b>
+                 </div>
+                 <template if:true={isShowItem1Progress}>
+                    <div class="slds-modal__content slds-p-around_medium">
+                       <lightning-progress-bar size="medium" value={total1Progress} variant="circular"></lightning-progress-bar>
+                    </div>
+                    <div class="slds-text-align--center slds-text-heading_small slds-p-bottom_medium">   
+                        <b>{batch1processStatus}</b>
+                     </div>
+                 </template>
+            </template>
+            <template if:false={isShowBatchProgress}>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-progress-bar size="medium" value={progress} variant="circular"></lightning-progress-bar>
+                </div>
+                 <div class="slds-text-align--center slds-text-heading_small">
+                    <b>{processStatus}</b>
+                 </div>
+            </template>
+            <template if:true={isShowDetailedInfo}>
+                <hr style="margin:10px 15px!important;"/>
+                <div class="slds-text-align--center slds-text-heading_small slds-p-bottom_medium">
+                   <b>Processing Detail</b>
+                </div>
+                <table style="width: calc(100% - 30px);margin: 0px auto 15px auto;" class="slds-m-bottom_medium">
+                    <thead>
+                        <tr>
+                            <th>Status </th>
+                            <th>Total Items </th>
+                            <th>Success </th>
+                            <th>Error </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{transDetail.Status}</td>
+                            <td>{transDetail.Total}</td>
+                            <td>{transDetail.Success}</td>
+                            <td>{transDetail.Error}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr style="margin:10px 15px!important;"/>
+                <div class="slds-text-align--center slds-text-heading_small">
+                    <b>{label.sendWelcomeEmailErrorMessage}</b>
+                </div>
+            </template>
+        </template>
+    </lightning-quick-action-panel>
+
+    <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon class="slds-modal__close" title="Close" icon-name="utility:close" icon-class="slds-button_icon-inverse" onclick={handleDialogClose}></lightning-button-icon>
+
+                    <h3 class="slds-text-heading_medium slds-hyphenate header-string">
+                        This will send email to all Contacts
+                    </h3>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <slot>
+                        <div class="slds-float_right">
+                            <lightning-button variant="neutral" label="Cancel" onclick={handleDialogClose}></lightning-button>
+                            &nbsp;&nbsp;
+                            <lightning-button variant="brand" label="Proceed" onclick={handleSendWelcomeEmailToAll}></lightning-button>
+                        </div>
+                    </slot>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template> 
+
+    <template if:true={showModal2}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon class="slds-modal__close" title="Close" icon-name="utility:close" icon-class="slds-button_icon-inverse" onclick={handleDialogClose}></lightning-button-icon>
+
+                    <h3 class="slds-text-heading_medium slds-hyphenate header-string">
+                        This will send email to all Selected Contacts
+                    </h3>
+                </header>
+                
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                    <div class="slds-float_right">
+                        <lightning-button variant="neutral" label="Cancel" onclick={handleDialogClose}></lightning-button>&nbsp;&nbsp;
+                        <lightning-button variant="brand" label="Proceed" onclick={handleSendWelcomeEmail}></lightning-button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

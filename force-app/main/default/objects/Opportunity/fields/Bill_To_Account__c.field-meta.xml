@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bill_To_Account__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>This field is an explicit field for Bill To Account.</description>
+    <externalId>false</externalId>
+    <label>Bill To Account</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Account.Accounting_Credit_Hold__c</field>
+            <operation>notEqual</operation>
+            <value>Hold</value>
+        </filterItems>
+        <filterItems>
+            <field>Account.Accounting_Credit_Hold__c</field>
+            <operation>notEqual</operation>
+            <value>Warning</value>
+        </filterItems>
+        <infoMessage>Account Credit Status is On Hold/Warning.</infoMessage>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Opportunities (Bill To Account)</relationshipLabel>
+    <relationshipName>Opportunities1</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

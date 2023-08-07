@@ -1,0 +1,65 @@
+.THIS .combo-box {
+    cursor: pointer;
+}
+.THIS .whitebg{background-color: #fff;}
+.THIS .ease-in {}
+
+.THIS .slds-text-heading_small {
+    font-size: 13px;
+}
+
+.THIS .gkn-page-header {
+    border-radius: 0px!important;
+    background: rgb(250, 250, 249);
+}
+
+.THIS .gkn-media__figure {
+    padding: 3px;
+    background: token(colorBrand);
+    border-radius: 4px;
+}
+
+.THIS .slds-icon_container:hover+.slds-hide {
+    display: block!important;
+}
+
+.THIS .panelHeader,
+.THIS .panelBody {
+    padding: .75rem;
+    background-color: rgb(255, 255, 255);
+}
+
+.THIS .panelHeader {
+    border-bottom: rgb(221, 219, 218) 1px solid;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.THIS .panelHeader h2 {
+    color: rgb(62, 62, 60);
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.875rem;
+    height: 36px;
+}
+
+.THIS .gkn-sidebar {
+    background-color: rgb(250, 250, 249);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.40);
+    overflow: auto;
+    z-index: 1;
+    border-left: 1px solid #e1e1e1;
+    min-height: 500px;
+    max-height: auto;
+}
+
+.THIS .slds-dropdown-trigger button {
+    -webkit-transition: border .15s linear;
+    transition: border .15s linear;
+    background-color: rgb(255, 255, 255)!important;
+}
+
+.THIS #auraErrorMessage {
+    display: none;
+}

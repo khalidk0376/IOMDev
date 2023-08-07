@@ -1,0 +1,105 @@
+<aura:component controller="OpportunityDetailsCtrl">
+    
+	<aura:attribute name="selectedItemId" type="String" access="public"/>
+    <aura:attribute name="selectedItem" type="Object" access="public"/>
+    <aura:attribute name="isBilling" type="Boolean" access="public" default="false"/>
+    <aura:attribute name="objectLabel" type="String" default="Contact" access="public"/>
+    <aura:attribute name="placeholder" type="String" default="Search..." access="public"/>
+    <aura:attribute name="label" type="String" default="Search" access="public"/>
+    <aura:attribute name="helpText" type="String" default="" access="public"/>
+    
+    <aura:attribute name="objectName" type="String" default="account" access="public"/>
+    <aura:attribute name="nameFieldApi" type="String" default="Name" access="public"/>
+    <aura:attribute name="accountId" type="String" default="" access="public"/>
+    <aura:attribute name="parterAccId" type="String" default="" access="public"/>
+    <aura:attribute name="isOpenModal" type="Boolean" default="false" access="public"/>
+    <aura:attribute name="isRequired" type="Boolean" default="false" access="public"/>
+    <aura:attribute name="isDisabled" type="Boolean" default="false" access="public"/>
+    
+    <aura:attribute name="lookupData" type="List" access="private"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:LookupValidationEvent" action="{!c.handleValidation}"/>
+            
+		<div class="slds-form-element">
+            <label class="slds-form-element__label">
+                <span><aura:if isTrue="{!v.isRequired}"><abbr title="required" class="slds-required">*</abbr></aura:if> {!v.label}</span> 
+            </label><aura:if isTrue="{!!empty(v.helpText)}"> <lightning:helpText content="{!v.helpText}"/></aura:if>
+            <div class="slds-form-element__control">
+                <aura:if isTrue="{!empty(v.selectedItem.Name)}">
+                    <div class="slds-combobox_container">
+                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click" aria-expanded="false" aria-haspopup="listbox" role="combobox" aura:id="searchLookup">
+                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                                <lightning:input class="slds-combobox__input" type="text" label="Search" variant="label-hidden" value="" aura:id="lookupField" required="{!v.isRequired}" onchange="{!c.searchDatas}" onblur="{!c.handleBlur}" disabled="{!v.isDisabled}"/>
+                                <button onclick="{!c.openModal}" type="button" class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Open Lookup Modal">
+                                    <lightning:icon iconName="utility:search" size="xx-small"/>
+                                    <span class="slds-assistive-text">Open</span>
+                                </button>
+                                <div id="listbox-unique-id" role="listbox">
+                                    <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid"
+                                        role="presentation" style="max-width:99.9%">
+                                        <aura:if isTrue="{!v.lookupData.length==0}">
+                                            <li role="presentation" class="slds-listbox__item">
+                                                <span id="listbox-option-unique-id-01"
+                                                      class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                      role="option">
+                                                    <span class="slds-media__body">
+                                                        <span class="slds-listbox__option-text slds-listbox__option-text_entity">
+                                                            Loading... </span>
+                                                    </span>
+                                                </span>
+                                            </li>
+                                        </aura:if>
+                                        <aura:iteration items="{!v.lookupData}" var="option">
+                                            <li role="presentation"
+                                                class="slds-listbox__item"
+                                                onclick="{!c.handleSelect}"
+                                                data-value="{!option.Id}"
+                                                data-name="{!option.Name}">
+                                                <span id="listbox-option-unique-id-01"
+                                                      class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                      role="option">
+                                                    <span class="slds-media__body">
+                                                        <span class="slds-listbox__option-text slds-listbox__option-text_entity">{!option.Name+' - '+option.Contact_Type__c+' - '+option.Account.Name}</span>
+                                                    </span>
+                                                </span>
+                                            </li>
+                                        </aura:iteration>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aura:if>
+                <!-- item selected -->
+                <aura:if isTrue="{!!empty(v.selectedItem.Name)}">
+                    <div class="slds-combobox_container">
+                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                                <span class="slds-icon_container" title="ObjectName">
+                                    <lightning:icon class="slds-combobox__input-entity-icon" iconName="{!'standard:'+v.objectName}" size="xx-small"/>
+                                    <span class="slds-assistive-text">{!v.objectName}</span>
+                                </span>
+                                <input disabled="{!v.isDisabled}" class="slds-input slds-combobox__input slds-combobox__input-value" role="textbox" type="text" readonly="true" value="{!v.selectedItem.Name}"/>
+                                <button type="button" disabled="{!v.isDisabled}" onclick="{!c.clearSelected}" class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Remove selected option">
+                                    <lightning:icon iconName="utility:close" size="xx-small"/>
+                                    <span class="slds-assistive-text">Remove selected option</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </aura:if>
+            </div>
+        </div>
+    
+    <aura:if isTrue="{!v.isOpenModal}">
+    <c:CustomLookup isOpenModal="{!v.isOpenModal}" 
+                    objectName="{!v.objectName}" 
+                    selectedItem="{!v.selectedItem}" 
+                    nameFieldApi="{!v.nameFieldApi}"
+                    selectedItemId="{!v.selectedItemId}"
+                    accountId ="{!v.accountId}" 
+                    parterAccId="{!v.parterAccId}"
+                    isBilling="{!v.isBilling}"/> 
+        </aura:if>
+</aura:component>

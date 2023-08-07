@@ -1,0 +1,95 @@
+<!-- sldsValidatorIgnore -->
+<!-- Created By : Girikon(Aishwarya[])
+Created On		: Sep 22 2021
+Updated By      : Girikon(Mukesh)
+Updated On		: March 23 2022
+@description 	: This LWC is used for Home page of the community
+There are event summary, purchase summary, pending task and announcement different components.
+custom event binding (imccPurchaseSummary - imccEventSummary - imccMyTask)
+-->
+<template>
+    <lightning-layout class="main-c" multiple-rows="true">
+        <lightning-layout-item size="4" class="left-sidebar">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="12" class="left-sidebar-size">
+                    <div class="event-heading">
+                        <span class="heading heading-d-small heading-m-small">{label.eventSummary}</span>
+                    </div>
+                    <div if:true={refreshEventSummary} class="event-summary-box">
+                        <c-imcc-event-summary onafterload={haldleDataLoad}></c-imcc-event-summary>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="left-sidebar-size">
+                    <div class="purchase-summary-box">
+                        <div class="purchase-summary-content">
+                            <span class="heading heading-d-small heading-m-small">{label.purchaseSummary}</span>
+                        </div>                        
+                        <c-imcc-purchase-summary if:true={userDtls} onreloadtask={reloadAfterTaskComplete} user-dtls={userDtls}></c-imcc-purchase-summary>                       
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+            <div if:true={logoURL} class="xl health-image-box">
+                <lightning-formatted-rich-text value={logoURL}></lightning-formatted-rich-text>
+                <!-- <img src={logoURL} alt={eventeditionName}> -->
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item size="8" class="right-sidebar">
+            <c-imcc-my-task if:true={task} due-dates={allDueDates} my-task={task}></c-imcc-my-task>
+            <!--
+            <div class="slds-grid promo-container">
+                <div class="slds-col promo-block">
+                    <div class="promo-content">
+                        <span class="heading heading-d-medium">Promo block 4:3</span>
+                    </div>
+                </div>
+                <div class="slds-col promo-block-right">
+                    <div class="promo-content">
+                        <span class="heading heading-d-medium">Promo block 4:3</span>
+                    </div>
+                </div>
+            </div>
+            -->
+            <c-imcc-announcements></c-imcc-announcements>
+            <!--
+            <div class="promo">
+                <div class="promo-content">
+                    <span class="heading heading-d-medium">Promo wide</span>
+                </div>
+            </div>
+            -->
+        </lightning-layout-item>
+    </lightning-layout>
+
+    <!--Pop up Greeting -->
+    <template if:true={isGreetingPopUp}>
+        <template if:true={isPopupMarkedasRead}>
+            <div class="popupHeight">
+                <section role="dialog" tabindex="-1" aria-modal="true" aria-describedby="modal-content-id-1"
+                    class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                                Welcome to&nbsp;
+                                <lightning-formatted-rich-text value={userDtls.Edition__r.Name}>
+                                </lightning-formatted-rich-text>
+                            </h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+
+                            <lightning-formatted-rich-text value={popupDtls}></lightning-formatted-rich-text>
+                        </div>
+                        <footer class="slds-modal__footer" style="margin-top:0px">
+                            <button class="slds-button slds-button_brand" onclick={updateMarkAsRead}>
+                                <i class="fa fa-check-circle fa-padding-5"></i>{label.markAsRead}</button>
+
+                            <button class="slds-button slds-button_neutral" onclick={cancelModal}>
+                                <i class="fa fa-close fa-padding-5"></i>{label.cancel}</button>
+                            <p> {label.PopupFooter} </p>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </div>
+        </template>
+    </template>
+</template>

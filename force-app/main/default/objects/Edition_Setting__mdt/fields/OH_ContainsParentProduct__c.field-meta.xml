@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OH_ContainsParentProduct__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If  true Parentlineitem and ParentSumNetValue. the field values in OH JSON</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Contains Parent Product</label>
+    <type>Checkbox</type>
+</CustomField>

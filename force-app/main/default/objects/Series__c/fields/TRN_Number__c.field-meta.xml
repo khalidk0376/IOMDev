@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TRN_Number__c</fullName>
+    <description>Tax Registration Number</description>
+    <externalId>false</externalId>
+    <formula>IF( ISPICKVAL(TRN_CODE__c, &quot;TRN-India&quot;),&quot;Permanent Account No.: AACCT2201P &lt;br /&gt; GST Registration No.: 27AACCT2201P1ZB &lt;br /&gt; Corporate Identify No.: U22112DL2004PTC131487&quot;, 
+IF( ISPICKVAL(TRN_CODE__c, &quot;TRN-Nigeria&quot;), &quot;12500679-0001&quot;, 
+IF( ISPICKVAL(TRN_CODE__c, &quot;TRN-UAE&quot;), &quot;100030889800003&quot;, 
+IF( ISPICKVAL(TRN_CODE__c, &quot;TRN-UK&quot;), &quot;164866080&quot;, 
+IF( ISPICKVAL(TRN_CODE__c, &quot;TRN-Saudi Arabia&quot;), &quot;310192119100003&quot;, 
+IF( ISPICKVAL(TRN_CODE__c, &quot;TRN-Singapore&quot;), &quot;198601200E &lt;br /&gt; GST Registration No. M2-0073058-5&quot;, 
+IF( ISPICKVAL(TRN_CODE__c, &quot;TRN-Egypt005&quot;), &quot;379-033-135 &lt;br /&gt; Commercial Registration No.: 54140&quot;, 
+IF( ISPICKVAL(TRN_CODE__c, &quot;TRN-Egypt003/4/6&quot;), &quot;379-033-135&quot;, 
+IF( ISPICKVAL(TRN_CODE__c, &quot;TRN-SouthAfrica&quot;), &quot;403-0185-187&quot;, &quot;&quot;)))))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>TRN Number</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

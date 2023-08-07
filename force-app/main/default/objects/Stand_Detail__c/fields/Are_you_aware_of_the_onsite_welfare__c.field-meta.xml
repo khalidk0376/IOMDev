@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Are_you_aware_of_the_onsite_welfare__c</fullName>
+    <description>Are you aware of the onsite welfare facilities; E.g. Toilets, Catering, Emergency Assembly &amp; Fire Aid points</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Are you aware of the onsite welfare facilities; E.g. Toilets, Catering, Emergency Assembly &amp; Fire Aid points</inlineHelpText>
+    <label>Are you aware of the onsite welfare</label>
+    <length>10</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

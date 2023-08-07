@@ -1,0 +1,3 @@
+<design:component label="IMCC theme (account and edition selection)">
+    <!--Use <design:attribute> to make theme configurable-->
+</design:component>

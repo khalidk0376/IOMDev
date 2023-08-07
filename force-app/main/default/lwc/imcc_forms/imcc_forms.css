@@ -1,0 +1,18 @@
+.form-info .card{
+    border-left:4px solid var(--indigo-4);
+    color:var(--indigo-7);
+    background-color: var(--indigo-2);
+    display: block;
+}
+.form-info .card .message-text{padding-top: var(--space-4);}
+.fnm .required-form{padding-top:var(--space-8);padding-bottom: 23px;border-bottom: 1px solid var(--light-blue-2);color:var(--indigo-10);}
+.fnm .form-count{padding-top: var(--space-4);}
+.fnm .form-count span{color: var(--light-blue-7);}
+.fnm .form-table{padding-top: var(--space-7);}
+
+.fht{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.fht svg{fill: #3974a9; height: 12px; width: 12px; line-height: 12px;}

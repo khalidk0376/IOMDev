@@ -1,0 +1,34 @@
+.selected{
+    color:orange;
+}
+.detail-rows{    height: auto;    display: inline-block;}
+.slds-hide{
+    display:none;
+}
+.slds-card__body{
+    border-top: 1px solid #e1e1e1;
+}
+.refreshButton button{
+    margin-bottom: 1%;
+}
+.pagesize-btn-container{
+    width: 100px;
+    display: inline-block;
+    margin: 0px 10px;
+}
+.slds-modal:focus {
+    border: 0px;
+    outline: 0px;
+}
+lightning-combobox{display: inline-block;margin-right: 5px;}
+.search-box{display: inline-block;}
+.slds-th__action .slds-icon-text-default {
+    fill: rgb(0, 112, 210);
+}
+/*.THIS .slds-no-flex{width: 100%}*/
+.slds-th__action:hover svg{fill: rgb(0, 112, 210)}
+.pagesize{
+    width: 80px;
+    display: inline-block;
+    margin: 0px 2px;
+}

@@ -1,0 +1,42 @@
+<!-- 
+Created By		        : Girikon(Keertiraj[IMCC-4])
+Designed By             : Ayush[IMCC-1300]
+Functionality Develop By: Mukesh[IMCC-1300]
+Created On		        : Sep 16 2021
+@description 	        : This LWC is used for IMCC event selection page.
+-->
+
+<template>
+    <lightning-layout>
+        <lightning-layout-item size="12" class="event-selection">
+            <div class="task-heading">
+                <span class="heading heading-d-medium heading-m-medium">My Events</span>
+            </div>
+            <template if:true={evtLst} for:each={evtLst} for:item="event" for:index="index">                           
+                <div key={event.Id} class={event.taskClass}>
+                    <div class="task-progress-content">
+                        <span class="heading heading-d-medium heading-m-medium profile">{event.Name}</span>
+                        <div class="event-detail">
+                            <span class="para paragraph-d-small paragraph-m-small profile-content">{event.eventDate}</span>
+                            <div class="dot-pill"></div>
+                            <span class="para paragraph-d-small paragraph-m-small profile-content">{event.Venue__c}</span>
+                            <template if:true={event.cemRole}>
+                              <div class="dot-pill"></div>
+                              <span class="para paragraph-d-small paragraph-m-small profile-content">{event.cemRole}</span>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="task-status">
+                        <div class={event.labelClass}>
+                            <span class="para paragraph-d-tiny paragraph-m-tiny">{event.taskCount}</span>                            
+                        </div>
+                        <div class="task-button">
+                            <lightning-button data-eventid={event.Edition_Code__c} onclick={gotoEventLandingPage} label="View event" title="View event" class="link link-d-small-medium link-m-small-medium"></lightning-button>
+                        </div>
+                    </div>
+                </div>
+            </template>            
+        </lightning-layout-item>
+    </lightning-layout>
+    <iframe src="/IMCC/apex/IMCC_Live_Chat" height="0" width="0" class="maxHeight chatWindowFrame" ></iframe>
+</template>

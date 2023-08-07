@@ -1,0 +1,63 @@
+<aura:component controller="OppActionButtonController" implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
+	<ltng:require scripts="{!$Resource.LtngUtility}"/>
+
+	<aura:attribute name="isOpenModal" default="false" type="Boolean" access="public"/>
+	<aura:attribute name="accountId" type="String" access="public"/>
+	<aura:attribute name="oppId" type="Object" access="public"/>
+	<aura:attribute name="repId" type="Object" access="public"/>
+	<aura:attribute name="primaryContId" type="Object" access="public"/>
+	<aura:attribute name="billingContId" type="Object" access="public"/>
+
+	<aura:attribute name="spinner" default="false" type="Boolean" access="private"/>		
+	<aura:attribute name="isQuoteExist" default="false" type="Boolean" access="private"/>
+
+	<aura:attribute name="quoteObj" type="Object" access="private" description="sobjectType=SBQQ__Quote__c"/>	
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+	<lightning:recordEditForm aura:id="editForm2" objectApiName="SBQQ__Quote__c" onsubmit="{!c.handleSubmit}" onsuccess="{!c.handleSuccess}">
+	<lightning:messages />
+	<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+    	<aura:if isTrue="{!v.spinner}">
+			<lightning:spinner size="small" variant="brand"/>
+		</aura:if>
+    	<div class="slds-modal__container">
+	      	<header class="slds-modal__header">
+		        <button type="button" onclick="{!c.closeModal}" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+		          	<lightning:icon iconName="utility:close" size="small" variant="bare"/>
+		          	<span class="slds-assistive-text">Close</span>
+		        </button>
+	        	<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Quote</h2>
+	      	</header>
+	      	<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+	        	<lightning:layout multipleRows="true">	        		
+	        		<aura:if isTrue="{!v.isQuoteExist}">
+		        		<lightning:layoutItem size="12" class="slds-p-around_small slds-text-color_error">
+		        			<div style="background: #f5f5f5">A Primary quote already exists. Please check the Primary box if you would like to make this the Primary Quote.</div>
+		        		</lightning:layoutItem>
+		        	</aura:if>
+	        		<lightning:layoutItem size="6" class="slds-p-around_small">
+	        			<h2 class="slds-text-heading_medium"><strong>Basic Detail</strong></h2>
+	        			<lightning:inputField fieldName="SBQQ__Primary__c" class="slds-m-top_small"/><br/>
+				        <lightning:inputField fieldName="SBQQ__Status__c" disabled="true" class="slds-m-top_small"/><br/>
+				        <lightning:inputField fieldName="SBQQ__Account__c" disabled="true" value="{!v.quoteObj.SBQQ__Account__c}" class="slds-m-top_small"/><br/>
+				        <lightning:inputField fieldName="SBQQ__Opportunity2__c" disabled="true" value="{!v.quoteObj.SBQQ__Opportunity2__c}" class="slds-p-top_x-small"/>
+	        		</lightning:layoutItem>
+	        		<lightning:layoutItem size="6" class="slds-p-around_small">		        			
+	        			<h2 class="slds-text-heading_medium"><strong>Primary Detail</strong></h2>
+	        			<lightning:inputField fieldName="SBQQ__SalesRep__c" value="{!v.quoteObj.SBQQ__SalesRep__c}" class="slds-p-top_x-small"/><br/>
+				        <lightning:inputField fieldName="SBQQ__PrimaryContact__c" value="{!v.quoteObj.SBQQ__PrimaryContact__c}" disabled="true" class="slds-p-top_x-small"/><br/>
+				        <lightning:inputField fieldName="Billing_Contact__c" value="{!v.quoteObj.Billing_Contact__c}" disabled="true" class="slds-p-top_x-small"/><br/>
+				        <lightning:inputField fieldName="SBQQ__StartDate__c" value="{!v.quoteObj.SBQQ__StartDate__c}" class="slds-p-top_x-small"/><br/>
+				        <lightning:inputField fieldName="SBQQ__ExpirationDate__c" value="{!v.quoteObj.SBQQ__ExpirationDate__c}" class="slds-p-top_x-small"/>  
+	        		</lightning:layoutItem>		        		
+	        	</lightning:layout>
+	      	</div>
+	      	<footer class="slds-modal__footer">
+		        <lightning:button type="button" label="Cancel" onclick="{!c.closeModal}" iconName="utility:close" iconPosition="left" variant="destructive"/>
+		        <lightning:button label="Save" type="submit" iconName="utility:check" iconPosition="left" variant="brand"/>
+	      	</footer>
+    	</div>
+  	</section>
+  	<div class="slds-backdrop slds-backdrop_open"></div>
+  	</lightning:recordEditForm>
+</aura:component>

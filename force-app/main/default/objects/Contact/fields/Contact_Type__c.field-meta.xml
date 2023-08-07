@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Contact Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Primary Contact</fullName>
+                <default>false</default>
+                <label>Primary Contact</label>
+            </value>
+            <value>
+                <fullName>Billing</fullName>
+                <default>false</default>
+                <label>Billing</label>
+            </value>
+            <value>
+                <fullName>Operations Contact</fullName>
+                <default>false</default>
+                <label>Operations Contact</label>
+            </value>
+            <value>
+                <fullName>Invoice Contact</fullName>
+                <default>false</default>
+                <label>Invoice Contact</label>
+            </value>
+            <value>
+                <fullName>Accounting Contact</fullName>
+                <default>false</default>
+                <label>Accounting Contact</label>
+            </value>
+            <value>
+                <fullName>Agency</fullName>
+                <default>false</default>
+                <label>Agency</label>
+            </value>
+            <value>
+                <fullName>Booth Logistics</fullName>
+                <default>false</default>
+                <label>Booth Logistics</label>
+            </value>
+            <value>
+                <fullName>Collection</fullName>
+                <default>false</default>
+                <label>Collection</label>
+            </value>
+            <value>
+                <fullName>Editorial Contact</fullName>
+                <default>false</default>
+                <label>Editorial Contact</label>
+            </value>
+            <value>
+                <fullName>Events</fullName>
+                <default>false</default>
+                <label>Events</label>
+            </value>
+            <value>
+                <fullName>Health and Safety Contact</fullName>
+                <default>false</default>
+                <label>Health and Safety Contact</label>
+            </value>
+            <value>
+                <fullName>Marketing</fullName>
+                <default>false</default>
+                <label>Marketing</label>
+            </value>
+            <value>
+                <fullName>Marketing Services</fullName>
+                <default>false</default>
+                <label>Marketing Services</label>
+            </value>
+            <value>
+                <fullName>Primary Booth Contact</fullName>
+                <default>false</default>
+                <label>Primary Booth Contact</label>
+            </value>
+            <value>
+                <fullName>Production</fullName>
+                <default>false</default>
+                <label>Production</label>
+            </value>
+            <value>
+                <fullName>Sales</fullName>
+                <default>false</default>
+                <label>Sales</label>
+            </value>
+            <value>
+                <fullName>Show Coordinator</fullName>
+                <default>false</default>
+                <label>Show Coordinator</label>
+            </value>
+            <value>
+                <fullName>Booth Contact</fullName>
+                <default>false</default>
+                <label>Booth Contact</label>
+            </value>
+            <value>
+                <fullName>Nota Fiscal</fullName>
+                <default>false</default>
+                <label>Nota Fiscal</label>
+            </value>
+            <value>
+                <fullName>Stand Contractor</fullName>
+                <default>false</default>
+                <label>Stand Contractor</label>
+            </value>
+            <value>
+                <fullName>Agreement Contact</fullName>
+                <default>false</default>
+                <label>Agreement Contact</label>
+            </value>
+            <value>
+                <fullName>MarkitMkr</fullName>
+                <default>false</default>
+                <label>MarkitMkr</label>
+            </value>
+            <value>
+                <fullName>Operation Contact 2</fullName>
+                <default>false</default>
+                <label>Operation Contact 2</label>
+            </value>
+            <value>
+                <fullName>Local Representative</fullName>
+                <default>false</default>
+                <label>Local Representative</label>
+            </value>
+            <value>
+                <fullName>Legal Representative 1</fullName>
+                <default>false</default>
+                <label>Legal Representative 1</label>
+            </value>
+            <value>
+                <fullName>Legal Representative 2</fullName>
+                <default>false</default>
+                <label>Legal Representative 2</label>
+            </value>
+            <value>
+                <fullName>Witness</fullName>
+                <default>false</default>
+                <label>Witness</label>
+            </value>
+            <value>
+                <fullName>No Revenue</fullName>
+                <default>false</default>
+                <label>No Revenue</label>
+            </value>
+            <value>
+                <fullName>Revenue</fullName>
+                <default>false</default>
+                <label>Revenue</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>5</visibleLines>
+</CustomField>

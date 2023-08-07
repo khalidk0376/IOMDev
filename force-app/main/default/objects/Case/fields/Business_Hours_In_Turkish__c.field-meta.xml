@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Business_Hours_In_Turkish__c</fullName>
+    <description>Fetch business hours from either edition or customer service teams in turkish</description>
+    <externalId>false</externalId>
+    <formula>IF( ISBLANK( Edition__r.Business_Hours_In_Turkish__c) ,  Edition__r.Customer_Support_Team__r.Business_Hours_In_Turkish__c , Edition__r.Business_Hours_In_Turkish__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Business Hours(In Turkish)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

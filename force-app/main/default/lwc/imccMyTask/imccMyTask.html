@@ -1,0 +1,75 @@
+<template>
+    <div if:true={isShowTask} class="task-heading">
+        <span class="heading heading-d-small heading-m-small">Your Pending Tasks({taskCount})</span>
+    </div>
+    <template if:true={isShowTask} for:each={taskList} for:item="item" for:index="index">
+        <div if:true={item.isShow} key={item.Id} style={item.style} class={item.color.mainClass}>
+            <div class="task-progress-content">
+                <span class="heading heading-d-small heading-m-small profile">{item.label} <span class="heading heading-d-eyebrow heading-m-eyebrow" if:true={item.suffix} style="font-size: 14px;font-weight:500">{item.suffix}</span></span>
+                
+                    <template if:true={item.showRejectReason}>
+                        <span class="para paragraph-d-small paragraph-m-small profile-content">{item.tabType}</span> 
+                        <div class="task-status">
+                            <div class={item.color.childClass} style="background: rgb(255, 255, 255);">
+                          <span class="para paragraph-d-tiny paragraph-m-tiny"><strong>{label.RejectedNoteOnPendingTasks}</strong></span>
+                        </div></div>
+                    </template>
+                    <template if:false={item.showRejectReason}>
+                      <span class="para paragraph-d-small paragraph-m-small profile-content">{item.tabType}</span> 
+                    </template>
+            </div>
+            <div class="task-status">
+                <div class={item.color.childClass}>
+                    <span class="para paragraph-d-tiny paragraph-m-tiny">{item.color.label}</span>
+                </div>
+                <div class="task-button">
+                    <lightning-button value={index} onclick={openTask} label="View task" title="Looks like a link" class="link link-d-small-medium">
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+    </template>
+    <div class="task-load" if:true={isShowTask}>
+        <lightning-button if:true={loadMore} onclick={loadMoreData} label="Load more" title="Load more task" class="link link-d-small-medium">
+        </lightning-button>
+        <lightning-button if:true={showLess} onclick={showLessData} label="Show less" title="Show less task" class="link link-d-small-medium">
+        </lightning-button>
+    </div>
+    <template if:true={showComp}>
+        <c-imcc-view-form-manual-task task={selectedTask} map-fd-pd={mapPDFD} map-fa-fe={mapFAFE} cem-id={cemId} contact-id={contactId} onformsubmitted={formsubmitted}></c-imcc-view-form-manual-task>
+    </template>
+    <!-- Modal for Rejection Reason starts here-->
+    <template if:true={isReasonModal}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="rejectionReasonHeader" aria-modal="true"
+            aria-describedby="rejectionReasonContent" class="slds-modal slds-fade-in-open modalpopup">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                            size="small">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="rejectionReasonHeader" class="slds-text-heading_medium slds-hyphenate">
+                        Rejection
+                        Reason</h2>
+                </header>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-modal__content slds-p-around_medium" id="rejectionReasonContent">
+                    <p>
+                        {formRejectionReason}
+                    </p>
+                </div>
+                <footer class="slds-modal__footer">
+
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!-- Modal for Rejection Reason ends here-->
+    
+</template>

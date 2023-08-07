@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Category_3__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Consist Level 3 Categories</description>
+    <externalId>false</externalId>
+    <label>Category 3</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Case_Category__c.Level__c</field>
+            <operation>equals</operation>
+            <value>L3</value>
+        </filterItems>
+        <filterItems>
+            <field>Case_Category__c.Parent_Category__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Category_2__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Case_Category__c</referenceTo>
+    <relationshipLabel>Cases (Category 3)</relationshipLabel>
+    <relationshipName>Cases2</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

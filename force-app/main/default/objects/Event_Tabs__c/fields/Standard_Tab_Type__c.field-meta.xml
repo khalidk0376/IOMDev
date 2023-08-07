@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Standard_Tab_Type__c</fullName>
+    <description>Defines the Standard Tab Type when Tab Type is choosen as standard.</description>
+    <externalId>false</externalId>
+    <label>Tab Sub Type</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Tab_Type__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Floorplan</fullName>
+                <default>false</default>
+                <label>Floorplan</label>
+            </value>
+            <value>
+                <fullName>FAQ</fullName>
+                <default>false</default>
+                <label>FAQ</label>
+            </value>
+            <value>
+                <fullName>Forms</fullName>
+                <default>false</default>
+                <label>Forms</label>
+            </value>
+            <value>
+                <fullName>Manuals</fullName>
+                <default>false</default>
+                <label>Manuals</label>
+            </value>
+            <value>
+                <fullName>Stand Design</fullName>
+                <default>false</default>
+                <label>Stand Design</label>
+            </value>
+            <value>
+                <fullName>Stand Contractors</fullName>
+                <default>false</default>
+                <label>Stand Contractors</label>
+            </value>
+            <value>
+                <fullName>Heavy Machinery</fullName>
+                <default>false</default>
+                <label>Heavy Machinery</label>
+            </value>
+            <value>
+                <fullName>Lead Retrieval</fullName>
+                <default>false</default>
+                <label>Lead Retrieval</label>
+            </value>
+            <value>
+                <fullName>Virtual Event</fullName>
+                <default>false</default>
+                <label>Virtual Event</label>
+            </value>
+            <value>
+                <fullName>HTML</fullName>
+                <default>false</default>
+                <label>HTML</label>
+            </value>
+            <value>
+                <fullName>Badge Registration</fullName>
+                <default>false</default>
+                <label>Badge Registration</label>
+            </value>
+            <value>
+                <fullName>Manage Team</fullName>
+                <default>false</default>
+                <label>Manage Team</label>
+            </value>
+            <value>
+                <fullName>Badge/Registrations</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Badge/Registrations</label>
+            </value>
+            <value>
+                <fullName>Badges</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Badges</label>
+            </value>
+            <value>
+                <fullName>Manage My Task</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Manage My Task</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Standard</controllingFieldValue>
+            <valueName>Floorplan</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Standard</controllingFieldValue>
+            <valueName>FAQ</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Standard</controllingFieldValue>
+            <valueName>Forms</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Standard</controllingFieldValue>
+            <valueName>Manuals</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Standard</controllingFieldValue>
+            <valueName>Stand Design</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Standard</controllingFieldValue>
+            <valueName>Stand Contractors</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Standard</controllingFieldValue>
+            <valueName>Heavy Machinery</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Standard</controllingFieldValue>
+            <valueName>Lead Retrieval</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Standard</controllingFieldValue>
+            <valueName>Virtual Event</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Standard</controllingFieldValue>
+            <valueName>Badge Registration</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Standard</controllingFieldValue>
+            <valueName>Manage Team</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Custom</controllingFieldValue>
+            <valueName>HTML</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

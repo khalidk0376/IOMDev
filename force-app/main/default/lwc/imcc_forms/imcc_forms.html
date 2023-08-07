@@ -1,0 +1,16 @@
+<template>
+   
+   <lightning-spinner if:true={spinner} alternative-text="Loading" variant="brand" size="small"></lightning-spinner>
+   
+   <div class="forms-and-manuals fnm">
+      <template for:each={formsTypes} for:item="item" for:index="ind">
+         <c-imcc_form-table
+            key={item.formtype}
+            show-tab-context-in={showTabContextIN} tabtype={stanTabType}
+            formtype={item.formtype}
+            con-ed-map-id={conEdMapId} contact-id={contactId} 
+            purchase-datas={listPD} form-datas={item.formdata}  
+            all-contacts-datas={contactData} nodata={nodata}></c-imcc_form-table>
+      </template>
+   </div> 
+</template>

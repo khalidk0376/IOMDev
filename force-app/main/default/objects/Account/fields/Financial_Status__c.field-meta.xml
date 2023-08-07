@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Financial_Status__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Active or Inactive from a Finance perspective</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Active or Inactive from a Finance perspective</inlineHelpText>
+    <label>Financial Status</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

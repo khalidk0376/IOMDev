@@ -1,0 +1,10 @@
+.THIS{z-index: 9001;}
+.THIS .action-width{width: 6.25rem;}
+.THIS #sortableoptions tr td div.slds-truncate {
+    width: 250px;
+    max-width: 250px;
+}
+
+.THIS #auraErrorMessage {
+    display: none;
+}

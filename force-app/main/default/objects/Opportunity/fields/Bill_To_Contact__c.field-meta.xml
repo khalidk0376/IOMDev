@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bill_To_Contact__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Billing Contact of Opportunity. Field is Obsolete now.</description>
+    <externalId>false</externalId>
+    <label>Bill To Contact</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Contact.IOM_Contact_Identifier__c</field>
+            <operation>equals</operation>
+            <value>IOM</value>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>Opportunities (Bill To Contact)</relationshipLabel>
+    <relationshipName>Opportunities_Bill_To_Contact</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

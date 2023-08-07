@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Event_Tab__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>IMCC Tab for stand contractor/Purchase Summary Information.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>IMCC Tab for stand contractor/Purchase Summary Information.</inlineHelpText>
+    <label>Select Internal Page Tab</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Event_Tabs__c.Event_Setting__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Event_Setting__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Event_Tabs__c</referenceTo>
+    <relationshipLabel>Purchase Summaries</relationshipLabel>
+    <relationshipName>Purchase_Summaries</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

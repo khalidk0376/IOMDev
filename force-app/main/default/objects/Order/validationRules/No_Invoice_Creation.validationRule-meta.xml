@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Invoice_Creation</fullName>
+    <active>true</active>
+    <description>This validation rule is used for no Invoice batch or order status selection when &apos;No Invoicing&apos; checkbox is checked on Edition.</description>
+    <errorConditionFormula>AND(No_Invoicing__c,  OR(ISCHANGED( blng__InvoiceBatch__c ),ISPICKVAL(Status , &apos;Activated&apos;) ) )</errorConditionFormula>
+    <errorMessage>Invoices are not allowed to be created for this Edition.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,112 @@
+<template>
+    <div class="section-header">
+        <div class="container-standard dashboard-h">
+            <lightning-layout multiple-rows="true" class="top">
+                <lightning-layout-item size="7" class="left-box">
+                    <div class="informa-logo">
+                        <a href="javascript:void(0);"><img alt="Informa Logo" src="/sfsites/c/resource/IMCC/icons/informa-logo-2.png?v=1"/></a>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="5" class="right-box">
+                    <div class="slds-grid slds-float_right">
+                        <!--<div class="slds-col bell-icon">
+                            <img class="xl" src="/sfsites/c/resource/IMCC/icons/notification.svg"/>                            
+                        </div>
+                        <div class="hide-in-only-small slds-col divider"></div>-->
+                        <div class="xl slds-col profile-pic" style="margin-right: 8px;margin-left:0px">
+                            <img src={userObj.SmallPhotoUrl} alt="User profile pic"/>
+                        </div>
+                        <div class="xl slds-col user-name">
+                            <a onclick={openProfileMenu} class="link link-d-small-medium link-m-small-medium name-link" href="javascript:voic(0);">
+                                {userObj.Name}
+                            </a>
+                            <div class="user-profile-dropdown" onclick={handleClickOnTop}>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_9-of-12">
+                                        <div class="para paragraph-d-standard-medium paragraph-m-standard-medium p-header">{userObj.Name}</div>
+                                        <div class="para paragraph-d-tiny paragraph-m-tiny email">
+                                            <div class="slds-truncate" title={userObj.Username}>{userObj.Username}</div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col">
+                                        <div class="m-avatar p-link slds-float_right">
+                                            <img src={userObj.SmallPhotoUrl} alt="User profile pic"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--
+                                <div class="line"></div>
+                                <div class="para paragraph-d-standard-medium p-header">My Account</div>
+                                <div class="link link-d-small-medium p-link">
+                                    <a href="javascript:void(0);">Personal Profile</a>
+                                </div>
+                                <div class="line"></div>
+                                <div class="para paragraph-d-standard-medium p-header">Manage</div>
+                                <div class="link link-d-small-medium p-link">
+                                    <a href="javascript:void(0);">Company: Pfizer Middle East</a>
+                                </div>
+                                <div class="link link-d-small-medium p-link">
+                                    <a href="javascript:void(0);">Event Products</a>
+                                </div>
+                                <div class="link link-d-small-medium p-link">
+                                    <a href="javascript:void(0);">User Accounts</a>
+                                </div>
+                                -->
+                                <div class="line"></div>
+                                <div class="link link-d-small-medium p-link slds-float_right">
+                                    <a onclick={logOut} href="javascript:void(0);">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="xl slds-col divider"></div>
+                        <div class="slds-col bell-icon">
+                            <img class="xl" src="/sfsites/c/resource/IMCC/icons/notification.svg"/>
+                        </div> -->
+                        <div class="mobile slds-col user-name">
+                            <!-- <div class="alert-container">
+                                <div class="alert"><span>5</span></div>
+                            </div> -->
+                            <a class="" href="javascript:void(0);"><img src="/sfsites/c/resource/IMCC/icons/mobile-menu.png"/></a>                        
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12">
+                    <div class="account-name-container">
+                        <span class="display display-d-large display-m-medium display-m-small slds-truncate">{accountName}</span>
+                    </div>
+                    <div class="switch-account">
+                        <a class="link link-d-small link-m-small switch-account-label" onclick={openAccountList} href="javascript:void(0);">Switch Account</a>
+                        <div class="account-list">
+                            <div id="eventdropdown" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid" role="listbox">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template for:each={accLst} for:item="item">
+                                        <li key={item.Id} role="presentation" class="slds-listbox__item account-name">
+                                            <div id={item.Id} data-account={item.Id} onclick={switchAccount} class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small" role="option">
+                                                <span class="slds-media__body">
+                                                    <span class="slds-truncate para paragraph-d-standard paragraph-m-standard" title={item.Name}>{item.Name}</span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                
+                <!--Tab Start-->
+                <lightning-layout-item size="12" class="xl-nav">                        
+                    <ul class="nav">
+                        <li class="nav-item active">
+                            <a class="link link-d-small" href="javascript:void(0)">Dashboard</a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a class="link link-d-small" href="javascript:void(0)">Company Profile</a>
+                        </li> -->
+                    </ul>                    
+                </lightning-layout-item>
+                <c-imcc-Pendo-Component></c-imcc-Pendo-Component>
+            </lightning-layout>                
+        </div>
+    </div>
+</template>

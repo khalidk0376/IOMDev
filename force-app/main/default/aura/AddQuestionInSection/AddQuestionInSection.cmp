@@ -1,0 +1,53 @@
+<aura:component controller="AddQuestionInSectionCtr">
+    <aura:attribute name="lstQuesGroup" type="List" default="[]" description="List for Question_Questionnaire__c" />
+    <aura:attribute name="qstnQnaireObject" type="Object"  default="{'sobjectType': 'Question_Questionnaire__c'}"/>
+    <aura:attribute name="selTabId" type="String" /> 
+    <aura:attribute name="showConfirmModal" type="boolean" default="false" />
+    {!v.body}
+    <aura:if isTrue="{!v.showConfirmModal==false}">
+        <div class="main-modal">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close" onclick="{!c.hideModal}" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" />
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Move Question</h2>
+                    </header>
+                    <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                        <p>
+                            <lightning:select name="selectItem" label="Select Section" value="{!v.selTabId}">
+                                <aura:iteration items="{!v.lstQuesGroup}" var="QuesGroup" indexVar="0">
+                                    <option value="{!QuesGroup.Question_Group__c}">{!QuesGroup.Question_Group__r.Name}</option>
+                                </aura:iteration>
+                            </lightning:select>
+                        </p>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning:button onclick="{!c.hideModal}" label="Cancel"/>
+                        <lightning:button variant="brand" onclick="{!c.saveQuestionInSection}" label="Save"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </aura:if>    
+    <aura:if isTrue="{!v.showConfirmModal==true}">
+        <div class="main-modal">
+            <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
+                        <lightning:buttonIcon iconName="utility:close" onclick="{!c.hideModal}" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" />
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Alert</h2>
+                    </header>
+                    <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                        <p>Do you want to move question along with its branched questions.</p>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning:button onclick="{!c.hideModal}" label="No"/>
+                        <lightning:button variant="brand" onclick="{!c.saveQuestionInSectionWithBranching}" label="Yes"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </aura:if>
+</aura:component>

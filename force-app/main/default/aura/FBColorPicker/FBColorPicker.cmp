@@ -1,0 +1,50 @@
+<aura:component >
+	<aura:attribute name="colorList" type="List" default="[]"/>
+	<aura:attribute name="colorCode" type="string" default="#5679C0"/>
+	<aura:attribute name="rcolorCode" type="string" default="#5679C0"/>
+	<aura:attribute name="attrToReflect" type="string" default=""/>
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+	<div class="slds-color-picker">
+	  <div class="slds-color-picker__summary">	    
+	    <button onclick="{!c.openBox}" class="slds-button slds-color-picker__summary-button slds-button_icon slds-button_icon-more" title="Choose Color">
+		    <span class="slds-swatch">
+		        <span class="slds-assistive-text">#5679C0</span>
+		    </span>
+		    <lightning:icon iconName="utility:down" size="x-small" class="slds-var-m-left_xx-small"/>
+		    <span class="slds-assistive-text">Choose a color. Current color: {!v.colorCode}</span>
+	    </button>
+	    <div class="slds-form-element slds-color-picker__summary-input">
+		    <div class="slds-form-element__control">
+		        <lightning:input type="text" value="{!v.colorCode}" label="color" variant="label-hidden"/>
+		        <!--
+		        <input type="text" id="color-picker-summary-input" class="slds-input" placeholder="Placeholder Text" value="#5679C0" />
+				-->
+		    </div>
+	    </div>
+	  </div>
+
+	  <div aura:id="colorbox" class="slds-popover slds-is-absolute slds-color-picker__selector slds-hide" role="dialog" aria-label="Choose a color" aria-describedby="dialog-body-id-10">
+	    <div class="slds-popover__body" id="dialog-body-id-10">
+	      <ul class="slds-color-picker__swatches" role="listbox">
+	        <aura:iteration items="{!v.colorList}" var="item">
+	        	<li class="slds-color-picker__swatch" role="presentation">
+		          <a onclick="{!c.updateColor}" class="slds-color-picker__swatch-trigger" href="javascript:void(0)" role="option" tabindex="0">
+		            <span class="slds-swatch" id="{!item}">
+		              <span class="slds-assistive-text">{!'#'+item}</span>
+		            </span>
+		          </a>
+		        </li>
+	    	</aura:iteration>
+	      </ul>
+	    </div>
+	    <footer class="slds-popover__footer">
+	      	<div class="slds-color-picker__selector-footer">
+	        	<lightning:button onclick="{!c.resetColor}" label="Cancel"/>
+	        	<lightning:button variant="brand" onclick="{!c.selectColor}" label="Done"/>
+	      	</div>
+	    </footer>
+	  </div>
+	</div>
+</aura:component>

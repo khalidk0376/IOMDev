@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract_and_invoice_templates</fullName>
+    <active>false</active>
+    <description>contract and invoice templates can,t be Blank on Legal Entity when the status is  Active</description>
+    <errorConditionFormula>IF(AND(ISPICKVAL(Edition_Status__c, &apos;Active&apos;) ,ISBLANK( Part_of_Series__r.Legal_Entity__r.Invoice_Template__c)), true,IF( AND(ISPICKVAL(Edition_Status__c, &apos;Active&apos;) ,ISBLANK( Part_of_Series__r.Legal_Entity__r.Contract_Template__c)),true, IF( AND(ISPICKVAL(Edition_Status__c, &apos;Active&apos;) ,ISBLANK( Part_of_Series__r.Legal_Entity__r.Quote_Template__c)),true,IF( AND(ISPICKVAL(Edition_Status__c, &apos;Active&apos;) ,ISBLANK( Part_of_Series__r.Legal_Entity__r.Credit_Note_Template__c)),true, false))))</errorConditionFormula>
+    <errorMessage>The Quote/Contract/Invoice/Credit Note Template fields on the Legal Entity Object should all be populated before activating the Edition</errorMessage>
+</ValidationRule>

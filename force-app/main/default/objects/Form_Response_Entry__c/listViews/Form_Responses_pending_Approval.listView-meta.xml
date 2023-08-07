@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Form_Responses_pending_Approval</fullName>
+    <columns>NAME</columns>
+    <columns>Form_Name__c</columns>
+    <columns>Form_Type__c</columns>
+    <columns>Form_Deadline__c</columns>
+    <columns>Company_Name__c</columns>
+    <columns>Ops_Contact_Name__c</columns>
+    <columns>Status__c</columns>
+    <columns>Approval_Status__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>View_Response__c</columns>
+    <columns>User_Type1__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Approval_Status__c</field>
+        <operation>equals</operation>
+        <value>In Review</value>
+    </filters>
+    <filters>
+        <field>Event_Name__c</field>
+        <operation>equals</operation>
+        <value>CPHI Frankfurt 2022</value>
+    </filters>
+    <label>Form Responses pending Approval</label>
+</ListView>

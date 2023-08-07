@@ -1,0 +1,166 @@
+<template>
+    <template if:true={viewTestScreen}>
+        <lightning-quick-action-panel header="View Test Data">
+            <lightning-spinner if:true={showSpinner} size="small" variant="brand"></lightning-spinner>
+            <template if:true={noDataScreen}>No Test Data Found</template>
+            <template if:true={viewTestDataScreen}>
+                <div class="slds-p-around_medium lgc-bg">
+                    <div class="slds-scrollable_x slds-scrollable_y">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th>NAME</th>
+                                    <th>ACCESS TYPE</th>
+                                    <th>BOOTH PRODUCT TYPE</th>
+                                    <th>EMAIL ADDRESS</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <template if:true={memberDetails} for:each={memberDetails} for:item="cem"
+                                    for:index="index">
+                                    <tr key={cem.Id}>
+                                        <td>{cem.Name}</td>
+                                        <td>{cem.accessType}</td>
+                                        <td>{cem.selectedBoothType}</td>
+                                        <td>{cem.email}</td>
+                                        <td><lightning-button variant="base" label="Send Email" data-id={cem.Id}
+                                                title="Looks like a link" onclick={handleSendInviteClick}
+                                                class="slds-m-left_x-small"></lightning-button>
+                                        </td>
+                                        <td><lightning-button variant="base" label="Cancel Invite" data-id={cem.Id}
+                                                title="Looks like a link" onclick={handleCancleInviteClick}
+                                                class="slds-m-left_x-small"></lightning-button>
+                                        </td>
+                                        <td><lightning-button variant="base" label="Login" data-id={cem.Id}
+                                            title="Looks like a link" onclick={handleLoginCommunityClick}
+                                            class="slds-m-left_x-small"></lightning-button>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </template>
+            <div slot="footer">
+                <lightning-button variant="neutral" label="Cancel" onclick={cancel}></lightning-button>
+                <lightning-button variant="brand" label="Create Test Data" class="slds-m-left_x-small"
+                    onclick={selectAccessType}></lightning-button>
+            </div>
+            <template if:true={isSendEmailModal}>
+                <!-- Modal/Popup Box LWC starts here -->
+                <section role="dialog" tabindex="-1" aria-labelledby="emailHeader" aria-modal="true"
+                    aria-describedby="rejectionReasonContent" class="slds-modal slds-fade-in-open modalpopup">
+                    <div class="slds-modal__container">
+                        <!-- Modal/Popup Box LWC header here -->
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                title="Close" onclick={closeModal}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                    size="small">
+                                </lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 id="emailHeaderId" class="slds-text-heading_medium slds-hyphenate">
+                            </h2>
+                        </header>
+                        <!-- Modal/Popup Box LWC body starts here -->
+                        <div class="slds-modal__content slds-p-around_medium">
+                            <lightning-input name="email" onchange={handleEmailChange} label="Email Address: "
+                                value={emailId} max-length="100" required={isRequired}
+                                disabled={isDisable}></lightning-input>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning-button variant="Neutral" label="Cancel" class="slds-m-right_medium"
+                                onclick={closeModal} disabled={isUserBtnDisable}>
+                            </lightning-button>
+                            <lightning-button variant="Brand" label="Send Email" onclick={sendEmail}
+                                disabled={isUserBtnDisable}>
+                            </lightning-button>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+        </lightning-quick-action-panel>
+    </template>
+
+    <template if:true={createTestScreen}>
+        <lightning-quick-action-panel header="Create Test Data">
+
+            <template if:true={viewAccessTypeScreen}>
+                <div class="slds-p-around_small">
+                    <lightning-radio-group label="Select Access Type" options={lstOptionsUserType}
+                        value={selectedUserType} onchange={handleUserTypeChange} required
+                        type="radio"></lightning-radio-group>
+                    <br />
+                    <strong style="color: red;">{label.NoteOnUserTypeOnlySelectionTestData}</strong>
+                </div>
+
+            </template>
+
+            <template if:true={viewBoothTypeScreen}>
+                <div class="slds-p-around_small">
+                    <lightning-radio-group label="Select Booth Type" options={lstOptionsBoothType}
+                        value={selectedBoothType} onchange={handleBoothTypeChange} required
+                        type="radio"></lightning-radio-group>
+                    <br />
+                    <strong style="color: red;">{label.NoteOnBoothTypeOnlySelectionTestData}</strong>
+                </div>
+                <!--<footer class="slds-modal__footer slds-align_absolute-center">
+                
+        </footer>-->
+            </template>
+
+            <template if:true={selectedCombinationScreen}>
+                <div class="slds-p-around_small">
+                    <p>
+                        Selected Combination :
+                        <br />
+                        Access Type : {selectedUserType}
+                        <br />
+                        Booth Type : {selectedBoothType}
+                        <br /><br />
+                        <strong style="color: red;">{label.NoteOnAfterSelectionTestData}</strong>
+                    </p>
+                </div>
+            </template>
+
+            <div slot="footer">
+                <!--<template if:true={viewTestDataScreen}>
+                <lightning-button variant="neutral" label="Cancel" onclick={cancel}></lightning-button>
+                <lightning-button variant="brand" label="Create Test Data" class="slds-m-left_x-small"
+                    onclick={selectAccessType}></lightning-button>
+            </template>-->
+                <template if:true={viewAccessTypeScreen}>
+                    <lightning-button variant="Brand" label="Create Test Data" class="slds-m-right_medium"
+                        onclick={selectBoothType} disabled={isAccessSelectionBtnDisable}>
+                    </lightning-button>
+                </template>
+                <template if:true={viewBoothTypeScreen}>
+                    <lightning-button variant="Neutral" label="Select Access Type" class="slds-m-right_medium"
+                        onclick={previousScreen}>
+                    </lightning-button>
+                    <lightning-button variant="Brand" label="Create Purchase Data" onclick={createData}
+                        disabled={isBoothSelectionBtnDisable}>
+                    </lightning-button>
+                </template>
+                <template if:true={selectedCombinationScreen}>
+                    <lightning-button variant="Neutral" label="Select Booth Type" class="slds-m-right_medium"
+                        onclick={backToBoothSelection}>
+                    </lightning-button>
+                    <lightning-button variant="Brand" label="Login As User" onclick={login}>
+                    </lightning-button>
+                </template>
+            </div>
+
+            
+
+
+        </lightning-quick-action-panel>
+    </template>
+</template>

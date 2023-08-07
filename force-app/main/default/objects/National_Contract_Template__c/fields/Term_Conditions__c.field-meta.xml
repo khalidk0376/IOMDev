@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Term_Conditions__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Term &amp; Conditions</label>
+    <referenceTo>APXTConga4__Conga_Template__c</referenceTo>
+    <relationshipLabel>National Contract Templates (Term &amp; Conditions)</relationshipLabel>
+    <relationshipName>National_Contract_Templates1</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

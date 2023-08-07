@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Response_Count_All__c</fullName>
+    <description>All Form Response Enteries Count of the Form Data</description>
+    <externalId>false</externalId>
+    <label>Response Count All</label>
+    <summaryForeignKey>Form_Response_Entry__c.Form_Data__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

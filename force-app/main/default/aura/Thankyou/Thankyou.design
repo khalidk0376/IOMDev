@@ -1,0 +1,6 @@
+<design:component label="Thankyou">
+	<design:attribute name="message" label="Message" default="Thankyou for submit survey"/>
+    <design:attribute name="buttonLabel" label="Button Label" default="Download Response As PDF"/>
+    <design:attribute name="site_url" label="Site URL" default="" description="Enter site url with protocol to download response"/>
+    <!--https://girikonformbuilder-developer-edition.na50.force.com-->
+</design:component>

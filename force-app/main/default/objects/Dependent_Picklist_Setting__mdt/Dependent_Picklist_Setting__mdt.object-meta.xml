@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>IM Customer Center - This custom metadata used to get country picklist along with state and telephone code of country. Country-State dependent picklist</description>
+    <label>Dependent Picklist Setting</label>
+    <pluralLabel>Dependent Picklist Settings</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

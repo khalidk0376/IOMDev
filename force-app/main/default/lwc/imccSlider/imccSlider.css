@@ -1,0 +1,30 @@
+.recommended-events .event-icon .icon-notfade{    
+    opacity: 1;
+    cursor: pointer;
+}
+
+.recommended-events .event-icon .icon-notfade:hover{
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.carousel {
+    width: 100%;
+    height: 531px;
+    overflow: hidden;
+    position: relative;
+}
+.carousel .slides {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    display: flex;
+    width: 100%;
+    transition: 1s ease-in-out all;
+}
+.carousel .slides .slide {
+    min-width: 33.33%;
+    min-height: 250px;
+    height: auto;
+}

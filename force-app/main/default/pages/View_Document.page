@@ -1,0 +1,60 @@
+<!--
+/**
+* File         :   view_Document
+* Project      :   GECI
+* Created Date :   3 July 2023
+* Created By   :   IBM (Bharath)
+* ***************************************************************************************************
+* @description : Visualforce Page to display PDF file from the external System(GECI-1922)
+* ***************************************************************************************************
+-->
+<apex:page id="PDFPage" controller="ViewDocumentController" showHeader="false" sideBar="false" lightningStylesheets="true" action="{!getDocument}">
+    <apex:slds />
+    <Apex:form >
+        <div class="slds-scope row-container">
+            <!-- SPINNER -->
+            <div id="spinner" class="slds-spinner_container first-row">
+                <div role="status" class="slds-spinner slds-spinner--large slds-spinner--brand">
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+            <!-- / SPINNER -->
+            
+            <!-- iframe the displays PDF page -->
+            <apex:outputPanel rendered="{!positiveResponse}">
+                <iframe id="pdfViewer" class="second-row" style="display:none;"></iframe>
+            </apex:outputPanel>
+            
+            <Apex:pagemessages id="message" rendered="{!(!positiveResponse)}"></Apex:pagemessages>
+        </div>
+        
+    </apex:form>
+    <script>
+        // blob display in pdf format
+        var pdfViewer = document.querySelector('[id$=pdfViewer]');
+        const byteCharacters = atob("{!base64String}");
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const contentType = 'application/pdf';
+        const byteArray = new Uint8Array(byteNumbers);
+        const blobBody = new Blob([byteArray], {
+            type: contentType
+        });
+        var url = window.URL.createObjectURL(blobBody);
+        if(pdfViewer != null){
+            pdfViewer.src = url;
+            pdfViewer.style.display = 'block';
+        }
+        // Spinner Timeout
+        setTimeout(function() {
+            document.getElementById('spinner').className += ' slds-hide'
+        }, 1000);
+    </script>
+    <style>
+        body, html, form,.row-container,.second-row {width: 100%; height: 100%; margin: 0; padding: 0}
+        .second-row{border: 0px;}
+    </style>
+</apex:page>

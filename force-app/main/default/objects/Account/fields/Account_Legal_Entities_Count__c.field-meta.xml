@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Legal_Entities_Count__c</fullName>
+    <description>Rollup Summary field of total  Account Legal Entities</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Rollup Summary field of total  Account Legal Entities</inlineHelpText>
+    <label>Account Legal Entities Count</label>
+    <summaryForeignKey>Account_Legal_Entity__c.Account__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

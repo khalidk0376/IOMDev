@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IOM_Custom_Billing_Instructions_Required</fullName>
+    <active>true</active>
+    <description>Billing Instructions Required incase of Custom Billing</description>
+    <errorConditionFormula>AND(IOM_Is_Custom_Billing_Required__c,ISBLANK(IOM_Custom_Billing_Instructions__c) , $CustomMetadata.IOM_Global_Configuration_Data__mdt.Disable_IOM_Trigger.IOM_Value__c  = &apos;False&apos;)</errorConditionFormula>
+    <errorMessage>Custom billing Instructions are required in case of custom billing</errorMessage>
+</ValidationRule>

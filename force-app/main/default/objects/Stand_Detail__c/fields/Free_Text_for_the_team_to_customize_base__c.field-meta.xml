@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Free_Text_for_the_team_to_customize_base__c</fullName>
+    <description>Free Text for the team to customize based on show requirement</description>
+    <externalId>false</externalId>
+    <label>Free Text for the team to customize base</label>
+    <length>32768</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

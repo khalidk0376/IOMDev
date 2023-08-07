@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Set_Override_Next_Billing_Date__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Set the override next billing date field based on the End Date automatically If true  [IOM-1458]</description>
+    <externalId>false</externalId>
+    <label>Set Override Next Billing Date</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

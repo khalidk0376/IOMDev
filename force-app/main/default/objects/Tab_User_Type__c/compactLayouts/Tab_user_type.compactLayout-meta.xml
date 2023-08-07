@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tab_user_type</fullName>
+    <fields>Name</fields>
+    <fields>User_Type__c</fields>
+    <fields>Form_Allocation__c</fields>
+    <fields>Event_Tab__c</fields>
+    <fields>Edition_Popup__c</fields>
+    <label>Tab user type</label>
+</CompactLayout>

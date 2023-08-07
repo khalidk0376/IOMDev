@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ERP_Sync__c</fullName>
+    <description>This flag is used by Mulesoft to understand if this Account is needs to be synced to the ERP.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This flag is used by Mulesoft to understand if this Account is needs to be synced to the ERP.</inlineHelpText>
+    <label>ERP Sync</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Awaiting Update</fullName>
+                <default>false</default>
+                <label>Awaiting Update</label>
+            </value>
+            <value>
+                <fullName>Synced</fullName>
+                <default>false</default>
+                <label>Synced</label>
+            </value>
+            <value>
+                <fullName>Error</fullName>
+                <default>false</default>
+                <label>Error</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

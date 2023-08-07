@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Feature_Category__c</fullName>
+    <description>Define the category of the Form e.g. Form/Manual/Badges</description>
+    <externalId>false</externalId>
+    <label>Feature Category</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Badges</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Badges</label>
+            </value>
+            <value>
+                <fullName>Form</fullName>
+                <default>false</default>
+                <label>Form</label>
+            </value>
+            <value>
+                <fullName>Heavy Machinery</fullName>
+                <default>false</default>
+                <label>Heavy Machinery</label>
+            </value>
+            <value>
+                <fullName>Manual</fullName>
+                <default>false</default>
+                <label>Manual</label>
+            </value>
+            <value>
+                <fullName>Stand Contractor</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Stand Contractor</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

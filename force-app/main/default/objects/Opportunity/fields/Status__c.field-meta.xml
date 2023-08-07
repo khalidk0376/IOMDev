@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <description>Status of opportunity.</description>
+    <externalId>false</externalId>
+    <label>Status</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>StageName</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Customer Contacted</fullName>
+                <default>false</default>
+                <label>Customer Contacted</label>
+            </value>
+            <value>
+                <fullName>Customer Engaged</fullName>
+                <default>false</default>
+                <label>Customer Engaged</label>
+            </value>
+            <value>
+                <fullName>Proposal Sent</fullName>
+                <default>false</default>
+                <label>Proposal Sent</label>
+            </value>
+            <value>
+                <fullName>Revised Proposal Sent</fullName>
+                <default>false</default>
+                <label>Revised Proposal Sent</label>
+            </value>
+            <value>
+                <fullName>Pending Accounting Approval</fullName>
+                <default>false</default>
+                <label>Pending Accounting Approval</label>
+            </value>
+            <value>
+                <fullName>Awaiting Payment</fullName>
+                <default>false</default>
+                <label>Awaiting Payment</label>
+            </value>
+            <value>
+                <fullName>Accounting Rejected</fullName>
+                <default>false</default>
+                <label>Accounting Rejected</label>
+            </value>
+            <value>
+                <fullName>AR Cancel / Re-bill</fullName>
+                <default>false</default>
+                <label>AR Cancel / Re-bill</label>
+            </value>
+            <value>
+                <fullName>Booth/Sponsorship Cancellation</fullName>
+                <default>false</default>
+                <label>Booth/Sponsorship Cancellation</label>
+            </value>
+            <value>
+                <fullName>Digital / Print Cancellation</fullName>
+                <default>false</default>
+                <label>Digital / Print Cancellation</label>
+            </value>
+            <value>
+                <fullName>Discover</fullName>
+                <default>false</default>
+                <label>Discover</label>
+            </value>
+            <value>
+                <fullName>Online Booth Form In Review</fullName>
+                <default>false</default>
+                <label>Online Booth Form In Review</label>
+            </value>
+            <value>
+                <fullName>Partial Payment</fullName>
+                <default>false</default>
+                <label>Partial Payment</label>
+            </value>
+            <value>
+                <fullName>Pending Change</fullName>
+                <default>false</default>
+                <label>Pending Change</label>
+            </value>
+            <value>
+                <fullName>Legacy Lost</fullName>
+                <default>false</default>
+                <label>Legacy Lost</label>
+            </value>
+            <value>
+                <fullName>Legacy Cancelled</fullName>
+                <default>false</default>
+                <label>Legacy Cancelled</label>
+            </value>
+            <value>
+                <fullName>Legacy Won</fullName>
+                <default>false</default>
+                <label>Legacy Won</label>
+            </value>
+            <value>
+                <fullName>Opportunity Cancelled</fullName>
+                <default>false</default>
+                <label>Opportunity Cancelled</label>
+            </value>
+            <value>
+                <fullName>Recalled</fullName>
+                <default>false</default>
+                <label>Recalled</label>
+            </value>
+            <value>
+                <fullName>Amended</fullName>
+                <default>false</default>
+                <label>Amended</label>
+            </value>
+            <value>
+                <fullName>Customize</fullName>
+                <default>false</default>
+                <label>Customize</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>AR Cancel / Re-bill</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Booth/Sponsorship Cancellation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Digital / Print Cancellation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Legacy Lost</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Legacy Cancelled</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Lost</controllingFieldValue>
+            <valueName>Opportunity Cancelled</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Proposal Sent</controllingFieldValue>
+            <valueName>Proposal Sent</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Proposal Sent</controllingFieldValue>
+            <valueName>Revised Proposal Sent</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Customize</controllingFieldValue>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Accounting Rejected</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Customize</controllingFieldValue>
+            <valueName>Recalled</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Customize</controllingFieldValue>
+            <valueName>Customize</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Discover</controllingFieldValue>
+            <valueName>Discover</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Booked</controllingFieldValue>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Legacy Won</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Pending Accounting Approval</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Awaiting Payment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Online Booth Form In Review</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed Won</controllingFieldValue>
+            <valueName>Pending Change</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

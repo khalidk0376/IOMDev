@@ -1,0 +1,129 @@
+<template>
+    <h2 class="tab-heading slds-p-horizontal_small">Step 3: Design Detail</h2>
+    <lightning-spinner if:true={spinner} variant="brand" size="small" title="Loading..."></lightning-spinner>
+
+    <div class="manuals slds-m-around_small">
+        <div class="tab-sub-heading">
+            <span>Stand Information</span>
+        </div>
+        <div class="slds-box">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item if:true={isShowQ1} size="4" small-device-size="12" medium-device-size="6" large-device-size="4" padding="horizontal-small">
+                    <lightning-input type="text" value={detailObj.Purchase_Data__r.Booth_Number__c} label="Stand Number" variant="label-inline" disabled></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item if:true={isShowQ2} size="5" small-device-size="12" medium-device-size="6" large-device-size="5" padding="horizontal-small">
+                    <div class="slds-grid">
+                        <div class="slds-size_4-of-12 dim-heading">Dimensions</div>
+                        <div class="slds-size_3-of-12" style="display: inherit;gap:2px">
+                            <lightning-input type="number" value={detailObj.Purchase_Data__r.Stand_Length__c} label="width" variant="label-hidden" disabled></lightning-input>
+                            <div style="margin-top: 4px;font-weight: bold;">{unit}</div>
+                        </div>
+                        <div class="slds-size_1-of-12" style="text-align: center;margin-top: 4px;font-weight: bold;">X</div>
+                        <div class="slds-size_3-of-12" style="display: inherit;gap:2px">
+                            <lightning-input type="number" value={detailObj.Purchase_Data__r.Stand_Width__c} label="height" variant="label-hidden" disabled></lightning-input>
+                            <div style="margin-top: 4px;font-weight: bold;">{unit}</div>
+                        </div>                        
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item  if:true={isShowQ3} size="3" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-small">
+                    <div class="slds-grid">
+                        <div class="slds-size_12-of-12" style="display: inherit;gap:2px">
+                            <lightning-input type="number"  value={detailObj.Purchase_Data__r.Quantity_Area__c} label="Area" variant="label-inline" disabled></lightning-input>
+                            <div class="area">{unit}<sup>2</sup></div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item if:true={isShowQ4} size="7" small-device-size="12" medium-device-size="8" large-device-size="7" padding="horizontal-small">
+                    <lightning-combobox disabled={isInReview} onchange={handleChange} value={standDetail.Open_Side__c} name="openside" options={openSideOption} label="Number of open sides?" variant="label-inline" required></lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" padding="horizontal-small" class="slds-m-top_small">
+                    <lightning-radio-group if:true={isShowQ5} disabled={isInReview} name="isfabric" label="Are you planning on constructing a sustainable frame and fabric?" required  message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" onchange={handleChange} value={standDetail.Sustainable_frame_and_fabric__c} options={yesNoOption}></lightning-radio-group>
+                    <template if:true={isShowQ6}>
+                        <lightning-radio-group if:false={isFrameAndFabric} disabled={isInReview} name="doubledecker" label="Are you planning on constructing a Double Decker?" required  message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" onchange={handleChange} value={standDetail.Double_Decker__c} options={yesNoOption}></lightning-radio-group>
+                    </template>
+                    <lightning-radio-group if:true={isShowQ7} disabled={isInReview} name="riggingindesign" label="Are you planning on including rigging in the design?" required  message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" onchange={handleChange} value={standDetail.Including_rigging_in_the_design__c} options={yesNoOption}></lightning-radio-group>
+                </lightning-layout-item>
+
+                <lightning-layout-item if:true={showRigging} size="5" padding="horizontal-small" class="slds-m-top_small">
+                    <lightning-combobox if:true={isShowQ8} disabled={isInReview} onchange={handleChange} value={standDetail.Type_of_rigging__c} name="riggingtype" options={riggingOpttion} label="Type of rigging" variant="label-inline" required></lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item if:true={showRigging} size="7" padding="horizontal-small" class="slds-m-top_small">
+                    <lightning-combobox if:true={isShowQ9} disabled={isInReview} onchange={handleChange} value={standDetail.Are_any_other_hanging_structure__c} name="hangingstructure" options={hangingStruOption} label="Are any other hanging structure?" variant="label-inline" required></lightning-combobox>
+                </lightning-layout-item>
+
+                <lightning-layout-item if:true={isShowQ10} size="8" small-device-size="12" medium-device-size="12" large-device-size="8" padding="horizontal-small" class="slds-m-top_small">
+                    <div class="slds-grid">
+                        <div class="slds-size_6-of-12">
+                            <lightning-combobox disabled={isInReview} onchange={handleChange} 
+                                value={selectedStandHight}
+                                name="shinteger" options={shandHeightOptions} 
+                                label="Stand Height?" placeholder={unit}
+                                variant="label-inline" required></lightning-combobox>
+                        </div>
+                        <div class="slds-size_4-of-12 strand-box">
+                            <lightning-combobox disabled={isInReview} onchange={handleChange} 
+                                value={selectedStandHightDecimal} placeholder=".M"
+                                name="shdecimal" options={shandHeightDecimalOptions} 
+                                label="Stand Height Decimal?" 
+                                variant="label-hidden" required></lightning-combobox>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="12" padding="horizontal-small" class="slds-m-top_small">
+                    <lightning-radio-group if:true={isShowQ11} disabled={isInReview} name="radio4" label="Does the design incorporate any water feature?" required  message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" onchange={handleChange} value={standDetail.Incorporate_any_water_feature__c} options={yesNoOption}></lightning-radio-group>
+                    <lightning-radio-group if:true={isShowQ12} disabled={isInReview} name="radio5" label="Do you have a requirement to build a food preparation area?" required  message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" onchange={handleChange} value={standDetail.Build_a_food_preparation_area__c} options={yesNoOption}></lightning-radio-group>
+                    <lightning-radio-group if:true={isShowQ13} disabled={isInReview} name="radio6" label="Does the design include glass walls?" required  message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" onchange={handleChange} value={standDetail.Dose_design_include_glass_walls__c} options={yesNoOption}></lightning-radio-group>
+                    <lightning-radio-group if:true={isShowQ14} disabled={isInReview} name="radio7" label="Is there a stage / platform over 600mm within the design?" required  message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" onchange={handleChange} value={standDetail.Over_600mm_within_the_design__c} options={yesNoOption}></lightning-radio-group>
+                    <lightning-radio-group if:true={isShowQ15} disabled={isInReview} name="radio8" label="Are there any staircases built into the design?" required  message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" onchange={handleChange} value={standDetail.Staircases_built_into_the_design__c} options={yesNoOption}></lightning-radio-group>
+                    <lightning-radio-group if:true={isShowQ16} disabled={isInReview} name="radio9" label="Will the stand require high value product storage?" required  message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" onchange={handleChange} value={standDetail.Require_high_value_product_storage__c} options={yesNoOption}></lightning-radio-group>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>        
+    </div>
+
+    <div class="manuals slds-m-around_small">
+        <div class="tab-sub-heading">
+            <span>Materials required to construct structure</span>
+        </div>
+        <div class="slds-box s-1of2">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6" padding="horizontal-small">
+                    <lightning-combobox if:true={isShowQ17} disabled={isInReview} onchange={handleChange} name="mdfpanel" value={standDetail.MDF_Panels_or_similar__c} options={percentOpt} label="MDF Panels or similar?" variant="label-inline" required></lightning-combobox>
+                    <lightning-combobox if:true={isShowQ18} disabled={isInReview} onchange={handleChange} name="reusablematerial" value={standDetail.Reusable_Materials__c} options={percentOpt} label="Reusable Materials?" class="slds-m-top_small" variant="label-inline" required></lightning-combobox>
+                    <lightning-radio-group if:true={isShowQ19} disabled={isInReview} name="material1" label="LED Lighting?" required  message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" onchange={handleChange} value={standDetail.LED_Lighting__c} options={yesNoOption}></lightning-radio-group>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6" padding="horizontal-small">
+                    <lightning-combobox if:true={isShowQ20} disabled={isInReview} onchange={handleChange} name="rawmaterial" value={standDetail.Raw_Materials__c} options={percentOpt} label="Raw Materials (others)" variant="label-inline" required></lightning-combobox>
+                    <lightning-combobox if:true={isShowQ21} disabled={isInReview} onchange={handleChange} name="prefabricated" value={standDetail.Prefabricated_Offsite__c} options={percentOpt} label="Prefabricated (Offsite)" class="slds-m-top_small" variant="label-inline" required></lightning-combobox>
+                    <lightning-radio-group if:true={isShowQ22} disabled={isInReview} name="material2" label="Flame retarded material, compliant to venue regulations and local legislation" required  message-when-value-missing="Please choose yes/no" 
+                        variant="label-inline" onchange={handleChange} value={standDetail.Flame_retarded_material__c} options={yesNoOption}></lightning-radio-group>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+
+    <div if:true={isShowMachine} class="manuals slds-m-around_small">
+        <div class="tab-sub-heading">
+            <span>Heavy Machine / Vehicles</span>
+        </div>
+        <div class="slds-box">
+            <lightning-radio-group if:true={isShowQ23} disabled={isInReview} name="heavymachine1" label="Do you have heavy machinery/equipment lift requirement?" required  message-when-value-missing="Please choose yes/no" 
+                variant="label-inline" onchange={handleChange} value={standDetail.Heavy_machinery_equipment_lift_require__c} options={yesNoOption}></lightning-radio-group>
+            <lightning-radio-group if:true={isShowQ24} disabled={isInReview} name="heavymachine2" label="Do you have large machinery/equipment on the stand area?" required  message-when-value-missing="Please choose yes/no" 
+                variant="label-inline" onchange={handleChange} value={standDetail.Large_machinery_on_the_stand_area__c} options={yesNoOption}></lightning-radio-group>
+            <lightning-radio-group if:true={isShowQ25} disabled={isInReview} name="heavymachine3" label="Is there a display vehicles/craft requirement on stand?" required  message-when-value-missing="Please choose yes/no" 
+                variant="label-inline" onchange={handleChange} value={standDetail.Display_vehicles_requirement_on_stand__c} options={yesNoOption}></lightning-radio-group>
+        </div>
+    </div>
+</template>

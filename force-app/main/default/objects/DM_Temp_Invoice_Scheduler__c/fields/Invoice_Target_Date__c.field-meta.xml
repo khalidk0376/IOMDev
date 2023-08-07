@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Invoice_Target_Date__c</fullName>
+    <description>Target Date for invoice scheduler</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Target Date for invoice scheduler</inlineHelpText>
+    <label>Invoice Target Date</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

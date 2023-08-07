@@ -1,0 +1,5 @@
+.THIS {z-index:90001}
+.THIS .section{background-color: #64799e;font-weight: bold;color:#fff;padding: .5rem;}
+.THIS #sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+.THIS #sortable li{color: #fff!important;border-radius: 0;border-bottom: 1px solid rgb(217, 219, 221);border-top: 0 solid red;border-left: 0 solid red;border-right: 0 solid red;cursor:move;height:40px;}
+.THIS .ui-state-highlight {height: 25px; border:1px solid token(colorBrand);box-shadow: inset 0 0 8px token(colorBrand); border-style: dashed;}

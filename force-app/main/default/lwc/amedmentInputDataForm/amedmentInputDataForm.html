@@ -1,0 +1,1609 @@
+<template>
+    <!-- -->
+    <!-- ***************** Amedment RECORD VIEW ***************  -->
+    <div class="slds-m-around_medium slds-border_bottom">
+        <lightning-record-view-form object-api-name="Change_Request__c" record-id={recordId}>
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="6">
+
+                    <div class="slds-form__item" role="listitem">
+                        <div
+                            class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <lightning-output-field field-name="Name"> </lightning-output-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form__item" role="listitem">
+                        <div
+                            class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <lightning-output-field field-name="Account__c"></lightning-output-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <template if:true={parentOppId}>
+                        <lightning-record-view-form record-id={parentOppId} object-api-name="Opportunity">
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static slds-form-element_horizontal">
+                                            <lightning-output-field field-name="Bill_To_Account__c"></lightning-output-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-form__item" role="listitem">
+                                <div class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static slds-form-element_horizontal">
+                                            <lightning-output-field field-name="CRM_Opportunity__c"></lightning-output-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </lightning-record-view-form>
+                    </template>
+
+                    <div class="slds-form__item" role="listitem">
+                        <div
+                            class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <lightning-output-field field-name="Edition__c"> </lightning-output-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="6">
+                    <div class="slds-form__item" role="listitem">
+                        <div
+                            class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <lightning-output-field field-name="Opportunity__c"> </lightning-output-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form__item" role="listitem">
+                        <div
+                            class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <lightning-output-field field-name="Change_Request_Status__c">
+                                    </lightning-output-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form__item" role="listitem">
+                        <div
+                            class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <lightning-output-field field-name="Actioned_By__c">
+                                    </lightning-output-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form__item" role="listitem">
+                        <div
+                            class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <lightning-output-field field-name="Actioned_Date_Time__c">
+                                    </lightning-output-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form__item" role="listitem">
+                        <div
+                            class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <lightning-output-field field-name="CRM_Change_Request_No__c">
+                                    </lightning-output-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="6">
+                    <div class="slds-form__item" role="listitem">
+                        <div
+                            class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <lightning-output-field field-name="Sales_Comments__c"> </lightning-output-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form__item" role="listitem">
+                        <div
+                            class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <lightning-output-field field-name="Requested_By__c">
+                                    </lightning-output-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="6">
+                    <div class="slds-form__item" role="listitem">
+                        <div
+                            class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <lightning-output-field field-name="Sales_Operations_Comments__c">
+                                    </lightning-output-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form__item" role="listitem">
+                        <div
+                            class="slds-form-element slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element slds-form-element_horizontal">
+                                    <label class="slds-form-element__label">Last Modified By</label>
+                                    <lightning-output-field variant="label-hidden" field-name="LastModifiedById">
+                                    </lightning-output-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="12">
+                    <div class="slds-form__item" role="listitem">
+                        <div class="slds-form-element slds-form-element_stacked slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <lightning-output-field field-name="Amendment_Type__c"> </lightning-output-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+
+            </lightning-layout>
+        </lightning-record-view-form>
+    </div>
+
+    <!-- Spinner Start -->
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </template>
+
+    <!-- Spinner End   -->
+
+    <!-- ***************************   Data Updates  ************************************ -->
+
+    <template if:true={showAmendmentDataForm}>
+        <div class="slds-m-around_medium">
+
+            <!-- header -->
+            <!-- <h1
+                class="extraLargeHeader slds-align_absolute-center slds-p-horizontal_large slds-p-bottom_small slds-m-top_large">
+                Please update amended values</h1>
+            <h5 class="slds-p-horizontal_large slds-m-bottom_medium"></h5> -->
+
+            <!-- RICD -->
+            <template if:true={isGroup3}>
+                <lightning-accordion allow-multiple-sections-open onsectiontoggle={handleSectionToggle}
+                    active-section-name={activeSections}>
+
+                    <!--
+                     __*************** Financial Admedments *******************__
+                    -->
+
+                    <!-- ************Billing Schedule Change************* -->
+                    <template if:true={isBillingScheduleChange}>
+                        <lightning-accordion-section class="amedment-accordion" name="FC_01"
+                            label="Billing Schedule Change">
+                            <div>
+                            <!--<lightning-record-view-form object-api-name="Opportunity"
+                                    record-id={amendmentObj.Opportunity__c}>
+
+                                  <table class={amendmentTableCSSClass}>
+                                        <thead>
+                                            <tr>
+                                                <th> Field Name </th>
+                                                <th class="fixedColumnWidth"> {currentDataRowHeader} </th>
+                                                <th class="fixedColumnWidth"> New Value </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Payment Schedule</td>
+                                                <td>
+                                                    <span>
+                                                        <template if:true={isPaymentSchedulefromOpp}>
+                                                            <lightning-output-field variant="label-hidden"
+                                                                field-name="Payment_Schedule__c">
+                                                            </lightning-output-field>
+                                                        </template>
+                                                        <template if:false={isPaymentSchedulefromOpp}>
+                                                            <lightning-output-field variant="label-hidden"
+                                                                field-name="Event_Payment_ScheduleFor__c">
+                                                            </lightning-output-field>
+                                                        </template>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <lightning-combobox class="validate" variant="label-hidden"
+                                                        onchange={onDataChange} dropdown-alignment="bottom-left"
+                                                        data-request-type="Billing Schedule Change"
+                                                        data-object="Opportunity" name="Payment_Schedule__c"
+                                                        options={paymentvalues} required></lightning-combobox>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                </lightning-record-view-form>-->
+                                   <!--GECI-570-->
+                                   <div class="slds-grid slds-wrap">
+                                    <!-- <div class="slds-col slds-size_6-of-12 slds-p-left_medium">
+                                        <lightning-input type="date" name="closeDate" label="Due Date" value={formatedDueDate} field-level-help="First Due Date." disabled></lightning-input>
+                                      </div> -->
+                                      <div class="slds-col slds-size_6-of-12 slds-p-left_medium">
+                                        <lightning-input type="number" name="totalNoOfPayment" value={totalNoOfPayment} label="Total No of Billing Schedules" data-index="0" onchange={handleCustomBillingInputChange} read-only={isReadOnlyMode}></lightning-input>
+                                      </div>
+                                </div>
+                                 <!-- Custom Billing Section -->
+                                <template if:true={showCustomBillingInput}>
+                                    <div class="slds-m-top_medium">
+                                        <table class="slds-table slds-table_cell-buffer ">
+                                            <thead>
+                                            <tr>
+                                                <th> Start Date </th>
+                                                <th> Percentage </th>
+                                                <!-- <th> Amount</th> -->
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template for:each={customBillingList} for:item="cbl">
+                                                    <tr key={cbl.index}>
+                                                        <td>
+                                                            <lightning-input type="date" data-index={cbl.index} name="paymentDate" label={cbl.datelabel} onchange={handleCustomBillingInputChange} value={cbl.date} disabled={isReadOnlyMode}></lightning-input>
+                                                        </td>
+                                                        <td>
+                                                            <!-- formatter="percent"  -->
+                                                            <template if:true={isReadOnlyMode}>
+                                                                <lightning-input type="number" name="paymentPercent" data-index={cbl.index} value={cbl.percent} label={cbl.percentageLabel} onchange={handleCustomBillingInputChange} step="0.01" disabled ></lightning-input>
+                                                            </template>
+                                                            <template if:false={isReadOnlyMode}>
+                                                                <lightning-input type="number" name="paymentPercent" data-index={cbl.index} value={cbl.percent} label={cbl.percentageLabel} onchange={handleCustomBillingInputChange} step="0.01" disabled={cbl.isLast} ></lightning-input>
+                                                            </template>                                                            
+                                                        </td>                                                                        
+                                                    </tr>
+                                                </template>                         
+                                            
+                                            </tbody>
+                                        </table> 
+                                    </div>
+                                </template>
+                            </div>
+                        </lightning-accordion-section>
+                    </template>
+
+                    <!-- ************ Tax Exempt Rebill ************* -->
+                    <template if:true={isTaxExemptRebill}>
+                        <lightning-accordion-section class="amedment-accordion" name="FC_02" label="Tax Exempt Rebill">
+                            <div>
+                                <lightning-record-view-form object-api-name="Opportunity"
+                                    record-id={amendmentObj.Opportunity__c}>
+
+                                    <!-- body -->
+                                    <table class={amendmentTableCSSClass}>
+                                        <thead>
+                                            <tr>
+                                                <th> Field Name </th>
+                                                <th class="fixedColumnWidth"> {currentDataRowHeader} </th>
+                                                <th class="fixedColumnWidth"> New Value </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Is Tax Exempt</td>
+                                                <td>
+                                                    <span>                                                        
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="Tax_Exempt__c">
+                                                        </lightning-output-field>                                                        
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <lightning-input type="checkbox" variant="label-hidden"
+                                                        onchange={onDataChange}
+                                                        data-request-type="Tax Exempt Rebill"
+                                                        data-object="Opportunity" name="Tax_Exempt__c"
+                                                       ></lightning-input>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </lightning-record-view-form>
+                            </div>
+                        </lightning-accordion-section>
+                    </template>
+                    <!-- *********** Campaign Run Dates/Amounts Change ***********-->
+                    <template if:true={isCampaignRunDatesChange}>
+                        <lightning-accordion-section class="amedment-accordion" name="FC_03"
+                            label="Campaign Run Dates/Amounts Change">
+                            <div>
+                                <lightning-accordion allow-multiple-sections-open
+                                    active-section-name={activeOrderAccordions}>
+                                    <template for:each={opportunityOrderList} for:item="odr">
+                                        <lightning-accordion-section key={odr.OrderNumber} class="amedment-accordion"
+                                            name={odr.OrderNumber} label={odr.OrderNumber}>
+                                            <!-- products -->
+                                            <div class="slds-m-top_medium">
+                                                <table class="slds-table slds-table_cell-buffer">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="fixedColumnWidth-1-5">Order Product</th>
+                                                        <th class="fixedColumnWidth-1-5">Start Date </th>
+                                                        <th class="fixedColumnWidth-1-5">End Date</th>
+                                                        <th class="fixedColumnWidth-1-5">Override Next Billing Date</th>
+                                                        <th class="fixedColumnWidth-1-5">Unit Price</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <template for:each={odr.OrderItems} for:item="item">
+                                                            <tr key={item.OrderItemNumber}>
+                                                                <td>
+                                                                    <a href={item.recordUrl} target="_blank">{item.ProductName}</a>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="slds-truncate">
+                                                                        <lightning-input type="date" data-order-id={odr.Id} data-order-item-id={item.Id} data-start-id={item.OrderItemNumber} name="ServiceDate" value={item.ServiceDate} onchange={handleCampaignRunInputChange} variant="label-hidden" disabled={isReadOnlyMode}></lightning-input>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="slds-truncate">
+                                                                        <lightning-input type="date" data-order-id={odr.Id} data-order-item-id={item.Id} data-end-id={item.OrderItemNumber} name="EndDate" value={item.EndDate} onchange={handleCampaignRunInputChange} variant="label-hidden" disabled={isReadOnlyMode}></lightning-input>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="slds-truncate">
+                                                                        <lightning-input type="date" data-order-id={odr.Id} data-order-item-id={item.Id} data-end-id={item.OrderItemNumber} name="blng__OverrideNextBillingDate__c" value={item.blng__OverrideNextBillingDate__c} onchange={handleCampaignRunInputChange} variant="label-hidden" disabled={isReadOnlyMode}></lightning-input>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <!-- formatter="percent"  -->
+                                                                    <template if:false={odr.IsActive}>
+                                                                        <div class="slds-truncate">
+                                                                            <lightning-input type="number" name="UnitPrice" data-order-id={odr.Id} data-order-item-id={item.Id} value={item.UnitPrice} onchange={handleCampaignRunInputChange} variant="label-hidden" step="0.01" disabled={isReadOnlyMode}></lightning-input>
+                                                                        </div>
+                                                                    </template>
+
+                                                                    <template if:true={odr.IsActive}>
+                                                                        <div class="slds-truncate">
+                                                                            <lightning-input type="number" name="UnitPrice" data-order-id={odr.Id} data-order-item-id={item.Id} value={item.UnitPrice} onchange={handleCampaignRunInputChange} variant="label-hidden" step="0.01" disabled></lightning-input>
+                                                                        </div>
+                                                                    </template>                                                                    
+                                                                </td>                                                                        
+                                                            </tr>
+                                                        </template>                         
+                                                    
+                                                    </tbody>
+                                                </table> 
+                                            </div>                                                                                
+                                        </lightning-accordion-section>
+                                    </template>
+                                </lightning-accordion>
+                            </div>
+                        </lightning-accordion-section>
+                    </template>
+                    <!--
+                     ******** RICD [Non -Financial] *******************
+                    -->
+                    
+                    <!-- ********** Billing Address Change *********** -->
+                    <template if:true={isBillingAddressChange}>
+                        <lightning-accordion-section class="amedment-accordion" name="RICD_01"
+                            label="Account - Bill To Address Update Same Account">
+                            <div>
+                                <lightning-record-view-form object-api-name="Account"
+                                    record-id={amendmentObj.Opportunity__r.Bill_To_Account__c}>
+
+                                    <!-- body -->
+                                    <table class={amendmentTableCSSClass}>
+                                        <thead>
+                                            <tr>
+                                                <th> Field Name </th>
+                                                <th class="fixedColumnWidth"> {currentDataRowHeader} </th>
+                                                <th class="fixedColumnWidth"> New Value </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Billing Address Line 1</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="BillingStreet"></lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td> <!-- Billing Steet-->
+                                                    <div class={billToAddressClass} aria-expanded="false" aria-haspopup="listbox" role="combobox" id="billToBillingSteet">
+
+                                                        <lightning-input type="search" variant="label-hidden"
+                                                            label="Billing Street" onchange={handleBillToSteetChange}
+                                                            onblur={handleAddressBlur}
+                                                            data-request-type="Billing Address Change"
+                                                            data-object="BillingAccount" name="BillingStreet"
+                                                            onfocus={handleBillToSteetChange} value={billToAccountObj.BillingStreet} required>
+                                                        </lightning-input>
+
+                                                        <template if:true={showBillToAddressOptions}>
+                                                            <div id="Bill-To-Address-id" role="listbox"
+                                                                class="listboxDiv">
+                                                                <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid"
+                                                                    role="presentation" style="max-width:99.9%">
+                                                                    <template if:true={isBillToAddressLoading}>
+                                                                        <li role="presentation"
+                                                                            class="slds-listbox__item">
+                                                                            <span id="listbox-option-unique-id-01"
+                                                                                class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                                                role="option">
+                                                                                <span class="slds-media__body">
+                                                                                    <span
+                                                                                        class="slds-listbox__option-text slds-listbox__option-text_entity">
+                                                                                        Loading...</span>
+                                                                                </span>
+                                                                            </span>
+                                                                        </li>
+                                                                    </template>
+                                                                    <template if:false={isBillToAddressLoading}>
+                                                                        <template for:each={billToAddressOptions}
+                                                                            for:item="option">
+                                                                            <li key={option.PlaceId} role="presentation"
+                                                                                class="slds-listbox__item"
+                                                                                onclick={handleBillToAddressSelect}
+                                                                                data-value={option.value}
+                                                                                data-record={option.label}
+                                                                                data-locaval={option.locaval}
+                                                                                data-placeid={option.PlaceId}>
+                                                                                <span
+                                                                                    class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                                                    role="option">
+                                                                                    <span class="slds-media__body">
+                                                                                        <span
+                                                                                            class="slds-listbox__option-text slds-listbox__option-text_entity"
+                                                                                            style="white-space:normal;">
+                                                                                            {option.label}
+                                                                                        </span>
+                                                                                    </span>
+                                                                                </span>
+                                                                            </li>
+                                                                        </template>
+                                                                    </template>
+                                                                </ul>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                    <!--<lightning-input class="validate" type="Text"
+                                                        onchange={onDataChange}
+                                                        data-request-type="Billing Address Change"
+                                                        data-object="BillingAccount" name="BillingStreet"
+                                                        variant="label-hidden" required>
+                                                    </lightning-input>-->
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Billing Address Line 2</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="Billing_Address_Line_2__c">
+                                                        </lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>                                                    
+                                                    <lightning-input type="Text" onchange={onDataChange}
+                                                        data-request-type="Billing Address Change"
+                                                        data-object="BillingAccount" name="Billing_Address_Line_2__c"
+                                                        variant="label-hidden"
+                                                        value={billToAccountObj.Billing_Address_Line_2__c}>
+                                                    </lightning-input>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Billing Address Line 3</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="Billing_Address_Line_3__c">
+                                                        </lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>                                                    
+                                                    <lightning-input type="Text" onchange={onDataChange}
+                                                        data-request-type="Billing Address Change"
+                                                        data-object="BillingAccount" name="Billing_Address_Line_3__c"
+                                                        variant="label-hidden"
+                                                        value={billToAccountObj.Billing_Address_Line_3__c}>
+                                                    </lightning-input>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Billing City</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="BillingCity"> </lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>                                                    
+                                                    <lightning-input class="validate" type="Text"
+                                                        onchange={onDataChange}
+                                                        data-request-type="Billing Address Change"
+                                                        data-object="BillingAccount" name="BillingCity"
+                                                        variant="label-hidden" value={billToAccountObj.BillingCity}
+                                                        required>
+                                                    </lightning-input>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Billing Country</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="BillingCountry"> </lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>                                                
+                                                    <lightning-combobox dropdown-alignment="bottom-left"
+                                                        class="validate" data-request-type="Billing Address Change"
+                                                        data-object="BillingAccount" name="BillingCountryCode"
+                                                        variant="label-hidden" options={countryOptions}
+                                                        onchange={handleChangeCountry}
+                                                        value={billToAccountObj.BillingCountryCode} required>
+                                                    </lightning-combobox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Billing State/Province</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="BillingState"> </lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>                                                    
+                                                    <lightning-combobox dropdown-alignment="bottom-left"
+                                                        data-request-type="Billing Address Change" class="validate"
+                                                        data-object="BillingAccount" name="BillingStateCode"
+                                                        variant="label-hidden" options={billToStateOptions}
+                                                        onchange={onDataChange}
+                                                        value={billToAccountObj.BillingStateCode}
+                                                        >
+                                                    </lightning-combobox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Billing Zip/Postal Code</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="BillingPostalCode"> </lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>                                                    
+                                                    <lightning-input class="validate" type="Text"
+                                                        onchange={onDataChange}
+                                                        data-request-type="Billing Address Change"
+                                                        data-object="BillingAccount" name="BillingPostalCode"
+                                                        variant="label-hidden"
+                                                        value={billToAccountObj.BillingPostalCode} required={isBillToPostalCodeRequired}>
+                                                    </lightning-input>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Translations -->
+                                            <!-- <tr></tr> -->
+                                            <template if:true={billToAccTransOldObj.Id}>
+                                                <tr>
+                                                    <td>Billing Address Line 1 (Local Language)</td>
+                                                    <td>
+                                                        <span>
+                                                            {billToAccTransOldObj.Translated_Billing_Address_Line_1__c}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <!-- Billing Steet-->
+                                                        <lightning-input type="Text" onchange={onDataChange}
+                                                            data-request-type="Billing Address Translation Change"
+                                                            data-object="BillingTranslationAccount"
+                                                            name="Translated_Billing_Address_Line_1__c"
+                                                            value={billToAccTransOldObj.Translated_Billing_Address_Line_1__c}
+                                                            variant="label-hidden">
+                                                        </lightning-input>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Billing Address Line 2 (Local Language)</td>
+                                                    <td>
+                                                        <span>
+                                                            {billToAccTransOldObj.Translated_Billing_Address_Line_2__c}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <lightning-input type="Text" onchange={onDataChange}
+                                                            data-request-type="Billing Address Translation Change"
+                                                            data-object="BillingTranslationAccount"
+                                                            name="Translated_Billing_Address_Line_2__c"
+                                                            value={billToAccTransOldObj.Translated_Billing_Address_Line_2__c}
+                                                            variant="label-hidden">
+                                                        </lightning-input>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Billing City (Local Language)</td>
+                                                    <td>
+                                                        <span>
+                                                            {billToAccTransOldObj.Translated_Billing_City__c}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <lightning-input type="Text" onchange={onDataChange}
+                                                            data-request-type="Billing Address Translation Change"
+                                                            data-object="BillingTranslationAccount"
+                                                            value={billToAccTransOldObj.Translated_Billing_City__c}
+                                                            name="Translated_Billing_City__c" variant="label-hidden">
+                                                        </lightning-input>
+                                                    </td>
+                                                </tr>
+                                                <!-- <tr>
+                                                    <td>Billing State/Province (Local Language)</td>
+                                                    <td>
+                                                        <span>
+                                                            {billToAccTransOldObj.Translated_Billing_State__c}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <lightning-input type="Text" onchange={onDataChange}
+                                                            data-request-type="Billing Address Translation Change"
+                                                            data-object="BillingTranslationAccount"
+                                                            name="Translated_Billing_State__c" variant="label-hidden">
+                                                        </lightning-input>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Billing Zip/Postal Code (Local Language)</td>
+                                                    <td>
+                                                        <span>
+                                                            {billToAccTransOldObj.Translation_Postal_Code__c}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <lightning-input type="Text" onchange={onDataChange}
+                                                            data-request-type="Billing Address Translation Change"
+                                                            data-object="BillingTranslationAccount"
+                                                            name="Translation_Postal_Code__c" variant="label-hidden">
+                                                        </lightning-input>
+                                                    </td>
+                                                </tr> -->
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </lightning-record-view-form>
+                            </div>
+                        </lightning-accordion-section>
+                    </template>
+
+                    <!-- ************ PO Number Change ************* -->
+                    <template if:true={isPONumberChange}>
+                        <lightning-accordion-section class="amedment-accordion" name="RICD_02" label="PO Number Update">
+                            <div>
+                                <lightning-record-view-form object-api-name="Opportunity"
+                                    record-id={amendmentObj.Opportunity__c}>
+
+                                    <!-- body -->
+                                    <table class={amendmentTableCSSClass}>
+                                        <thead>
+                                            <tr>
+                                                <th> Field Name </th>
+                                                <th class="fixedColumnWidth"> {currentDataRowHeader} </th>
+                                                <th class="fixedColumnWidth"> New Value </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <!--<td>PO Number</td>-->
+                                                <td>PO Number</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="PO_Number__c"></lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <lightning-input type="Text"
+                                                        onchange={onDataChange} data-request-type="PO number change"
+                                                        data-object="Opportunity" name="PO_Number__c"
+                                                        variant="label-hidden" value={opportunityObj.PO_Number__c} >
+                                                    </lightning-input>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </lightning-record-view-form>
+                            </div>
+                        </lightning-accordion-section>
+                    </template>
+
+                    <!-- ************ Bill To Account Change ************* -->
+                    <template if:true={isBillToAccountChange}>
+                        <lightning-accordion-section class="amedment-accordion" name="RICD_03"
+                            label="Account - Bill To Account Change To Different Account">
+                            <div>
+                                <lightning-record-view-form object-api-name="Opportunity"
+                                    record-id={amendmentObj.Opportunity__c}>
+
+                                    <!-- body -->
+                                    <table class={amendmentTableCSSClass}>
+                                        <thead>
+                                            <tr>
+                                                <th> Field Name </th>
+                                                <th class="fixedColumnWidth"> {currentDataRowHeader} </th>
+                                                <th class="fixedColumnWidth"> New Value </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Bill To Account</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="Bill_To_Account__c"></lightning-output-field>
+                                                    </span>
+                                                    <span>
+                                                        {billToAccountOldAddress.Line1}<br />{billToAccountOldAddress.Line2}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <c-s-object-look-up-input icon-name="standard:account"
+                                                        s-object-api-name="Account" label=""
+                                                        filter-condition={billToAccountFilterCondition}
+                                                        onlookupupdate={billToAccountChange}
+                                                        other-fields={billingAddressFields}
+                                                        placeholder="Search Account here...">
+                                                    </c-s-object-look-up-input>
+                                                    <span>
+                                                        {billToAccountNewAddress.Line1}<br />{billToAccountNewAddress.Line2}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </lightning-record-view-form>
+                            </div>
+                        </lightning-accordion-section>
+                    </template>
+
+                    <!-- ************Update Bill To Contact************* -->
+                    <template if:true={isUpdateBillToContact}>
+                        <lightning-accordion-section class="amedment-accordion" name="RICD_04"
+                            label="Contact - Bill To Contact Change To Different Contact">
+                            <div>
+                                <lightning-record-view-form object-api-name="Opportunity"
+                                    record-id={amendmentObj.Opportunity__c}>
+
+                                    <!-- body -->
+                                    <table class={amendmentTableCSSClass}>
+                                        <thead>
+                                            <tr>
+                                                <th> Field Name </th>
+                                                <th class="fixedColumnWidth"> {currentDataRowHeader} </th>
+                                                <th class="fixedColumnWidth"> New Value </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Bill To Contact</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="Billing_Contact__c"></lightning-output-field>
+                                                    </span>
+                                                    <span>
+                                                        {amendmentObj.Opportunity__r.Billing_Contact__r.Account.Name}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <c-s-object-look-up-input icon-name="standard:contact"
+                                                        s-object-api-name="Contact" label=""
+                                                        filter-condition={billToContactFilterCondition}
+                                                        onlookupupdate={billToContactChange}
+                                                        placeholder="Search Contact here..."
+                                                        other-fields="Email,Account.Name,IM_Contact_No__c"
+                                                        other-search-fields="Email,IM_Contact_No__c"
+                                                        sub-text-help-fields="IM_Contact_No__c,Email">
+                                                    </c-s-object-look-up-input>
+                                                    <span>{billingContactAddedInformation}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </lightning-record-view-form>
+                            </div>
+                        </lightning-accordion-section>
+                    </template>
+
+                    <!-- ************Account Name Change************* -->
+                    <template if:true={isAccountNameUpdate}>
+                        <lightning-accordion-section class="amedment-accordion" name="RICD_05"
+                            label="Account - Name Update">
+                            <div>
+                                <lightning-record-view-form object-api-name="Account"
+                                    record-id={amendmentObj.Opportunity__r.Bill_To_Account__c}>
+
+                                    <!-- body -->
+                                    <table class={amendmentTableCSSClass}>
+                                        <thead>
+                                            <tr>
+                                                <th> Field Name </th>
+                                                <th class="fixedColumnWidth"> {currentDataRowHeader} </th>
+                                                <th class="fixedColumnWidth"> New Value </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Account Name</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="Name">
+                                                        </lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <lightning-input class="validate" onchange={onDataChange}
+                                                        type="Text" name="Name" data-request-type="Account Name Change"
+                                                        data-object="BillingAccountName" value={billToAccountObj.Name} variant="label-hidden"
+                                                        required>
+                                                    </lightning-input>
+                                                </td>
+                                            </tr>
+                                            <!-- Translations -->
+                                            <template if:true={billToAccTransOldObj.Id}>
+                                                <tr>
+                                                    <td>Name (Local Language)</td>
+                                                    <td>
+                                                        <span>
+                                                            {billToAccTransOldObj.Translated_Account_Name__c}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <!-- Billing Steet-->
+                                                        <lightning-input type="Text" onchange={onDataChange}
+                                                            data-request-type="Billing Address Translation Change"
+                                                            data-object="BillingTranslationAccount"
+                                                            name="Translated_Account_Name__c" value={billToAccTransOldObj.Translated_Account_Name__c} 
+                                                            variant="label-hidden">
+                                                        </lightning-input>
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </lightning-record-view-form>
+                            </div>
+                        </lightning-accordion-section>
+                    </template>
+
+                    <!-- ************Ship To Account Change************* -->
+                    <template if:true={isShipToAccountChange}>
+                        <lightning-accordion-section class="amedment-accordion" name="RICD_08"
+                            label="Account - Ship To Account Change To Different Account">
+                            <div>
+                                <lightning-record-view-form object-api-name="Opportunity"
+                                    record-id={amendmentObj.Opportunity__c}>
+
+                                    <!-- body -->
+                                    <table class={amendmentTableCSSClass}>
+                                        <thead>
+                                            <tr>
+                                                <th> Field Name </th>
+                                                <th class="fixedColumnWidth"> {currentDataRowHeader} </th>
+                                                <th class="fixedColumnWidth"> New Value </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Ship To Account</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="Ship_To_Account__c"></lightning-output-field>
+                                                    </span>
+                                                    <span>
+                                                        {shipToAccountOldAddress.Line1}<br />{shipToAccountOldAddress.Line2}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <c-s-object-look-up-input icon-name="standard:account"
+                                                        s-object-api-name="Account" label=""
+                                                        filter-condition={shipToAccountFilterCondition}
+                                                        other-fields={billingAddressFields}
+                                                        onlookupupdate={shipToAccountChange}
+                                                        placeholder="Search Account here...">
+                                                    </c-s-object-look-up-input>
+                                                    <span>
+                                                        {shipToAccountNewAddress.Line1}<br />{shipToAccountNewAddress.Line2}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </lightning-record-view-form>
+                            </div>
+                        </lightning-accordion-section>
+                    </template>
+
+                    <!-- ********** Shipping Address Change *********** -->
+                    <template if:true={isShippingAddressChange}>
+                        <lightning-accordion-section class="amedment-accordion" name="RICD_09"
+                            label="Account - Ship To Address Update Same Account">
+                            <div>
+                                <lightning-record-view-form object-api-name="Account"
+                                    record-id={amendmentObj.Opportunity__r.Ship_To_Account__c}>
+
+                                    <!-- body -->
+                                    <table class={amendmentTableCSSClass}>
+                                        <thead>
+                                            <tr>
+                                                <th> Field Name </th>
+                                                <th class="fixedColumnWidth"> {currentDataRowHeader} </th>
+                                                <th class="fixedColumnWidth"> New Value </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Billing Address Line 1</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="BillingStreet"></lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <!--Billing Street -->
+                                                    <div class={shipToAddressClass} aria-expanded="false"
+                                                        aria-haspopup="listbox" role="combobox" id="shipToBillingSteet">
+
+                                                        <lightning-input type="search" variant="label-hidden"
+                                                            label="Billing Street" onchange={handleShipToSteetChange}
+                                                            onblur={handleAddressBlur}
+                                                            data-request-type="Shipping Address Change"
+                                                            data-object="ShippingAccount" name="BillingStreet"
+                                                            onfocus={handleShipToSteetChange}
+                                                            value={shipToAccountObj.BillingStreet} required>
+                                                        </lightning-input>
+
+                                                        <template if:true={showShipToAddressOptions}>
+                                                            <div id="Ship-To-Address-id" role="listbox"
+                                                                class="listboxDiv">
+                                                                <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid"
+                                                                    role="presentation" style="max-width:99.9%">
+                                                                    <template if:true={isShipToAddressLoading}>
+                                                                        <li role="presentation"
+                                                                            class="slds-listbox__item">
+                                                                            <span id="listbox-option-unique-id-02"
+                                                                                class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                                                role="option">
+                                                                                <span class="slds-media__body">
+                                                                                    <span
+                                                                                        class="slds-listbox__option-text slds-listbox__option-text_entity">
+                                                                                        Loading...</span>
+                                                                                </span>
+                                                                            </span>
+                                                                        </li>
+                                                                    </template>
+                                                                    <template if:false={isShipToAddressLoading}>
+                                                                        <template for:each={shipToAddressOptions}
+                                                                            for:item="option">
+                                                                            <li key={option.PlaceId} role="presentation"
+                                                                                class="slds-listbox__item"
+                                                                                onclick={handleShipToAddressSelect}
+                                                                                data-value={option.value}
+                                                                                data-record={option.label}
+                                                                                data-locaval={option.locaval}
+                                                                                data-placeid={option.PlaceId}>
+                                                                                <span
+                                                                                    class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                                                    role="option">
+                                                                                    <span class="slds-media__body">
+                                                                                        <span
+                                                                                            class="slds-listbox__option-text slds-listbox__option-text_entity"
+                                                                                            style="white-space:normal;">
+                                                                                            {option.label}
+                                                                                        </span>
+                                                                                    </span>
+                                                                                </span>
+                                                                            </li>
+                                                                        </template>
+                                                                    </template>
+                                                                </ul>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                    
+                                                    <!-- <lightning-input class="validate" type="Text"
+                                                        onchange={onDataChange}
+                                                        data-request-type="Shipping Address Change"
+                                                        data-object="ShippingAccount" name="ShippingStreet"
+                                                        variant="label-hidden" required>
+                                                    </lightning-input> -->
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Billing Address Line 2</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="Billing_Address_Line_2__c">
+                                                        </lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>                                                    
+                                                    <lightning-input type="Text" onchange={onDataChange}
+                                                        data-request-type="Shipping Address Change"
+                                                        data-object="ShippingAccount" name="Billing_Address_Line_2__c"
+                                                        variant="label-hidden"
+                                                        value={shipToAccountObj.Billing_Address_Line_2__c}>
+                                                    </lightning-input>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Billing Address Line 3</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="Billing_Address_Line_3__c">
+                                                        </lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>                                                    
+                                                    <lightning-input type="Text" onchange={onDataChange}
+                                                        data-request-type="Shipping Address Change"
+                                                        data-object="ShippingAccount" name="Billing_Address_Line_3__c"
+                                                        variant="label-hidden"
+                                                        value={shipToAccountObj.Billing_Address_Line_3__c}>
+                                                    </lightning-input>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Billing City</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="BillingCity"> </lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <lightning-input class="validate" type="Text"
+                                                        onchange={onDataChange}
+                                                        data-request-type="Shipping Address Change"
+                                                        data-object="ShippingAccount" name="BillingCity"
+                                                        variant="label-hidden" value={shipToAccountObj.BillingCity}
+                                                        required>
+                                                    </lightning-input>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Billing Country</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="BillingCountry"> </lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <lightning-combobox dropdown-alignment="bottom-left"
+                                                        class="validate" data-request-type="Shipping Address Change"
+                                                        data-object="ShippingAccount" name="BillingCountryCode"
+                                                        variant="label-hidden" options={countryOptions}
+                                                        onchange={handleChangeCountry}
+                                                        value={shipToAccountObj.BillingCountryCode} required>
+                                                    </lightning-combobox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Billing State/Province</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="BillingState"> </lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <lightning-combobox dropdown-alignment="bottom-left"
+                                                        data-request-type="Shipping Address Change" class="validate"
+                                                        data-object="ShippingAccount" name="BillingStateCode"
+                                                        variant="label-hidden" options={shipToStateOptions}
+                                                        onchange={onDataChange}
+                                                        value={shipToAccountObj.BillingStateCode}
+                                                        >
+                                                    </lightning-combobox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Billing Zip/Postal Code</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="BillingPostalCode"> </lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <lightning-input class="validate" type="Text"
+                                                        onchange={onDataChange}
+                                                        data-request-type="Shipping Address Change"
+                                                        data-object="ShippingAccount" name="BillingPostalCode"
+                                                        variant="label-hidden"
+                                                        value={shipToAccountObj.BillingPostalCode} required={isShipToPostalCodeRequired}>
+                                                    </lightning-input>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Translations -->
+                                            <!-- <tr></tr> -->
+                                            <template if:true={shipToAccTransOldObj.Id}>
+                                                <tr>
+                                                    <td>Billing Address Line 1 (Local Language)</td>
+                                                    <td>
+                                                        <span>
+                                                            {shipToAccTransOldObj.Translated_Billing_Address_Line_1__c}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <!-- Billing Steet-->
+                                                        <lightning-input type="Text" onchange={onDataChange}
+                                                            data-request-type="Shipping Address Translation Change"
+                                                            data-object="ShippingTranslationAccount"
+                                                            name="Translated_Billing_Address_Line_1__c"
+                                                            value={shipToAccTransOldObj.Translated_Billing_Address_Line_1__c}
+                                                            variant="label-hidden">
+                                                        </lightning-input>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Billing Address Line 2 (Local Language)</td>
+                                                    <td>
+                                                        <span>
+                                                            {shipToAccTransOldObj.Translated_Billing_Address_Line_2__c}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <lightning-input type="Text" onchange={onDataChange}
+                                                            data-request-type="Shipping Address Translation Change"
+                                                            data-object="ShippingTranslationAccount"
+                                                            name="Translated_Billing_Address_Line_2__c"
+                                                            value={shipToAccTransOldObj.Translated_Billing_Address_Line_2__c}
+                                                            variant="label-hidden">
+                                                        </lightning-input>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Billing City (Local Language)</td>
+                                                    <td>
+                                                        <span>
+                                                            {shipToAccTransOldObj.Translated_Billing_City__c}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <lightning-input type="Text" onchange={onDataChange}
+                                                            data-request-type="Shipping Address Translation Change"
+                                                            data-object="ShippingTranslationAccount"
+                                                            value={shipToAccTransOldObj.Translated_Billing_City__c}
+                                                            name="Translated_Billing_City__c" variant="label-hidden">
+                                                        </lightning-input>
+                                                    </td>
+                                                </tr>
+                                                <!-- <tr>
+                                                    <td>Billing State/Province (Local Language)</td>
+                                                    <td>
+                                                        <span>
+                                                            {shipToAccTransOldObj.Translated_Billing_State__c}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <lightning-input type="Text" onchange={onDataChange}
+                                                            data-request-type="Shipping Address Translation Change"
+                                                            data-object="ShippingTranslationAccount"
+                                                            name="Translated_Billing_State__c" variant="label-hidden">
+                                                        </lightning-input>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Billing Zip/Postal Code (Local Language)</td>
+                                                    <td>
+                                                        <span>
+                                                            {shipToAccTransOldObj.Translation_Postal_Code__c}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <lightning-input type="Text" onchange={onDataChange}
+                                                            data-request-type="Shipping Address Translation Change"
+                                                            data-object="ShippingTranslationAccount"
+                                                            name="Translation_Postal_Code__c" variant="label-hidden">
+                                                        </lightning-input>
+                                                    </td>
+                                                </tr> -->
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </lightning-record-view-form>
+                            </div>
+                        </lightning-accordion-section>
+                    </template>
+
+                    <!-- ************Bill to Contact Details Change************* -->
+                    <template if:true={isBilltoContactDetailsChange}>
+                        <lightning-accordion-section class="amedment-accordion" name="RICD_06"
+                            label="Contact - Bill To Contact Update Same Contact">
+                            <div>
+                                <lightning-record-view-form object-api-name="Contact"
+                                    record-id={amendmentObj.Opportunity__r.Billing_Contact__c}>
+
+                                    <!-- body -->
+                                    <table class={amendmentTableCSSClass}>
+                                        <thead>
+                                            <tr>
+                                                <th> Field Name </th>
+                                                <th class="fixedColumnWidth"> {currentDataRowHeader} </th>
+                                                <th class="fixedColumnWidth"> New Value </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Contact First Name</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="FirstName"></lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <lightning-input type="Text" onchange={onDataChange}
+                                                        class="validate" name="FirstName"
+                                                        data-request-type="Bill to Contact Details Change"
+                                                        data-object="BillingContact" value={billToContactObj.FirstName} variant="label-hidden" required>
+                                                    </lightning-input>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Contact Last Name</td> 
+                                                <td>
+                                                    <!-- [GECI-924] -->
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="LastName"></lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <lightning-input class="validate" type="Text"
+                                                        onchange={onDataChange} name="LastName"
+                                                        data-request-type="Bill to Contact Details Change"
+                                                        data-object="BillingContact" value={billToContactObj.LastName} variant="label-hidden" required>
+                                                    </lightning-input>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Email</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="Email">
+                                                        </lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <lightning-input class="validate" type="Email"
+                                                        onchange={onDataChange} name="Email"
+                                                        data-request-type="Bill to Contact Details Change"
+                                                        data-object="BillingContact" value={billToContactObj.Email} variant="label-hidden" required>
+                                                    </lightning-input>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mobile Phone</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="MobilePhone">
+                                                        </lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <lightning-input onchange={onDataChange} type="Phone"
+                                                        class="ContactValidate" name="MobilePhone"
+                                                        data-request-type="Bill to Contact Details Change"
+                                                        data-object="BillingContact" value={billToContactObj.MobilePhone} variant="label-hidden">
+                                                    </lightning-input>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </lightning-record-view-form>
+                            </div>
+                        </lightning-accordion-section>
+                    </template>
+
+                    <!-- ************VAT Registration Number Change************* -->
+                    <template if:true={isVATRegistrationNumberChange}>
+                        <lightning-accordion-section class="amedment-accordion" name="RICD_07"
+                            label="VAT Registration Number Update">
+                            <div>
+                                <lightning-record-view-form object-api-name="Account_Tax_Number__c"
+                                    record-id={amendmentObj.Old_Account_Tax_Number__r.Id}>
+
+                                    <!-- body -->
+                                    <table class={amendmentTableCSSClass}>
+                                        <thead>
+                                            <tr>
+                                                <th> Field Name </th>
+                                                <th class="fixedColumnWidth"> {currentDataRowHeader} </th>
+                                                <th class="fixedColumnWidth"> New Value </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Tax ID</td>
+                                                <td>
+                                                    <span>
+                                                        <lightning-output-field variant="label-hidden"
+                                                            field-name="Tax_ID__c"></lightning-output-field>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <lightning-input class="validate" onchange={onDataChange}
+                                                        type="Text" name="Tax_ID__c"
+                                                        data-request-type="VAT Registration Number Change"
+                                                        data-object="VATRegistration" value={accTaxObj.Tax_ID__c} variant="label-hidden" required>
+                                                    </lightning-input>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </lightning-record-view-form>
+                            </div>
+                        </lightning-accordion-section>
+                    </template>
+                </lightning-accordion>
+
+                <!-- Final Update Button -->
+                <template if:false={isReadOnlyMode}>
+                    <div>
+                        <lightning-layout-item size="12" padding="horizontal-small">
+                            <div class="slds-clearfix">
+                                <div class="slds-float_right">
+                                    <lightning-button type="submit" class="save-button" variant="brand"
+                                        icon-name="utility:change_request" label="Update" onclick={openSaveModal}
+                                        disabled={disableUpdate}>
+                                    </lightning-button>&nbsp;&nbsp;
+                                    <!-- <lightning-button label="Cancel" variant="destructive" icon-name="utility:close">
+                            </lightning-button> -->
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                    </div>
+                </template>
+            </template>
+
+            <!-- Full Cancle  -->
+            <template if:true={isGroup1}>
+                <div class="slds-align_absolute-center">
+                    <!-- <span class="cancle-label">Do You wish to Cancel the full Deal ? </span>
+                    <lightning-input type="checkbox" variant="label-hidden" name="isFullCancleSelected"
+                        checked={isFullCancleSelected} onchange={handleFullCancleCheckChange}></lightning-input>
+                    &nbsp;&nbsp; --> <!-- GECI-1079 -->
+                    <lightning-button label="Full Deal Cancellation" variant="brand"
+                        onclick={handleCancellation}>
+                    </lightning-button>
+                </div>
+            </template>
+
+            <!-- New Amedment opportunity  -->
+            <template if:true={isGroup2}>
+                <div class="slds-align_absolute-center">
+                    <template if:false={isAmedmentOpportunityCreated}>
+                        <lightning-button label="New Amendment Opportunity" variant="brand" icon-name="utility:reassign"
+                        onclick={createNewAmendmentOpp}>
+                        </lightning-button>
+                    </template>
+                    <template if:true={isAmedmentOpportunityCreated}>
+                        <lightning-button label="Execute Amendment" variant="brand" icon-name="utility:replace"
+                        onclick={handlePCAI}>
+                        </lightning-button>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </template>
+
+    <!-- *****************************  *** Modals ***   ********************************* -->
+
+    <!-- Invoice Cancel Modal -->
+    <template if:true={isOpenInvCancleModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="edit-inv-heading" aria-modal="true"
+            aria-describedby="modal-content-edit-form" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button type="button" onclick={closeModal}
+                        class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning-icon icon-name="utility:close" variant="bare" size="small"></lightning-icon>
+                    </button>
+                    <h2 id="edit-inv-heading" class="slds-text-heading_medium slds-hyphenate">Select Invoice to cancel
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-edit-inv">
+                    <!-- Spinner -->
+                    <template if:true={showModalLoading}>
+                        <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass">
+                        </lightning-spinner>
+                    </template>
+                    <!--<template if:true={isNextDisabled}>
+                        <div class="slds-align_absolute-center slds-m-top_x-small slds-text-heading_medium">
+                            <P>No Invoice Found!</P>
+                        </div>
+                    </template>
+                    <template if:false={isNextDisabled}>-->
+                    <div style="height: 250px;">
+                        <lightning-datatable key-field="Id" selected-rows={selectedInvs} data={invoiceToCancel}
+                            columns={invCrcolumns} onrowselection={handleInv2CancleSelection}>
+                        </lightning-datatable>
+                    </div>
+                    <!--</template>-->
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <lightning-button onclick={closeModal} label="Cancel" variant="destructive"
+                        icon-name="utility:close">
+                    </lightning-button>&nbsp;&nbsp;
+                    <!-- <template if:false={isInvoiceCancelModalReadOnly}> -->
+                        <lightning-button type="submit" class="save-button" variant="brand" icon-name="utility:check"
+                            label="Next" onclick={cancleInvoice} disabled={isNextDisabled}></lightning-button>
+                        &nbsp;&nbsp;
+                    <!-- </template> -->
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Confirmation Modal -->
+    <template if:true={isOpenConfirmationModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+            aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button type="button" onclick={closeModal}
+                        class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning-icon icon-name="utility:close" variant="bare" size="small"></lightning-icon>
+                    </button>
+                    <h2 id="edit-form-heading" class="slds-text-heading_medium slds-hyphenate">Amendment
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-edit-form">
+                    <!-- Spinner -->
+                    <template if:true={showModalLoading}>
+                        <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass">
+                        </lightning-spinner>
+                    </template>
+                    <div class="slds-align_absolute-center"></div><span>{confirmationMSG}</span>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button onclick={closeModal} label="No" variant="destructive" icon-name="utility:close">
+                    </lightning-button>&nbsp;&nbsp;
+                    <template if:false={isFullCancleSelected}>
+                        <lightning-button type="submit" class="save-button" variant="brand" icon-name="utility:check"
+                        label="Yes" onclick={saveData}></lightning-button>&nbsp;&nbsp;
+                    </template>
+                    <template if:true={isFullCancleSelected}>
+                        <lightning-button type="submit" class="save-button" variant="brand" icon-name="utility:check"
+                        label="Yes" onclick={fullCancle}></lightning-button>&nbsp;&nbsp;
+                    </template>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Invoice Selection Modal [RICD]-->
+    <!-- After RICD Amend invoice to RePrint Selection Box-->
+    <template if:true={showInvoiceSelectionModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="edit-inv-heading" aria-modal="true"
+        aria-describedby="modal-content-edit-form" class="slds-modal slds-fade-in-open slds-modal_medium">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <button type="button" onclick={closeModal}
+                    class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                    <lightning-icon icon-name="utility:close" variant="bare" size="small"></lightning-icon>
+                </button>
+                    <h2 id="modal-heading-07" class="slds-text-heading_medium slds-hyphenate"> Select Invoices for Reprint </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-9">
+                    <div>
+                        <div style="height: 250px;">
+                            <!-- Table Loader -->
+                            <template if:true={showModalLoading}>
+                                <div class="table-placeholder">
+                                    <c-table-placeholder is-show={showModalLoading}></c-table-placeholder>
+                                </div>
+                            </template>
+
+                            <lightning-datatable key-field="Id" data={invCrTableData} columns={invCrcolumns}
+                                    onrowselection={handleInv2RePrintSelection}>
+                            </lightning-datatable>
+                        </div> 
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <!-- <template if:true={showRequiredInvMessage}>
+                        <div class="slds-align_absolute-center slds-text-color_error">{reqErrorMessage}</div>
+                    </template> -->
+                    <button class="slds-button slds-button_neutral" onclick={closeModal}>Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={invoiceSelectionModalNext}>Next</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Amend Complete confirmation/Warning Box before CRM/ERP Sync-->
+    <template if:true={isAmedDataConfirmAmendModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button onclick={closeModal}
+                        class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning-icon icon-name="utility:close" variant="bare" size="small"></lightning-icon>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Complete Amend</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <template if:true={isTrue}>
+                        <lightning-spinner variant="brand" size="small" title="Loading..."></lightning-spinner>
+                    </template>
+                    <div class="messageTxt"> You are about to complete the amendment and sync the data with CRM & ERP
+                        ,Make sure you have actually amended the opportunity with correct data.</div>
+                    <!--<lightning-textarea label="Comment" value="" class="comment"></lightning-textarea>-->
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeModal}>Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={completeAmend}>Complete Amend</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

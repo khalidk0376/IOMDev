@@ -1,0 +1,16 @@
+<template>
+    <lightning-quick-action-panel header={Generate_Proposal_Label}>
+        <div class="slds-p-around_xx-small" style="height:300px">
+            <lightning-spinner if:true={spinner} size="small" variant="brand"></lightning-spinner>
+            
+            <div class="slds-p-around_small">
+                <p class="slds-text-heading_small">Do you really want to publish setting?</p><br/>
+                <p>Once stand setting published, this would be the final form to be available for customer and contractors visibility and should be locked for you. You can not update this stand setting.</p>
+            </div>            
+        </div>
+        <div slot="footer">
+            <lightning-button label="Cancel" icon-name="utility:close" onclick={hideModal} variant="neutral"></lightning-button>        
+            <lightning-button label="Yes, Publish" icon-name="utility:check" onclick={publish} variant="brand" class="slds-m-left_x-small"></lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>

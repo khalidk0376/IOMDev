@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Replace_User_Primary_CEM__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Replace User Primary CEM</label>
+    <referenceTo>Contact_Edition_Mapping__c</referenceTo>
+    <relationshipLabel>Contact Edition Mappings (Replace_User_Primary_CEM)</relationshipLabel>
+    <relationshipName>Contact_Edition_Mappings2</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

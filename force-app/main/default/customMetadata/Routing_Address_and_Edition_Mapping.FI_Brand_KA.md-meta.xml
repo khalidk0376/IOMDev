@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>FI Brand KA</label>
+    <protected>false</protected>
+    <values>
+        <field>Brand_Id__c</field>
+        <value xsi:type="xsd:string">a3C4P000003Jm0fUAC</value>
+    </values>
+    <values>
+        <field>Edition_Id__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Routing_Address__c</field>
+        <value xsi:type="xsd:string">kacustomerservice@informa.com</value>
+    </values>
+    <values>
+        <field>Series_Id__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Support_Type__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

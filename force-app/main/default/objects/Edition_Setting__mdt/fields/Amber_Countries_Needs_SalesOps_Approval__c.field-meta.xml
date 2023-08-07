@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Amber_Countries_Needs_SalesOps_Approval__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If true Amber Countries Need SalesOps Approval from Action Dashboard before Order Creation</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Amber Countries Needs SalesOps Approval</label>
+    <type>Checkbox</type>
+</CustomField>

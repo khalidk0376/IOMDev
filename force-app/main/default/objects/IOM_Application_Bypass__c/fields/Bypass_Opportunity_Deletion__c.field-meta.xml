@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bypass_Opportunity_Deletion__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If an entry exist with this field checked then user will be able to delete Opportunity.</description>
+    <externalId>false</externalId>
+    <label>Bypass Opportunity Deletion</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

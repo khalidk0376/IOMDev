@@ -1,0 +1,16 @@
+.s-red{    
+    background-color: var(--red-1);
+    color: var(--red-7);
+}
+.s-purple{    
+    background-color: var(--hex-1);
+    color: var(--hex-3);
+}
+.s-gray{    
+    background-color: var(--neutral-1);
+    color: var(--neutral-7);
+}
+.s-green{
+    background-color: var(--jade-1);
+    color: var(--jade-8);
+}

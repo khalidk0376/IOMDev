@@ -1,0 +1,56 @@
+<aura:component controller="ListTemplateCtrl">
+
+    <aura:attribute name="recordId" type="Id" default="" />
+    <aura:attribute name="objQuesnaire" type="Object" default="{sobjectType='Questionnaire__c'}" />
+    <aura:attribute name="Spinner" type="Boolean" default="false" />
+    <aura:attribute name="lstQuenaireCategory" type="List" default="[]" />
+    <aura:attribute name="lstCommunity" type="List" default="[]" />
+    <aura:attribute name="lstLanguage" type="list" default="[]" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <aura:if isTrue="{!v.Spinner}">
+        <lightning:spinner size="small" variant="brand" />
+    </aura:if>
+
+    <div class="slds-col slds-grid_vertical">
+        <div class="slds-grid slds-no-flex panelHeader">
+            <h2>Edit Form Property</h2>
+            <a href="#">
+                <lightning:buttonIcon iconName="utility:forward" onclick="{!c.closeForm}" variant="bare" />
+            </a>
+        </div>
+    </div>
+    <div class="slds-col slds-scrollable_y">
+        <div class="panelBody">
+            <div class="slds-grid">
+                <div class="slds-size_12-of-12">
+                    <lightning:input labelVisible="true" aura:id="formedit" required="true" label="Template title" name="TemplateTitle" placeholder="Enter template title" minlength="2" maxlength="80" messageWhenValueMissing="Please enter the template name." value="{!v.objQuesnaire.Name}"
+                    />
+                    <lightning:input onblur="{!c.checkTextLength}" class="slds-var-p-top_x-small" aura:id="templatedesc" label="Template description" placeholder="Enter a Template Description" messageWhenBadInput="Please enter the template description." value="{!v.objQuesnaire.Description__c}"
+                    />
+                    <lightning:combobox aura:id="formedit" name="category" label="Select Category" placeholder="Select Category" messageWhenValueMissing="Please select Category." value="{!v.objQuesnaire.Category__c}" options="{!v.lstQuenaireCategory}" required="true"
+                        class="combo-box slds-var-p-top_x-small" />
+                    
+                    <div class="slds-var-m-top_xx-small">
+                        <lightning:select aura:id="formedit" value="{!v.objQuesnaire.Language__c}" label="Select Language">
+                            <aura:iteration items="{!v.lstLanguage}" var="l">
+                                <aura:if isTrue="{!v.objQuesnaire.Language__c==l.value}">
+                                    <option selected="true" value="{!l.value}">{!l.label}</option>
+                                    <aura:set attribute="else">
+                                        <option value="{!l.value}">{!l.label}</option>
+                                    </aura:set>
+                                </aura:if>
+                            </aura:iteration>
+                        </lightning:select>
+                    </div>
+                    <lightning:input class="slds-var-p-top_x-small" label="Do you want to Show Main Title to user?" type="checkbox" checked="{!v.objQuesnaire.Show_Main_Title_to_User__c}" aura:id="showtitleuser" />
+                </div>
+            </div>
+            <br/>
+            <lightning:button label="Cancel" onclick="{!c.closeForm}" />
+            <lightning:button class="slds-button_brand" label="Update Form" onclick="{!c.updateQQuesnaireRecrod}" />
+        </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</aura:component>

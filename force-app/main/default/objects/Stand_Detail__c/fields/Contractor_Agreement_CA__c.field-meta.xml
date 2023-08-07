@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contractor_Agreement_CA__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Captures whether one agrees to contractor&apos;s agreement or not.</description>
+    <externalId>false</externalId>
+    <label>Contractor Agreement(CA)</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

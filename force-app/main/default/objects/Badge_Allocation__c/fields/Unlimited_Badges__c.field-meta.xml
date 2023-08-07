@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unlimited_Badges__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If checked unlimited badges will be allocated for booth/product.</description>
+    <externalId>false</externalId>
+    <label>Unlimited Badges</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

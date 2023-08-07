@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Amendment_Team__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Member of Amendment Team</inlineHelpText>
+    <label>Amendment Team</label>
+    <referenceTo>Amendment_Team__c</referenceTo>
+    <relationshipLabel>Amendment Team Members</relationshipLabel>
+    <relationshipName>Amendment_Team_Members</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

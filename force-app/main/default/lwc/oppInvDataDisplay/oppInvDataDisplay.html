@@ -1,0 +1,128 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <article class="slds-var-m-around_small">
+        <!-- Header-->
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">                            
+                            <lightning-icon icon-name="custom:custom17" alternative-text="Event" title="Event"
+                                size="small"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h3>
+                                        <span class="slds-page-header__title slds-truncate slds-text-title"
+                                            title="Invoice/Credit Note" style="font-size: medium;"><b>Invoice/Credit Note ({recordSize})</b></span>
+                                    </h3>
+                                </div>
+                            </div>
+                            <p class="slds-page-header__name-meta"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BODY-->
+        <!-- Collection Table-->
+        <div class="slds-m-top_small">
+            <!-- If No Data -->
+            <template if:false={hasData}>
+                <div class="slds-align_absolute-center" style="height:5rem;font-size:larger;font-weight:500;">
+                    {erMessage}
+                </div> 
+            </template>
+            <!-- Show Data table  -->
+            <template if:true={hasData}>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                        <tr class="slds-line-height_reset">                        
+                            <th class="tabHeaderSort" scope="col" id="erpId">
+                                <div class="slds-truncate" title="Contact">
+                                    ERP Reference Number
+                                </div>
+                            </th>
+                            <th class="tabHeaderSort" scope="col" id="invNum">
+                                <div class="slds-truncate" title="Contact">
+                                    IOM Number
+                                </div>
+                            </th>
+                            <th class="tabHeaderSort" scope="col" id="invDate">
+                                <div class="slds-truncate" title="Contact">
+                                    Invoice Date
+                                </div>
+                            </th>
+                            <th class="tabHeaderSort" scope="col" id="cnDate">
+                                <div class="slds-truncate" title="Contact">
+                                    Credit Note Date
+                                </div>
+                            </th>
+                            <th class="tabHeaderSort" scope="col" id="dueDate">
+                                <div class="slds-truncate" title="Contact">
+                                    Due Date
+                                </div>
+                            </th>
+                            <th class="tabHeaderSort" scope="col" id="totalAmount">
+                                <div class="slds-truncate" title="Contact">
+                                    Total Amount (with Tax)
+                                </div>
+                            </th>
+                            <th class="tabHeaderSort" scope="col" id="outStandingbal">
+                                <div class="slds-truncate" title="Contact">
+                                    Outstanding Balance
+                                </div>
+                            </th>
+                            <th class="tabHeaderSort" scope="col" id="status">
+                                <div class="slds-truncate" title="Contact">
+                                    Status
+                                </div>
+                            </th>
+                            <th class="tabHeaderSort" scope="col" id="sourceInv">
+                                <div class="slds-truncate" title="Contact">
+                                    Source Invoice
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={pageData} for:item="rec">
+                            <tr key={rec.Id}>
+                                <td>   
+                                    {rec.erpReference}
+                                </td>
+                                <td>   
+                                    {rec.InvoiceNumber}
+                                </td>
+                                <td>   
+                                    <lightning-formatted-date-time value={rec.invoiceDate} year="numeric" month="short" day="numeric"></lightning-formatted-date-time>
+                                </td>
+                                <td>   
+                                    <lightning-formatted-date-time value={rec.cnDate} year="numeric" month="short" day="numeric"></lightning-formatted-date-time>
+                                </td>
+                                <td>   
+                                    <lightning-formatted-date-time value={rec.dueDate} year="numeric" month="short" day="numeric"></lightning-formatted-date-time>
+                                </td>
+                                <td>
+                                    <lightning-formatted-number value={rec.totalAmount} format-style="currency" currency-display-as="code" currency-code={rec.InvoiceCurrencyISOCode}></lightning-formatted-number>
+                                </td>
+                                <td>   
+                                    <lightning-formatted-number value={rec.InvoiceOutStandingBalc} format-style="currency" currency-display-as="code" currency-code={rec.InvoiceCurrencyISOCode}></lightning-formatted-number>
+                                </td>
+                                <td>
+                                    {rec.InvoiceStatus}
+                                </td>
+                                <td>
+                                    {rec.sourceInvoice}
+                                </td>                       
+                            </tr>
+                        </template>
+                    </tbody>        
+                </table> 
+            </template>
+        </div>
+    </article>
+
+</template>

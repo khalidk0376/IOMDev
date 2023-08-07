@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Non_Reseller_Agent__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Before Close Won, SSC/System Admin should be able to mark the Opportunity as &quot;Non-Reseller&quot; opportunity, so that the agent opportunity will become eligible for VAT Refund.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Before Close Won, SSC/System Admin should be able to mark the Opportunity as &quot;Non-Reseller&quot; opportunity, so that the agent opportunity will become eligible for VAT Refund.</inlineHelpText>
+    <label>Non Reseller Agent</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

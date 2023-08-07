@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IOM_Red_Countries_Validation</fullName>
+    <active>true</active>
+    <description>Validation rule to prevent billing for red countries.</description>
+    <errorConditionFormula>AND( TEXT(StageName )  =  $CustomMetadata.IOM_Global_Configuration_Data__mdt.Opportunity_Won_Stage_Name.IOM_Value__c, CONTAINS( $CustomMetadata.IOM_Global_Configuration_Data__mdt.Red_Countries.IOM_Value__c ,  TEXT(Account.BillingCountryCode) ), ISCHANGED(StageName ) , $CustomMetadata.IOM_Global_Configuration_Data__mdt.Disable_IOM_Trigger.IOM_Value__c  = &apos;False&apos;)</errorConditionFormula>
+    <errorMessage>You cannot close win this opportunity as the account’s address falls in the restricted country list.</errorMessage>
+</ValidationRule>
